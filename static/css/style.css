@@ -1,0 +1,30 @@
+/* Navigation */
+
+.navbar-side {
+    width: 30%;
+}
+
+.search-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.search-bar {
+    border: 1px solid black;
+    border-radius: 32px;
+    padding: 2px 8px;
+    width: 80%;
+    background-color: white;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-rows: 1fr;
+}
+
+.search-bar>input {
+    margin-left: 8px;
+    border: none;
+    outline: none;
+    display: inline-block;
+    min-width: none;
+}
