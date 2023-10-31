@@ -32,7 +32,7 @@ DEBUG = os.environ.get('DEVELOPMENT') == 'True'
 
 ALLOWED_HOSTS = [
     '8000-shanebyrne0963-conversat-mjis5u9dmb.us2.codeanyapp.com',
-    'conversate-55f06929cde1.herokuapp.com/',
+    'conversate-55f06929cde1.herokuapp.com',
 ]
 
 
