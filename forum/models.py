@@ -36,8 +36,9 @@ class Comment(models.Model):
     content = models.TextField()
     posted_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name='added_comments')
     posted_on = models.DateTimeField(auto_now_add=True)
+    reply_to = models.ForeignKey('self', on_delete=models.CASCADE, related_name='replies', blank=True, null=True)
     edited = models.BooleanField(default=False)
-    likes = models.ManyToManyField(User, related_name="comment_likes")
+    likes = models.ManyToManyField(User, related_name="comment_likes", blank=True)
     approved = models.BooleanField(default=False)
 
     class Meta:
