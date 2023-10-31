@@ -8,6 +8,9 @@ class Tag(models.Model):
 
     def __str__(self):
         return self.name
+    
+    def number_of_posts(self):
+        return self.tagged_posts.count()
 
 
 class Post(models.Model):
