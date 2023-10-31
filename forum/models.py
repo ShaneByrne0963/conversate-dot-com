@@ -8,7 +8,7 @@ class Tag(models.Model):
 
     def __str__(self):
         return self.name
-    
+
     def number_of_posts(self):
         return self.tagged_posts.count()
 
@@ -26,10 +26,10 @@ class Post(models.Model):
 
     class Meta:
         ordering = ['-posted_on']
-    
+
     def __str__(self):
         return f'({self.tag}) {self.title}'
-    
+
     def number_of_likes(self):
         return self.likes.count()
 
@@ -46,7 +46,7 @@ class Comment(models.Model):
 
     class Meta:
         ordering = ['-posted_on']
-    
+
     def __str__(self):
         return f'{self.posted_by}: {self.content}'
 
