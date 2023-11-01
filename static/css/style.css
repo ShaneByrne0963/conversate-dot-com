@@ -1,4 +1,10 @@
-/* Navigation */
+/* -----------------------------------------------------Global styles----------------------------------------------------- */
+
+body {
+    background-color: lightgray;
+}
+
+/* ------------------------------------------------------Navigation------------------------------------------------------ */
 
 .navbar {
     display: grid;
@@ -38,4 +44,24 @@
     width: 30px;
     padding: 4px;
     text-align: center;
+}
+
+/* ------------------------------------------------------Home Page------------------------------------------------------ */
+
+#main-content {
+    background-color: white;
+}
+
+/* ------------------------------------------------------Posts------------------------------------------------------ */
+
+.tag {
+    margin-right: 8px;
+    border: 1px solid black;
+    text-align: center;
+    padding: 2px;
+    color: black;
+}
+
+.tag:hover {
+    text-decoration: none;
 }
