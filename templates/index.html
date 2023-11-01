@@ -6,10 +6,10 @@
 <hr>
 {% for post in post_list %}
     <div class="row post">
-        <div class="post-title col-md-8 justify-content-end">
+        <div class="post-title col-12">
             <h2>{{ post.title }}</h2>
         </div>
-        <div class="col-md-4">
+        <div class="col-12">
             <a href="#" class="tag">{{ post.tag }}</a>
             <i class="fa-regular fa-thumbs-up"></i>
             {{ post.number_of_likes }}
