@@ -1,7 +1,9 @@
 /* Navigation */
 
-.navbar-side {
-    width: 30%;
+.navbar {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr;
 }
 
 .search-icon {
@@ -14,7 +16,7 @@
     border: 1px solid black;
     border-radius: 32px;
     padding: 2px 8px;
-    width: 80%;
+    width: 100%;
     background-color: white;
     display: grid;
     grid-template-columns: auto 1fr;
@@ -27,4 +29,13 @@
     outline: none;
     display: inline-block;
     min-width: none;
+}
+
+.nav-icon {
+    color: black;
+    background-color: white;
+    border-radius: 32px;
+    width: 30px;
+    padding: 4px;
+    text-align: center;
 }

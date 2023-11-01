@@ -17,17 +17,23 @@
 </head>
 <body>
     <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
-        <a class="navbar-brand navbar-side" href="#">
+        <a class="navbar-brand" href="#">
             <i class="fa-solid fa-message"></i>
             Conversate
         </a>
-        <div class="search-bar mx-auto">
+        <!-- Search Bar -->
+        <div class="nav search-bar">
             <div class="search-icon">
                 <i class="fa-solid fa-magnifying-glass"></i>
             </div>
             <input type="text" placeholder="Search...">
         </div>
-        <div class="navbar-side"></div>
+        <!-- Icons -->
+        <div class="nav justify-content-end">
+            <a class="nav-icon" href="#">
+                <i class="fa-solid fa-pencil"></i>
+            </a>
+        </div>
     </nav>
     {% block content %}
     {% endblock content %}
