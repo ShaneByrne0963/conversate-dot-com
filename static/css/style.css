@@ -16,7 +16,7 @@
 
 #form-shell {
     width: 100%;
-    height: 60%;
+    min-height: 60%;
     background-color: lightgray;
     display: flex;
     flex-direction: column;
@@ -91,17 +91,7 @@
 
 /* ------------------------------------------------------Posts------------------------------------------------------ */
 
-.tag {
-    margin-right: 8px;
-    border: 1px solid black;
-    text-align: center;
-    padding: 2px;
-    color: black;
-}
 
-.tag:hover {
-    text-decoration: none;
-}
 
 /* ------------------------------------------------------Post Form------------------------------------------------------ */
 

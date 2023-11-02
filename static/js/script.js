@@ -12,4 +12,7 @@ window.addEventListener('DOMContentLoaded', () => {
     $('#myModal').on('shown.bs.modal', function () {
         $('#myInput').trigger('focus');
     });
+
+    // Alerts
+    $('.alert').alert();
 });
