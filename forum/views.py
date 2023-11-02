@@ -4,21 +4,11 @@ from .models import Post, Tag
 from .forms import PostForm
 
 
-class SignIn(View):
-
-    def get(self, request):
-        return render(
-            request,
-            'sign_in.html',
-            {},
-        )
-
-
 class PostList(generic.ListView):
     model = Post
     queryset = Post.objects.order_by('-posted_on')
     template_name = 'index.html'
-    paginate_by = 15
+    paginate_by = 2
 
 
 class AddPost(View):
