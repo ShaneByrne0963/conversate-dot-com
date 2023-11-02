@@ -1,9 +1,15 @@
+// Enabling Bootstrap's components
 window.addEventListener('DOMContentLoaded', () => {
-    // Enabling Bootstrap's dropdown menus
+    // Dropdown menus
     $('.dropdown-toggle').dropdown();
 
-    // Enabling Bootstrap's tooltips
+    // Tooltips
     $(function () {
         $('[data-toggle="tooltip"]').tooltip();
+    });
+
+    // Modals
+    $('#myModal').on('shown.bs.modal', function () {
+        $('#myInput').trigger('focus');
     });
 });
