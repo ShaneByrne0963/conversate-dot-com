@@ -1,14 +1,28 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.views import generic, View
+from django.views import View
+from django.core.paginator import Paginator
 from .models import Post, Tag
 from .forms import PostForm
 
 
-class PostList(generic.ListView):
-    model = Post
-    queryset = Post.objects.order_by('-posted_on')
-    template_name = 'index.html'
-    paginate_by = 2
+class PostList(View):
+    paginate_by = 20
+
+    def get(self, request):
+        posts = Post.objects.order_by('-posted_on')
+        p = Paginator(posts, self.paginate_by)
+        page = request.GET.get('page')
+        current_posts = p.get_page(page)
+
+        context = {
+            'post_list': current_posts,
+            'paginator': p
+        }
+        return render(
+            request,
+            'index.html',
+            context,
+        )
 
 
 class AddPost(View):

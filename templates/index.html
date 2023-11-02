@@ -23,16 +23,38 @@
     <hr>
 {% endfor %}
 
-{% if is_paginated %}
+<!-- Pagination -->
+{% if post_list.has_other_pages %}
+
 <nav aria-label="Page navigation">
     <ul class="pagination justify-content-center">
-        {% if page_obj.has_previous %}
-        <li><a href="?page={{ page_obj.previous_page_number }}" class="page-link">&laquo; Previous </a></li>
+        {% if post_list.has_previous %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ post_list.previous_page_number }}">Previous</a>
+        {% else %}
+            <li class="page-item disabled">
+                <div class="page-link">Previous</div>
         {% endif %}
-        {% if page_obj.has_next %}
-        <li><a href="?page={{ page_obj.next_page_number }}" class="page-link"> Next &raquo;</a></li>
+        </li>
 
+        {% for page in paginator.page_range %}
+            {% if page == post_list.number %}
+            <li class="page-item active">
+            {% else %}
+            <li class="page-item">
+            {% endif %}
+                <a class="page-link" href="?page={{ page }}">{{ page }}</a>
+            </li>
+        {% endfor %}
+
+        {% if post_list.has_next %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ post_list.next_page_number }}">Next</a>
+        {% else %}
+            <li class="page-item disabled">
+                <div class="page-link">Next</div>
         {% endif %}
+        </li>
     </ul>
 </nav>
 {% endif %}
