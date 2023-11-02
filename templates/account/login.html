@@ -1,7 +1,9 @@
 {% load static %}
+{% load i18n %}
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -15,26 +17,34 @@
     <link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css">
     <title>Conversate - Log In</title>
 </head>
+
 <body>
     <div class="container">
         <div class="row">
             <div class="col-lg-6"></div>
             <div id="form-login" class="col-lg-6">
                 <div id="form-shell">
+                    <h1>Sign In</h1>
                     <form method="POST">
                         {% csrf_token %}
+                        <!-- Username -->
                         <div class="form-group">
-                            <label for="login-email">Email address</label>
-                            <input type="email" class="form-control" id="login-email" aria-describedby="emailHelp">
-                            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                            <label for="login-username">Username</label>
+                            <input type="text" class="form-control" id="login-username" autocomplete="username"
+                                name="login" aria-describedby="emailHelp" maxlength="30" required>
+                            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone
+                                else.</small>
                         </div>
+                        <!-- Password -->
                         <div class="form-group">
                             <label for="login-password">Password</label>
-                            <input type="password" class="form-control" id="login-password">
+                            <input type="password" class="form-control" id="login-password"
+                                name="password" autocomplete="current-password" required>
                         </div>
+                        <!-- Remember Me -->
                         <div class="form-group form-check">
                             <input type="checkbox" class="form-check-input clickable" id="remain-logged">
-                            <label class="form-check-label clickable" for="remain-logged">Keep me logged in</label>
+                            <label class="form-check-label clickable" for="remain-logged" name="remember">Keep me logged in</label>
                         </div>
                         <hr>
                         <button type="submit" class="btn btn-primary btn-block">Log In</button>
@@ -47,4 +57,5 @@
         </div>
     </div>
 </body>
+
 </html>
