@@ -9,6 +9,10 @@ class PostList(View):
     paginate_by = 20
 
     def get(self, request):
+        # Redirects the user to the login page if not logged in
+        if not request.user.is_authenticated:
+            return redirect('accounts/login')
+
         posts = Post.objects.order_by('-posted_on')
         p = Paginator(posts, self.paginate_by)
         page = request.GET.get('page')
@@ -28,6 +32,9 @@ class PostList(View):
 class AddPost(View):
 
     def get(self, request):
+        # Redirects the user to the login page if not logged in
+        if not request.user.is_authenticated:
+            return redirect('accounts/login')
         context = {}
         return render(
             request,
