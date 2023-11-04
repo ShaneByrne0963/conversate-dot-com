@@ -1,0 +1,59 @@
+{% extends "account_base.html" %}
+
+{% block title %}
+Conversate - Create an Account
+{% endblock title %}
+
+{% block content %}
+<!-- Error that will appear if the user's details are incorrect -->
+{% if form.errors %}
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        The username or password you have entered is incorrect. Please try again.
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+{% endif %}
+
+<h1>Create an Account</h1>
+<form method="POST">
+    {% csrf_token %}
+    <!-- Username -->
+    <div class="form-group">
+        <label for="signup-username">Username*</label>
+        <input type="text" class="form-control" id="signup-username" autocomplete="username" name="username" maxlength="30" required>
+    </div>
+    <!-- Email -->
+    <div class="form-group">
+        <label for="signup-username">Email Address*</label>
+        <input type="email" class="form-control" id="signup-username" autocomplete="email" name="email" maxlength="320" required>
+    </div>
+    <!-- Password -->
+    <div class="form-group">
+        <label for="signup-password">Password*</label>
+        <input type="password" class="form-control" id="signup-password" name="password1" autocomplete="new-password" required>
+    </div>
+    <ul>
+        <li>Your password can’t be too similar to your other personal information.</li>
+        <li>Your password must contain at least 8 characters.</li>
+        <li>Your password can’t be a commonly used password.</li>
+        <li>Your password can’t be entirely numeric.</li>
+    </ul>
+    <div class="form-group">
+        <label for="signup-password-repeat">Repeat Password*</label>
+        <input type="password" class="form-control" id="signup-password-repeat" name="password2" autocomplete="new-password"
+            required>
+    </div>
+    <!-- Remember Me -->
+    <div class="form-group form-check">
+        <input type="checkbox" class="form-check-input clickable" id="remain-logged">
+        <label class="form-check-label clickable" for="remain-logged" name="remember">Keep me logged in</label>
+    </div>
+    <hr>
+    <button type="submit" class="btn btn-primary btn-block">Create Account</button>
+</form>
+<div>
+    <p>Already have an account? <a href="{% url 'account_login' %}">Log in here!</a></p>
+</div>
+
+{% endblock content %}

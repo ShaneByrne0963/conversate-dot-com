@@ -1,82 +1,47 @@
-{% load static %}
-{% load i18n %}
+{% extends "account_base.html" %}
 
-<!DOCTYPE html>
-<html lang="en">
+{% block title %}
+Conversate - Log In
+{% endblock title %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Bootstrap -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
-        integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
-    <!-- Font Awesome -->
-    <script src="https://kit.fontawesome.com/1a1e78fae2.js" crossorigin="anonymous"></script>
-    <!-- CSS -->
-    <link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css">
-    <title>Conversate - Log In</title>
-</head>
-
-<body>
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-6"></div>
-            <div id="form-login" class="col-lg-6">
-                <div id="form-shell">
-                    <!-- Error that will appear if the user's details are incorrect -->
-                    {% if form.errors %}
-                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                            The username or password you have entered is incorrect. Please try again.
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                    {% endif %}
-
-                    <h1>Sign In</h1>
-                    <form method="POST">
-                        {% csrf_token %}
-                        <!-- Username -->
-                        <div class="form-group">
-                            <label for="login-username">Username</label>
-                            <input type="text" class="form-control" id="login-username" autocomplete="username"
-                                name="login" aria-describedby="emailHelp" maxlength="30" required>
-                            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone
-                                else.</small>
-                        </div>
-                        <!-- Password -->
-                        <div class="form-group">
-                            <label for="login-password">Password</label>
-                            <input type="password" class="form-control" id="login-password"
-                                name="password" autocomplete="current-password" required>
-                        </div>
-                        <!-- Remember Me -->
-                        <div class="form-group form-check">
-                            <input type="checkbox" class="form-check-input clickable" id="remain-logged">
-                            <label class="form-check-label clickable" for="remain-logged" name="remember">Keep me logged in</label>
-                        </div>
-                        <hr>
-                        <button type="submit" class="btn btn-primary btn-block">Log In</button>
-                    </form>
-                    <div>
-                        <p>Don't have an account? <a href="#">Sign up here!</a></p>
-                    </div>
-                </div>
-            </div>
-        </div>
+{% block content %}
+<!-- Error that will appear if the user's details are incorrect -->
+{% if form.errors %}
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        The username or password you have entered is incorrect. Please try again.
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
     </div>
-</body>
+{% endif %}
 
-<!-- jQuery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.js"
-    integrity="sha512-+k1pnlgt4F1H8L7t3z95o3/KO+o78INEcXTbnoJQ/F2VqDVhWoaiVml/OEHv9HsVgxUaVW+IbiZPUJQfF/YxZw=="
-    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<!-- Bootstrap JavaScript -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct"
-    crossorigin="anonymous"></script>
-<!-- Custom JavaScript -->
-<script src="{% static 'js/script.js' %}"></script>
+<h1>Sign In</h1>
+<form method="POST">
+    {% csrf_token %}
+    <!-- Username -->
+    <div class="form-group">
+        <label for="login-username">Username</label>
+        <input type="text" class="form-control" id="login-username" autocomplete="username"
+            name="login" aria-describedby="emailHelp" maxlength="30" required>
+        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone
+            else.</small>
+    </div>
+    <!-- Password -->
+    <div class="form-group">
+        <label for="login-password">Password</label>
+        <input type="password" class="form-control" id="login-password"
+            name="password" autocomplete="current-password" required>
+    </div>
+    <!-- Remember Me -->
+    <div class="form-group form-check">
+        <input type="checkbox" class="form-check-input clickable" id="remain-logged">
+        <label class="form-check-label clickable" for="remain-logged" name="remember">Keep me logged in</label>
+    </div>
+    <hr>
+    <button type="submit" class="btn btn-primary btn-block">Log In</button>
+</form>
+<div>
+    <p>Don't have an account? <a href="{% url 'account_signup' %}">Sign up here!</a></p>
+</div>
 
-</html>
+{% endblock content %}
