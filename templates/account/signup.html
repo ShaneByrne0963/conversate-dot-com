@@ -6,14 +6,16 @@ Conversate - Create an Account
 
 {% block content %}
 <!-- Error that will appear if the user's details are incorrect -->
-{% if form.errors %}
-    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-        The username or password you have entered is incorrect. Please try again.
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
-{% endif %}
+{% for field in form %}
+    {% for error in field.errors %}
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            {{ error }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    {% endfor %}
+{% endfor %}
 
 <h1>Create an Account</h1>
 <form method="POST">
