@@ -9,8 +9,8 @@ window.addEventListener('DOMContentLoaded', () => {
     });
 
     // Modals
-    $('#myModal').on('shown.bs.modal', function () {
-        $('#myInput').trigger('focus');
+    $('#modal-logout').on('shown.bs.modal', function () {
+        $('#nav-logout').trigger('focus');
     });
 
     // Alerts
