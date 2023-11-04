@@ -23,6 +23,14 @@ Conversate - Create an Account
     <!-- Username -->
     <div class="form-group">
         <label for="signup-username">Username*</label>
+        <!-- Information about usernames -->
+        <a tabindex="0" class="fa-solid fa-circle-info clickable info-hover" role="button" data-toggle="popover"
+            data-placement="bottom" data-trigger="hover" title="Username Requirements" data-content="
+            <ul>
+                <li>Your username must not exceed 30 characters.</li>
+                <li>Your username cannot already exist.</li>
+            </ul>">
+        </a>
         <input type="text" class="form-control" id="signup-username" autocomplete="username" name="username" maxlength="30" required>
     </div>
     <!-- Email -->
@@ -33,14 +41,19 @@ Conversate - Create an Account
     <!-- Password -->
     <div class="form-group">
         <label for="signup-password">Password*</label>
+        <!-- Information about passwords -->
+        <a tabindex="0" class="fa-solid fa-circle-info clickable info-hover" role="button" data-toggle="popover"
+            data-placement="bottom" data-trigger="hover" title="Password Requirements" data-content="
+            <ul>
+                <li>Your password can't be too similar to your other personal information.</li>
+                <li>Your password must contain at least 8 characters.</li>
+                <li>Your password can't be a commonly used password.</li>
+                <li>Your password can't be entirely numeric.</li>
+            </ul>">
+        </a>
         <input type="password" class="form-control" id="signup-password" name="password1" autocomplete="new-password" required>
     </div>
-    <ul>
-        <li>Your password can’t be too similar to your other personal information.</li>
-        <li>Your password must contain at least 8 characters.</li>
-        <li>Your password can’t be a commonly used password.</li>
-        <li>Your password can’t be entirely numeric.</li>
-    </ul>
+    
     <div class="form-group">
         <label for="signup-password-repeat">Repeat Password*</label>
         <input type="password" class="form-control" id="signup-password-repeat" name="password2" autocomplete="new-password"

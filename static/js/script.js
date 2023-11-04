@@ -3,8 +3,8 @@ window.addEventListener('DOMContentLoaded', () => {
     // Dropdown menus
     $('.dropdown-toggle').dropdown();
 
-    // Tooltips
     $(function () {
+        // Tooltips
         $('[data-toggle="tooltip"]').tooltip();
     });
 
@@ -15,4 +15,11 @@ window.addEventListener('DOMContentLoaded', () => {
 
     // Alerts
     $('.alert').alert();
+
+    // Popovers
+    $(function () {
+        $('[data-toggle="popover"]').popover({
+            html: true
+        });
+    });
 });

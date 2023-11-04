@@ -29,6 +29,11 @@
     width: 90%;
 }
 
+/* Removing the underline from the information icon when hovered over */
+.info-hover:hover {
+    text-decoration: none;
+}
+
 /* ------------------------------------------------------Navigation------------------------------------------------------ */
 
 .navbar {
