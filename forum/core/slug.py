@@ -7,6 +7,17 @@ def test_instance(variable, var_type, error_message):
         raise TypeError(error_message)
 
 
+def test_index(number, min_range, max_range):
+    """
+    Tests if a number is within a certain range, and raises an IndexError
+    if it isn't
+    """
+    if number < min_range:
+        raise IndexError(f'index should not be less than {min_range}')
+    elif number > max_range:
+        raise IndexError(f'index should not be greater than {max_range}')
+
+
 def generate_slug(post_title, post_tag, total_posts):
     """
     Generates a slug for a post using it's title and tag, as well as the total
@@ -35,4 +46,48 @@ def generate_character_set(seed, number_of_characters):
     return characters
 
 
-generate_slug('Title', 'Tag', 42)
+def get_character(index):
+    """
+    Gets a character with a specified index
+    - 0-9 returns their respective number
+    - 10-35 returns a lowercase letter
+    - 36-61 returns an uppercase letter
+    """
+    test_instance(index, int, 'index must be an integer')
+    test_index(index, 0, 61)
+
+    letters = (
+        'a',
+        'b',
+        'c',
+        'd',
+        'e',
+        'f',
+        'g',
+        'h',
+        'i',
+        'j',
+        'k',
+        'l',
+        'm',
+        'n',
+        'o',
+        'p',
+        'q',
+        'r',
+        's',
+        't',
+        'u',
+        'v',
+        'w',
+        'x',
+        'y',
+        'z',
+    )
+
+    # Digits
+    if index < 10:
+        return str(index)
+    if index <= 35:
+        return letters[index - 10]
+    return letters[index - 36].upper()
