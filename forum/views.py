@@ -2,7 +2,6 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.views import View
 from django.core.paginator import Paginator
 from .models import Post, Tag
-from .forms import PostForm
 
 
 class PostList(View):
