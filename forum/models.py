@@ -3,6 +3,17 @@ from django.contrib.auth.models import User
 from cloudinary.models import CloudinaryField
 
 
+class SiteData(models.Model):
+    # region Explanation for why this is necessary
+    """
+    Used for slug generation. If the total number of active posts was used
+    instead, then deleting posts can cause repeated character sets,
+    increasing the risk of duplicate slugs
+    """
+    # endregion
+    total_posts_created = models.IntegerField(default=0)
+
+
 class Tag(models.Model):
     name = models.CharField(max_length=30, unique=True)
 

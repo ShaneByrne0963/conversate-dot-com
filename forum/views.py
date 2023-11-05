@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views import View
 from django.core.paginator import Paginator
-from .models import Post, Tag
+from .models import Post, Tag, SiteData
 from .core.slug import generate_slug
 
 
@@ -56,8 +56,12 @@ class AddPost(View):
             tag_object = existing_tag[0]
 
         # Generating the slug for the post
-        total_posts = Post.objects.count()
+        site_data = get_object_or_404(SiteData)
+        total_posts = site_data.total_posts_created
         post_slug = generate_slug(title, tag, total_posts)
+        total_posts += 1
+        site_data.total_posts_created = total_posts
+        site_data.save()
 
         Post.objects.create(
             title=title,
@@ -66,5 +70,4 @@ class AddPost(View):
             tag=tag_object,
             posted_by=request.user
         )
-
         return redirect('home')

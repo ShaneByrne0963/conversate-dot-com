@@ -17,7 +17,7 @@ class TestSlug(unittest.TestCase):
 
     def test_generate_slug_returns_string(self):
         self.assertIsInstance(generate_slug('Hello World', 'Tag', 42), str)
-    
+
     def test_slugified_tag_in_returned_string(self):
         self.assertTrue(
             'test-tag' in generate_slug('Hello World', 'Test Tag', 42)
