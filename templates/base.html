@@ -13,7 +13,10 @@
     <script src="https://kit.fontawesome.com/1a1e78fae2.js" crossorigin="anonymous"></script>
     <!-- CSS -->
     <link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css">
-    <title>Conversate - Join the Discussion</title>
+    <title>
+        {% block title %}
+        {% endblock title %}
+    </title>
 </head>
 <body id="main-page">
     <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
@@ -22,7 +25,6 @@
             Conversate
         </a>
         <!-- Search Bar -->
-        <div></div>
         <!-- <div class="nav search-bar">
             <div class="search-icon">
                 <i class="fa-solid fa-magnifying-glass"></i>
