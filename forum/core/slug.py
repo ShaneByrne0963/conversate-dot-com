@@ -1,3 +1,7 @@
+import random
+from django.utils.text import slugify
+
+
 def test_instance(variable, var_type, error_message):
     """
     Tests if a variable is of a certain instance, and raises a TypeError
@@ -27,7 +31,13 @@ def generate_slug(post_title, post_tag, total_posts):
     test_instance(post_title, str, 'title must be a string')
     test_instance(post_tag, str, 'tag must be a string')
     test_instance(total_posts, int, 'total_posts must be an integer')
-    return ''
+
+    # Getting all the components of the slug
+    slugified_tag = slugify(post_tag)
+    character_set = generate_character_set(total_posts, 8)
+    slugified_title = slugify(post_title)
+
+    return f'{slugified_tag}/{character_set}/{slugified_title}'
 
 
 def generate_character_set(seed, number_of_characters):
@@ -40,8 +50,11 @@ def generate_character_set(seed, number_of_characters):
                   'num_of_characters must be an integer')
 
     characters = ''
+    random.seed(seed)
     for i in range(number_of_characters):
-        characters += '0'
+        index = random.randint(0, 61)
+        new_character = get_character(index)
+        characters += new_character
 
     return characters
 
