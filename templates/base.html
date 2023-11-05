@@ -20,7 +20,7 @@
 </head>
 <body id="main-page">
     <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
-        <a class="navbar-brand" href="{% url 'home' %}">
+        <a class="navbar-brand" href="{% url 'home' %}" aria-label="Go to the home page">
             <i class="fa-solid fa-message"></i>
             Conversate
         </a>
@@ -33,20 +33,25 @@
         </div> -->
         <!-- Icons -->
         <ul class="nav justify-content-end">
+            <li class="text-light d-none d-sm-inline mr-2 mr-lg-4">
+                <em class="align-middle">{{user.username}}</em>
+            </li>
             <li class="nav mr-2 mr-lg-4">
-                <a class="nav-icon" href="{% url 'new_post' %}" data-toggle="tooltip" data-placement="bottom" title="New Post">
+                <a class="nav-icon" href="{% url 'new_post' %}" data-toggle="tooltip"
+                    data-placement="bottom" title="New Post" aria-label="Create a new post">
                     <i class="fa-solid fa-plus"></i>
                 </a>
             </li>
             <li class="nav dropdown">
-                <a class="nav-icon" data-toggle="dropdown" href="#" role="button" aria-expanded="false">
-                    <i class="fa-solid fa-gear"></i></a>
+                <span class="nav-icon" data-toggle="dropdown" role="button" aria-expanded="false" aria-label="User Information">
+                    <i class="fa-solid fa-gear"></i>
+                </span>
                 <div class="dropdown-menu dropdown-menu-right">
-                    <a class="dropdown-item" href="#">View Posts</a>
-                    <a class="dropdown-item" href="#">Account Settings</a>
+                    <a class="dropdown-item" href="#" aria-label="View all of your previously made posts">View Posts</a>
+                    <a class="dropdown-item" href="#" aria-label="View and edit your account settings">Account Settings</a>
                     <div class="dropdown-divider"></div>
-                    <!-- <a class="dropdown-item" href="{% url 'account_logout' %}" data-toggle="modal" data-target="#exampleModal">Log out</a> -->
-                    <a id="nav-logout" class="dropdown-item clickable" data-toggle="modal" data-target="#modal-logout">Log out</a>
+                    <a id="nav-logout" class="dropdown-item clickable" data-toggle="modal"
+                        data-target="#modal-logout" aria-label="Log out of your account">Log out</a>
                 </div>
             </li>
         </ul>
@@ -72,8 +77,8 @@
                     <p>Are you sure you want to log out?</p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                    <a href="{% url 'account_logout' %}" class="btn btn-primary">Log Out</a>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" aria-label="Dismiss logout">Cancel</button>
+                    <a href="{% url 'account_logout' %}" class="btn btn-primary" aria-label="Confirm logout">Log Out</a>
                 </div>
             </div>
         </div>
