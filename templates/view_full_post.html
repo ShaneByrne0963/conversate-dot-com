@@ -6,28 +6,39 @@
 
 {% block content %}
     <h1>{{ post.title }}</h1>
-    <a class="btn btn-large btn-dark" href="">{{ post.tag }}</a>
+    <a class="btn btn-large btn-dark" href="#">{{ post.tag }}</a>
     <span>{{ post.posted_by }}</span>
     <br><br>
     <p>{{ post.content }}</p>
     <hr>
     <div class="row">
         <div class="col-3 col-md-2 px-1 px-md-2 px-lg-4">
-            <form class="d-inline" method="POST" action="{% url 'like_post' post.slug %}">
-                {% csrf_token %}
-                {% if liked %}
-                <button type="submit" class="btn btn-dark btn-block">
-                    <i class="fa-solid fa-thumbs-up"></i>
-                {% else %}
-                <button type="submit" class="btn btn-outline-dark btn-block">
+            {% if user.is_authenticated %}
+                <form class="d-inline" method="POST" action="{% url 'like_post' post.slug %}">
+                    {% csrf_token %}
+                    {% if liked %}
+                    <button type="submit" class="btn btn-dark btn-block">
+                        <i class="fa-solid fa-thumbs-up"></i>
+                    {% else %}
+                    <button type="submit" class="btn btn-outline-dark btn-block">
+                        <i class="fa-regular fa-thumbs-up"></i>
+                    {% endif %}
+                        {{ post.number_of_likes }}
+                    </button>
+                </form>
+            {% else %}
+                <span class="btn btn-dark btn-block">
                     <i class="fa-regular fa-thumbs-up"></i>
-                {% endif %}
                     {{ post.number_of_likes }}
-                </button>
-            </form>
+                </span>
+            {% endif %}
         </div>
         <div class="col-3 col-md-2 px-1 px-md-2 px-lg-4">
-            <a class="btn btn-outline-dark btn-block" href="#comment">
+            {% if user.is_authenticated %}
+                <a class="btn btn-outline-dark btn-block" href="#post-comment">
+            {% else %}
+                <a class="btn btn-outline-dark btn-block" href="#comments">
+            {% endif %}
                 <i class="fa-regular fa-comment"></i>
                 {{ post.number_of_comments }}
             </a>
@@ -45,19 +56,21 @@
                 <li>Commenting as <em>{{ user.username }}</em></li>
             </ul>
             <div class="form-group">
-                <textarea class="form-control" id="comment" rows="3"></textarea>
+                <textarea class="form-control" id="post-comment" rows="3"></textarea>
             </div>
         </form>
     {% endif %}
 
-    <h3>Comments</h3>
-    <br>
-    {% for comment in comments %}
-        <strong>{{ comment.posted_by }}</strong> - 
-        <em>{{ comment.posted_on }}</em>
-        <p>{{ comment.content }}</p>
-        {% if not forloop.last %}
-            <hr>
-        {% endif %}
-    {% endfor %}
+    <div id="comments">
+        <h3>Comments</h3>
+        <br>
+        {% for comment in comments %}
+            <strong>{{ comment.posted_by }}</strong> -
+            <em>{{ comment.posted_on }}</em>
+            <p>{{ comment.content }}</p>
+            {% if not forloop.last %}
+                <hr>
+            {% endif %}
+        {% endfor %}
+    </div>
 {% endblock %}
