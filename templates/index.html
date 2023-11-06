@@ -11,7 +11,9 @@ What's New - Conversate
 {% for post in post_list %}
     <div class="row post">
         <div class="post-title col-12">
-            <h2>{{ post.title }}</h2>
+            <a href="{% url 'view_post' post.slug %}" class="anchor-no-style">
+                <h2>{{ post.title }}</h2>
+            </a>
         </div>
         <div class="col-12">
             <a href="#" class="btn btn-sm btn-dark">{{ post.tag }}</a>
@@ -21,7 +23,7 @@ What's New - Conversate
         <div class="col-12">
             <p>Posted on {{ post.posted_on }} by {{ post.posted_by }}</p>
             <p>{{ post.content }}</p>
-            <a href="">Read More...</a>
+            <a href="{% url 'view_post' post.slug %}">Read More...</a>
         </div>
     </div>
     <hr>

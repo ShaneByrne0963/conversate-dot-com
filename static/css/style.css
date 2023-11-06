@@ -5,6 +5,13 @@
     cursor: pointer;
 }
 
+/* Removes the blue colour and underline from default anchors */
+.anchor-no-style,
+.anchor-no-style:hover {
+    color: inherit;
+    text-decoration: none;
+}
+
 /* --------------------------------------------------------Login--------------------------------------------------------- */
 
 #form-account {

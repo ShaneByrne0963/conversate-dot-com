@@ -37,7 +37,7 @@ def generate_slug(post_title, post_tag, total_posts):
     character_set = generate_character_set(total_posts, 8)
     slugified_title = slugify(post_title)
 
-    return f'{slugified_tag}/{character_set}/{slugified_title}'
+    return f'{slugified_tag}-{character_set}-{slugified_title}'
 
 
 def generate_character_set(seed, number_of_characters):

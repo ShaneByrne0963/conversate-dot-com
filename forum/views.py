@@ -6,7 +6,7 @@ from .core.slug import generate_slug
 
 
 class PostList(View):
-    paginate_by = 20
+    paginate_by = 1
 
     def get(self, request):
         # Redirects the user to the login page if not logged in
@@ -71,3 +71,17 @@ class AddPost(View):
             posted_by=request.user
         )
         return redirect('home')
+
+
+class ViewPost(View):
+
+    def get(self, request, slug, *args, **kwargs):
+        post = get_object_or_404(Post, slug=slug)
+        context = {
+            'post': post
+        }
+        return render(
+            request,
+            'view_post.html',
+            context
+        )
