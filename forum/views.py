@@ -77,11 +77,13 @@ class ViewPost(View):
 
     def get(self, request, slug, *args, **kwargs):
         post = get_object_or_404(Post, slug=slug)
+        comments = post.comments.order_by('-posted_on')
         context = {
-            'post': post
+            'post': post,
+            'comments': comments
         }
         return render(
             request,
-            'view_post.html',
+            'view_full_post.html',
             context
         )

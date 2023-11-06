@@ -26,7 +26,11 @@ What's New - Conversate
             <a href="{% url 'view_post' post.slug %}">Read More...</a>
         </div>
     </div>
-    <hr>
+    {% if not forloop.last %}
+        <hr>
+    {% else %}
+        <br>
+    {% endif %}
 {% endfor %}
 
 <!-- Pagination -->

@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block title %}
+    {{ post.title }} - Conversate
+{% endblock %}
+
+{% block content %}
+    <h1>{{ post.title }}</h1>
+    <a class="btn btn-large btn-dark" href="">{{ post.tag }}</a>
+    <span>{{ post.posted_by }}</span>
+    <br><br>
+    <p>{{ post.content }}</p>
+    <hr>
+    <div class="row">
+        <div class="col-3 col-md-2 px-1 px-md-2 px-lg-4">
+            <button class="btn btn-outline-dark btn-block">
+                <i class="fa-regular fa-thumbs-up"></i>
+                {{ post.number_of_likes }}
+            </button>
+        </div>
+        <div class="col-3 col-md-2 px-1 px-md-2 px-lg-4">
+            <button class="btn btn-outline-dark btn-block">
+                <i class="fa-regular fa-comment"></i>
+                {{ post.number_of_likes }}
+            </button>
+        </div>
+    </div>
+    <br>
+    <!-- Comment input when  -->
+    {% if user.is_authenticated %}
+        <form method="POST">
+            {% csrf_token %}
+            <label for="comment-body" class="mb-0 mb-sm-2">
+                <h4 class="d-inline-block mb-0 mb-sm-2">Leave a Comment</h4>
+            </label>
+            <ul class="d-inline-block pl-4">
+                <li>Commenting as <em>{{ user.username }}</em></li>
+            </ul>
+            <div class="form-group">
+                <textarea class="form-control" id="comment-body" rows="3"></textarea>
+            </div>
+        </form>
+    {% endif %}
+
+    <h3>Comments</h3>
+    <br>
+    {% for comment in comments %}
+        <strong>{{ comment.posted_by }}</strong> - 
+        <em>{{ comment.posted_on }}</em>
+        <p>{{ comment.content }}</p>
+        {% if not forloop.last %}
+            <hr>
+        {% endif %}
+    {% endfor %}
+{% endblock %}
