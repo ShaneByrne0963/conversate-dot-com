@@ -6,7 +6,7 @@ from .core.slug import generate_slug
 
 
 class PostList(View):
-    paginate_by = 1
+    paginate_by = 20
 
     def get(self, request):
         # Redirects the user to the login page if not logged in
