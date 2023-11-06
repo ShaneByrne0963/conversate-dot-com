@@ -13,16 +13,24 @@
     <hr>
     <div class="row">
         <div class="col-3 col-md-2 px-1 px-md-2 px-lg-4">
-            <button class="btn btn-outline-dark btn-block">
-                <i class="fa-regular fa-thumbs-up"></i>
-                {{ post.number_of_likes }}
-            </button>
+            <form class="d-inline" method="POST" action="{% url 'like_post' post.slug %}">
+                {% csrf_token %}
+                {% if liked %}
+                <button type="submit" class="btn btn-dark btn-block">
+                    <i class="fa-solid fa-thumbs-up"></i>
+                {% else %}
+                <button type="submit" class="btn btn-outline-dark btn-block">
+                    <i class="fa-regular fa-thumbs-up"></i>
+                {% endif %}
+                    {{ post.number_of_likes }}
+                </button>
+            </form>
         </div>
         <div class="col-3 col-md-2 px-1 px-md-2 px-lg-4">
-            <button class="btn btn-outline-dark btn-block">
+            <a class="btn btn-outline-dark btn-block" href="#comment">
                 <i class="fa-regular fa-comment"></i>
-                {{ post.number_of_likes }}
-            </button>
+                {{ post.number_of_comments }}
+            </a>
         </div>
     </div>
     <br>
@@ -30,14 +38,14 @@
     {% if user.is_authenticated %}
         <form method="POST">
             {% csrf_token %}
-            <label for="comment-body" class="mb-0 mb-sm-2">
+            <label for="comment" class="mb-0 mb-sm-2">
                 <h4 class="d-inline-block mb-0 mb-sm-2">Leave a Comment</h4>
             </label>
             <ul class="d-inline-block pl-4">
                 <li>Commenting as <em>{{ user.username }}</em></li>
             </ul>
             <div class="form-group">
-                <textarea class="form-control" id="comment-body" rows="3"></textarea>
+                <textarea class="form-control" id="comment" rows="3"></textarea>
             </div>
         </form>
     {% endif %}

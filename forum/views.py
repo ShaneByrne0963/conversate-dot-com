@@ -1,6 +1,7 @@
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404, reverse
 from django.views import View
 from django.core.paginator import Paginator
+from django.http import HttpResponseRedirect
 from .models import Post, Tag, SiteData
 from .core.slug import generate_slug
 
@@ -78,12 +79,26 @@ class ViewPost(View):
     def get(self, request, slug, *args, **kwargs):
         post = get_object_or_404(Post, slug=slug)
         comments = post.comments.order_by('-posted_on')
+        liked = post.likes.filter(id=request.user.id).exists()
         context = {
             'post': post,
-            'comments': comments
+            'comments': comments,
+            'liked': liked
         }
         return render(
             request,
             'view_full_post.html',
             context
         )
+
+
+class LikePost(View):
+
+    def post(self, request, slug):
+        post = get_object_or_404(Post, slug=slug)
+
+        if post.likes.filter(id=request.user.id).exists():
+            post.likes.remove(request.user)
+        else:
+            post.likes.add(request.user)
+        return HttpResponseRedirect(reverse('view_post', args=[slug]))
