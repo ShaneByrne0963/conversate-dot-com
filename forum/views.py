@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404, reverse
 from django.views import View
 from django.core.paginator import Paginator
 from django.http import HttpResponseRedirect
-from .models import Post, Tag, SiteData
+from .models import Post, Tag, Comment, SiteData
 from .core.slug import generate_slug
 
 
@@ -101,4 +101,18 @@ class LikePost(View):
             post.likes.remove(request.user)
         else:
             post.likes.add(request.user)
+        return HttpResponseRedirect(reverse('view_post', args=[slug]))
+
+
+class SendComment(View):
+
+    def post(self, request, slug):
+        post = get_object_or_404(Post, slug=slug)
+        comment_text = request.POST.get('content')
+
+        Comment.objects.create(
+            post=post,
+            content=comment_text,
+            posted_by=request.user
+        )
         return HttpResponseRedirect(reverse('view_post', args=[slug]))
