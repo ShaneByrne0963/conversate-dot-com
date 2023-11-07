@@ -76,8 +76,13 @@
                 <div>
                     <form method="POST" action="{% url 'like_comment' comment.id %}">
                         {% csrf_token %}
+                        {% if user in comment.likes.all %}
+                        <button type="submit" class="btn btn-small btn-dark py-0">
+                            <i class="fa-solid fa-thumbs-up"></i>
+                        {% else %}
                         <button type="submit" class="btn btn-small btn-outline-dark py-0">
                             <i class="fa-regular fa-thumbs-up"></i>
+                        {% endif %}
                             {{ comment.number_of_likes }}
                         </button>
                     </form>
