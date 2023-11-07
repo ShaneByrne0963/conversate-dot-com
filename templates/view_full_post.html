@@ -17,17 +17,17 @@
                 <form class="d-inline" method="POST" action="{% url 'like_post' post.slug %}">
                     {% csrf_token %}
                     {% if liked %}
-                    <button type="submit" class="btn btn-dark btn-block">
+                    <button type="submit" class="btn btn-dark btn-block" aria-label="Unlike this post">
                         <i class="fa-solid fa-thumbs-up"></i>
                     {% else %}
-                    <button type="submit" class="btn btn-outline-dark btn-block">
+                    <button type="submit" class="btn btn-outline-dark btn-block" aria-label="Like this post">
                         <i class="fa-regular fa-thumbs-up"></i>
                     {% endif %}
                         {{ post.number_of_likes }}
                     </button>
                 </form>
             {% else %}
-                <span class="btn btn-outline-dark btn-block disabled">
+                <span class="btn btn-outline-dark btn-block disabled" aria-disabled="true">
                     <i class="fa-regular fa-thumbs-up"></i>
                     {{ post.number_of_likes }}
                 </span>
@@ -35,9 +35,9 @@
         </div>
         <div class="col-3 col-md-2 px-1 px-md-2 px-lg-4">
             {% if user.is_authenticated %}
-                <a class="btn btn-outline-dark btn-block" href="#post-comment">
+                <a class="btn btn-outline-dark btn-block" href="#post-comment" aria-label="Post a comment">
             {% else %}
-                <a class="btn btn-outline-dark btn-block" href="#comments">
+                <a class="btn btn-outline-dark btn-block" href="#comments" aria-label="View the post's comments">
             {% endif %}
                 <i class="fa-regular fa-comment"></i>
                 {{ post.number_of_comments }}
@@ -55,9 +55,11 @@
             <ul class="d-inline-block pl-4">
                 <li>Commenting as <em>{{ user.username }}</em></li>
             </ul>
-            <div class="form-group">
-                <textarea class="form-control" id="post-comment" rows="3"></textarea>
+            <div class="form-group mb-1">
+                <textarea class="form-control" id="post-comment" rows="3" required></textarea>
             </div>
+            <input type="submit" class="btn btn-outline-dark" value="Comment"></input>
+            <input type="reset" class="btn btn-outline-dark" value="Cancel"></input>
         </form>
     {% endif %}
 
