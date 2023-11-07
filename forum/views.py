@@ -116,3 +116,19 @@ class SendComment(View):
             posted_by=request.user
         )
         return HttpResponseRedirect(reverse('view_post', args=[slug]))
+
+
+class LikeComment(View):
+
+    def post(self, request, comment_id):
+        comment = get_object_or_404(Comment, id=comment_id)
+
+        if comment.likes.filter(id=request.user.id).exists():
+            comment.likes.remove(request.user)
+        else:
+            comment.likes.add(request.user)
+
+        # Finding the slug of the post the comment is on
+        post = comment.post
+        slug = post.slug
+        return HttpResponseRedirect(reverse('view_post', args=[slug]))

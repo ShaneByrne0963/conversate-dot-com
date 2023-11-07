@@ -68,10 +68,20 @@
     <div id="comments">
         {% if comments %}
             <h3>Comments</h3>
+            <hr>
             {% for comment in comments %}
                 <strong>{{ comment.posted_by }}</strong> -
                 <em>{{ comment.posted_on }}</em>
-                <p>{{ comment.content }}</p>
+                <p class="mb-1">{{ comment.content }}</p>
+                <div>
+                    <form method="POST" action="{% url 'like_comment' comment.id %}">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-small btn-outline-dark py-0">
+                            <i class="fa-regular fa-thumbs-up"></i>
+                            {{ comment.number_of_likes }}
+                        </button>
+                    </form>
+                </div>
                 {% if not forloop.last %}
                     <hr>
                 {% endif %}
