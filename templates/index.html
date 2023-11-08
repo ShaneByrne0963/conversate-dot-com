@@ -27,7 +27,7 @@ What's New - Conversate
             {{ post.number_of_comments }}
         </div>
         <div class="col-12">
-            <p>Posted on {{ post.posted_on }} by {{ post.posted_by }}</p>
+            <p>Posted on {{ post.date_formatted }} by {{ post.posted_by }}</p>
             <p>{{ post.content }}</p>
             <a href="{% url 'view_post' post.slug %}">Read More...</a>
         </div>

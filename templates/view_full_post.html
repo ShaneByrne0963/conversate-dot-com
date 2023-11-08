@@ -72,7 +72,7 @@
             <hr>
             {% for comment in comments %}
                 {% if comment.reply_to %}
-                    <div id="reply-to-{{ comment.reply_to.id }}" class="comment reply ml-3 ml-sm-4 ml-lg-5">
+                    <div id="reply-to-{{ comment.reply_to.id }}" class="comment reply ml-3 ml-sm-4 ml-lg-5 py-2">
                 {% else %}
                     <div id="comment-{{ comment.id }}" class="comment">
                 {% endif %}
@@ -133,11 +133,14 @@
                             {% endif %}
                         </a>
                         <div id="reply-section-{{ comment.id }}" class="replies collapse"></div>
-                    {% elif not forloop.last %}
-                        <hr>
                     {% endif %}
                     <!-- /.replies -->
                 </div>
+                {% if not comment.reply_to %}
+                    {% if not forloop.last %}
+                        <hr>
+                    {% endif %}
+                {% endif %}
             {% endfor %}
         {% endif %}
     </div>

@@ -15,7 +15,6 @@ function organizeReplies() {
         commentId = commentId.replace('reply-to-', '');
         let comment = document.getElementById(`comment-${commentId}`);
         let replySection = comment.getElementsByClassName('replies')[0];
-        console.log(replySection);
         replySection.appendChild(reply);
     }
 }

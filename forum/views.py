@@ -109,11 +109,11 @@ class SendComment(View):
     def post(self, request, slug):
         post = get_object_or_404(Post, slug=slug)
         comment_text = request.POST.get('content')
-        reply_id = int(request.POST.get('reply'))
+        reply_id = request.POST.get('reply')
         reply_to = None
 
         if reply_id is not None:
-            reply_to = get_object_or_404(Comment, id=reply_id)
+            reply_to = get_object_or_404(Comment, id=int(reply_id))
 
         Comment.objects.create(
             post=post,
