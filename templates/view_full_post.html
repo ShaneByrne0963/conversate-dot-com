@@ -103,7 +103,7 @@
                         </button>
                         <form method="POST" action="{% url 'send_comment' post.slug %}" class="collapse reply-collapse" id="reply-toggle-{{ comment.id }}">
                             {% csrf_token %}
-                            
+
                             <!-- Hidden input to tell the view which comment is being replied to -->
                             {% if comment.reply_to %}
                                 <input type="hidden" name="reply" value="{{ comment.reply_to.id }}" aria-hidden="true">
@@ -121,24 +121,22 @@
                         </form>
                         <!-- /.reply -->
                     </div>
+
+                    <!-- Replies section -->
+                    {% if comment.number_of_replies %}
+                        <a href="#" class="reply-toggle d-inline-block mt-2">
+                            {% if comment.number_of_replies == 1 %}
+                                View 1 Reply
+                            {% else %}
+                                View {{ comment.number_of_replies }} Replies
+                            {% endif %}
+                        </a>
+                        <div class="replies"></div>
+                    {% elif not forloop.last %}
+                        <hr>
+                    {% endif %}
+                    <!-- /.replies -->
                 </div>
-
-                <!-- Anchor to show replies -->
-                {% if comment.number_of_replies %}
-                    <a href="#" class="reply-toggle d-inline-block mt-1">
-                        {% if comment.number_of_replies == 1 %}
-                            View 1 Reply
-                        {% else %}
-                            View {{ comment.number_of_replies }} Replies
-                        {% endif %}
-                    </a>
-                    <div class="replies"></div>
-                {% endif %}
-                <!-- /.reply-anchor -->
-
-                {% if not forloop.last %}
-                    <hr>
-                {% endif %}
             {% endfor %}
         {% endif %}
     </div>
