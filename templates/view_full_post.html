@@ -74,7 +74,8 @@
                 <em>{{ comment.posted_on }}</em>
                 <p class="mb-1">{{ comment.content }}</p>
                 <div>
-                    <form method="POST" action="{% url 'like_comment' comment.id %}">
+                    <!-- Like button for comments -->
+                    <form method="POST" class="d-inline" action="{% url 'like_comment' comment.id %}">
                         {% csrf_token %}
                         {% if user in comment.likes.all %}
                         <button type="submit" class="btn btn-small btn-dark py-0">
@@ -86,6 +87,24 @@
                             {{ comment.number_of_likes }}
                         </button>
                     </form>
+                    <!-- /.like-comments -->
+
+                    <!-- Reply button and dropdown -->
+                    <button class="btn btn-small btn-outline-dark py-0" type="button" data-toggle="collapse"
+                        data-target="#reply-to-{{ comment.id }}" aria-expanded="false" aria-controls="reply-to-{{ comment.id }}">
+                        <i class="fa-regular fa-comment"></i>
+                        Reply
+                    </button>
+                    <form method="POST" action="{% url 'send_comment' post.slug %}" class="collapse" id="reply-to-{{ comment.id }}">
+                        {% csrf_token %}
+                        <div class="form-group mb-1">
+                            <textarea class="form-control" name="content" id="post-comment" rows="3" required></textarea>
+                        </div>
+                        <input type="submit" class="btn btn-outline-dark" value="Reply"></input>
+                        <input type="reset" class="btn btn-outline-dark" value="Cancel" data-toggle="collapse"
+                            data-target="#reply-to-{{ comment.id }}" aria-expanded="false" aria-controls="reply-to-{{ comment.id }}"></input>
+                    </form>
+                    <!-- /.reply -->
                 </div>
                 {% if not forloop.last %}
                     <hr>
