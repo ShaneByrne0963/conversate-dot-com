@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block title %}
     {{ post.title }} - Conversate
@@ -70,47 +71,79 @@
             <h3>Comments</h3>
             <hr>
             {% for comment in comments %}
-                <strong>{{ comment.posted_by }}</strong> -
-                <em>{{ comment.posted_on }}</em>
-                <p class="mb-1">{{ comment.content }}</p>
-                <div>
-                    <!-- Like button for comments -->
-                    <form method="POST" class="d-inline" action="{% url 'like_comment' comment.id %}">
-                        {% csrf_token %}
-                        {% if user in comment.likes.all %}
-                        <button type="submit" class="btn btn-small btn-dark py-0">
-                            <i class="fa-solid fa-thumbs-up"></i>
-                        {% else %}
-                        <button type="submit" class="btn btn-small btn-outline-dark py-0">
-                            <i class="fa-regular fa-thumbs-up"></i>
-                        {% endif %}
-                            {{ comment.number_of_likes }}
-                        </button>
-                    </form>
-                    <!-- /.like-comments -->
+                {% if comment.reply_to %}
+                    <div id="reply-to-{{ comment.reply_to.id }}" class="comment reply ml-3 ml-sm-4 ml-lg-5">
+                {% else %}
+                    <div id="comment-{{ comment.id }}" class="comment">
+                {% endif %}
+                    <strong>{{ comment.posted_by }}</strong> -
+                    <em>{{ comment.posted_on }}</em>
+                    <p class="mb-1">{{ comment.content }}</p>
+                    <div>
+                        <!-- Like button for comments -->
+                        <form method="POST" class="d-inline" action="{% url 'like_comment' comment.id %}">
+                            {% csrf_token %}
+                            {% if user in comment.likes.all %}
+                            <button type="submit" class="btn btn-small btn-dark py-0">
+                                <i class="fa-solid fa-thumbs-up"></i>
+                            {% else %}
+                            <button type="submit" class="btn btn-small btn-outline-dark py-0">
+                                <i class="fa-regular fa-thumbs-up"></i>
+                            {% endif %}
+                                {{ comment.number_of_likes }}
+                            </button>
+                        </form>
+                        <!-- /.like-comments -->
 
-                    <!-- Reply button and dropdown -->
-                    <button class="btn btn-small btn-outline-dark py-0" type="button" data-toggle="collapse"
-                        data-target="#reply-to-{{ comment.id }}" aria-expanded="false" aria-controls="reply-to-{{ comment.id }}">
-                        <i class="fa-regular fa-comment"></i>
-                        Reply
-                    </button>
-                    <form method="POST" action="{% url 'send_comment' post.slug %}" class="collapse reply-collapse" id="reply-to-{{ comment.id }}">
-                        {% csrf_token %}
-                        <input type="hidden" name="reply" value="{{ comment.id }}" aria-hidden="true">
-                        <div class="form-group mb-1">
-                            <textarea class="form-control" name="content" rows="3" required></textarea>
-                        </div>
-                        <input type="submit" class="btn btn-outline-dark" value="Reply"></input>
-                        <input type="reset" class="btn btn-outline-dark" value="Cancel" data-toggle="collapse"
-                            data-target="#reply-to-{{ comment.id }}" aria-expanded="false" aria-controls="reply-to-{{ comment.id }}"></input>
-                    </form>
-                    <!-- /.reply -->
+                        <!-- Reply button and dropdown -->
+                        <button class="btn btn-small btn-outline-dark py-0" type="button" data-toggle="collapse"
+                            data-target="#reply-toggle-{{ comment.id }}" aria-expanded="false" aria-controls="reply-toggle-{{ comment.id }}">
+                            <i class="fa-regular fa-comment"></i>
+                            Reply
+                        </button>
+                        <form method="POST" action="{% url 'send_comment' post.slug %}" class="collapse reply-collapse" id="reply-toggle-{{ comment.id }}">
+                            {% csrf_token %}
+                            
+                            <!-- Hidden input to tell the view which comment is being replied to -->
+                            {% if comment.reply_to %}
+                                <input type="hidden" name="reply" value="{{ comment.reply_to.id }}" aria-hidden="true">
+                            {% else %}
+                                <input type="hidden" name="reply" value="{{ comment.id }}" aria-hidden="true">
+                            {% endif %}
+                            <!-- /.hidden-input -->
+
+                            <div class="form-group mb-1">
+                                <textarea class="form-control" name="content" rows="3" required></textarea>
+                            </div>
+                            <input type="submit" class="btn btn-outline-dark" value="Reply"></input>
+                            <input type="reset" class="btn btn-outline-dark" value="Cancel" data-toggle="collapse"
+                                data-target="#reply-toggle-{{ comment.id }}" aria-expanded="false" aria-controls="reply-toggle-{{ comment.id }}"></input>
+                        </form>
+                        <!-- /.reply -->
+                    </div>
                 </div>
+
+                <!-- Anchor to show replies -->
+                {% if comment.number_of_replies %}
+                    <a href="#" class="reply-toggle d-inline-block mt-1">
+                        {% if comment.number_of_replies == 1 %}
+                            View 1 Reply
+                        {% else %}
+                            View {{ comment.number_of_replies }} Replies
+                        {% endif %}
+                    </a>
+                    <div class="replies"></div>
+                {% endif %}
+                <!-- /.reply-anchor -->
+
                 {% if not forloop.last %}
                     <hr>
                 {% endif %}
             {% endfor %}
         {% endif %}
     </div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static 'js/comments.js' %}"></script>
 {% endblock %}
