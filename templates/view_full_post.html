@@ -124,14 +124,15 @@
 
                     <!-- Replies section -->
                     {% if comment.number_of_replies %}
-                        <a href="#" class="reply-toggle d-inline-block mt-2">
+                        <a href="#reply-section-{{ comment.id }}" class="reply-toggle d-inline-block mt-2" type="button"
+                            data-toggle="collapse" aria-expanded="false" data-control="reply-section-{{ comment.id }}">
                             {% if comment.number_of_replies == 1 %}
                                 View 1 Reply
                             {% else %}
                                 View {{ comment.number_of_replies }} Replies
                             {% endif %}
                         </a>
-                        <div class="replies"></div>
+                        <div id="reply-section-{{ comment.id }}" class="replies collapse"></div>
                     {% elif not forloop.last %}
                         <hr>
                     {% endif %}
