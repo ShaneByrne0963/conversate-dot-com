@@ -109,11 +109,17 @@ class SendComment(View):
     def post(self, request, slug):
         post = get_object_or_404(Post, slug=slug)
         comment_text = request.POST.get('content')
+        reply_id = int(request.POST.get('reply'))
+        reply_to = None
+
+        if reply_id is not None:
+            reply_to = get_object_or_404(Comment, id=reply_id)
 
         Comment.objects.create(
             post=post,
             content=comment_text,
-            posted_by=request.user
+            posted_by=request.user,
+            reply_to=reply_to
         )
         return HttpResponseRedirect(reverse('view_post', args=[slug]))
 
