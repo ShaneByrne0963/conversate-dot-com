@@ -26,13 +26,6 @@
                 <strong>Conversate</strong>
             </a>
         </div>
-        <!-- Search Bar -->
-        <!-- <div class="nav search-bar">
-            <div class="search-icon">
-                <i class="fa-solid fa-magnifying-glass"></i>
-            </div>
-            <input type="text" placeholder="Search...">
-        </div> -->
             <!-- Icons -->
             <ul class="nav justify-content-end">
                 {% if user.is_authenticated %}
@@ -74,9 +67,36 @@
     <section>
         <div class="container-fluid">
             <div class="row">
+                <!-- Side nav -->
                 <div class="d-none d-md-block col-4">
-
+                    <!-- Search Bar -->
+                    <div class="search-bar my-4">
+                        <div class="search-icon">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </div>
+                        <input type="text" placeholder="Search...">
+                    </div>
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            <i class="fa-solid fa-fire mr-lg-3"></i>
+                            Popular
+                        </li>
+                        <li class="list-group-item">
+                            <i class="fa-solid fa-clock mr-lg-3"></i>
+                            New
+                        </li>
+                        <li class="list-group-item">
+                            <i class="fa-solid fa-hashtag mr-lg-3"></i>
+                            Tags
+                            <i class="fa-solid fa-caret-down align-middle"></i>
+                        </li>
+                        <li class="list-group-item">
+                            <i class="fa-solid fa-message mr-lg-3"></i>
+                            Your Posts
+                        </li>
+                    </ul>
                 </div>
+                <!-- Main content -->
                 <div id="main-content" class="col col-md-8">
                     {% block content %}
                     {% endblock content %}
