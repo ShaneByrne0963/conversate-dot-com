@@ -84,10 +84,17 @@
     text-align: center;
 }
 
+/* ------------------------------------------------------Side Navigation------------------------------------------------------ */
+
 .side-nav-dropdown {
     display: grid;
     grid-template-columns: auto 1fr auto;
     grid-template-rows: 1fr;
+}
+
+/* Removing the extra thick border between "Tags" and "Your Posts" */
+#tag-collapse {
+    border-bottom: none;
 }
 
 /* ------------------------------------------------------Default Template------------------------------------------------------ */

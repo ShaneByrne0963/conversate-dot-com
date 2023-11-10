@@ -26,7 +26,7 @@
                 <strong>Conversate</strong>
             </a>
         </div>
-            <!-- Icons -->
+            <!-- User-specific actions -->
             <ul class="nav justify-content-end">
                 {% if user.is_authenticated %}
                     <li class="nav mr-2 mr-lg-4">
@@ -76,25 +76,35 @@
                         </div>
                         <input type="text" placeholder="Search...">
                     </div>
-                    <ul class="list-group">
-                        <li class="list-group-item">
-                            <i class="fa-solid fa-fire mr-lg-3"></i>
-                            Popular
-                        </li>
-                        <li class="list-group-item">
-                            <i class="fa-solid fa-clock mr-lg-3"></i>
-                            New
-                        </li>
-                        <li class="list-group-item side-nav-dropdown">
+                    <!-- Post navigation -->
+                    <div class="list-group">
+                        <a class="list-group-item list-group-item-action clickable">
+                            <i class="fa-solid fa-fire mr-lg-3"></i>Popular
+                        </a>
+                        <a class="list-group-item list-group-item-action clickable">
+                            <i class="fa-solid fa-clock mr-lg-3"></i>New
+                        </a>
+                        <a id="tag-collapse" class="list-group-item side-nav-dropdown list-group-item-action clickable" data-toggle="collapse"
+                            href="#side-nav-tags" role="button" aria-expanded="false" aria-controls="side-nav-tags">
                             <i class="fa-solid fa-hashtag mr-lg-3 d-flex align-items-center"></i>
                             <div class="pl-1">Tags</div>
                             <i class="fa-solid fa-caret-down d-flex align-items-center"></i>
-                        </li>
-                        <li class="list-group-item">
-                            <i class="fa-solid fa-message mr-lg-3"></i>
-                            Your Posts
-                        </li>
-                    </ul>
+                        </a>
+                        <!-- Collapsible side nav tags -->
+                        <div id="side-nav-tags" class="list-group collapse">
+                            <a href="#" class="list-group-item list-group-item-action" aria-current="true">
+                                The current link item
+                            </a>
+                            <a href="#" class="list-group-item list-group-item-action">A second link item</a>
+                            <a href="#" class="list-group-item list-group-item-action">A third link item</a>
+                            <a href="#" class="list-group-item list-group-item-action">A fourth link item</a>
+                            <a class="list-group-item list-group-item-action disabled">A disabled link item</a>
+                        </div>
+                        <!-- /.collapsible -->
+                        <a class="list-group-item list-group-item-action clickable">
+                            <i class="fa-solid fa-message mr-lg-3"></i>Your Posts
+                        </a>
+                    </div>
                 </div>
                 <!-- Main content -->
                 <div id="main-content" class="col col-md-8">
