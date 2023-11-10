@@ -72,12 +72,13 @@
             <hr>
             {% for comment in comments %}
                 {% if comment.reply_to %}
-                    <div id="reply-to-{{ comment.reply_to.id }}" class="comment reply ml-3 ml-sm-4 ml-lg-5 py-2">
+                    <div id="reply-to-{{ comment.reply_to.id }}" data-timestamp="{{ comment.posted_on.timestamp }}"
+                        class="comment reply ml-3 ml-sm-4 ml-lg-5 py-2">
                 {% else %}
                     <div id="comment-{{ comment.id }}" class="comment">
                 {% endif %}
                     <strong>{{ comment.posted_by }}</strong> -
-                    <em>{{ comment.posted_on }}</em>
+                    <em">{{ comment.posted_on }}</em>
                     <p class="mb-1">{{ comment.content }}</p>
                     <div>
                         <!-- Like button for comments -->
