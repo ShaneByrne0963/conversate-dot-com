@@ -91,14 +91,16 @@
     display: grid;
     grid-template-columns: 1fr;
     /* Rows: Navbar Section Footer */
-    grid-template-rows: auto 1fr auto;
-    min-height: 100vh;
+    grid-template-rows: auto auto auto;
+    height: 100vh;
 }
 
 #main-content {
     background-color: white;
-    height: 100%;
     padding-top: 32px;
+    /* The full height of the screen minus the height of the navbar */
+    height: calc(100vh - 56px);
+    overflow-y: auto;
 }
 
 /* ------------------------------------------------------Posts------------------------------------------------------ */

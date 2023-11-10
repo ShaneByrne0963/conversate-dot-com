@@ -65,9 +65,16 @@
             </ul>
     </nav>
     <section>
-        <div id="main-content" class="container">
-            {% block content %}
-            {% endblock content %}
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-4">
+
+                </div>
+                <div id="main-content" class="col-8">
+                    {% block content %}
+                    {% endblock content %}
+                </div>
+            </div>
         </div>
     </section>
 
