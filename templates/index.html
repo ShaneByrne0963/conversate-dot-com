@@ -11,7 +11,7 @@ What's New - Conversate
 {% for post in post_list %}
     <div class="row post">
         <div class="post-title col-12">
-            <a href="#" class="btn btn-sm btn-dark align-middle">{{ post.tag }}</a>
+            <a href="#" class="btn btn-sm tag align-middle">{{ post.tag }}</a>
             <a href="{% url 'view_post' post.slug %}" class="anchor-no-style">
                 <h2 class="d-inline-block align-middle">{{ post.title }}</h2>
             </a>

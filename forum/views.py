@@ -87,7 +87,7 @@ class ViewPost(View):
         }
         return render(
             request,
-            'view_full_post.html',
+            'post_details.html',
             context
         )
 

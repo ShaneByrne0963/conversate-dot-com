@@ -8,8 +8,16 @@
 /* Removes the blue colour and underline from default anchors */
 .anchor-no-style,
 .anchor-no-style:hover {
-    color: inherit;
     text-decoration: none;
+}
+
+a,
+h1 {
+    color: #FA7568;
+}
+
+a:hover {
+    color: #FA9C52;
 }
 
 .center-to-container {
@@ -30,7 +38,7 @@
 #form-shell {
     width: 100%;
     min-height: 60%;
-    background-color: lightgray;
+    background-color: #FFEFD4;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -50,6 +58,7 @@
 /* ------------------------------------------------------Navigation------------------------------------------------------ */
 
 .navbar {
+    background-color: #FA9C52;
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr;
@@ -75,8 +84,8 @@
 }
 
 .nav-icon {
-    color: black;
-    background-color: white;
+    color: white;
+    background-color: #FA7336;
     border: none;
     border-radius: 32px;
     width: 30px;
@@ -90,6 +99,14 @@
     display: grid;
     grid-template-columns: auto 1fr auto;
     grid-template-rows: 1fr;
+    color: white;
+    background-color: #FA7568;
+}
+
+.side-nav>a:hover {
+    background-color: #FA9C52;
+    color: white;
+    font-weight: bold;
 }
 
 /* Removing the extra thick border between "Tags" and "Your Posts" */
@@ -100,7 +117,7 @@
 /* ------------------------------------------------------Default Template------------------------------------------------------ */
 
 #main-page {
-    background-color: lightgray;
+    background-color: #FFEFD4;
     /* Forcing the main section to reach the bottom of the page */
     display: grid;
     grid-template-columns: 1fr;
@@ -122,7 +139,17 @@
 .post {
     margin: 32px 0;
     padding: 16px 0;
-    background-color: lightgray;
+    background-color: #FFEFD4;
+}
+
+.tag {
+    background-color: #FA7336;
+    color: white;
+}
+
+#post-footer {
+    background-color: #FFEFD4;
+    padding: 8px;
 }
 
 /* ------------------------------------------------------Post Form------------------------------------------------------ */
