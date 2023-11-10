@@ -11,12 +11,12 @@ What's New - Conversate
 {% for post in post_list %}
     <div class="row post">
         <div class="post-title col-12">
+            <a href="#" class="btn btn-sm btn-dark align-middle">{{ post.tag }}</a>
             <a href="{% url 'view_post' post.slug %}" class="anchor-no-style">
-                <h2>{{ post.title }}</h2>
+                <h2 class="d-inline-block align-middle">{{ post.title }}</h2>
             </a>
         </div>
         <div class="col-12">
-            <a href="#" class="btn btn-sm btn-dark">{{ post.tag }}</a>
             {% if user in post.likes.all %}
                 <i class="fa-solid fa-thumbs-up ml-2"></i>
             {% else %}
@@ -25,18 +25,13 @@ What's New - Conversate
             {{ post.number_of_likes }}
             <i class="fa-regular fa-comment ml-2"></i>
             {{ post.number_of_comments }}
+            <p class="d-inline ml-4">Posted on {{ post.date_formatted }} by {{ post.posted_by }}</p>
         </div>
         <div class="col-12">
-            <p>Posted on {{ post.date_formatted }} by {{ post.posted_by }}</p>
-            <p>{{ post.content }}</p>
+            <p class="mt-2">{{ post.content }}</p>
             <a href="{% url 'view_post' post.slug %}">Read More...</a>
         </div>
     </div>
-    {% if not forloop.last %}
-        <hr>
-    {% else %}
-        <br>
-    {% endif %}
 {% endfor %}
 
 <!-- Pagination -->

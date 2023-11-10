@@ -12,6 +12,12 @@
     text-decoration: none;
 }
 
+.center-to-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 /* --------------------------------------------------------Login--------------------------------------------------------- */
 
 #form-account {
@@ -49,12 +55,6 @@
     grid-template-rows: 1fr;
 }
 
-.search-icon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
 .search-bar {
     border: 1px solid black;
     border-radius: 32px;
@@ -86,7 +86,7 @@
 
 /* ------------------------------------------------------Side Navigation------------------------------------------------------ */
 
-.side-nav-dropdown {
+.side-nav>a {
     display: grid;
     grid-template-columns: auto 1fr auto;
     grid-template-rows: 1fr;
@@ -119,7 +119,11 @@
 
 /* ------------------------------------------------------Posts------------------------------------------------------ */
 
-
+.post {
+    margin: 32px 0;
+    padding: 16px 0;
+    background-color: lightgray;
+}
 
 /* ------------------------------------------------------Post Form------------------------------------------------------ */
 
