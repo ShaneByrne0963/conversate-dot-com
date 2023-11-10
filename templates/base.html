@@ -85,10 +85,10 @@
                             <i class="fa-solid fa-clock mr-lg-3"></i>
                             New
                         </li>
-                        <li class="list-group-item">
-                            <i class="fa-solid fa-hashtag mr-lg-3"></i>
-                            Tags
-                            <i class="fa-solid fa-caret-down align-middle"></i>
+                        <li class="list-group-item side-nav-dropdown">
+                            <i class="fa-solid fa-hashtag mr-lg-3 d-flex align-items-center"></i>
+                            <div class="pl-1">Tags</div>
+                            <i class="fa-solid fa-caret-down d-flex align-items-center"></i>
                         </li>
                         <li class="list-group-item">
                             <i class="fa-solid fa-message mr-lg-3"></i>
@@ -100,6 +100,10 @@
                 <div id="main-content" class="col col-md-8">
                     {% block content %}
                     {% endblock content %}
+                    <footer>
+                        <hr>
+                        <p class="text-center my-4">&copy; Conversate 2023</p>
+                    </footer>
                 </div>
             </div>
         </div>
