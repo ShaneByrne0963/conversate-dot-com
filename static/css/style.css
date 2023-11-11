@@ -173,6 +173,10 @@ a:hover {
     /* The full height of the screen minus the height of the navbar */
     height: calc(100vh - 56px);
     overflow-y: auto;
+    /* Forces the footer to the bototm of the page */
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr auto;
 }
 
 /* ------------------------------------------------------Posts------------------------------------------------------ */

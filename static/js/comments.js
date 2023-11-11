@@ -35,6 +35,7 @@ function organizeReplies() {
         let replySection = commentElement.getElementsByClassName('replies')[0];
         for (let reply of comment.replies) {
             replySection.appendChild(reply.element);
+            reply.element.classList.remove('d-none');
         }
     }
 }

@@ -64,11 +64,11 @@
                 {% endif %}
             </ul>
     </nav>
-    <section>
+    <div>
         <div class="container-fluid">
             <div class="row">
                 <!-- Side nav -->
-                <div class="d-none d-md-block col-4">
+                <nav class="d-none d-md-block col-4">
                     <!-- Search Bar -->
                     <div class="search-bar my-4">
                         <div class="center-to-container">
@@ -106,11 +106,13 @@
                             <i class="fa-solid fa-message mr-lg-3 center-to-container"></i>Your Posts
                         </a>
                     </div>
-                </div>
+                </nav>
                 <!-- Main content -->
                 <div id="main-content" class="col col-md-8">
-                    {% block content %}
-                    {% endblock content %}
+                    <section>
+                        {% block content %}
+                        {% endblock content %}
+                    </section>
                     <footer>
                         <hr>
                         <p class="text-center my-4">&copy; Conversate 2023</p>
@@ -118,7 +120,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </div>
 
     <!-- Modal for logging out -->
     <div class="modal fade" id="modal-logout" tabindex="-1">

@@ -10,7 +10,7 @@
     <a class="btn btn-sm tag" href="#">{{ post.tag }}</a>
     <span>{{ post.posted_by }}
         {% if post.edited %}
-            (Edited)
+            <em>(Edited)</em>
         {% endif %}
     </span>
     <br><br>
@@ -83,12 +83,16 @@
             {% for comment in comments %}
                 {% if comment.reply_to %}
                     <div id="reply-to-{{ comment.reply_to.id }}" data-timestamp="{{ comment.posted_on.timestamp }}"
-                        class="comment reply ml-3 ml-sm-4 ml-lg-5 py-2">
+                        class="comment reply ml-3 ml-sm-4 ml-lg-5 py-2 d-none">
                 {% else %}
                     <div id="comment-{{ comment.id }}" class="comment">
                 {% endif %}
                     <strong>{{ comment.posted_by }}</strong> -
-                    <em">{{ comment.posted_on }}</em>
+                    <em>{{ comment.posted_on }}
+                        {% if comment.edited %}
+                            (Edited)
+                        {% endif %}
+                    </em>
                     <p class="mb-1">{{ comment.content }}</p>
                     <div>
                         <!-- Like button for comments -->
