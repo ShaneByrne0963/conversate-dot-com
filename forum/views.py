@@ -90,35 +90,30 @@ class EditPost(View):
             context,
         )
 
-    def post(self, request):
+    def post(self, request, slug):
         title = request.POST.get('title')
         content = request.POST.get('content')
         tag = request.POST.get('tag')
+        post = get_object_or_404(Post, slug=slug)
 
-        # Add the tag to the database if the tag doesn't already exist
-        existing_tag = list(Tag.objects.filter(name=tag))
-        tag_object = None
-        if len(existing_tag) == 0:
-            tag_object = Tag.objects.create(name=tag)
-        else:
-            tag_object = existing_tag[0]
+        post.title = title
+        post.content = content
+        post.edited = True
+        post.approved = False
 
-        # Generating the slug for the post
-        site_data = get_object_or_404(SiteData)
-        total_posts = site_data.total_posts_created
-        post_slug = generate_slug(title, tag, total_posts)
-        total_posts += 1
-        site_data.total_posts_created = total_posts
-        site_data.save()
+        if post.tag.name != tag:
+            print('Different Tags')
+            # Add the tag to the database if the tag doesn't already exist
+            existing_tag = list(Tag.objects.filter(name=tag))
+            tag_object = None
+            if len(existing_tag) == 0:
+                tag_object = Tag.objects.create(name=tag)
+            else:
+                tag_object = existing_tag[0]
+            post.tag = tag_object
 
-        Post.objects.create(
-            title=title,
-            slug=post_slug,
-            content=content,
-            tag=tag_object,
-            posted_by=request.user
-        )
-        return redirect('home')
+        post.save()
+        return HttpResponseRedirect(reverse('view_post', args=[slug]))
 
 
 class ViewPost(View):
