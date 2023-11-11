@@ -8,7 +8,11 @@
 {% block content %}
     <h1>{{ post.title }}</h1>
     <a class="btn btn-sm tag" href="#">{{ post.tag }}</a>
-    <span>{{ post.posted_by }}</span>
+    <span>{{ post.posted_by }}
+        {% if post.edited %}
+            (Edited)
+        {% endif %}
+    </span>
     <br><br>
     <p id="post-content">{{ post.content }}</p>
     <div id="post-footer" class="d-flex justify-content-between">
@@ -47,7 +51,9 @@
                 </a>
             {% endif %}
         </div>
-        <div class="center-to-container">Posted on {{ post.posted_on }}</div>
+        <div class="center-to-container">
+            <strong>{{ post.posted_on|date:"d/m/y G:i" }}</strong>
+        </div>
     </div>
     <br>
     <!-- Comment input when the user is logged in -->
