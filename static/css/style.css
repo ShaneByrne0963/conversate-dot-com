@@ -1,4 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&family=Roboto+Slab:wght@100&family=Roboto:wght@300&display=swap');
+
 /* --------------------------------------------------------GLOBAL--------------------------------------------------------- */
+
+* {
+    font-family: 'Roboto', sans-serif;
+}
+
+h1,h2,h3 {
+    font-family: 'Montserrat', sans-serif;
+}
 
 /* Gives the mouse cursor a pointer effect when hovering over the element */
 .clickable {
