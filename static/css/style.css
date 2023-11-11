@@ -74,25 +74,6 @@ a:hover {
     grid-template-rows: 1fr;
 }
 
-.search-bar {
-    border: 1px solid black;
-    border-radius: 32px;
-    padding: 2px 8px;
-    width: 100%;
-    background-color: white;
-    display: grid;
-    grid-template-columns: auto 1fr;
-    grid-template-rows: 1fr;
-}
-
-.search-bar>input {
-    margin-left: 8px;
-    border: none;
-    outline: none;
-    display: inline-block;
-    min-width: none;
-}
-
 .nav-icon {
     color: white;
     background-color: #FA7336;
@@ -119,6 +100,47 @@ a:hover {
     font-weight: bold;
 }
 
+.search-bar {
+    border-radius: 32px;
+    width: 100%;
+    background-color: #FA7568;
+    color: white;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    grid-template-rows: 1fr;
+}
+
+.search-bar:hover {
+    background-color: #FA9C52;
+}
+
+.search-bar i {
+    padding-left: 10px;
+}
+
+.search-bar>input {
+    margin-left: 8px;
+    padding: 6px 0;
+    border: none;
+    outline: none;
+    display: inline-block;
+    min-width: 0;
+    background-color: inherit;
+    color: white;
+}
+
+.search-bar>input::placeholder {
+    color: white;
+}
+
+.search-bar button {
+    background: none;
+    border: none;
+    border-left: 2px solid white;
+    padding: 4px 16px;
+    color: white;
+}
+
 /* Removing the extra thick border between "Tags" and "Your Posts" */
 #tag-collapse {
     border-bottom: none;
@@ -128,12 +150,6 @@ a:hover {
 
 #main-page {
     background-color: #FFEFD4;
-    /* Forcing the main section to reach the bottom of the page */
-    display: grid;
-    grid-template-columns: 1fr;
-    /* Rows: Navbar Section Footer */
-    grid-template-rows: auto auto auto;
-    height: 100vh;
 }
 
 #main-content {
