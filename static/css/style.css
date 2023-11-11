@@ -6,7 +6,9 @@
     font-family: 'Roboto', sans-serif;
 }
 
-h1,h2,h3 {
+h1,
+h2,
+h3 {
     font-family: 'Montserrat', sans-serif;
 }
 
@@ -22,12 +24,24 @@ h1,h2,h3 {
 }
 
 a,
-h1 {
+h1,
+h2,
+h3 {
     color: #FA7568;
+}
+
+.btn {
+    background-color: #FA7568;
+    border: none;
+    color: white;
 }
 
 a:hover {
     color: #FA9C52;
+}
+
+.btn:hover {
+    background-color: #FA9C52;
 }
 
 .center-to-container {
@@ -103,15 +117,12 @@ a:hover {
 .search-bar {
     border-radius: 32px;
     width: 100%;
-    background-color: #FA7568;
+    background-color: #FA7336;
     color: white;
     display: grid;
     grid-template-columns: auto 1fr auto;
     grid-template-rows: 1fr;
-}
-
-.search-bar:hover {
-    background-color: #FA9C52;
+    overflow: hidden;
 }
 
 .search-bar i {
@@ -134,11 +145,15 @@ a:hover {
 }
 
 .search-bar button {
-    background: none;
+    background-color: #FA7568;
     border: none;
-    border-left: 2px solid white;
-    padding: 4px 16px;
+    border-left: 1px solid white;
+    padding: 4px 16px 4px 10px;
     color: white;
+}
+
+.search-bar button:hover {
+    background-color: #FA9C52;
 }
 
 /* Removing the extra thick border between "Tags" and "Your Posts" */

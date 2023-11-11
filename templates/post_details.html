@@ -17,29 +17,35 @@
             <form class="d-inline" method="POST" action="{% url 'like_post' post.slug %}">
                 {% csrf_token %}
                 {% if liked %}
-                    <button type="submit" class="btn btn-dark py-0" aria-label="Unlike this post">
+                    <button type="submit" class="btn py-0" aria-label="Unlike this post">
                         <i class="fa-solid fa-thumbs-up"></i>
                 {% else %}
-                    <button type="submit" class="btn btn-outline-dark py-0" aria-label="Like this post">
+                    <button type="submit" class="btn py-0" aria-label="Like this post">
                         <i class="fa-regular fa-thumbs-up"></i>
                 {% endif %}
                     {{ post.number_of_likes }}
                 </button>
             </form>
             {% else %}
-                <span class="btn btn-outline-dark disabled py-0" aria-disabled="true">
+                <span class="btn disabled py-0" aria-disabled="true">
                     <i class="fa-regular fa-thumbs-up"></i>
                     {{ post.number_of_likes }}
                 </span>
             {% endif %}
             {% if user.is_authenticated %}
-                <a class="btn btn-outline-dark py-0" href="#post-comment" aria-label="Post a comment">
+                <a class="btn py-0" href="#post-comment" aria-label="Post a comment">
             {% else %}
-                <a class="btn btn-outline-dark py-0" href="#comments" aria-label="View the post's comments">
+                <a class="btn py-0" href="#comments" aria-label="View the post's comments">
             {% endif %}
                 <i class="fa-regular fa-comment"></i>
                 {{ post.number_of_comments }}
             </a>
+            {% if user == post.posted_by %}
+                <a class="btn py-0" href="#" aria-label="Post a comment">
+                    <i class="fa-solid fa-pen"></i>
+                    Edit
+                </a>
+            {% endif %}
         </div>
         <div class="center-to-container">Posted on {{ post.posted_on }}</div>
     </div>
@@ -57,8 +63,8 @@
             <div class="form-group mb-1">
                 <textarea class="form-control" name="content" id="post-comment" rows="3" required></textarea>
             </div>
-            <input type="submit" class="btn btn-outline-dark" value="Comment"></input>
-            <input type="reset" class="btn btn-outline-dark" value="Cancel"></input>
+            <input type="submit" class="btn" value="Comment"></input>
+            <input type="reset" class="btn" value="Cancel"></input>
         </form>
     {% endif %}
 
@@ -83,10 +89,10 @@
                         <form method="POST" class="d-inline" action="{% url 'like_comment' comment.id %}">
                             {% csrf_token %}
                             {% if user in comment.likes.all %}
-                            <button type="submit" class="btn btn-small btn-dark py-0">
+                            <button type="submit" class="btn btn-small py-0">
                                 <i class="fa-solid fa-thumbs-up"></i>
                             {% else %}
-                            <button type="submit" class="btn btn-small btn-outline-dark py-0">
+                            <button type="submit" class="btn btn-small py-0">
                                 <i class="fa-regular fa-thumbs-up"></i>
                             {% endif %}
                                 {{ comment.number_of_likes }}
@@ -95,7 +101,7 @@
                         <!-- /.like-comments -->
 
                         <!-- Reply button and dropdown -->
-                        <button class="btn btn-small btn-outline-dark py-0" type="button" data-toggle="collapse"
+                        <button class="btn btn-small py-0" type="button" data-toggle="collapse"
                             data-target="#reply-toggle-{{ comment.id }}" aria-expanded="false" aria-controls="reply-toggle-{{ comment.id }}">
                             <i class="fa-regular fa-comment"></i>
                             Reply
@@ -114,8 +120,8 @@
                             <div class="form-group mb-1">
                                 <textarea class="form-control" name="content" rows="3" required></textarea>
                             </div>
-                            <input type="submit" class="btn btn-outline-dark" value="Reply"></input>
-                            <input type="reset" class="btn btn-outline-dark" value="Cancel" data-toggle="collapse"
+                            <input type="submit" class="btn" value="Reply"></input>
+                            <input type="reset" class="btn" value="Cancel" data-toggle="collapse"
                                 data-target="#reply-toggle-{{ comment.id }}" aria-expanded="false" aria-controls="reply-toggle-{{ comment.id }}"></input>
                         </form>
                         <!-- /.reply -->
