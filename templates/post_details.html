@@ -41,7 +41,7 @@
                 {{ post.number_of_comments }}
             </a>
             {% if user == post.posted_by %}
-                <a class="btn py-0" href="#" aria-label="Post a comment">
+                <a class="btn py-0" href="{% url 'edit_post' post.slug %}" aria-label="Post a comment">
                     <i class="fa-solid fa-pen"></i>
                     Edit
                 </a>

@@ -74,6 +74,53 @@ class AddPost(View):
         return redirect('home')
 
 
+class EditPost(View):
+
+    def get(self, request, slug):
+        # Redirects the user to the login page if not logged in
+        if not request.user.is_authenticated:
+            return redirect('accounts/login')
+        post = get_object_or_404(Post, slug=slug)
+        context = {
+            'post': post
+        }
+        return render(
+            request,
+            'edit_post.html',
+            context,
+        )
+
+    def post(self, request):
+        title = request.POST.get('title')
+        content = request.POST.get('content')
+        tag = request.POST.get('tag')
+
+        # Add the tag to the database if the tag doesn't already exist
+        existing_tag = list(Tag.objects.filter(name=tag))
+        tag_object = None
+        if len(existing_tag) == 0:
+            tag_object = Tag.objects.create(name=tag)
+        else:
+            tag_object = existing_tag[0]
+
+        # Generating the slug for the post
+        site_data = get_object_or_404(SiteData)
+        total_posts = site_data.total_posts_created
+        post_slug = generate_slug(title, tag, total_posts)
+        total_posts += 1
+        site_data.total_posts_created = total_posts
+        site_data.save()
+
+        Post.objects.create(
+            title=title,
+            slug=post_slug,
+            content=content,
+            tag=tag_object,
+            posted_by=request.user
+        )
+        return redirect('home')
+
+
 class ViewPost(View):
 
     def get(self, request, slug, *args, **kwargs):

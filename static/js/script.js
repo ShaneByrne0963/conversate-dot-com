@@ -22,6 +22,4 @@ window.addEventListener('DOMContentLoaded', () => {
             html: true
         });
     });
-
-    //
 });
