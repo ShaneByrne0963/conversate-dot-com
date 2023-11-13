@@ -105,7 +105,7 @@
 
     <!-- Comments section -->
     <br>
-    <div id="comments">
+    <div id="comments" class="accordion">
         {% if comments %}
             <h3>Comments</h3>
             <hr>
@@ -223,14 +223,14 @@
                     <!-- Replies section -->
                     {% if comment.number_of_replies %}
                         <a href="#reply-section-{{ comment.id }}" class="reply-toggle d-inline-block mt-2" type="button"
-                            data-toggle="collapse" aria-expanded="false" data-control="reply-section-{{ comment.id }}">
+                            data-toggle="collapse" aria-expanded="false" data-control="reply-section-{{ comment.id }}" data-parent="#comments">
                             {% if comment.number_of_replies == 1 %}
                                 View 1 Reply
                             {% else %}
                                 View {{ comment.number_of_replies }} Replies
                             {% endif %}
                         </a>
-                        <div id="reply-section-{{ comment.id }}" class="replies collapse"></div>
+                        <div id="reply-section-{{ comment.id }}" class="replies collapse" data-parent="#comments"></div>
                     {% endif %}
                 </div>
                 {% if not comment.reply_to %}
