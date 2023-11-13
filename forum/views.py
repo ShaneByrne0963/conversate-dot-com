@@ -42,7 +42,7 @@ class RecentPosts(View):
         # Redirects the user to the login page if not logged in
         if not request.user.is_authenticated:
             return redirect('accounts/login')
-        
+
         posts = Post.objects.order_by('-posted_on')
         p = Paginator(posts, self.paginate_by)
         page = request.GET.get('page')
