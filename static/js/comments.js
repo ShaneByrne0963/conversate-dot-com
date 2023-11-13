@@ -91,7 +91,13 @@ function insertReply(newReply, comment) {
  * @param {Boolean} enable Whether to enable or disable the text area
  */
 function editComment(event) {
-    let comment = event.target.parentNode.parentNode;
+    // Moving up the DOM to find the root comment element
+    let comment = event.target;
+    do {
+        comment = comment.parentNode;
+    }
+    while (!comment.classList.contains('comment'));
+
     let commentBody = comment.getElementsByClassName('comment-body')[0];
     let commentEditField = comment.getElementsByClassName('comment-edit-field')[0];
 
@@ -100,6 +106,12 @@ function editComment(event) {
         $('.cancel-edit').trigger('click', {
             enable: false
         });
+
+        console.clear();
+        console.log(comment);
+        console.log(commentBody);
+        console.log(commentEditField);
+
         commentBody.classList.add('d-none');
         commentEditField.value = comment.getElementsByClassName('comment-text')[0].innerText;
         commentEditField.classList.remove('d-none');
