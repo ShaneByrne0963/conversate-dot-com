@@ -88,16 +88,33 @@ function insertReply(newReply, comment) {
  * Is called when a user clicks on the edit button for one of their comments.
  * Replaces the comment with a text area and a save and cancel button
  * @param {Event} event The edit button that was clicked on
+ * @param {Boolean} enable Whether to enable or disable the text area
  */
 function editComment(event) {
     let comment = event.target.parentNode.parentNode;
-    let commentBody = event.target.parentNode;
+    let commentBody = comment.getElementsByClassName('comment-body')[0];
     let commentEditField = comment.getElementsByClassName('comment-edit-field')[0];
 
-    commentBody.classList.add('d-none');
-    commentEditField.value = comment.getElementsByClassName('comment-body')[0].innerText;
-    commentEditField.classList.remove('d-none');
+    if (event.data.enable) {
+        // First disabling any other enabled edits
+        $('.cancel-edit').trigger('click', {
+            enable: false
+        });
+        commentBody.classList.add('d-none');
+        commentEditField.value = comment.getElementsByClassName('comment-text')[0].innerText;
+        commentEditField.classList.remove('d-none');
+    }
+    else {
+        commentBody.classList.remove('d-none');
+        commentEditField.classList.add('d-none');
+    }
 }
 
+
 window.addEventListener('DOMContentLoaded', organizeReplies);
-$('.edit-comment').on('click', editComment);
+$('.edit-comment').on('click', {
+    enable: true
+}, editComment);
+$('.cancel-edit').on('click', {
+    enable: false
+}, editComment);

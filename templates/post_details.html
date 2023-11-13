@@ -96,8 +96,8 @@
                             {% endif %}
                         </em>
                     </div>
-                    <div>
-                        <p class="mb-1 comment-body">{{ comment.content }}</p>
+                    <div class="comment-body">
+                        <p class="mb-1 comment-text">{{ comment.content }}</p>
 
                         <!-- Menu buttons underneath the comment -->
                         <form method="POST" class="d-inline" action="{% url 'like_comment' comment.id %}">
@@ -151,7 +151,7 @@
                             <textarea class="form-control" name="content" rows="3" required>{{ comment.content }}</textarea>
                         </div>
                         <input type="submit" class="btn" value="Save"></input>
-                        <button class="btn">Cancel</button>
+                        <button class="btn cancel-edit" type="button">Cancel</button>
                     </form>
 
                     <!-- Replies section -->
