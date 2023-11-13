@@ -196,7 +196,12 @@
                             {% endif %}
 
                             <div class="form-group mb-1">
-                                <textarea class="form-control" name="content" rows="3" required></textarea>
+                                {% if comment.reply_to and not comment.posted_by == comment.reply_to.posted_by and not comment.posted_by == user %}
+                                    <textarea class="form-control reply-to-reply" data-reply-user="{{ comment.posted_by.username }}"
+                                        name="content" rows="3" required></textarea>
+                                {% else %}
+                                    <textarea class="form-control" name="content" rows="3" required></textarea>
+                                {% endif %}
                             </div>
                             <input type="submit" class="btn" value="Reply"></input>
                             <input type="reset" class="btn" value="Cancel" data-toggle="collapse"

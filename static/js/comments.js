@@ -1,6 +1,20 @@
 // Focus on the reply text area when it is expanded
 $('.reply-collapse').on('shown.bs.collapse', (event) => {
-    event.target.getElementsByClassName('form-control')[0].focus();
+    event.target.querySelector('.form-control').focus();
+    
+    // Moving the cursor position to the end of the text input
+    let replyToReply = event.target.querySelector('.reply-to-reply');
+    if (replyToReply !== null) {
+        replyToReply.setSelectionRange(replyToReply.value.length, replyToReply.value.length);
+    }
+});
+
+// Prepopulate the text area with the referred username on reply to reply
+$('.reply-collapse').on('show.bs.collapse', (event) => {
+    let replyToReply = event.target.querySelector('.reply-to-reply');
+    if (replyToReply !== null) {
+        replyToReply.value = `@${replyToReply.getAttribute('data-reply-user')} `;
+    }
 });
 
 
