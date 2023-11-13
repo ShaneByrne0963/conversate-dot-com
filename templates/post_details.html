@@ -70,7 +70,7 @@
                 <textarea class="form-control" name="content" id="post-comment" rows="3" required></textarea>
             </div>
             <input type="submit" class="btn" value="Comment"></input>
-            <input type="reset" class="btn" value="Cancel"></input>
+            <input type="reset" class="btn" value="Clear"></input>
         </form>
     {% endif %}
 
@@ -82,8 +82,8 @@
             <hr>
             {% for comment in comments %}
                 {% if comment.reply_to %}
-                <div id="reply-to-{{ comment.reply_to.id }}" data-timestamp="{{ comment.posted_on.timestamp }}"
-                    class="comment reply ml-3 ml-sm-4 ml-lg-5 py-2 d-none">
+                <div id="comment-{{ comment.id }}" data-timestamp="{{ comment.posted_on.timestamp }}"
+                    data-reply-to="{{ comment.reply_to.id }}" class="comment reply ml-3 ml-sm-4 ml-lg-5 py-2 d-none">
                 {% else %}
                 <div id="comment-{{ comment.id }}" class="comment">
                 {% endif %}

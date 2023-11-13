@@ -21,7 +21,7 @@ function organizeReplies() {
         else {
             let timestamp = reply.getAttribute('data-timestamp');
             comments.push({
-                id: getReplyId(reply),
+                id: reply.getAttribute('data-reply-to'),
                 replies: [{
                     element: reply,
                     timestamp: timestamp
@@ -49,7 +49,7 @@ function organizeReplies() {
  * @returns {Integer} The index of the found comment, or -1 if none
  */
 function getComment(reply, comments) {
-    let commentId = getReplyId(reply);
+    let commentId = reply.getAttribute('data-reply-to');
     for (let i = 0; i < comments.length; i++) {
         let comment = comments[i];
         if (comment.id === commentId) {
@@ -57,17 +57,6 @@ function getComment(reply, comments) {
         }
     }
     return -1;
-}
-
-
-/**
- * Gets the id of a reply
- * @param {Element} reply The reply to get the id from
- * @returns {String} The reply id in string format
- */
-function getReplyId(reply) {
-    let commentId = reply.id;
-    return commentId.replace('reply-to-', '');
 }
 
 
@@ -94,4 +83,21 @@ function insertReply(newReply, comment) {
         timestamp: timestamp
     });
 }
+
+/**
+ * Is called when a user clicks on the edit button for one of their comments.
+ * Replaces the comment with a text area and a save and cancel button
+ * @param {Event} event The edit button that was clicked on
+ */
+function editComment(event) {
+    let comment = event.target.parentNode.parentNode;
+    let commentBody = event.target.parentNode;
+    let commentEditField = comment.getElementsByClassName('comment-edit-field')[0];
+
+    commentBody.classList.add('d-none');
+    commentEditField.value = comment.getElementsByClassName('comment-body')[0].innerText;
+    commentEditField.classList.remove('d-none');
+}
+
 window.addEventListener('DOMContentLoaded', organizeReplies);
+$('.edit-comment').on('click', editComment);
