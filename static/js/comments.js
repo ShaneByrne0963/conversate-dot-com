@@ -98,8 +98,8 @@ function editComment(event) {
     }
     while (!comment.classList.contains('comment'));
 
-    let commentBody = comment.getElementsByClassName('comment-body')[0];
-    let commentEditField = comment.getElementsByClassName('comment-edit-field')[0];
+    let commentBody = comment.querySelector('.comment-body');
+    let commentEditField = comment.querySelector('.comment-edit-field');
 
     if (event.data.enable) {
         // First disabling any other enabled edits
@@ -107,13 +107,10 @@ function editComment(event) {
             enable: false
         });
 
-        console.clear();
-        console.log(comment);
-        console.log(commentBody);
-        console.log(commentEditField);
-
         commentBody.classList.add('d-none');
-        commentEditField.value = comment.getElementsByClassName('comment-text')[0].innerText;
+        // Prepopulating the text area with the original comment text
+        editTextArea = commentEditField.querySelector('textarea');
+        editTextArea.value = comment.querySelector('.comment-text').innerText;
         commentEditField.classList.remove('d-none');
     }
     else {
@@ -124,9 +121,5 @@ function editComment(event) {
 
 
 window.addEventListener('DOMContentLoaded', organizeReplies);
-$('.edit-comment').on('click', {
-    enable: true
-}, editComment);
-$('.cancel-edit').on('click', {
-    enable: false
-}, editComment);
+$('.edit-comment').click({ enable: true }, editComment);
+$('.cancel-edit').click({ enable: false }, editComment);

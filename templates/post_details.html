@@ -148,7 +148,7 @@
                     <form class="comment-edit-field mb-3 d-none">
                         {% csrf_token %}
                         <div class="form-group mb-1">
-                            <textarea class="form-control" name="content" rows="3" required>{{ comment.content }}</textarea>
+                            <textarea class="form-control" name="content" rows="3" required></textarea>
                         </div>
                         <input type="submit" class="btn" value="Save"></input>
                         <button class="btn cancel-edit" type="button">Cancel</button>
