@@ -145,7 +145,7 @@
                     </div>
 
                     <!-- Text area to replace comment body when editing -->
-                    <form class="comment-edit-field mb-3 d-none">
+                    <form method="POST" action="{% url 'edit_comment' comment.id %}" class="comment-edit-field mb-3 d-none">
                         {% csrf_token %}
                         <div class="form-group mb-1">
                             <textarea class="form-control" name="content" rows="3" required></textarea>
@@ -175,8 +175,4 @@
             {% endfor %}
         {% endif %}
     </div>
-{% endblock %}
-
-{% block scripts %}
-<script src="{% static 'js/comments.js' %}"></script>
 {% endblock %}

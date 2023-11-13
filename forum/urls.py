@@ -15,6 +15,12 @@ urlpatterns = [
     ),
     path(
         'like-comment/<int:comment_id>',
-        views.LikeComment.as_view(), name='like_comment'
+        views.LikeComment.as_view(),
+        name='like_comment'
     ),
+    path(
+        'edit-comment/<int:comment_id>',
+        views.EditComment.as_view(),
+        name='edit_comment'
+    )
 ]

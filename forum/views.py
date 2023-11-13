@@ -180,3 +180,19 @@ class LikeComment(View):
         post = comment.post
         slug = post.slug
         return HttpResponseRedirect(reverse('view_post', args=[slug]))
+
+
+class EditComment(View):
+
+    def post(self, request, comment_id):
+        comment = get_object_or_404(Comment, id=comment_id)
+        updated_body = request.POST.get('content')
+
+        comment.content = updated_body
+        comment.edited = True
+        comment.save()
+
+        # Finding the slug of the post the comment is on
+        post = comment.post
+        slug = post.slug
+        return HttpResponseRedirect(reverse('view_post', args=[slug]))
