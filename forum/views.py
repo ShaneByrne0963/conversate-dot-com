@@ -25,6 +25,7 @@ class PopularPosts(View):
 
         context = {
             'heading': "What's Trending",
+            'selected_tab': 'Popular',
             'post_list': current_posts,
             'paginator': p
         }
@@ -50,6 +51,7 @@ class RecentPosts(View):
 
         context = {
             'heading': "What's New",
+            'selected_tab': 'Recent',
             'post_list': current_posts,
             'paginator': p
         }

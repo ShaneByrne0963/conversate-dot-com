@@ -114,6 +114,11 @@ a:hover {
     font-weight: bold;
 }
 
+.side-nav>a.active {
+    background-color: #FA7336;
+    border-color: #FA7568;
+}
+
 .search-bar {
     border-radius: 32px;
     width: 100%;
