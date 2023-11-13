@@ -146,6 +146,14 @@ class LikePost(View):
         return HttpResponseRedirect(reverse('view_post', args=[slug]))
 
 
+class DeletePost(View):
+
+    def get(self, request, slug):
+        post = get_object_or_404(Post, slug=slug)
+        post.delete()
+        return redirect('home')
+
+
 class SendComment(View):
 
     def post(self, request, slug):
@@ -195,4 +203,14 @@ class EditComment(View):
         # Finding the slug of the post the comment is on
         post = comment.post
         slug = post.slug
+        return HttpResponseRedirect(reverse('view_post', args=[slug]))
+
+
+class DeleteComment(View):
+
+    def get(self, request, comment_id):
+        comment = get_object_or_404(Comment, id=comment_id)
+        post = comment.post
+        slug = post.slug
+        comment.delete()
         return HttpResponseRedirect(reverse('view_post', args=[slug]))
