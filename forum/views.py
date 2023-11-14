@@ -4,7 +4,6 @@ from django.core.paginator import Paginator
 from django.http import HttpResponseRedirect
 from django.db.models import Count
 from .models import Post, Tag, Comment, SiteData
-from django.contrib.postgres.search import SearchVector
 from .core.slug import generate_slug
 
 
@@ -66,12 +65,17 @@ class RecentPosts(View):
 class SearchPost(View):
     paginate_by = 20
 
-    def post(self, request):
+    def get(self, request):
         # Redirects the user to the login page if not logged in
         if not request.user.is_authenticated:
             return redirect('accounts/login')
-        search_input = request.POST.get('search_input')
-        posts = Post.objects.filter(title__contains=search_input)
+
+        # Redirects the user to the home page if no search query is given
+        if not 'search_query' in request.GET:
+            return redirect('home')
+
+        search_input = request.GET.get('search_query')
+        posts = Post.objects.filter(title__icontains=search_input)
         number_of_results = len(list(posts))
 
         p = Paginator(posts, self.paginate_by)
