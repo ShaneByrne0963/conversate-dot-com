@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404, reverse
 from django.views import View
 from django.core.paginator import Paginator
 from django.http import HttpResponseRedirect
-from django.db.models import Count
+from django.db.models import Count, Q
 from .models import Post, Tag, Comment, SiteData
 from .core.slug import generate_slug
 
@@ -75,7 +75,9 @@ class SearchPost(View):
             return redirect('home')
 
         search_input = request.GET.get('search_query')
-        posts = Post.objects.filter(title__icontains=search_input)
+        query = Q(Q(title__icontains=search_input) |
+                  Q(content__icontains=search_input))
+        posts = Post.objects.filter(query)
         number_of_results = len(list(posts))
 
         p = Paginator(posts, self.paginate_by)
