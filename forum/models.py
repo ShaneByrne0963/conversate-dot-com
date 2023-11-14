@@ -49,20 +49,6 @@ class Post(models.Model):
     def number_of_comments(self):
         return self.comments.count()
 
-    def date_formatted(self):
-        day = ''
-        if self.posted_on.day < 10:
-            day += '0'
-        day += str(self.posted_on.day)
-        month = ''
-        if self.posted_on.month < 10:
-            month += '0'
-        month += str(self.posted_on.month)
-        year = self.posted_on.year % 100
-        hour = self.posted_on.hour
-        minute = self.posted_on.minute
-        return (f'{day}/{month}/{year},{hour}:{minute} -')
-
 
 class Comment(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE,

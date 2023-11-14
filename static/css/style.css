@@ -27,11 +27,11 @@ a,
 h1,
 h2,
 h3 {
-    color: #FA7568;
+    color: #f75949;
 }
 
 .btn {
-    background-color: #FA7568;
+    background-color: #f75949;
     border: none;
     color: white;
 }
@@ -48,6 +48,12 @@ a:hover {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+/* Adds a white line to separate an element to the right of it */
+.line-separate {
+    border-radius: 0;
+    border-right: 1px solid white;
 }
 
 /* --------------------------------------------------------Login--------------------------------------------------------- */
@@ -98,6 +104,11 @@ a:hover {
     text-align: center;
 }
 
+.nav-icon:hover {
+    color: white;
+    background-color: #f75949;
+}
+
 /* ------------------------------------------------------Side Navigation------------------------------------------------------ */
 
 .side-nav>a {
@@ -105,18 +116,19 @@ a:hover {
     grid-template-columns: auto 1fr auto;
     grid-template-rows: 1fr;
     color: white;
-    background-color: #FA7568;
+    background-color: #FA7336;
 }
 
-.side-nav>a:hover {
-    background-color: #FA9C52;
+.side-nav>a:hover,
+.side-nav>a.active:hover {
+    background-color: #f75949;
     color: white;
     font-weight: bold;
 }
 
 .side-nav>a.active {
-    background-color: #FA7336;
-    border-color: #FA7568;
+    background-color: #FA9C52;
+    border-color: rgba(0, 0, 0, 0.25);
 }
 
 .search-bar {
@@ -150,15 +162,15 @@ a:hover {
 }
 
 .search-bar input[type=submit] {
-    background-color: #FA7568;
+    background: none;
     border: none;
     border-left: 1px solid white;
     padding: 4px 16px 4px 10px;
     color: white;
 }
 
-.search-bar button:hover {
-    background-color: #FA9C52;
+.search-bar input[type=submit]:hover {
+    background-color: #f75949;
 }
 
 #search-filter {
@@ -204,8 +216,14 @@ a:hover {
 }
 
 #post-footer {
-    background-color: #FFEFD4;
+    background-color: #FA7336;
     padding: 8px;
+    color: white;
+}
+
+#post-footer button,
+#post-footer a {
+    background: none;
 }
 
 /* ------------------------------------------------------Post Form------------------------------------------------------ */

@@ -21,10 +21,10 @@
             <form class="d-inline" method="POST" action="{% url 'like_post' post.slug %}">
                 {% csrf_token %}
                 {% if liked %}
-                    <button type="submit" class="btn py-0" aria-label="Unlike this post">
+                    <button type="submit" class="btn py-0 line-separate" aria-label="Unlike this post">
                         <i class="fa-solid fa-thumbs-up"></i>
                 {% else %}
-                    <button type="submit" class="btn py-0" aria-label="Like this post">
+                    <button type="submit" class="btn py-0 line-separate" aria-label="Like this post">
                         <i class="fa-regular fa-thumbs-up"></i>
                 {% endif %}
                     {{ post.number_of_likes }}
@@ -37,16 +37,16 @@
                 </span>
             {% endif %}
             {% if user.is_authenticated %}
-                <a class="btn py-0" href="#post-comment" aria-label="Post a comment">
+                <a class="btn py-0 line-separate" href="#post-comment" aria-label="Post a comment">
             {% else %}
-                <a class="btn py-0" href="#comments" aria-label="View the post's comments">
+                <a class="btn py-0 line-separate" href="#comments" aria-label="View the post's comments">
             {% endif %}
                 <i class="fa-regular fa-comment"></i>
                 {{ post.number_of_comments }}
             </a>
             <!-- Buttons specifically for user-owned posts -->
             {% if user == post.posted_by %}
-                <a class="btn py-0" href="{% url 'edit_post' post.slug %}" aria-label="Edit this post">
+                <a class="btn py-0 line-separate" href="{% url 'edit_post' post.slug %}" aria-label="Edit this post">
                     <i class="fa-solid fa-pen"></i>
                     Edit
                 </a>
