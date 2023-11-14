@@ -161,6 +161,12 @@ a:hover {
     background-color: #FA9C52;
 }
 
+#search-filter {
+    background: none;
+    border: none;
+    outline: none;
+}
+
 /* Removing the extra thick border between "Tags" and "Your Posts" */
 #tag-collapse {
     border-bottom: none;

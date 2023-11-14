@@ -70,12 +70,19 @@
                 <!-- Side nav -->
                 <nav class="d-none d-md-block col-4">
                     <!-- Search Bar -->
-                    <form class="search-bar my-4" action="{% url 'search_post' %}" method="GET">
-                        <div class="center-to-container">
-                            <i class="fa-solid fa-magnifying-glass"></i>
+                    <form action="{% url 'search_post' %}" method="GET">
+                        <div class="search-bar mt-4">
+                            <div class="center-to-container">
+                                <i class="fa-solid fa-magnifying-glass"></i>
+                            </div>
+                            <input type="text" name="search_query" value="{{ search_result }}" placeholder="Search...">
+                            <input type="submit" value="Go!">
                         </div>
-                        <input type="text" name="search_query" placeholder="Search...">
-                        <input type="submit" value="Go!">
+                        <label for="search-filter" class="ml-4 pl-2">Filter by:</label>
+                        <select class="mt-1 mb-4 clickable" name="filter_by" id="search-filter">
+                            <option value="popular">Popular</option>
+                            <option value="new" {% if search_filter == 'new' %} selected {% endif %}>Recent</option>
+                        </select>
                     </form>
                     <!-- Post navigation -->
                     <div class="list-group side-nav">

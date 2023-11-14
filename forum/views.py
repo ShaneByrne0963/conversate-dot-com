@@ -71,24 +71,39 @@ class SearchPost(View):
             return redirect('accounts/login')
 
         # Redirects the user to the home page if no search query is given
-        if not 'search_query' in request.GET:
+        if 'search_query' not in request.GET:
             return redirect('home')
 
         search_input = request.GET.get('search_query')
+        filter_by = request.GET.get('filter_by')
         query = Q(Q(title__icontains=search_input) |
                   Q(content__icontains=search_input))
-        posts = Post.objects.filter(query)
+        posts = None
+        if filter_by == 'popular':
+            posts = Post.objects \
+                .filter(query) \
+                .annotate(num_likes=Count('likes')) \
+                .order_by('-num_likes')
+        else:
+            posts = Post.objects.filter(query).order_by('-posted_on')
         number_of_results = len(list(posts))
 
         p = Paginator(posts, self.paginate_by)
         page = request.GET.get('page')
         current_posts = p.get_page(page)
 
+        heading = f'{number_of_results} Result'
+        if number_of_results != 1:
+            heading += 's'
+        heading += f' for "{search_input}"'
+
         context = {
-            'heading': f'{number_of_results} Results for "{search_input}"',
+            'heading': heading,
             'selected_tab': 'Search',
             'post_list': current_posts,
-            'paginator': p
+            'paginator': p,
+            'search_result': search_input,
+            'search_filter': filter_by
         }
         return render(
             request,
