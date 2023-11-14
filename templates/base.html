@@ -70,13 +70,14 @@
                 <!-- Side nav -->
                 <nav class="d-none d-md-block col-4">
                     <!-- Search Bar -->
-                    <div class="search-bar my-4">
+                    <form class="search-bar my-4" action="{% url 'search_post' %}" method="POST">
+                        {% csrf_token %}
                         <div class="center-to-container">
                             <i class="fa-solid fa-magnifying-glass"></i>
                         </div>
-                        <input type="text" placeholder="Search...">
-                        <button>Go!</button>
-                    </div>
+                        <input type="text" name="search_input" placeholder="Search...">
+                        <input type="submit" value="Go!">
+                    </form>
                     <!-- Post navigation -->
                     <div class="list-group side-nav">
                         <a class="list-group-item list-group-item-action clickable{% if selected_tab == 'Popular' %} active{% endif %}"
