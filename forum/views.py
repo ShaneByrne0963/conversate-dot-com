@@ -5,10 +5,7 @@ from django.http import HttpResponseRedirect
 from django.db.models import Count, Q
 from .models import Post, Tag, Comment, SiteData
 from .core.slug import generate_slug
-from .core.pagination import get_page_range
-
-
-POSTS_PER_PAGE = 3
+from .core.pagination import get_page_range, POSTS_PER_PAGE, NUM_PAGES
 
 
 def get_paginated_posts(request, post_list):
@@ -19,10 +16,21 @@ def get_paginated_posts(request, post_list):
     page = request.GET.get('page')
     current_posts = p.get_page(page)
 
-    return {
+    pagination_context = {
         'post_list': current_posts,
-        'paginator': p
+        'paginator': p,
+        'page': page
     }
+
+    if page is None:
+        page = 1
+    if p.num_pages > NUM_PAGES:
+        pagination_context['page_range'] = get_page_range(
+            int(page),
+            p.num_pages
+        )
+
+    return pagination_context
 
 
 class PopularPosts(View):

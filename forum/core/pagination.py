@@ -1,9 +1,27 @@
-from .slug import test_instance, test_index
-
-
 # The maximum amount of pages that can be displayed in the pagination bar
 # Must be an odd number to have the current page in the middle
 NUM_PAGES = 5
+POSTS_PER_PAGE = 2
+
+
+def test_instance(variable, var_type, error_message):
+    """
+    Tests if a variable is of a certain instance, and raises a TypeError
+    if it isn't
+    """
+    if not isinstance(variable, var_type):
+        raise TypeError(error_message)
+
+
+def test_index(number, min_range, max_range):
+    """
+    Tests if a number is within a certain range, and raises an IndexError
+    if it isn't
+    """
+    if number < min_range:
+        raise IndexError(f'index should not be less than {min_range}')
+    elif number > max_range:
+        raise IndexError(f'index should not be greater than {max_range}')
 
 
 def get_page_range(page_index, last_page, num_pages=NUM_PAGES):
@@ -32,7 +50,7 @@ def get_page_range(page_index, last_page, num_pages=NUM_PAGES):
     upper_limit = page_index + pages_one_side
 
     # The page range cannot include the first or last page. They will be
-    # handled separately
+    # added later
     if lower_limit <= 1:
         upper_limit += 2 - lower_limit
         lower_limit = 2
@@ -40,5 +58,8 @@ def get_page_range(page_index, last_page, num_pages=NUM_PAGES):
         lower_limit += last_page - 1 - upper_limit
         upper_limit = last_page - 1
 
-    page_range = range(lower_limit, upper_limit + 1)
+    page_range = list(range(lower_limit, upper_limit + 1))
+    # Adding the first and last page
+    page_range.insert(0, 1)
+    page_range.append(last_page)
     return page_range
