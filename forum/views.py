@@ -102,6 +102,9 @@ class SearchPost(View):
         context['selected_tab'] = 'Search'
         context['search_result'] = search_input
         context['search_filter'] = filter_by
+        # Converting the form inputs into a url to insert into pagination
+        search_url = f'?search_query={search_input}&filter_by={filter_by}'
+        context['search_url'] = search_url.replace(' ', '+')
 
         return render(
             request,

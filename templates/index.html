@@ -41,7 +41,11 @@
     <ul class="pagination justify-content-center">
         {% if post_list.has_previous %}
             <li class="page-item">
-                <a class="page-link" href="?page={{ post_list.previous_page_number }}">Previous</a>
+                {% if selected_tab == 'Search' %}
+                    <a class="page-link" href="{{ search_url }}&page={{ post_list.previous_page_number }}">Previous</a>
+                {% else %}
+                    <a class="page-link" href="?page={{ post_list.previous_page_number }}">Previous</a>
+                {% endif %}
         {% else %}
             <li class="page-item disabled">
                 <div class="page-link">Previous</div>
@@ -54,13 +58,21 @@
             {% else %}
             <li class="page-item">
             {% endif %}
-                <a class="page-link" href="?page={{ page }}">{{ page }}</a>
+                {% if selected_tab == 'Search' %}
+                    <a class="page-link" href="{{ search_url }}&page={{ page }}">{{ page }}</a>
+                {% else %}
+                    <a class="page-link" href="?page={{ page }}">{{ page }}</a>
+                {% endif %}
             </li>
         {% endfor %}
 
         {% if post_list.has_next %}
             <li class="page-item">
-                <a class="page-link" href="?page={{ post_list.next_page_number }}">Next</a>
+                {% if selected_tab == 'Search' %}
+                    <a class="page-link" href="{{ search_url }}&page={{ post_list.next_page_number }}">Next</a>
+                {% else %}
+                    <a class="page-link" href="?page={{ post_list.next_page_number }}">Next</a>
+                {% endif %}
         {% else %}
             <li class="page-item disabled">
                 <div class="page-link">Next</div>
