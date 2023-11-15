@@ -1,4 +1,4 @@
-from slug import test_instance, test_index
+from .slug import test_instance, test_index
 
 
 # The maximum amount of pages that can be displayed in the pagination bar

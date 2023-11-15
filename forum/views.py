@@ -5,6 +5,24 @@ from django.http import HttpResponseRedirect
 from django.db.models import Count, Q
 from .models import Post, Tag, Comment, SiteData
 from .core.slug import generate_slug
+from .core.pagination import get_page_range
+
+
+POSTS_PER_PAGE = 3
+
+
+def get_paginated_posts(request, post_list):
+    """
+    Paginates a list of posts
+    """
+    p = Paginator(post_list, POSTS_PER_PAGE)
+    page = request.GET.get('page')
+    current_posts = p.get_page(page)
+
+    return {
+        'post_list': current_posts,
+        'paginator': p
+    }
 
 
 class PopularPosts(View):
@@ -18,17 +36,10 @@ class PopularPosts(View):
         posts = Post.objects \
                     .annotate(num_likes=Count('likes')) \
                     .order_by('-num_likes')
+        context = get_paginated_posts(request, posts)
+        context['heading'] = "What's Trending"
+        context['selected_tab'] = 'Popular'
 
-        p = Paginator(posts, self.paginate_by)
-        page = request.GET.get('page')
-        current_posts = p.get_page(page)
-
-        context = {
-            'heading': "What's Trending",
-            'selected_tab': 'Popular',
-            'post_list': current_posts,
-            'paginator': p
-        }
         return render(
             request,
             'index.html',
@@ -43,18 +54,11 @@ class RecentPosts(View):
         # Redirects the user to the login page if not logged in
         if not request.user.is_authenticated:
             return redirect('accounts/login')
-
         posts = Post.objects.order_by('-posted_on')
-        p = Paginator(posts, self.paginate_by)
-        page = request.GET.get('page')
-        current_posts = p.get_page(page)
+        context = get_paginated_posts(request, posts)
+        context['heading'] = "What's New"
+        context['selected_tab'] = 'Recent'
 
-        context = {
-            'heading': "What's New",
-            'selected_tab': 'Recent',
-            'post_list': current_posts,
-            'paginator': p
-        }
         return render(
             request,
             'index.html',
@@ -88,23 +92,17 @@ class SearchPost(View):
             posts = Post.objects.filter(query).order_by('-posted_on')
         number_of_results = len(list(posts))
 
-        p = Paginator(posts, self.paginate_by)
-        page = request.GET.get('page')
-        current_posts = p.get_page(page)
-
         heading = f'{number_of_results} Result'
         if number_of_results != 1:
             heading += 's'
         heading += f' for "{search_input}"'
 
-        context = {
-            'heading': heading,
-            'selected_tab': 'Search',
-            'post_list': current_posts,
-            'paginator': p,
-            'search_result': search_input,
-            'search_filter': filter_by
-        }
+        context = get_paginated_posts(request, posts)
+        context['heading'] = heading
+        context['selected_tab'] = 'Search'
+        context['search_result'] = search_input
+        context['search_filter'] = filter_by
+
         return render(
             request,
             'index.html',
