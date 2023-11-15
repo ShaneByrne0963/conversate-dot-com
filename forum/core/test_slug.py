@@ -27,7 +27,9 @@ class TestSlug(unittest.TestCase):
         self.assertTrue('SoMUq2gZ' in generate_slug('Hello World', 'Tag', 0))
 
     def test_slugified_title_in_returned_string(self):
-        self.assertTrue('hello-world' in generate_slug('Hello World', 'Tag', 0))
+        self.assertTrue(
+            'hello-world' in generate_slug('Hello World', 'Tag', 0)
+        )
 
 
 class TestRandomCharacterSet(unittest.TestCase):
