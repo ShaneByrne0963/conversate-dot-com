@@ -152,18 +152,15 @@ a:hover {
     padding-left: 10px;
 }
 
-.search-bar>input[type=text] {
+#search-input,
+#search-input::placeholder {
     margin-left: 8px;
     padding: 6px 0;
     border: none;
     outline: none;
     display: inline-block;
     min-width: 0;
-    background-color: inherit;
-    color: white;
-}
-
-.search-bar>input::placeholder {
+    background-color: #FA7336;
     color: white;
 }
 
