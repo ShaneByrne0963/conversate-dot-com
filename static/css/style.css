@@ -111,22 +111,28 @@ a:hover {
 
 /* ------------------------------------------------------Side Navigation------------------------------------------------------ */
 
-.side-nav>a {
-    display: grid;
-    grid-template-columns: auto 1fr auto;
-    grid-template-rows: 1fr;
+.list-group-item-action,
+.list-group-item-action:focus {
     color: white;
     background-color: #FA7336;
 }
 
-.side-nav>a:hover,
-.side-nav>a.active:hover {
+/* Adds space for icons in the side nav */
+.side-nav>.list-group-item-action,
+.side-nav>.list-group-item-action:focus {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    grid-template-rows: 1fr;
+}
+
+.list-group-item-action:hover,
+.list-group-item-action:hover {
     background-color: #f75949;
     color: white;
     font-weight: bold;
 }
 
-.side-nav>a.active {
+.list-group-item-action.active {
     background-color: #FA9C52;
     border-color: rgba(0, 0, 0, 0.25);
 }
