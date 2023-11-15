@@ -48,18 +48,29 @@ def get_page_range(page_index, last_page, num_pages=NUM_PAGES):
 
     lower_limit = page_index - pages_one_side
     upper_limit = page_index + pages_one_side
+    # Will be used to display "..." between page gaps
+    start_gap = True
+    end_gap = True
 
     # The page range cannot include the first or last page. They will be
     # added later
-    if lower_limit <= 1:
+    if lower_limit <= 2:
         upper_limit += 2 - lower_limit
         lower_limit = 2
-    elif upper_limit >= last_page:
+        start_gap = False
+    elif upper_limit >= last_page - 1:
         lower_limit += last_page - 1 - upper_limit
         upper_limit = last_page - 1
+        end_gap = False
 
     page_range = list(range(lower_limit, upper_limit + 1))
     # Adding the first and last page
     page_range.insert(0, 1)
     page_range.append(last_page)
-    return page_range
+
+    page_info = {
+        'page_range': page_range,
+        'start_gap': start_gap,
+        'end_gap': end_gap
+    }
+    return page_info
