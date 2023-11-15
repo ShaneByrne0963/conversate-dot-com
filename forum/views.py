@@ -18,17 +18,18 @@ def get_paginated_posts(request, post_list):
 
     pagination_context = {
         'post_list': current_posts,
-        'paginator': p,
         'page': page
     }
 
     if page is None:
         page = 1
     if p.num_pages > NUM_PAGES:
-        pagination_context['page_range'] = get_page_range(
+        pagination_context.update(get_page_range(
             int(page),
             p.num_pages
-        )
+        ))
+    else:
+        pagination_context['page_range'] = p.page_range
 
     return pagination_context
 

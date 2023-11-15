@@ -52,7 +52,7 @@
         {% endif %}
         </li>
 
-        {% for page in paginator.page_range %}
+        {% for page in page_range %}
             {% if page == post_list.number %}
             <li class="page-item active">
             {% else %}
