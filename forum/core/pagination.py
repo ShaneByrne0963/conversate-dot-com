@@ -1,7 +1,7 @@
 # The maximum amount of pages that can be displayed in the pagination bar
 # Must be an odd number to have the current page in the middle
-NUM_PAGES = 5
-POSTS_PER_PAGE = 2
+NUM_PAGES = 9
+POSTS_PER_PAGE = 1
 
 
 def test_instance(variable, var_type, error_message):

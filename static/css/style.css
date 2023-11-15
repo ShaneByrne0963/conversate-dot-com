@@ -246,6 +246,12 @@ a:hover {
     background: none;
 }
 
+.pagination-gap {
+    border: none;
+    font-weight: bold;
+    padding: 0.5rem;
+}
+
 /* ------------------------------------------------------Post Form------------------------------------------------------ */
 
 .form-button {
