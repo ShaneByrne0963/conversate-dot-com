@@ -208,6 +208,23 @@ a:hover {
     grid-template-rows: 1fr auto;
 }
 
+/* Pagination */
+.page-link {
+    background-color: #FA7336;
+    color: white;
+}
+
+.page-link:hover {
+    background-color: #f75949;
+    color: white;
+    font-weight: bold;
+}
+
+.page-item.active>.page-link {
+    background-color: #FA9C52;
+    border-color: rgba(0, 0, 0, 0.25);
+}
+
 /* ------------------------------------------------------Posts------------------------------------------------------ */
 
 .post {
