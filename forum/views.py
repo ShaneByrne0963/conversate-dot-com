@@ -1,42 +1,14 @@
 from django.shortcuts import render, redirect, get_object_or_404, reverse
 from django.views import View
-from django.core.paginator import Paginator
 from django.http import HttpResponseRedirect
 from django.db.models import Count, Q
 from .models import Post, Tag, Comment, SiteData
 from .core.slug import generate_slug
-from .core.pagination import get_page_range, POSTS_PER_PAGE, NUM_PAGES
+from .core.pagination import get_paginated_posts
 import urllib.parse
 
 
-def get_paginated_posts(request, post_list):
-    """
-    Paginates a list of posts
-    """
-    p = Paginator(post_list, POSTS_PER_PAGE)
-    page = request.GET.get('page')
-    current_posts = p.get_page(page)
-
-    pagination_context = {
-        'post_list': current_posts,
-        'page': page
-    }
-
-    if page is None:
-        page = 1
-    if p.num_pages > NUM_PAGES:
-        pagination_context.update(get_page_range(
-            int(page),
-            p.num_pages
-        ))
-    else:
-        pagination_context['page_range'] = p.page_range
-
-    return pagination_context
-
-
 class PopularPosts(View):
-    paginate_by = 20
 
     def get(self, request):
         # Redirects the user to the login page if not logged in
@@ -58,7 +30,6 @@ class PopularPosts(View):
 
 
 class RecentPosts(View):
-    paginate_by = 20
 
     def get(self, request):
         # Redirects the user to the login page if not logged in
@@ -77,7 +48,6 @@ class RecentPosts(View):
 
 
 class SearchPost(View):
-    paginate_by = 20
 
     def get(self, request):
         # Redirects the user to the login page if not logged in
@@ -87,9 +57,12 @@ class SearchPost(View):
         # Redirects the user to the home page if no search query is given
         if 'search_query' not in request.GET:
             return redirect('home')
-
         search_input = request.GET.get('search_query')
-        filter_by = request.GET.get('filter_by')
+
+        filter_by = 'popular'
+        if 'filter_by' in request.GET:
+            filter_by = request.GET.get('filter_by')
+
         query = Q(Q(title__icontains=search_input) |
                   Q(content__icontains=search_input))
         posts = None
@@ -102,11 +75,13 @@ class SearchPost(View):
             posts = Post.objects.filter(query).order_by('-posted_on')
         number_of_results = len(list(posts))
 
+        # Constructing the heading
         heading = f'{number_of_results} Result'
         if number_of_results != 1:
             heading += 's'
         heading += f' for "{search_input}"'
 
+        # Adding the extra details to the context
         context = get_paginated_posts(request, posts)
         context['heading'] = heading
         context['selected_tab'] = 'Search'

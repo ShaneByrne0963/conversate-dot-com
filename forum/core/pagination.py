@@ -1,7 +1,36 @@
+from django.core.paginator import Paginator
+
+
 # The maximum amount of pages that can be displayed in the pagination bar
 # Must be an odd number to have the current page in the middle
 NUM_PAGES = 9
-POSTS_PER_PAGE = 5
+POSTS_PER_PAGE = 1
+
+
+def get_paginated_posts(request, post_list):
+    """
+    Paginates a list of posts
+    """
+    p = Paginator(post_list, POSTS_PER_PAGE)
+    page = request.GET.get('page')
+    current_posts = p.get_page(page)
+
+    pagination_context = {
+        'post_list': current_posts,
+        'page': page
+    }
+
+    if page is None:
+        page = 1
+    if p.num_pages > NUM_PAGES:
+        pagination_context.update(get_page_range(
+            int(page),
+            p.num_pages
+        ))
+    else:
+        pagination_context['page_range'] = p.page_range
+
+    return pagination_context
 
 
 def test_instance(variable, var_type, error_message):
