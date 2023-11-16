@@ -6,6 +6,7 @@ from django.db.models import Count, Q
 from .models import Post, Tag, Comment, SiteData
 from .core.slug import generate_slug
 from .core.pagination import get_page_range, POSTS_PER_PAGE, NUM_PAGES
+import urllib.parse
 
 
 def get_paginated_posts(request, post_list):
@@ -112,8 +113,9 @@ class SearchPost(View):
         context['search_result'] = search_input
         context['search_filter'] = filter_by
         # Converting the form inputs into a url to insert into pagination
-        search_url = f'?search_query={search_input}&filter_by={filter_by}'
-        context['search_url'] = search_url.replace(' ', '+')
+        search_formatted = urllib.parse.quote_plus(search_input)
+        search_url = f'?search_query={search_formatted}&filter_by={filter_by}'
+        context['search_url'] = search_url
 
         return render(
             request,
