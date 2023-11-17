@@ -31,5 +31,11 @@ class TestPosting(unittest.TestCase):
             '<p>Hello</p><br><p>World!</p>'
         )
 
+    def test_trims_paragraphs_of_white_space(self):
+        self.assertEqual(
+            convert_post_content('Hello\n \nWorld!'),
+            '<p>Hello</p><br><p>World!</p>'
+        )
+
 
 unittest.main()

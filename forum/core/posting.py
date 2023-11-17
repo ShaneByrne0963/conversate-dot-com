@@ -8,7 +8,10 @@ def convert_post_content(content_input):
 
     formatted_input = ''
     for line in input_lines:
-        formatted_input += f'<p>{line}</p>'
-    formatted_input = formatted_input.replace('<p></p>', '<br>')
+        line = line.strip()
+        if line == '':
+            formatted_input += '<br>'
+        else:
+            formatted_input += f'<p>{line}</p>'
 
     return formatted_input
