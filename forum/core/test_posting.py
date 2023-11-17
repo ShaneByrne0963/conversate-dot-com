@@ -25,5 +25,11 @@ class TestPosting(unittest.TestCase):
             '<p>Hello</p><p>World!</p>'
         )
 
+    def test_replaces_empty_paragraphs_with_line_breaks(self):
+        self.assertEqual(
+            convert_post_content('Hello\n\nWorld!'),
+            '<p>Hello</p><br><p>World!</p>'
+        )
+
 
 unittest.main()
