@@ -16,5 +16,8 @@ class TestPosting(unittest.TestCase):
     def test_convert_post_content_returns_string(self):
         self.assertIsInstance(convert_post_content('Hello'), str)
 
+    def test_returns_input_wrapped_in_paragraph_tags(self):
+        self.assertEqual(convert_post_content('Hello'), '<p>Hello</p>')
+
 
 unittest.main()
