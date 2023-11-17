@@ -14,7 +14,7 @@
         {% endif %}
     </span>
     <br><br>
-    <p id="post-content" class="mb-5">{{ post.content }}</p>
+    <div id="post-content" class="mb-5">{{ post.content|safe }}</div>
     <div id="post-footer" class="d-flex justify-content-between">
         <div class="post-footer-buttons">
             {% if user.is_authenticated %}

@@ -28,7 +28,7 @@
             <p class="d-inline ml-4">Posted on {{ post.date_formatted }} by {{ post.posted_by }}</p>
         </div>
         <div class="col-12">
-            <p class="mt-2">{{ post.content }}</p>
+            <div class="mt-2">{{ post.content|safe }}</div>
             <a href="{% url 'view_post' post.slug %}">Read More...</a>
         </div>
     </div>
