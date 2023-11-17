@@ -116,6 +116,7 @@ class AddPost(View):
         title = request.POST.get('title')
         content = request.POST.get('content')
         tag = request.POST.get('tag')
+        print(content)
 
         # Add the tag to the database if the tag doesn't already exist
         existing_tag = list(Tag.objects.filter(name=tag))
