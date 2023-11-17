@@ -5,6 +5,7 @@ from django.db.models import Count, Q
 from .models import Post, Tag, Comment, SiteData
 from .core.slug import generate_slug
 from .core.pagination import get_paginated_posts
+from .core.posting import convert_post_content
 import urllib.parse
 
 
@@ -114,9 +115,9 @@ class AddPost(View):
 
     def post(self, request):
         title = request.POST.get('title')
-        content = request.POST.get('content')
         tag = request.POST.get('tag')
-        print(content)
+        content = request.POST.get('content')
+        content = convert_post_content(content)
 
         # Add the tag to the database if the tag doesn't already exist
         existing_tag = list(Tag.objects.filter(name=tag))
