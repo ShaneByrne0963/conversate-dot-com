@@ -37,5 +37,11 @@ class TestPosting(unittest.TestCase):
             '<p>Hello</p><br><p>World!</p>'
         )
 
+    def test_can_only_have_1_line_break_between_paragraphs(self):
+        self.assertEqual(
+            convert_post_content('Hello\n\n\n\nWorld!'),
+            '<p>Hello</p><br><p>World!</p>'
+        )
+
 
 unittest.main()
