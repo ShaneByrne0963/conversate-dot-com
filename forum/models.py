@@ -14,6 +14,12 @@ class SiteData(models.Model):
     total_posts_created = models.IntegerField(default=0)
 
 
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE,
+                                primary_key=True, related_name='profile')
+    sort_by_new = models.BooleanField(default=False)
+
+
 class Tag(models.Model):
     name = models.CharField(max_length=30, unique=True)
 

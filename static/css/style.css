@@ -111,10 +111,14 @@ a:hover {
 
 /* ------------------------------------------------------Side Navigation------------------------------------------------------ */
 
-.list-group-item-action,
-.list-group-item-action:focus {
+.side-nav-btn,
+.side-nav-btn:focus {
     color: white;
     background-color: #FA7336;
+    transition: color .15s ease-in-out,
+        background-color .15s ease-in-out,
+        border-color .15s ease-in-out,
+        box-shadow .15s ease-in-out;
 }
 
 /* Adds space for icons in the side nav */
@@ -125,17 +129,23 @@ a:hover {
     grid-template-rows: 1fr;
 }
 
-.list-group-item-action:hover,
-.list-group-item-action:hover {
+.side-nav-btn:hover {
     background-color: #f75949;
     color: white;
     font-weight: bold;
 }
 
-.list-group-item-action.active {
+.side-nav-btn.active {
     background-color: #FA9C52;
-    border-color: rgba(0, 0, 0, 0.25);
+    border: 1px solid rgba(0, 0, 0, 0.25);
 }
+
+/* Removing the extra thick border between "Tags" and "Your Posts" */
+#tag-collapse {
+    border-bottom: none;
+}
+
+/* ------------------------------------------------------Search Bar------------------------------------------------------ */
 
 .search-bar {
     border-radius: 32px;
@@ -180,11 +190,6 @@ a:hover {
     background: none;
     border: none;
     outline: none;
-}
-
-/* Removing the extra thick border between "Tags" and "Your Posts" */
-#tag-collapse {
-    border-bottom: none;
 }
 
 /* ------------------------------------------------------Default Template------------------------------------------------------ */

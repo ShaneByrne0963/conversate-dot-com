@@ -173,7 +173,6 @@ class EditPost(View):
         post.approved = False
 
         if post.tag.name != tag:
-            print('Different Tags')
             # Add the tag to the database if the tag doesn't already exist
             existing_tag = list(Tag.objects.filter(name=tag))
             tag_object = None
