@@ -86,17 +86,29 @@
                         <div class="row">
                             {% with request.path|add:"?"|add:request.GET.urlencode as current_path %}
                             <div class="col-6">
-                                <a href="{% url 'sort_posts' 0 current_path %}"
-                                    class="btn btn-block side-nav-btn{% if not user.profile.sort_by_new %} active{% endif %}">
-                                    <i class="fa-solid fa-fire mr-lg-1"></i>
-                                    Popular
+                                {% if request.GET.urlencode %}
+                                    <a href="{% url 'sort_posts' 0 current_path %}" class="anchor-no-style">
+                                {% else %}
+                                    <a href="{% url 'sort_posts' 0 request.path %}" class="anchor-no-style">
+                                {% endif %}
+                                    <div class="btn btn-block side-nav-btn
+                                        {% if not user.profile.sort_by_new %} active{% endif %}">
+                                        <i class="fa-solid fa-fire mr-lg-1"></i>
+                                        Popular
+                                    </div>
                                 </a>
                             </div>
                             <div class="col-6">
-                                <a href="{% url 'sort_posts' 1 current_path %}"
-                                    class="btn btn-block side-nav-btn{% if user.profile.sort_by_new %} active{% endif %}">
-                                    <i class="fa-solid fa-clock mr-lg-1"></i>
-                                    New
+                                {% if request.GET.urlencode %}
+                                    <a href="{% url 'sort_posts' 1 current_path %}" class="anchor-no-style">
+                                {% else %}
+                                    <a href="{% url 'sort_posts' 1 request.path %}" class="anchor-no-style">
+                                {% endif %}
+                                    <div class="btn btn-block side-nav-btn
+                                        {% if user.profile.sort_by_new %} active{% endif %}">
+                                        <i class="fa-solid fa-clock mr-lg-1"></i>
+                                        New
+                                    </div>
                                 </a>
                             </div>
                             {% endwith %}
