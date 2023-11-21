@@ -17,12 +17,18 @@ class ListPosts(View):
         if not request.user.is_authenticated:
             return redirect('accounts/login')
 
-        posts = Post.objects \
-                    .annotate(num_likes=Count('likes')) \
-                    .order_by('-num_likes')
+        posts = Post.objects.all()
+        user_profile = get_profile(request.user)
+        sort_by_new = user_profile.sort_by_new
+        posts = sort_posts(posts, sort_by_new)
+
         context = get_paginated_posts(request, posts)
-        context['heading'] = "What's Trending"
-        context['selected_tab'] = 'Popular'
+        if sort_by_new:
+            context['heading'] = "What's New"
+            context['selected_tab'] = 'Recent'
+        else:
+            context['heading'] = "What's Trending"
+            context['selected_tab'] = 'Popular'
 
         return render(
             request,
@@ -37,24 +43,6 @@ class SortPosts(View):
         profile.sort_by_new = (by_new == 1)
         profile.save()
         return redirect(current_dir)
-
-
-class RecentPosts(View):
-
-    def get(self, request):
-        # Redirects the user to the login page if not logged in
-        if not request.user.is_authenticated:
-            return redirect('accounts/login')
-        posts = Post.objects.order_by('-posted_on')
-        context = get_paginated_posts(request, posts)
-        context['heading'] = "What's New"
-        context['selected_tab'] = 'Recent'
-
-        return render(
-            request,
-            'index.html',
-            context,
-        )
 
 
 class SearchPost(View):
