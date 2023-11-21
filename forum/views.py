@@ -3,13 +3,14 @@ from django.views import View
 from django.http import HttpResponseRedirect
 from django.db.models import Count, Q
 from .models import Post, Tag, Comment, SiteData
+from .core.content import get_profile, sort_posts
 from .core.slug import generate_slug
 from .core.pagination import get_paginated_posts
 from .core.posting import convert_post_content
 import urllib.parse
 
 
-class PopularPosts(View):
+class ListPosts(View):
 
     def get(self, request):
         # Redirects the user to the login page if not logged in
@@ -28,6 +29,14 @@ class PopularPosts(View):
             'index.html',
             context,
         )
+
+
+class SortPosts(View):
+    def get(self, request, by_new, current_dir):
+        profile = get_profile(request.user)
+        profile.sort_by_new = (by_new == 1)
+        profile.save()
+        return redirect(current_dir)
 
 
 class RecentPosts(View):

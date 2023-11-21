@@ -73,16 +73,18 @@
                     <div class="container-fluid px-0 mt-4">
                         <div class="row">
                             <div class="col-6">
-                                <div class="btn btn-block side-nav-btn active">
+                                <a href="{% url 'sort_posts' 0 request.path %}" class="btn btn-block side-nav-btn
+                                    {% if not user.profile.sort_by_new %} active{% endif %}">
                                     <i class="fa-solid fa-fire mr-lg-1"></i>
                                     Popular
-                                </div>
+                                </a>
                             </div>
                             <div class="col-6">
-                                <div class="btn btn-block side-nav-btn">
+                                <a href="{% url 'sort_posts' 1 request.path %}" class="btn btn-block side-nav-btn
+                                    {% if user.profile.sort_by_new %} active{% endif %}">
                                     <i class="fa-solid fa-clock mr-lg-1"></i>
                                     New
-                                </div>
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -107,15 +109,15 @@
                     <div class="list-group side-nav">
                         <a class="list-group-item list-group-item-action side-nav-btn {% if selected_tab == 'Popular' %} active{% endif %}"
                             href="{% url 'home' %}">
-                            <i class="fa-solid fa-fire mr-lg-3 center-to-container"></i>Popular
+                            <i class="fa-solid fa-house mr-2 mr-lg-3 center-to-container"></i>Home
                         </a>
-                        <a class="list-group-item list-group-item-action side-nav-btn clickable{% if selected_tab == 'Recent' %} active{% endif %}"
-                            href="{% url 'recent_posts' %}">
-                            <i class="fa-solid fa-clock mr-lg-3 center-to-container"></i>New
-                        </a>
+                        <!-- <a class="list-group-item list-group-item-action side-nav-btn clickable{% if selected_tab == 'Recent' %} active{% endif %}"
+                            href=" url 'recent_posts' ">
+                            <i class="fa-solid fa-clock mr-2 mr-lg-3 center-to-container"></i>New
+                        </a> -->
                         <a id="tag-collapse" class="list-group-item list-group-item-action side-nav-btn clickable" data-toggle="collapse"
                             href="#side-nav-tags" role="button" aria-expanded="false" aria-controls="side-nav-tags">
-                            <i class="fa-solid fa-hashtag mr-lg-3 center-to-container"></i>
+                            <i class="fa-solid fa-hashtag mr-2 mr-lg-3 center-to-container"></i>
                             <div>Tags</div>
                             <i class="fa-solid fa-caret-down center-to-container"></i>
                         </a>
@@ -130,7 +132,7 @@
                         </div>
                         <!-- /.collapsible -->
                         <a class="list-group-item list-group-item-action side-nav-btn clickable">
-                            <i class="fa-solid fa-message mr-lg-3 center-to-container"></i>Your Posts
+                            <i class="fa-solid fa-message mr-2 mr-lg-3 center-to-container"></i>Your Posts
                         </a>
                     </div>
                 </nav>
