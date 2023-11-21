@@ -19,6 +19,9 @@ class Profile(models.Model):
                                 primary_key=True, related_name='profile')
     sort_by_new = models.BooleanField(default=False)
 
+    def __str__(self):
+        return self.user.username
+
 
 class Tag(models.Model):
     name = models.CharField(max_length=30, unique=True)

@@ -1,6 +1,12 @@
 from django.contrib import admin
-from .models import Post, Comment, Tag, SiteData
+from .models import Profile, Post, Comment, Tag, SiteData
 from django_summernote.admin import SummernoteModelAdmin
+
+
+@admin.register(Profile)
+class ProfileAdmin(SummernoteModelAdmin):
+
+    list_display = ('user', 'sort_by_new')
 
 
 @admin.register(Post)
