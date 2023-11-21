@@ -69,25 +69,6 @@
             <div class="row">
                 <!-- Side nav -->
                 <nav class="d-none d-md-block col-4">
-                    <!-- Post filter by Popular/New -->
-                    <div class="container-fluid px-0 mt-4">
-                        <div class="row">
-                            <div class="col-6">
-                                <a href="{% url 'sort_posts' 0 request.path %}" class="btn btn-block side-nav-btn
-                                    {% if not user.profile.sort_by_new %} active{% endif %}">
-                                    <i class="fa-solid fa-fire mr-lg-1"></i>
-                                    Popular
-                                </a>
-                            </div>
-                            <div class="col-6">
-                                <a href="{% url 'sort_posts' 1 request.path %}" class="btn btn-block side-nav-btn
-                                    {% if user.profile.sort_by_new %} active{% endif %}">
-                                    <i class="fa-solid fa-clock mr-lg-1"></i>
-                                    New
-                                </a>
-                            </div>
-                        </div>
-                    </div>
                     <!-- Search Bar -->
                     <form action="{% url 'search_post' %}" method="GET" autocomplete="off">
                         <div class="search-bar mt-4">
@@ -99,15 +80,31 @@
                                 {% if search_result %} value="{{ search_result }}"{% endif %} placeholder="Search..." required>
                             <input type="submit" class="side-nav-btn" value="Go!">
                         </div>
-                        <label for="search-filter" class="ml-4 pl-2">Filter by:</label>
-                        <select class="mt-1 mb-4 clickable" name="filter_by" id="search-filter">
-                            <option value="popular">Popular</option>
-                            <option value="new" {% if search_filter == 'new' %} selected{% endif %}>Recent</option>
-                        </select>
                     </form>
+                    <!-- Post filter by Popular/New -->
+                    <div class="container-fluid px-0 mt-4 mb-2">
+                        <div class="row">
+                            {% with request.path|add:"?"|add:request.GET.urlencode as current_path %}
+                            <div class="col-6">
+                                <a href="{% url 'sort_posts' 0 current_path %}"
+                                    class="btn btn-block side-nav-btn{% if not user.profile.sort_by_new %} active{% endif %}">
+                                    <i class="fa-solid fa-fire mr-lg-1"></i>
+                                    Popular
+                                </a>
+                            </div>
+                            <div class="col-6">
+                                <a href="{% url 'sort_posts' 1 current_path %}"
+                                    class="btn btn-block side-nav-btn{% if user.profile.sort_by_new %} active{% endif %}">
+                                    <i class="fa-solid fa-clock mr-lg-1"></i>
+                                    New
+                                </a>
+                            </div>
+                            {% endwith %}
+                        </div>
+                    </div>
                     <!-- Post navigation -->
                     <div class="list-group side-nav">
-                        <a class="list-group-item list-group-item-action side-nav-btn {% if selected_tab == 'Popular' %} active{% endif %}"
+                        <a class="list-group-item list-group-item-action side-nav-btn {% if selected_tab == 'Home' %} active{% endif %}"
                             href="{% url 'home' %}">
                             <i class="fa-solid fa-house mr-2 mr-lg-3 center-to-container"></i>Home
                         </a>

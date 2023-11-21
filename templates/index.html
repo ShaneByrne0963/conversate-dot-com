@@ -25,7 +25,7 @@
             {{ post.number_of_likes }}
             <i class="fa-regular fa-comment ml-2"></i>
             {{ post.number_of_comments }}
-            <p class="d-inline ml-4">Posted on {{ post.date_formatted }} by {{ post.posted_by }}</p>
+            <p class="d-inline ml-4">Posted on {{ post.posted_on|date:"d/m/y G:i" }} by {{ post.posted_by }}</p>
         </div>
         <div class="col-12">
             <div class="mt-2">{{ post.content|safe }}</div>

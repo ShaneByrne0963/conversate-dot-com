@@ -25,10 +25,9 @@ class ListPosts(View):
         context = get_paginated_posts(request, posts)
         if sort_by_new:
             context['heading'] = "What's New"
-            context['selected_tab'] = 'Recent'
         else:
             context['heading'] = "What's Trending"
-            context['selected_tab'] = 'Popular'
+        context['selected_tab'] = 'Home'
 
         return render(
             request,
@@ -57,20 +56,12 @@ class SearchPost(View):
             return redirect('home')
         search_input = request.GET.get('search_query')
 
-        filter_by = 'popular'
-        if 'filter_by' in request.GET:
-            filter_by = request.GET.get('filter_by')
-
         query = Q(Q(title__icontains=search_input) |
                   Q(content__icontains=search_input))
-        posts = None
-        if filter_by == 'popular':
-            posts = Post.objects \
-                .filter(query) \
-                .annotate(num_likes=Count('likes')) \
-                .order_by('-num_likes')
-        else:
-            posts = Post.objects.filter(query).order_by('-posted_on')
+        posts = Post.objects.filter(query)
+        user_profile = get_profile(request.user)
+        sort_by_new = user_profile.sort_by_new
+        posts = sort_posts(posts, sort_by_new)
         number_of_results = len(list(posts))
 
         # Constructing the heading
@@ -84,10 +75,9 @@ class SearchPost(View):
         context['heading'] = heading
         context['selected_tab'] = 'Search'
         context['search_result'] = search_input
-        context['search_filter'] = filter_by
         # Converting the form inputs into a url to insert into pagination
         search_formatted = urllib.parse.quote_plus(search_input)
-        search_url = f'?search_query={search_formatted}&filter_by={filter_by}'
+        search_url = f'?search_query={search_formatted}'
         context['search_url'] = search_url
 
         return render(
