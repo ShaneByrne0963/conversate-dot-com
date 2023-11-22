@@ -4,6 +4,7 @@ from django.http import HttpResponseRedirect
 from django.db.models import Q
 from .models import Post, Tag, Comment, SiteData
 from .core.content import get_profile, sort_posts
+from .core.tags import get_top_tags
 from .core.slug import generate_slug
 from .core.pagination import get_paginated_posts
 from .core.posting import convert_post_content
@@ -21,6 +22,7 @@ class ListPosts(View):
         user_profile = get_profile(request.user)
         sort_by_new = user_profile.sort_by_new
         posts = sort_posts(posts, sort_by_new)
+        top_tags = get_top_tags()
 
         context = get_paginated_posts(request, posts)
         if sort_by_new:
@@ -28,6 +30,7 @@ class ListPosts(View):
         else:
             context['heading'] = "What's Trending"
         context['selected_tab'] = 'Home'
+        context['top_tags'] = top_tags
 
         return render(
             request,

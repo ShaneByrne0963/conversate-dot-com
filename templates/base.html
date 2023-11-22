@@ -129,12 +129,11 @@
                         </a>
                         <!-- Collapsible side nav tags -->
                         <div id="side-nav-tags" class="list-group collapse">
-                            <a href="#" class="list-group-item list-group-item-action side-nav-btn pl-5" aria-current="true">
-                                The current link item
-                            </a>
-                            <a href="#" class="list-group-item list-group-item-action side-nav-btn pl-5">A second link item</a>
-                            <a href="#" class="list-group-item list-group-item-action side-nav-btn pl-5">A third link item</a>
-                            <a href="#" class="list-group-item list-group-item-action side-nav-btn pl-5">A fourth link item</a>
+                            {% for top_tag in top_tags %}
+                                <a href="#" class="list-group-item list-group-item-action side-nav-btn pl-5">
+                                    <em>{{ top_tag.name }}</em>
+                                </a>
+                            {% endfor %}
                         </div>
                         <!-- /.collapsible -->
                         <a class="list-group-item list-group-item-action side-nav-btn clickable">
