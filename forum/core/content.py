@@ -1,6 +1,32 @@
 from forum.models import Post, Profile
+from .tags import get_top_tags
+from .pagination import get_paginated_posts
 from django.contrib.auth.models import User
 from django.db.models import Count
+
+
+def get_base_context(request):
+    """
+    Builds the minimum context required for the base template to function
+    correctly.
+    """
+    return {
+        'top_tags': get_top_tags()
+    }
+
+
+def get_post_list_context(request, post_list):
+    """
+    Builds the minimum context required for the post_list template to function
+    """
+    context = get_base_context(request)
+
+    user_profile = get_profile(request.user)
+    sort_by_new = user_profile.sort_by_new
+    posts_sorted = sort_posts(post_list, sort_by_new)
+
+    context.update(get_paginated_posts(request, posts_sorted))
+    return context
 
 
 def get_profile(user_object):

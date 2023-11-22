@@ -4,7 +4,8 @@ from django.http import HttpResponseRedirect
 from django.db.models import Q
 from django.utils.text import slugify
 from .models import Post, Tag, Comment, SiteData
-from .core.content import get_profile, sort_posts
+from .core.content import get_profile, sort_posts, get_post_list_context, \
+                          get_base_context
 from .core.tags import get_top_tags, get_or_create_tag, update_tag
 from .core.slug import generate_slug
 from .core.pagination import get_paginated_posts
@@ -20,17 +21,14 @@ class ListPosts(View):
             return redirect('accounts/login')
 
         posts = Post.objects.all()
-        user_profile = get_profile(request.user)
-        sort_by_new = user_profile.sort_by_new
-        posts = sort_posts(posts, sort_by_new)
 
-        context = get_paginated_posts(request, posts)
-        if sort_by_new:
+        context = get_post_list_context(request, posts)
+        user_profile = get_profile(request.user)
+        if user_profile.sort_by_new:
             context['heading'] = "What's New"
         else:
             context['heading'] = "What's Trending"
         context['selected_tab'] = 'Home'
-        context['top_tags'] = get_top_tags()
 
         return render(
             request,
@@ -40,6 +38,7 @@ class ListPosts(View):
 
 
 class SortPosts(View):
+
     def get(self, request, by_new, current_dir):
         profile = get_profile(request.user)
         profile.sort_by_new = (by_new == 1)
@@ -62,11 +61,7 @@ class SearchPost(View):
         query = Q(Q(title__icontains=search_input) |
                   Q(content__icontains=search_input))
         posts = Post.objects.filter(query)
-        user_profile = get_profile(request.user)
-        sort_by_new = user_profile.sort_by_new
-        posts = sort_posts(posts, sort_by_new)
         number_of_results = len(list(posts))
-        top_tags = get_top_tags()
 
         # Constructing the heading
         heading = f'{number_of_results} Result'
@@ -75,10 +70,9 @@ class SearchPost(View):
         heading += f' for "{search_input}"'
 
         # Adding the extra details to the context
-        context = get_paginated_posts(request, posts)
+        context = get_post_list_context(request, posts)
         context['heading'] = heading
         context['selected_tab'] = 'Search'
-        context['top_tags'] = top_tags
         context['search_result'] = search_input
         # Converting the form inputs into a url to insert into pagination
         search_formatted = urllib.parse.quote_plus(search_input)
@@ -100,13 +94,10 @@ class TaggedPosts(View):
 
         tag = get_object_or_404(Tag, slug=tag_slug)
         posts = Post.objects.filter(tag=tag)
-        user_profile = get_profile(request.user)
-        posts = sort_posts(posts, user_profile.sort_by_new)
 
-        context = get_paginated_posts(request, posts)
+        context = get_post_list_context(request, posts)
         context['heading'] = f'Posts tagged with "{tag.name}"'
         context['selected_tab'] = 'Tags'
-        context['top_tags'] = get_top_tags()
 
         return render(
             request,
@@ -122,13 +113,10 @@ class MyPosts(View):
             return redirect('accounts/login')
 
         posts = Post.objects.filter(posted_by=request.user)
-        user_profile = get_profile(request.user)
-        posts = sort_posts(posts, user_profile.sort_by_new)
 
-        context = get_paginated_posts(request, posts)
+        context = get_post_list_context(request, posts)
         context['heading'] = f'Your Posts'
         context['selected_tab'] = 'My Posts'
-        context['top_tags'] = get_top_tags()
 
         return render(
             request,
@@ -143,7 +131,7 @@ class AddPost(View):
         # Redirects the user to the login page if not logged in
         if not request.user.is_authenticated:
             return redirect('accounts/login')
-        context = {}
+        context = get_base_context(request)
         return render(
             request,
             'new_post.html',
@@ -215,15 +203,16 @@ class EditPost(View):
 
 class ViewPost(View):
 
-    def get(self, request, slug, *args, **kwargs):
+    def get(self, request, slug):
         post = get_object_or_404(Post, slug=slug)
         comments = post.comments.order_by('-posted_on')
         liked = post.likes.filter(id=request.user.id).exists()
-        context = {
+        context = get_base_context(request)
+        context.update({
             'post': post,
             'comments': comments,
             'liked': liked
-        }
+        })
         return render(
             request,
             'post_details.html',
