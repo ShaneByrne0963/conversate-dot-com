@@ -86,30 +86,42 @@
                         <div class="row">
                             {% with request.path|add:"?"|add:request.GET.urlencode as current_path %}
                             <div class="col-6">
-                                {% if request.GET.urlencode %}
+                                {% if disable_sort %}
+                                    <div>
+                                {% elif request.GET.urlencode %}
                                     <a href="{% url 'sort_posts' 0 current_path %}" class="anchor-no-style">
                                 {% else %}
                                     <a href="{% url 'sort_posts' 0 request.path %}" class="anchor-no-style">
                                 {% endif %}
                                     <div class="btn btn-block side-nav-btn
-                                        {% if not user.profile.sort_by_new %} active{% endif %}">
+                                        {% if disable_sort %} disabled{% elif not user.profile.sort_by_new %} active{% endif %}">
                                         <i class="fa-solid fa-fire mr-lg-1"></i>
                                         Popular
                                     </div>
-                                </a>
+                                {% if disable_sort %}
+                                    </div>
+                                {% else %}
+                                    </a>
+                                {% endif %}
                             </div>
                             <div class="col-6">
-                                {% if request.GET.urlencode %}
+                                {% if disable_sort %}
+                                    <div>
+                                {% elif request.GET.urlencode %}
                                     <a href="{% url 'sort_posts' 1 current_path %}" class="anchor-no-style">
                                 {% else %}
                                     <a href="{% url 'sort_posts' 1 request.path %}" class="anchor-no-style">
                                 {% endif %}
                                     <div class="btn btn-block side-nav-btn
-                                        {% if user.profile.sort_by_new %} active{% endif %}">
+                                        {% if disable_sort %} disabled{% elif user.profile.sort_by_new %} active{% endif %}">
                                         <i class="fa-solid fa-clock mr-lg-1"></i>
                                         New
                                     </div>
-                                </a>
+                                {% if disable_sort %}
+                                    </div>
+                                {% else %}
+                                    </a>
+                                {% endif %}
                             </div>
                             {% endwith %}
                         </div>

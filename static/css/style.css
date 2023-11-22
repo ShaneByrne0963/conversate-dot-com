@@ -40,8 +40,12 @@ a:hover {
     color: #FA9C52;
 }
 
-.btn:hover {
+.btn:not(.disabled):hover {
     background-color: #FA9C52;
+}
+
+.btn.disabled:hover {
+    color: white;
 }
 
 .center-to-container {
@@ -129,7 +133,7 @@ a:hover {
     grid-template-rows: 1fr;
 }
 
-.side-nav-btn:hover {
+.side-nav-btn:not(.disabled):hover {
     background-color: #f75949;
     color: white;
     font-weight: bold;

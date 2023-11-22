@@ -11,7 +11,8 @@ def get_base_context(request):
     correctly.
     """
     return {
-        'top_tags': get_top_tags()
+        'top_tags': get_top_tags(),
+        'disable_sort': True
     }
 
 
@@ -26,6 +27,7 @@ def get_post_list_context(request, post_list):
     posts_sorted = sort_posts(post_list, sort_by_new)
 
     context.update(get_paginated_posts(request, posts_sorted))
+    context['disable_sort'] = False
     return context
 
 
