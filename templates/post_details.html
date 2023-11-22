@@ -7,7 +7,7 @@
 
 {% block content %}
     <h1>{{ post.title }}</h1>
-    <a class="btn btn-sm tag" href="#">{{ post.tag }}</a>
+    <a class="btn btn-sm tag" href="{% url 'tags' post.tag.slug %}">{{ post.tag }}</a>
     <span>{{ post.posted_by }}
         {% if post.edited %}
             <em>(Edited)</em>

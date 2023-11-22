@@ -34,7 +34,7 @@ class ListPosts(View):
 
         return render(
             request,
-            'index.html',
+            'post_list.html',
             context,
         )
 
@@ -87,7 +87,7 @@ class SearchPost(View):
 
         return render(
             request,
-            'index.html',
+            'post_list.html',
             context,
         )
 
@@ -110,7 +110,29 @@ class TaggedPosts(View):
 
         return render(
             request,
-            'index.html',
+            'post_list.html',
+            context,
+        )
+
+
+class MyPosts(View):
+    def get(self, request):
+        # Redirects the user to the login page if not logged in
+        if not request.user.is_authenticated:
+            return redirect('accounts/login')
+
+        posts = Post.objects.filter(posted_by=request.user)
+        user_profile = get_profile(request.user)
+        posts = sort_posts(posts, user_profile.sort_by_new)
+
+        context = get_paginated_posts(request, posts)
+        context['heading'] = f'Your Posts'
+        context['selected_tab'] = 'My Posts'
+        context['top_tags'] = get_top_tags()
+
+        return render(
+            request,
+            'post_list.html',
             context,
         )
 
