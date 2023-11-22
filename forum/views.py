@@ -93,18 +93,18 @@ class SearchPost(View):
 
 
 class TaggedPosts(View):
-    def get(self, request, tag_name):
+    def get(self, request, tag_slug):
         # Redirects the user to the login page if not logged in
         if not request.user.is_authenticated:
             return redirect('accounts/login')
 
-        tag = get_object_or_404(Tag, name=tag_name)
+        tag = get_object_or_404(Tag, slug=tag_slug)
         posts = Post.objects.filter(tag=tag)
         user_profile = get_profile(request.user)
         posts = sort_posts(posts, user_profile.sort_by_new)
 
         context = get_paginated_posts(request, posts)
-        context['heading'] = f'Posts tagged with "{tag_name}"'
+        context['heading'] = f'Posts tagged with "{tag.name}"'
         context['selected_tab'] = 'Tags'
         context['top_tags'] = get_top_tags()
 
