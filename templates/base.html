@@ -130,7 +130,7 @@
                         <!-- Collapsible side nav tags -->
                         <div id="side-nav-tags" class="list-group collapse">
                             {% for top_tag in top_tags %}
-                                <a href="#" class="list-group-item list-group-item-action
+                                <a href="{% url 'tags' top_tag.name|slugify %}" class="list-group-item list-group-item-action
                                     side-nav-btn pl-5 d-flex justify-content-between align-items-center">
                                     <em>{{ top_tag.name }}</em>
                                     <span class="badge badge-primary badge-pill">{{ top_tag.number_of_posts }}</span>

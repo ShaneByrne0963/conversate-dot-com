@@ -41,7 +41,7 @@ class CommentAdmin(SummernoteModelAdmin):
 @admin.register(Tag)
 class TagAdmin(SummernoteModelAdmin):
 
-    list_display = ('name', 'number_of_posts')
+    list_display = ('name', 'slug', 'number_of_posts')
 
 
 @admin.register(SiteData)

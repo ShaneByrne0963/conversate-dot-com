@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404, reverse
 from django.views import View
 from django.http import HttpResponseRedirect
 from django.db.models import Q
+from django.utils.text import slugify
 from .models import Post, Tag, Comment, SiteData
 from .core.content import get_profile, sort_posts
 from .core.tags import get_top_tags
@@ -22,7 +23,6 @@ class ListPosts(View):
         user_profile = get_profile(request.user)
         sort_by_new = user_profile.sort_by_new
         posts = sort_posts(posts, sort_by_new)
-        top_tags = get_top_tags()
 
         context = get_paginated_posts(request, posts)
         if sort_by_new:
@@ -30,7 +30,7 @@ class ListPosts(View):
         else:
             context['heading'] = "What's Trending"
         context['selected_tab'] = 'Home'
-        context['top_tags'] = top_tags
+        context['top_tags'] = get_top_tags()
 
         return render(
             request,
@@ -66,6 +66,7 @@ class SearchPost(View):
         sort_by_new = user_profile.sort_by_new
         posts = sort_posts(posts, sort_by_new)
         number_of_results = len(list(posts))
+        top_tags = get_top_tags()
 
         # Constructing the heading
         heading = f'{number_of_results} Result'
@@ -77,11 +78,35 @@ class SearchPost(View):
         context = get_paginated_posts(request, posts)
         context['heading'] = heading
         context['selected_tab'] = 'Search'
+        context['top_tags'] = top_tags
         context['search_result'] = search_input
         # Converting the form inputs into a url to insert into pagination
         search_formatted = urllib.parse.quote_plus(search_input)
         search_url = f'?search_query={search_formatted}'
         context['search_url'] = search_url
+
+        return render(
+            request,
+            'index.html',
+            context,
+        )
+
+
+class TaggedPosts(View):
+    def get(self, request, tag_name):
+        # Redirects the user to the login page if not logged in
+        if not request.user.is_authenticated:
+            return redirect('accounts/login')
+
+        tag = get_object_or_404(Tag, name=tag_name)
+        posts = Post.objects.filter(tag=tag)
+        user_profile = get_profile(request.user)
+        posts = sort_posts(posts, user_profile.sort_by_new)
+
+        context = get_paginated_posts(request, posts)
+        context['heading'] = f'Posts tagged with "{tag_name}"'
+        context['selected_tab'] = 'Tags'
+        context['top_tags'] = get_top_tags()
 
         return render(
             request,
@@ -113,7 +138,7 @@ class AddPost(View):
         existing_tag = list(Tag.objects.filter(name=tag))
         tag_object = None
         if len(existing_tag) == 0:
-            tag_object = Tag.objects.create(name=tag)
+            tag_object = Tag.objects.create(name=tag, slug=slugify(tag))
         else:
             tag_object = existing_tag[0]
 
