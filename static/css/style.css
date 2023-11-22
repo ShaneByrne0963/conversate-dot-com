@@ -125,7 +125,7 @@ a:hover {
 .side-nav>.list-group-item-action,
 .side-nav>.list-group-item-action:focus {
     display: grid;
-    grid-template-columns: auto 1fr auto;
+    grid-template-columns: 32px 1fr auto;
     grid-template-rows: 1fr;
 }
 
@@ -143,6 +143,10 @@ a:hover {
 /* Removing the extra thick border between "Tags" and "Your Posts" */
 #tag-collapse {
     border-bottom: none;
+}
+
+#side-nav-tags {
+    border-radius: 0;
 }
 
 /* ------------------------------------------------------Search Bar------------------------------------------------------ */

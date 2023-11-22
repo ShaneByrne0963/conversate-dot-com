@@ -19,7 +19,7 @@
     </title>
 </head>
 <body id="main-page">
-    <nav class="navbar navbar-expand-sm navbar-dark">
+    <header class="navbar navbar-expand-sm navbar-dark">
         <div>
             <a class="navbar-brand" href="{% url 'home' %}" aria-label="Go to the home page">
                 <i class="fa-solid fa-message"></i>
@@ -63,7 +63,7 @@
                     </li>
                 {% endif %}
             </ul>
-    </nav>
+        </header>
     <div>
         <div class="container-fluid">
             <div class="row">
@@ -118,12 +118,13 @@
                     <div class="list-group side-nav">
                         <a class="list-group-item list-group-item-action side-nav-btn {% if selected_tab == 'Home' %} active{% endif %}"
                             href="{% url 'home' %}">
-                            <i class="fa-solid fa-house mr-2 mr-lg-3 center-to-container"></i>Home
+                            <i class="fa-solid fa-house center-to-container"></i>
+                            <span class="d-inline-block ml-lg-2">Home</span>
                         </a>
                         <a id="tag-collapse" class="list-group-item list-group-item-action side-nav-btn clickable" data-toggle="collapse"
                             href="#side-nav-tags" role="button" aria-expanded="false" aria-controls="side-nav-tags">
-                            <i class="fa-solid fa-hashtag mr-2 mr-lg-3 center-to-container"></i>
-                            <div>Tags</div>
+                            <i class="fa-solid fa-hashtag center-to-container"></i>
+                            <div class="ml-lg-2">Tags</div>
                             <i class="fa-solid fa-caret-down center-to-container"></i>
                         </a>
                         <!-- Collapsible side nav tags -->
@@ -137,7 +138,8 @@
                         </div>
                         <!-- /.collapsible -->
                         <a class="list-group-item list-group-item-action side-nav-btn clickable">
-                            <i class="fa-solid fa-message mr-2 mr-lg-3 center-to-container"></i>Your Posts
+                            <i class="fa-solid fa-message center-to-container"></i>
+                            <span class="d-inline-block ml-lg-2">Your Posts</span>
                         </a>
                     </div>
                 </nav>

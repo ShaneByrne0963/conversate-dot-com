@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404, reverse
 from django.views import View
 from django.http import HttpResponseRedirect
-from django.db.models import Count, Q
+from django.db.models import Q
 from .models import Post, Tag, Comment, SiteData
 from .core.content import get_profile, sort_posts
 from .core.slug import generate_slug
