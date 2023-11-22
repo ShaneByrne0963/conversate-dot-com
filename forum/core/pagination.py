@@ -6,9 +6,10 @@ from forum.tests import test_instance, test_index
 # Must be an odd number to have the current page in the middle
 NUM_PAGES = 9
 POSTS_PER_PAGE = 20
+TAGS_PER_PAGE = 48
 
 
-def get_paginated_items(request, object_list, items_per_page=POSTS_PER_PAGE):
+def get_paginated_items(request, object_list, items_per_page):
     """
     Paginates a list of items from a model
     """

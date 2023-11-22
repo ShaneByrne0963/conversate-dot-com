@@ -35,20 +35,20 @@
 {% endfor %}
 
 <!-- Pagination -->
-{% if post_list.has_other_pages %}
+{% if item_list.has_other_pages %}
 
 <nav aria-label="Page navigation">
     <ul class="pagination justify-content-center">
-        {% if post_list.has_previous %}
+        {% if item_list.has_previous %}
             <li class="page-item">
                 {% if selected_tab == 'Search' %}
-                    <a class="page-link" href="{{ search_url }}&page={{ post_list.previous_page_number }}">&lt;&lt;</a>
+                    <a class="page-link" href="{{ search_url }}&page={{ item_list.previous_page_number }}">&lt;</a>
                 {% else %}
-                    <a class="page-link" href="?page={{ post_list.previous_page_number }}">&lt;&lt;</a>
+                    <a class="page-link" href="?page={{ item_list.previous_page_number }}">&lt;</a>
                 {% endif %}
         {% else %}
             <li class="page-item disabled">
-                <div class="page-link">&lt;&lt;</div>
+                <div class="page-link">&lt;</div>
         {% endif %}
         </li>
 
@@ -58,7 +58,7 @@
                     <span class="page-link pagination-gap b-none">...</span>
                 </li>
             {% endif %}
-            {% if page == post_list.number %}
+            {% if page == item_list.number %}
                 <li class="page-item active">
             {% else %}
                 <li class="page-item">
@@ -76,16 +76,16 @@
             {% endif %}
         {% endfor %}
 
-        {% if post_list.has_next %}
+        {% if item_list.has_next %}
             <li class="page-item">
                 {% if selected_tab == 'Search' %}
-                    <a class="page-link" href="{{ search_url }}&page={{ post_list.next_page_number }}">&gt;&gt;</a>
+                    <a class="page-link" href="{{ search_url }}&page={{ item_list.next_page_number }}">&gt;</a>
                 {% else %}
-                    <a class="page-link" href="?page={{ post_list.next_page_number }}">&gt;&gt;</a>
+                    <a class="page-link" href="?page={{ item_list.next_page_number }}">&gt;</a>
                 {% endif %}
         {% else %}
             <li class="page-item disabled">
-                <div class="page-link">&gt;&gt;</div>
+                <div class="page-link">&gt;</div>
         {% endif %}
         </li>
     </ul>

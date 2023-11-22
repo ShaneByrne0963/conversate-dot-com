@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+
+{% block title %}
+Browse Tags - Conversate
+{% endblock title %}
+
+{% block content %}
+
+<h1>All Tags:</h1>
+<hr>
+<div class="row">
+    {% for tag in item_list %}
+        <div class="col-sm-6 col-lg-3 mb-2">
+            <a class="btn btn-block d-flex align-items-center justify-content-between"
+                href="{% url 'tags' tag.slug %}">
+                <span>{{ tag.name }}</span>
+                <span>{{ tag.number_of_posts }}</span>
+            </a>
+        </div>
+    {% endfor %}
+</div>
+<!-- Pagination -->
+{% if item_list.has_other_pages %}
+
+<nav aria-label="Page navigation">
+    <ul class="pagination justify-content-center">
+        {% if item_list.has_previous %}
+        <li class="page-item">
+            {% if selected_tab == 'Search' %}
+            <a class="page-link" href="{{ search_url }}&page={{ item_list.previous_page_number }}">&lt;</a>
+            {% else %}
+            <a class="page-link" href="?page={{ item_list.previous_page_number }}">&lt;</a>
+            {% endif %}
+            {% else %}
+        <li class="page-item disabled">
+            <div class="page-link">&lt;</div>
+            {% endif %}
+        </li>
+
+        {% for page in page_range %}
+        {% if forloop.last and end_gap %}
+        <li class="page-item disabled">
+            <span class="page-link pagination-gap b-none">...</span>
+        </li>
+        {% endif %}
+        {% if page == item_list.number %}
+        <li class="page-item active">
+            {% else %}
+        <li class="page-item">
+            {% endif %}
+            {% if selected_tab == 'Search' %}
+            <a class="page-link" href="{{ search_url }}&page={{ page }}">{{ page }}</a>
+            {% else %}
+            <a class="page-link" href="?page={{ page }}">{{ page }}</a>
+            {% endif %}
+        </li>
+        {% if forloop.first and start_gap %}
+        <li class="page-item disabled">
+            <span class="page-link pagination-gap b-none">...</span>
+        </li>
+        {% endif %}
+        {% endfor %}
+
+        {% if item_list.has_next %}
+        <li class="page-item">
+            {% if selected_tab == 'Search' %}
+            <a class="page-link" href="{{ search_url }}&page={{ item_list.next_page_number }}">&gt;</a>
+            {% else %}
+            <a class="page-link" href="?page={{ item_list.next_page_number }}">&gt;</a>
+            {% endif %}
+            {% else %}
+        <li class="page-item disabled">
+            <div class="page-link">&gt;</div>
+            {% endif %}
+        </li>
+    </ul>
+</nav>
+{% endif %}
+
+{% endblock content %}

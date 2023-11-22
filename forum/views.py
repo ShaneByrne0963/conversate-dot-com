@@ -1,10 +1,12 @@
 from django.shortcuts import render, redirect, get_object_or_404, reverse
 from django.views import View
 from django.http import HttpResponseRedirect
-from django.db.models import Q
+from django.db.models import Q, Count
 from .models import Post, Tag, Comment, SiteData
-from .core.content import get_profile, get_post_list_context, get_base_context
+from .core.content import get_profile, get_post_list_context, \
+                          get_base_context, get_tag_list_context
 from .core.tags import get_or_create_tag, update_tag
+from .core.pagination import get_paginated_items
 from .core.slug import generate_slug
 from .core.posting import convert_post_content
 import urllib.parse
@@ -99,6 +101,26 @@ class TaggedPosts(View):
         return render(
             request,
             'post_list.html',
+            context,
+        )
+
+
+class BrowseTags(View):
+
+    def get(self, request):
+        # Redirects the user to the login page if not logged in
+        if not request.user.is_authenticated:
+            return redirect('accounts/login')
+
+        tags = Tag.objects.annotate(num_posts=Count('tagged_posts')) \
+                          .order_by('-num_posts')
+
+        context = get_tag_list_context(request, tags)
+        context['selected_tab'] = 'Browse Tags'
+
+        return render(
+            request,
+            'tag_list.html',
             context,
         )
 
