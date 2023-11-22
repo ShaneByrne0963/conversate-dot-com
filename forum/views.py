@@ -5,7 +5,7 @@ from django.db.models import Q
 from django.utils.text import slugify
 from .models import Post, Tag, Comment, SiteData
 from .core.content import get_profile, sort_posts
-from .core.tags import get_top_tags
+from .core.tags import get_top_tags, get_or_create_tag, update_tag
 from .core.slug import generate_slug
 from .core.pagination import get_paginated_posts
 from .core.posting import convert_post_content
@@ -135,12 +135,7 @@ class AddPost(View):
         content = convert_post_content(content)
 
         # Add the tag to the database if the tag doesn't already exist
-        existing_tag = list(Tag.objects.filter(name=tag))
-        tag_object = None
-        if len(existing_tag) == 0:
-            tag_object = Tag.objects.create(name=tag, slug=slugify(tag))
-        else:
-            tag_object = existing_tag[0]
+        tag_object = get_or_create_tag(tag)
 
         # Generating the slug for the post
         site_data = get_object_or_404(SiteData)
@@ -187,15 +182,10 @@ class EditPost(View):
         post.edited = True
         post.approved = False
 
-        if post.tag.name != tag:
-            # Add the tag to the database if the tag doesn't already exist
-            existing_tag = list(Tag.objects.filter(name=tag))
-            tag_object = None
-            if len(existing_tag) == 0:
-                tag_object = Tag.objects.create(name=tag)
-            else:
-                tag_object = existing_tag[0]
-            post.tag = tag_object
+        previous_tag = post.tag
+        if previous_tag.name != tag:
+            post.tag = get_or_create_tag(tag)
+            update_tag(previous_tag)
 
         post.save()
         return HttpResponseRedirect(reverse('view_post', args=[slug]))
@@ -235,7 +225,9 @@ class DeletePost(View):
 
     def get(self, request, slug):
         post = get_object_or_404(Post, slug=slug)
+        tag = post.tag
         post.delete()
+        update_tag(tag)
         return redirect('home')
 
 
