@@ -8,7 +8,7 @@
 
 <h1>{{ heading }}:</h1>
 <hr>
-{% for post in post_list %}
+{% for post in item_list %}
     <div class="row post">
         <div class="post-title col-12">
             <a href="{% url 'tags' post.tag.slug %}" class="btn btn-sm tag align-middle">{{ post.tag }}</a>

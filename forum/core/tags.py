@@ -5,16 +5,20 @@ from django.shortcuts import get_object_or_404
 
 
 # The maximum amount of tags that can be displayed in the side navigation
-TAG_COLLAPSIBLE_LIMIT = 10
+TAG_COLLAPSIBLE_LIMIT = 1
 
 
 def get_top_tags(limit=TAG_COLLAPSIBLE_LIMIT):
     """
-    Gets a set number of tags, sorted by the most number of posts with this tag
+    Gets a set number of tags, sorted by the most number of posts with this
+    tag, as well as a boolean for if there are more tags available
     """
     tags = list(Tag.objects.annotate(num_posts=Count('tagged_posts'))
                 .order_by('-num_posts'))
-    return tags[:limit]
+    return {
+        'top_tags': tags[:limit],
+        'has_more_tags': (len(tags) > limit)
+    }
 
 
 def get_or_create_tag(tag_name):

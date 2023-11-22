@@ -128,12 +128,13 @@
                     </div>
                     <!-- Post navigation -->
                     <div class="list-group side-nav">
-                        <a class="list-group-item list-group-item-action side-nav-btn {% if selected_tab == 'Home' %} active{% endif %}"
-                            href="{% url 'home' %}">
+                        <a class="list-group-item list-group-item-action side-nav-btn
+                            {% if selected_tab == 'Home' %} active{% endif %}" href="{% url 'home' %}">
                             <i class="fa-solid fa-house center-to-container"></i>
                             <span class="d-inline-block ml-lg-2">Home</span>
                         </a>
-                        <a id="tag-collapse" class="list-group-item list-group-item-action side-nav-btn clickable" data-toggle="collapse"
+                        <a id="tag-collapse" class="list-group-item list-group-item-action side-nav-btn clickable
+                            {% if 'Tags' in selected_tab %} active{% endif %}" data-toggle="collapse"
                             href="#side-nav-tags" role="button" aria-expanded="false" aria-controls="side-nav-tags">
                             <i class="fa-solid fa-hashtag center-to-container"></i>
                             <div class="ml-lg-2">Tags</div>
@@ -143,11 +144,21 @@
                         <div id="side-nav-tags" class="list-group collapse">
                             {% for top_tag in top_tags %}
                                 <a href="{% url 'tags' top_tag.slug %}" class="list-group-item list-group-item-action
-                                    side-nav-btn pl-5 d-flex justify-content-between align-items-center">
+                                    side-nav-btn pl-5 d-flex justify-content-between align-items-center
+                                    {% if selected_tab == 'Tags/'|add:top_tag.name %} active{% endif %}">
                                     <em>{{ top_tag.name }}</em>
                                     <span class="badge badge-primary badge-pill">{{ top_tag.number_of_posts }}</span>
                                 </a>
                             {% endfor %}
+                            <!-- Browse tags anchor -->
+                            {% if has_more_tags %}
+                                <a class="list-group-item list-group-item-action side-nav-btn
+                                    {% if selected_tab == 'Browse Tags' %} active{% endif %}"
+                                    href="{% url 'home' %}">
+                                    <i class="fa-solid fa-earth-americas center-to-container"></i>
+                                    <span class="d-inline-block ml-lg-2">Browse More Tags...</span>
+                                </a>
+                            {% endif %}
                         </div>
                         <!-- /.collapsible -->
                         <a class="list-group-item list-group-item-action side-nav-btn clickable"

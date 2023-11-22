@@ -2,13 +2,10 @@ from django.shortcuts import render, redirect, get_object_or_404, reverse
 from django.views import View
 from django.http import HttpResponseRedirect
 from django.db.models import Q
-from django.utils.text import slugify
 from .models import Post, Tag, Comment, SiteData
-from .core.content import get_profile, sort_posts, get_post_list_context, \
-                          get_base_context
-from .core.tags import get_top_tags, get_or_create_tag, update_tag
+from .core.content import get_profile, get_post_list_context, get_base_context
+from .core.tags import get_or_create_tag, update_tag
 from .core.slug import generate_slug
-from .core.pagination import get_paginated_posts
 from .core.posting import convert_post_content
 import urllib.parse
 
@@ -97,7 +94,7 @@ class TaggedPosts(View):
 
         context = get_post_list_context(request, posts)
         context['heading'] = f'Posts tagged with "{tag.name}"'
-        context['selected_tab'] = 'Tags'
+        context['selected_tab'] = f'Tags/{tag.name}'
 
         return render(
             request,

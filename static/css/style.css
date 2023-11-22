@@ -126,8 +126,7 @@ a:hover {
 }
 
 /* Adds space for icons in the side nav */
-.side-nav>.list-group-item-action,
-.side-nav>.list-group-item-action:focus {
+.list-group-item-action {
     display: grid;
     grid-template-columns: 32px 1fr auto;
     grid-template-rows: 1fr;

@@ -8,16 +8,16 @@ NUM_PAGES = 9
 POSTS_PER_PAGE = 20
 
 
-def get_paginated_posts(request, post_list):
+def get_paginated_items(request, object_list, items_per_page=POSTS_PER_PAGE):
     """
-    Paginates a list of posts
+    Paginates a list of items from a model
     """
-    p = Paginator(post_list, POSTS_PER_PAGE)
+    p = Paginator(object_list, items_per_page)
     page = request.GET.get('page')
-    current_posts = p.get_page(page)
+    current_items = p.get_page(page)
 
     pagination_context = {
-        'post_list': current_posts,
+        'item_list': current_items,
         'page': page
     }
 
