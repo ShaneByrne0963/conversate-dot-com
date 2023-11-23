@@ -1,5 +1,5 @@
 import unittest
-from slug import generate_slug, generate_character_set, get_character
+from .slug import generate_slug, generate_character_set, get_character
 
 
 class TestSlug(unittest.TestCase):

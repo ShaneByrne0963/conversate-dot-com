@@ -46,7 +46,7 @@
             </a>
             <!-- Buttons specifically for user-owned posts -->
             {% if user == post.posted_by %}
-                <a class="btn py-0 line-separate" href="{% url 'edit_post' post.slug %}" aria-label="Edit this post">
+                <a class="btn py-0 line-separate" href="{% url 'edit_post' post.id %}" aria-label="Edit this post">
                     <i class="fa-solid fa-pen"></i>
                     Edit
                 </a>

@@ -17,7 +17,7 @@ class ListPosts(View):
     def get(self, request):
         # Redirects the user to the login page if not logged in
         if not request.user.is_authenticated:
-            return redirect('accounts/login')
+            return redirect('/accounts/login')
 
         posts = Post.objects.all()
 
@@ -50,7 +50,7 @@ class SearchPost(View):
     def get(self, request):
         # Redirects the user to the login page if not logged in
         if not request.user.is_authenticated:
-            return redirect('accounts/login')
+            return redirect('/accounts/login')
 
         # Redirects the user to the home page if no search query is given
         if 'search_query' not in request.GET:
@@ -89,7 +89,7 @@ class TaggedPosts(View):
     def get(self, request, tag_slug):
         # Redirects the user to the login page if not logged in
         if not request.user.is_authenticated:
-            return redirect('accounts/login')
+            return redirect('/accounts/login')
 
         tag = get_object_or_404(Tag, slug=tag_slug)
         posts = Post.objects.filter(tag=tag)
@@ -110,7 +110,7 @@ class BrowseTags(View):
     def get(self, request):
         # Redirects the user to the login page if not logged in
         if not request.user.is_authenticated:
-            return redirect('accounts/login')
+            return redirect('/accounts/login')
 
         tags = Tag.objects.annotate(num_posts=Count('tagged_posts')) \
                           .order_by('-num_posts')
@@ -129,7 +129,7 @@ class MyPosts(View):
     def get(self, request):
         # Redirects the user to the login page if not logged in
         if not request.user.is_authenticated:
-            return redirect('accounts/login')
+            return redirect('/accounts/login')
 
         posts = Post.objects.filter(posted_by=request.user)
 
@@ -149,7 +149,7 @@ class AddPost(View):
     def get(self, request):
         # Redirects the user to the login page if not logged in
         if not request.user.is_authenticated:
-            return redirect('accounts/login')
+            return redirect('/accounts/login')
         context = get_base_context(request)
         return render(
             request,
@@ -186,11 +186,14 @@ class AddPost(View):
 
 class EditPost(View):
 
-    def get(self, request, slug):
+    def get(self, request, id):
         # Redirects the user to the login page if not logged in
         if not request.user.is_authenticated:
-            return redirect('accounts/login')
-        post = get_object_or_404(Post, slug=slug)
+            return redirect('/accounts/login')
+        post = get_object_or_404(Post, id=id)
+        if post.posted_by != request.user:
+            print('This post does not belong to you!')
+            return HttpResponseRedirect(reverse('view_post', args=[post.slug]))
         context = {
             'post': post
         }
@@ -200,11 +203,11 @@ class EditPost(View):
             context,
         )
 
-    def post(self, request, slug):
+    def post(self, request, id):
         title = request.POST.get('title')
         content = request.POST.get('content')
         tag = request.POST.get('tag')
-        post = get_object_or_404(Post, slug=slug)
+        post = get_object_or_404(Post, id=id)
 
         post.title = title
         post.content = content
@@ -217,7 +220,7 @@ class EditPost(View):
             update_tag(previous_tag)
 
         post.save()
-        return HttpResponseRedirect(reverse('view_post', args=[slug]))
+        return HttpResponseRedirect(reverse('view_post', args=[post.slug]))
 
 
 class ViewPost(View):

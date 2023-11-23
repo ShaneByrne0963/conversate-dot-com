@@ -5,7 +5,7 @@ from django.shortcuts import get_object_or_404
 
 
 # The maximum amount of tags that can be displayed in the side navigation
-TAG_COLLAPSIBLE_LIMIT = 10
+TAG_COLLAPSIBLE_LIMIT = 1
 
 
 def get_top_tags(limit=TAG_COLLAPSIBLE_LIMIT):

@@ -12,7 +12,7 @@ urlpatterns = [
     path('tags/browse', views.BrowseTags.as_view(), name='browse_tags'),
     path('my-posts', views.MyPosts.as_view(), name='my_posts'),
     path('new-post', views.AddPost.as_view(), name='new_post'),
-    path('edit/<slug:slug>', views.EditPost.as_view(), name='edit_post'),
+    path('edit/<int:id>', views.EditPost.as_view(), name='edit_post'),
     path('like/<slug:slug>', views.LikePost.as_view(), name='like_post'),
     path('delete/<slug:slug>', views.DeletePost.as_view(), name='delete_post'),
     path('comment/<slug:slug>', views.SendComment.as_view(),
