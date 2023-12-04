@@ -36,14 +36,15 @@ class Category(models.Model):
 
 
 class Post(models.Model):
-    title = models.CharField(max_length=200)
-    slug = models.SlugField(max_length=200, unique=True)
+    title = models.CharField(max_length=100)
+    slug = models.SlugField(max_length=100, unique=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE,
                                  related_name='tagged_posts')
     posted_by = models.ForeignKey(User, on_delete=models.CASCADE,
                                   related_name='added_posts')
     posted_on = models.DateTimeField(auto_now_add=True)
     content = models.TextField()
+    tags = models.CharField(max_length=200, blank=True)
     edited = models.BooleanField(default=False)
     likes = models.ManyToManyField(User, related_name='post_likes', blank=True)
     approved = models.BooleanField(default=False)
