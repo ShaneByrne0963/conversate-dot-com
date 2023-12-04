@@ -26,6 +26,7 @@ class Profile(models.Model):
 class Category(models.Model):
     name = models.CharField(max_length=30, unique=True)
     slug = models.SlugField(max_length=30, unique=True)
+    icon = models.CharField(max_length=30, default="fa-tag")
 
     def __str__(self):
         return self.name

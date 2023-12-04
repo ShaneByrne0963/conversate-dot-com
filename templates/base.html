@@ -144,10 +144,14 @@
                         <div id="side-nav-categories" class="list-group collapse">
                             {% for top_category in top_categories %}
                                 <a href="{% url 'categories' top_category.slug %}" class="list-group-item list-group-item-action
-                                    side-nav-btn pl-5 d-flex justify-content-between align-items-center
-                                    {% if selected_tab == 'Category/'|add:top_category.name %} active{% endif %}">
-                                    <em>{{ top_category.name }}</em>
-                                    <span class="badge badge-primary badge-pill">{{ top_category.number_of_posts }}</span>
+                                    side-nav-btn{% if selected_tab == 'Category/'|add:top_category.name %} active{% endif %} pl-lg-5">
+                                    <i class="fa-solid {{ top_category.icon }} center-to-container"></i>
+                                    <div class="ml-lg-2">
+                                        <em>{{ top_category.name }}</em>
+                                    </div>
+                                    <span class="badge badge-primary badge-pill center-to-container">
+                                        {{ top_category.number_of_posts }}
+                                    </span>
                                 </a>
                             {% endfor %}
                             <!-- Browse categories anchor -->
