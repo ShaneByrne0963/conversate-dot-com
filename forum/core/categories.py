@@ -14,12 +14,14 @@ def get_top_categories(limit=CATEGORY_COLLAPSIBLE_LIMIT):
     """
     categories = list(Category.objects.annotate(num_posts=Count('tagged_posts'))
                       .order_by('-num_posts'))
+    num_categories = len(categories)
 
     # Preventing "No Category" from showing up on the list
     category_none = Category.objects.get(slug='none')
     categories.remove(category_none)
 
     return {
+        'num_categories': num_categories,
         'top_categories': categories[:limit],
         'has_more_categories': (len(categories) > limit)
     }
