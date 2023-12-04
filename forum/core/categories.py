@@ -12,13 +12,16 @@ def get_top_categories(limit=CATEGORY_COLLAPSIBLE_LIMIT):
     this category, as well as a boolean for if there are more categories
     available
     """
-    categories = list(Category.objects.annotate(num_posts=Count('tagged_posts'))
+    categories = list(Category.objects
+                      .annotate(num_posts=Count('tagged_posts'))
+                      .filter(num_posts__gt=0)
                       .order_by('-num_posts'))
     num_categories = len(categories)
 
     # Preventing "No Category" from showing up on the list
     category_none = Category.objects.get(slug='none')
-    categories.remove(category_none)
+    if category_none in categories:
+        categories.remove(category_none)
 
     return {
         'num_categories': num_categories,
