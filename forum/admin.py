@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Profile, Post, Comment, Tag, SiteData
+from .models import Profile, Post, Comment, Category, SiteData
 from django_summernote.admin import SummernoteModelAdmin
 
 
@@ -13,15 +13,15 @@ class ProfileAdmin(SummernoteModelAdmin):
 class PostAdmin(SummernoteModelAdmin):
 
     prepopulated_fields = {'slug': ('title',)}
-    list_filter = ('posted_on', 'tag')
+    list_filter = ('posted_on', 'category')
     list_display = (
         'title',
-        'tag',
+        'category',
         'posted_by',
         'posted_on',
         'number_of_likes'
     )
-    search_fields = ('title', 'tag', 'posted_by')
+    search_fields = ('title', 'category', 'posted_by')
     summernote_fields = ('content')
 
 
@@ -38,8 +38,8 @@ class CommentAdmin(SummernoteModelAdmin):
     )
 
 
-@admin.register(Tag)
-class TagAdmin(SummernoteModelAdmin):
+@admin.register(Category)
+class CategoryAdmin(SummernoteModelAdmin):
 
     list_display = ('name', 'slug', 'number_of_posts')
 

@@ -23,7 +23,7 @@ class Profile(models.Model):
         return self.user.username
 
 
-class Tag(models.Model):
+class Category(models.Model):
     name = models.CharField(max_length=30, unique=True)
     slug = models.SlugField(max_length=30, unique=True)
 
@@ -37,8 +37,8 @@ class Tag(models.Model):
 class Post(models.Model):
     title = models.CharField(max_length=200)
     slug = models.SlugField(max_length=200, unique=True)
-    tag = models.ForeignKey(Tag, on_delete=models.CASCADE,
-                            related_name='tagged_posts')
+    category = models.ForeignKey(Category, on_delete=models.CASCADE,
+                                 related_name='tagged_posts')
     posted_by = models.ForeignKey(User, on_delete=models.CASCADE,
                                   related_name='added_posts')
     posted_on = models.DateTimeField(auto_now_add=True)

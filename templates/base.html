@@ -133,30 +133,30 @@
                             <i class="fa-solid fa-house center-to-container"></i>
                             <span class="d-inline-block ml-lg-2">Home</span>
                         </a>
-                        <a id="tag-collapse" class="list-group-item list-group-item-action side-nav-btn clickable
-                            {% if 'Tags' in selected_tab %} active{% endif %}" data-toggle="collapse"
-                            href="#side-nav-tags" role="button" aria-expanded="false" aria-controls="side-nav-tags">
-                            <i class="fa-solid fa-hashtag center-to-container"></i>
-                            <div class="ml-lg-2">Tags</div>
+                        <a id="category-collapse" class="list-group-item list-group-item-action side-nav-btn clickable
+                            {% if 'Categories' in selected_tab %} active{% endif %}" data-toggle="collapse"
+                            href="#side-nav-categories" role="button" aria-expanded="false" aria-controls="side-nav-categories">
+                            <i class="fa-solid fa-list center-to-container"></i>
+                            <div class="ml-lg-2">Categories</div>
                             <i class="fa-solid fa-caret-down center-to-container"></i>
                         </a>
-                        <!-- Collapsible side nav tags -->
-                        <div id="side-nav-tags" class="list-group collapse">
-                            {% for top_tag in top_tags %}
-                                <a href="{% url 'tags' top_tag.slug %}" class="list-group-item list-group-item-action
+                        <!-- Collapsible side nav categories -->
+                        <div id="side-nav-categories" class="list-group collapse">
+                            {% for top_category in top_categories %}
+                                <a href="{% url 'categories' top_category.slug %}" class="list-group-item list-group-item-action
                                     side-nav-btn pl-5 d-flex justify-content-between align-items-center
-                                    {% if selected_tab == 'Tags/'|add:top_tag.name %} active{% endif %}">
-                                    <em>{{ top_tag.name }}</em>
-                                    <span class="badge badge-primary badge-pill">{{ top_tag.number_of_posts }}</span>
+                                    {% if selected_tab == 'Category/'|add:top_category.name %} active{% endif %}">
+                                    <em>{{ top_category.name }}</em>
+                                    <span class="badge badge-primary badge-pill">{{ top_category.number_of_posts }}</span>
                                 </a>
                             {% endfor %}
-                            <!-- Browse tags anchor -->
-                            {% if has_more_tags %}
+                            <!-- Browse categories anchor -->
+                            {% if has_more_categories %}
                                 <a class="list-group-item list-group-item-action side-nav-btn
-                                    {% if selected_tab == 'Browse Tags' %} active{% endif %}"
-                                    href="{% url 'browse_tags' %}">
+                                    {% if selected_tab == 'Browse Categories' %} active{% endif %}"
+                                    href="{% url 'browse_categories' %}">
                                     <i class="fa-solid fa-earth-americas center-to-container"></i>
-                                    <span class="d-inline-block ml-lg-2">Browse More Tags...</span>
+                                    <span class="d-inline-block ml-lg-2">Browse All Categories...</span>
                                 </a>
                             {% endif %}
                         </div>

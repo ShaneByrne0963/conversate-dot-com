@@ -143,12 +143,12 @@ a:hover {
     border: 1px solid rgba(0, 0, 0, 0.25);
 }
 
-/* Removing the extra thick border between "Tags" and "Your Posts" */
-#tag-collapse {
+/* Removing the extra thick border between "Categories" and "Your Posts" */
+#category-collapse {
     border-bottom: none;
 }
 
-#side-nav-tags {
+#side-nav-categories {
     border-radius: 0;
 }
 
@@ -242,7 +242,7 @@ a:hover {
     background-color: #FFEFD4;
 }
 
-.tag {
+.category {
     background-color: #FA7336;
     color: white;
 }

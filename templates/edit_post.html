@@ -22,7 +22,7 @@ Edit Post - Conversate
     <div class="form-group">
         <label for="tag">Tag</label>
         <input type="text" class="form-control" id="tag" name="tag"
-            maxlength="30" value="{{ post.tag }}" required>
+            maxlength="30" value="{{ post.category }}" required>
     </div>
     <button type="submit" class="btn form-button btn-primary">Save</button>
     <a href="{% url 'view_post' post.slug %}" class="btn form-button btn-primary">Cancel</a>

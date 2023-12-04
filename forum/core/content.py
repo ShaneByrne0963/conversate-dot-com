@@ -1,6 +1,7 @@
 from forum.models import Post, Profile
-from .tags import get_top_tags
-from .pagination import get_paginated_items, POSTS_PER_PAGE, TAGS_PER_PAGE
+from .categories import get_top_categories
+from .pagination import get_paginated_items, POSTS_PER_PAGE, \
+                        CATEGORIES_PER_PAGE
 from django.contrib.auth.models import User
 from django.db.models import Count
 
@@ -10,7 +11,7 @@ def get_base_context(request):
     Builds the minimum context required for the base template to function
     correctly.
     """
-    context = get_top_tags()
+    context = get_top_categories()
     context['disable_sort'] = True
     return context
 
@@ -30,13 +31,15 @@ def get_post_list_context(request, post_list):
     return context
 
 
-def get_tag_list_context(request, tag_list):
+def get_category_list_context(request, category_list):
     """
-    Builds the minimum context required for the tag_list template to function
+    Builds the minimum context required for the category_list
+    template to function
     """
     context = get_base_context(request)
-    context['item_list'] = tag_list
-    context.update(get_paginated_items(request, tag_list, TAGS_PER_PAGE))
+    context['item_list'] = category_list
+    context.update(get_paginated_items(request, category_list,
+                                       CATEGORIES_PER_PAGE))
     return context
 
 

@@ -11,7 +11,7 @@
 {% for post in item_list %}
     <div class="row post">
         <div class="post-title col-12">
-            <a href="{% url 'tags' post.tag.slug %}" class="btn btn-sm tag align-middle">{{ post.tag }}</a>
+            <a href="{% url 'categories' post.category.slug %}" class="btn btn-sm category align-middle">{{ post.category }}</a>
             <a href="{% url 'view_post' post.slug %}" class="anchor-no-style">
                 <h2 class="d-inline-block align-middle">{{ post.title }}</h2>
             </a>

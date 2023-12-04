@@ -1,20 +1,20 @@
 {% extends "base.html" %}
 
 {% block title %}
-Browse Tags - Conversate
+Browse Categories - Conversate
 {% endblock title %}
 
 {% block content %}
 
-<h1>All Tags:</h1>
+<h1>All Categories:</h1>
 <hr>
 <div class="row">
-    {% for tag in item_list %}
+    {% for category in item_list %}
         <div class="col-sm-6 col-lg-3 mb-2">
             <a class="btn btn-block d-flex align-items-center justify-content-between"
-                href="{% url 'tags' tag.slug %}">
-                <span>{{ tag.name }}</span>
-                <span>{{ tag.number_of_posts }}</span>
+                href="{% url 'categories' category.slug %}">
+                <span>{{ category.name }}</span>
+                <span>{{ category.number_of_posts }}</span>
             </a>
         </div>
     {% endfor %}

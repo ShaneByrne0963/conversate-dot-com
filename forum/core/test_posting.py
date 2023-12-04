@@ -1,5 +1,5 @@
 import unittest
-from posting import convert_post_content
+from .posting import convert_post_content
 
 
 class TestPosting(unittest.TestCase):

@@ -2,10 +2,9 @@ from django.shortcuts import render, redirect, get_object_or_404, reverse
 from django.views import View
 from django.http import HttpResponseRedirect
 from django.db.models import Q, Count
-from .models import Post, Tag, Comment, SiteData
+from .models import Post, Category, Comment, SiteData
 from .core.content import get_profile, get_post_list_context, \
-                          get_base_context, get_tag_list_context
-from .core.tags import get_or_create_tag, update_tag
+                          get_base_context, get_category_list_context
 from .core.pagination import get_paginated_items
 from .core.slug import generate_slug
 from .core.posting import convert_post_content
@@ -85,18 +84,18 @@ class SearchPost(View):
         )
 
 
-class TaggedPosts(View):
-    def get(self, request, tag_slug):
+class CategorisedPosts(View):
+    def get(self, request, category_slug):
         # Redirects the user to the login page if not logged in
         if not request.user.is_authenticated:
             return redirect('/accounts/login')
 
-        tag = get_object_or_404(Tag, slug=tag_slug)
-        posts = Post.objects.filter(tag=tag)
+        category = get_object_or_404(Category, slug=category_slug)
+        posts = Post.objects.filter(category=category)
 
         context = get_post_list_context(request, posts)
-        context['heading'] = f'Posts tagged with "{tag.name}"'
-        context['selected_tab'] = f'Tags/{tag.name}'
+        context['heading'] = f'Posts in "{category.name}"'
+        context['selected_tab'] = f'Category/{category.name}'
 
         return render(
             request,
@@ -105,22 +104,23 @@ class TaggedPosts(View):
         )
 
 
-class BrowseTags(View):
+class BrowseCategories(View):
 
     def get(self, request):
         # Redirects the user to the login page if not logged in
         if not request.user.is_authenticated:
             return redirect('/accounts/login')
 
-        tags = Tag.objects.annotate(num_posts=Count('tagged_posts')) \
-                          .order_by('-num_posts')
+        categories = Category.objects \
+                             .annotate(num_posts=Count('tagged_posts')) \
+                             .order_by('-num_posts')
 
-        context = get_tag_list_context(request, tags)
-        context['selected_tab'] = 'Browse Tags'
+        context = get_category_list_context(request, categories)
+        context['selected_tab'] = 'Browse Categories'
 
         return render(
             request,
-            'tag_list.html',
+            'category_list.html',
             context,
         )
 
@@ -159,17 +159,15 @@ class AddPost(View):
 
     def post(self, request):
         title = request.POST.get('title')
-        tag = request.POST.get('tag')
+        category = request.POST.get('category')
         content = request.POST.get('content')
         content = convert_post_content(content)
-
-        # Add the tag to the database if the tag doesn't already exist
-        tag_object = get_or_create_tag(tag)
+        category_object = Category.objects.get(name=category)
 
         # Generating the slug for the post
         site_data = get_object_or_404(SiteData)
         total_posts = site_data.total_posts_created
-        post_slug = generate_slug(title, tag, total_posts)
+        post_slug = generate_slug(title, category, total_posts)
         total_posts += 1
         site_data.total_posts_created = total_posts
         site_data.save()
@@ -178,7 +176,7 @@ class AddPost(View):
             title=title,
             slug=post_slug,
             content=content,
-            tag=tag_object,
+            category=category_object,
             posted_by=request.user
         )
         return redirect('home')
@@ -191,8 +189,9 @@ class EditPost(View):
         if not request.user.is_authenticated:
             return redirect('/accounts/login')
         post = get_object_or_404(Post, id=id)
+
+        # Preventing users that do not own the post from being able to edit it
         if post.posted_by != request.user:
-            print('This post does not belong to you!')
             return HttpResponseRedirect(reverse('view_post', args=[post.slug]))
         context = {
             'post': post
@@ -206,18 +205,14 @@ class EditPost(View):
     def post(self, request, id):
         title = request.POST.get('title')
         content = request.POST.get('content')
-        tag = request.POST.get('tag')
+        category = request.POST.get('category')
         post = get_object_or_404(Post, id=id)
 
         post.title = title
         post.content = content
         post.edited = True
         post.approved = False
-
-        previous_tag = post.tag
-        if previous_tag.name != tag:
-            post.tag = get_or_create_tag(tag)
-            update_tag(previous_tag)
+        post.category = Category.objects.get(name=category)
 
         post.save()
         return HttpResponseRedirect(reverse('view_post', args=[post.slug]))
@@ -258,9 +253,7 @@ class DeletePost(View):
 
     def get(self, request, slug):
         post = get_object_or_404(Post, slug=slug)
-        tag = post.tag
         post.delete()
-        update_tag(tag)
         return redirect('home')
 
 
