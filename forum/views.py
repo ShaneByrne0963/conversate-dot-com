@@ -195,9 +195,11 @@ class EditPost(View):
         # Preventing users that do not own the post from being able to edit it
         if post.posted_by != request.user:
             return HttpResponseRedirect(reverse('view_post', args=[post.slug]))
-        context = {
-            'post': post
-        }
+
+        context = get_base_context(request)
+        context['post'] = post
+        categories = Category.objects.all()
+        context['category_list'] = categories
         return render(
             request,
             'edit_post.html',
