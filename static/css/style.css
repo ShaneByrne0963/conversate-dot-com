@@ -274,3 +274,8 @@ a:hover {
     display: grid;
     grid-template-columns: 1fr auto;
 }
+
+.tag-list-item {
+    display: inline-block;
+    background-color: #FFEFD4;
+}

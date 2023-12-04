@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block title %}
 Edit Post - Conversate
@@ -46,3 +47,7 @@ Edit Post - Conversate
 </form>
 
 {% endblock content %}
+
+{% block scripts %}
+    <script src="{% static 'js/posting.js' %}"></script>
+{% endblock scripts %}
