@@ -19,8 +19,12 @@ New Post - Conversate
         <textarea class="form-control" id="content" name="content" rows="6" required></textarea>
     </div>
     <div class="form-group">
-        <label for="tag">Tag</label>
-        <input type="text" class="form-control" id="tag" name="tag" maxlength="30" required>
+        <label for="category">Category</label>
+        <select id="category" list="category" name="category" class="form-control" required>
+            {% for category in category_list %}
+                <option value="{{ category.name }}">{{ category.name }}</option>
+            {% endfor %}
+        </select>
     </div>
     <button type="submit" class="btn form-button btn-primary">Post</button>
     <button type="reset" class="btn form-button btn-primary">Clear</button>

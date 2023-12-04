@@ -151,6 +151,8 @@ class AddPost(View):
         if not request.user.is_authenticated:
             return redirect('/accounts/login')
         context = get_base_context(request)
+        categories = Category.objects.all()
+        context['category_list'] = categories
         return render(
             request,
             'new_post.html',
