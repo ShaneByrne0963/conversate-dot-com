@@ -15,16 +15,28 @@ New Post - Conversate
         <input type="text" class="form-control" id="title" name="title" maxlength="100" required>
     </div>
     <div class="form-group">
-        <label for="content">Text</label>
-        <textarea class="form-control" id="content" name="content" rows="6" required></textarea>
-    </div>
-    <div class="form-group">
         <label for="category">Category</label>
         <select id="category" list="category" name="category" class="form-control" required>
             {% for category in category_list %}
                 <option value="{{ category.name }}">{{ category.name }}</option>
             {% endfor %}
         </select>
+    </div>
+    <div class="form-group">
+        <label for="content">Body</label>
+        <textarea class="form-control" id="content" name="content" rows="6" required></textarea>
+    </div>
+    <div class="form-group">
+        <label for="tag">Tags</label>
+        <div id="tags-list"></div>
+        <div class="container-fluid px-0">
+            <div class="row">
+                <div class="col col-lg-6" id="tag-input">
+                    <input type="text" class="form-control" id="tag" name="tag" maxlength="100" required>
+                    <button class="btn ml-2">Add</button>
+                </div>
+            </div>
+        </div>
     </div>
     <button type="submit" class="btn form-button btn-primary">Post</button>
     <button type="reset" class="btn form-button btn-primary">Clear</button>

@@ -269,3 +269,8 @@ a:hover {
 .form-button {
     width: 128px;
 }
+
+#tag-input {
+    display: grid;
+    grid-template-columns: 1fr auto;
+}
