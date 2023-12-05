@@ -164,6 +164,7 @@ class AddPost(View):
         category = request.POST.get('category')
         content = request.POST.get('content')
         content = convert_post_content(content)
+        tags = request.POST.get('tags')
         category_object = Category.objects.get(name=category)
 
         # Generating the slug for the post
@@ -179,6 +180,7 @@ class AddPost(View):
             slug=post_slug,
             content=content,
             category=category_object,
+            tags=tags,
             posted_by=request.user
         )
         return redirect('home')

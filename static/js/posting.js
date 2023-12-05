@@ -3,7 +3,7 @@ const tagCharLimit = 200;
 // Adds a tag entered by the user to the list of tags
 $('#add-tag').click((event) => {
     event.preventDefault();
-    let tagName = $('#tag').val();
+    let tagName = $('#tag-input-text').val();
     let tagElement = document.createElement('div');
     tagElement.className = 'tag-list-item mr-2 mb-2';
     tagElement.innerHTML = `
@@ -16,13 +16,14 @@ $('#add-tag').click((event) => {
     `;
     tagElement.querySelector('button').addEventListener('click', removeTag);
     $('#tags-list').append(tagElement);
-    $('#tag').val('');
+    $('#tag-input-text').val('');
     setTagAddState(false);
+    updateTagListValue();
 });
 
 
 // Updates the add tag button to be enabled only when the tag is valid
-$('#tag').on('input', checkTagInput);
+$('#tag-input-text').on('input', checkTagInput);
 
 
 /**
@@ -30,7 +31,7 @@ $('#tag').on('input', checkTagInput);
  * message depending on if the entered tag is valid or not
  */
 function checkTagInput() {
-    let tagName = $('#tag').val();
+    let tagName = $('#tag-input-text').val();
     let tagIsValid = true;
     let feedbackMessage = "";
 
@@ -104,15 +105,23 @@ function tagObeysCharLimit(tagName) {
  */
 function setTagAddState(enabled, feedback) {
     $('#add-tag').removeClass('disabled').removeAttr('disabled');
-    $('#tag').removeClass('is-invalid');
+    $('#tag-input-text').removeClass('is-invalid');
     $('#tag-feedback').text('');
     if (!enabled) {
         $('#add-tag').addClass('disabled').attr('disabled', true);
         if (feedback) {
-            $('#tag').addClass('is-invalid');
+            $('#tag-input-text').addClass('is-invalid');
             $('#tag-feedback').text(feedback);
         }
     }
+}
+
+
+/**
+ * Updates the tag input value that will be sent to the database
+ */
+function updateTagListValue() {
+    $('#tags').val($('.tag-name').text());
 }
 
 
@@ -124,4 +133,5 @@ function removeTag(event) {
     let tagParent = event.target.parentNode.parentNode.parentNode;
     tagParent.remove();
     checkTagInput();
+    updateTagListValue();
 }
