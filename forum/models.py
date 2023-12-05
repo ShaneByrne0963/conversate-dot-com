@@ -60,6 +60,12 @@ class Post(models.Model):
 
     def number_of_comments(self):
         return self.comments.count()
+    
+    def tag_list(self):
+        tags_separate = self.tags.split('#')
+        # Removes the blank tag at the start of the list
+        tags_separate.pop(0)
+        return tags_separate
 
 
 class Comment(models.Model):

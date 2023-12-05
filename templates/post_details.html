@@ -14,8 +14,17 @@
         {% endif %}
     </span>
     <br><br>
-    <div id="post-content" class="mb-5">{{ post.content|safe }}</div>
-    <div id="post-footer" class="d-flex justify-content-between">
+    <div id="post-content" class="mb-3">{{ post.content|safe }}</div>
+    {% if post.tags %}
+        <div id="post-tags">
+            {% for tag in post.tag_list %}
+                <a class="tag-list-item mr-2 mb-2 p-1 anchor-no-style" href="#">
+                    <em>#{{ tag }}</em>
+                </a>
+            {% endfor %}
+        </div>
+    {% endif %}
+    <div id="post-footer" class="d-flex justify-content-between mt-2">
         <div class="post-footer-buttons">
             {% if user.is_authenticated %}
             <form class="d-inline" method="POST" action="{% url 'like_post' post.slug %}">

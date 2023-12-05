@@ -31,6 +31,16 @@
             <div class="mt-2">{{ post.content|safe }}</div>
             <a href="{% url 'view_post' post.slug %}">Read More...</a>
         </div>
+        {% if post.tags %}
+            <div class="col-12">
+                <hr>
+                {% for tag in post.tag_list %}
+                    <a class="tag-list-item mr-2 anchor-no-style" href="#">
+                        <em>#{{ tag }}</em>
+                    </a>
+                {% endfor %}
+            </div>
+        {% endif %}
     </div>
 {% endfor %}
 
