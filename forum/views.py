@@ -212,6 +212,7 @@ class EditPost(View):
         title = request.POST.get('title')
         content = request.POST.get('content')
         category = request.POST.get('category')
+        tags = request.POST.get('tags')
         post = get_object_or_404(Post, id=id)
 
         post.title = title
@@ -219,6 +220,7 @@ class EditPost(View):
         post.edited = True
         post.approved = False
         post.category = Category.objects.get(name=category)
+        post.tags = tags
 
         post.save()
         return HttpResponseRedirect(reverse('view_post', args=[post.slug]))
