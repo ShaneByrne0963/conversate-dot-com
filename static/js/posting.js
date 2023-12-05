@@ -1,3 +1,5 @@
+const tagCharLimit = 200;
+
 // Adds a tag entered by the user to the list of tags
 $('#add-tag').click((event) => {
     event.preventDefault();
@@ -25,7 +27,7 @@ $('#tag').on('input', checkTagInput);
 
 /**
  * Checks the value in the tag text input, updating the add button and feedback
- * message where necessary
+ * message depending on if the entered tag is valid or not
  */
 function checkTagInput() {
     let tagName = $('#tag').val();
@@ -34,6 +36,10 @@ function checkTagInput() {
 
     if (tagName === "") {
         tagIsValid = false;
+    }
+    else if (!tagObeysCharLimit(tagName)) {
+        tagIsValid = false;
+        feedbackMessage = 'You have exceeded your tag character limit';
     }
     else if (!tagHasAllowedChars(tagName)) {
         tagIsValid = false;
@@ -74,6 +80,19 @@ function tagHasAllowedChars(tagName) {
     allowedChars = /[a-zA-Z0-9_-]/g;
     remainingChars = tagName.replace(allowedChars, '');
     return (remainingChars === '');
+}
+
+
+/**
+ * Checks if the tag entered by the user is within the character limit allowed
+ * for tags, including the list of other tags previously entered
+ * @param {String} tagName The name of the new tag
+ * @returns {Boolean} True if the new tag will not exceed the character limit
+ */
+function tagObeysCharLimit(tagName) {
+    let existingTags = $('.tag-name').text();
+    existingTags += `#${tagName}`;
+    return (existingTags.length <= tagCharLimit);
 }
 
 
