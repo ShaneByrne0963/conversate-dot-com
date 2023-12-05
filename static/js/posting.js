@@ -29,8 +29,21 @@ $('#tag').on('input', checkTagInput);
  */
 function checkTagInput() {
     let tagName = $('#tag').val();
-    let feedbackMessage = (tagName) ? "You have already entered this tag" : "";
-    setTagAddState(tagIsUnique(tagName), feedbackMessage);
+    let tagIsValid = true;
+    let feedbackMessage = "";
+
+    if (tagName === "") {
+        tagIsValid = false;
+    }
+    else if (!tagHasAllowedChars(tagName)) {
+        tagIsValid = false;
+        feedbackMessage = 'Tag must only contain letters, numbers, "-" or "_"';
+    }
+    else if (!tagIsUnique(tagName)) {
+        tagIsValid = false;
+        feedbackMessage = "You have already entered this tag";
+    }
+    setTagAddState(tagIsValid, feedbackMessage);
 }
 
 
@@ -48,6 +61,19 @@ function tagIsUnique(tagName) {
         }
     }
     return true;
+}
+
+
+/**
+ * Checks if a tag name does not contain any invalid characters
+ * @param {String} tagName The tag entered by the user
+ * @returns {Boolean} If the tag only contains allowed characters
+ */
+function tagHasAllowedChars(tagName) {
+    // Allows all letters, numbers, "_" and "-"
+    allowedChars = /[a-zA-Z0-9_-]/g;
+    remainingChars = tagName.replace(allowedChars, '');
+    return (remainingChars === '');
 }
 
 
