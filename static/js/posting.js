@@ -21,7 +21,7 @@ $('#add-tag').click((event) => {
 // Updates the add tag button to be enabled only when the tag is valid
 $('#tag').on('input', () => {
     let tagName = $('#tag').val();
-    setTagAddState(tagIsUnique(tagName));
+    setTagAddState(tagIsUnique(tagName), "You have already entered this tag");
 })
 
 
@@ -33,7 +33,6 @@ $('#tag').on('input', () => {
 function tagIsUnique(tagName) {
     let existingTags = $('.tag-name').text();
     let tagList = existingTags.split('#');
-    console.log(tagList);
     for (let tag of tagList) {
         if (tagName.toLowerCase() === tag.toLowerCase()) {
             return false;
@@ -47,9 +46,15 @@ function tagIsUnique(tagName) {
  * Updates the active state of the "Add Tag" button
  * @param {Boolean} enabled Whether the button will be set to enabled/disabled
  */
-function setTagAddState(enabled) {
+function setTagAddState(enabled, failMessage) {
     $('#add-tag').removeClass('disabled').removeAttr('disabled');
+    $('#tag').removeClass('is-invalid');
+    $('#tag-feedback').text('');
     if (!enabled) {
         $('#add-tag').addClass('disabled').attr('disabled', true);
+        if (failMessage !== undefined) {
+            $('#tag').addClass('is-invalid');
+            $('#tag-feedback').text(failMessage);
+        }
     }
 }
