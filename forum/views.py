@@ -6,7 +6,7 @@ from .models import Post, Category, Comment, SiteData
 from .core.content import get_profile, get_post_list_context, \
                           get_base_context, get_category_list_context
 from .core.pagination import get_paginated_items
-from .core.slug import generate_slug
+from .core.slug import generate_slug, remove_special_chars
 from .core.posting import convert_post_content
 import urllib.parse
 
@@ -56,6 +56,12 @@ class SearchPost(View):
             return redirect('home')
         search_input = request.GET.get('search_query')
 
+        # Searching by tags if a hashtag is at the beginning of the search
+        if search_input.strip()[0] == '#':
+            search_formatted = remove_special_chars(search_input)
+            return HttpResponseRedirect(reverse('search_tag',
+                                                args=[search_formatted]))
+
         query = Q(Q(title__icontains=search_input) |
                   Q(content__icontains=search_input))
         posts = Post.objects.filter(query)
@@ -82,6 +88,12 @@ class SearchPost(View):
             'post_list.html',
             context,
         )
+
+
+class SearchTag(View):
+
+    def get(self, request):
+        pass
 
 
 class CategorisedPosts(View):

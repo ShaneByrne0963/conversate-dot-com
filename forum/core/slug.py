@@ -1,4 +1,4 @@
-import random
+import random, re
 from django.utils.text import slugify
 from forum.tests import test_instance, test_index
 
@@ -85,3 +85,11 @@ def get_character(index):
     if index <= 35:
         return letters[index - 10]
     return letters[index - 36].upper()
+
+
+def remove_special_chars(my_string):
+    """
+    Removes all special characters, with the exception of "-" and "_",
+    from a string, and replaces spaces with "+"
+    """
+    test_instance(my_string, str, "my_string must be a string")

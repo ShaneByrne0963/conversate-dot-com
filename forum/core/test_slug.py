@@ -1,5 +1,6 @@
 import unittest
-from .slug import generate_slug, generate_character_set, get_character
+from .slug import generate_slug, generate_character_set, get_character, \
+                  remove_special_chars
 
 
 class TestSlug(unittest.TestCase):
@@ -79,6 +80,12 @@ class TestGetCharacter(unittest.TestCase):
 
     def test_index_between_36_and_61_returns_uppercase_letter(self):
         self.assertEqual(get_character(61), 'Z')
+
+
+class TestRemoveSpecialChars(unittest.TestCase):
+
+    def test_throws_error_if_my_string_is_not_string(self):
+        self.assertRaises(TypeError, remove_special_chars, 12)
 
 
 unittest.main()
