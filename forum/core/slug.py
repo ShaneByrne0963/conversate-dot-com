@@ -87,13 +87,14 @@ def get_character(index):
     return letters[index - 36].upper()
 
 
-def remove_special_chars(my_string):
+def format_tag_search(tag_list):
     """
     Removes all special characters, with the exception of "-" and "_",
     from a string, and replaces spaces with "+"
     """
     # Error Handling
-    test_instance(my_string, str, "my_string must be a string")
+    test_instance(tag_list, str, "tag_list must be a string")
 
-    formatted_string = ''.join(re.findall(r'[a-zA-Z0-9_-]', my_string))
-    return formatted_string
+    formatted_tags = ''.join(re.findall(r'\s|[a-zA-Z0-9_-]', tag_list))
+    formatted_tags = formatted_tags.replace(' ', '+')
+    return formatted_tags

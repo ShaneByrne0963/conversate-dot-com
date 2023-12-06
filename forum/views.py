@@ -6,7 +6,7 @@ from .models import Post, Category, Comment, SiteData
 from .core.content import get_profile, get_post_list_context, \
                           get_base_context, get_category_list_context
 from .core.pagination import get_paginated_items
-from .core.slug import generate_slug, remove_special_chars
+from .core.slug import generate_slug, format_tag_search
 from .core.posting import convert_post_content
 import urllib.parse
 
@@ -58,7 +58,7 @@ class SearchPost(View):
 
         # Searching by tags if a hashtag is at the beginning of the search
         if search_input.strip()[0] == '#':
-            search_formatted = remove_special_chars(search_input)
+            search_formatted = format_tag_search(search_input)
             return HttpResponseRedirect(reverse('search_tag',
                                                 args=[search_formatted]))
 

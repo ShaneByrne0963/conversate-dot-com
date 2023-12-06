@@ -1,6 +1,6 @@
 import unittest
 from .slug import generate_slug, generate_character_set, get_character, \
-                  remove_special_chars
+                  format_tag_search
 
 
 class TestSlug(unittest.TestCase):
@@ -82,22 +82,25 @@ class TestGetCharacter(unittest.TestCase):
         self.assertEqual(get_character(61), 'Z')
 
 
-class TestRemoveSpecialChars(unittest.TestCase):
+class TestFormatTagSearch(unittest.TestCase):
 
-    def test_throws_error_if_my_string_is_not_string(self):
-        self.assertRaises(TypeError, remove_special_chars, 12)
+    def test_throws_error_if_tag_list_is_not_string(self):
+        self.assertRaises(TypeError, format_tag_search, 12)
 
-    def test_remove_special_chars_returns_string(self):
-        self.assertIsInstance(remove_special_chars("Hello World"), str)
+    def test_format_tag_search_returns_string(self):
+        self.assertIsInstance(format_tag_search("Hello World"), str)
 
     def test_removes_special_characters_from_input(self):
-        self.assertEqual(remove_special_chars('#@Hello!'), 'Hello')
+        self.assertEqual(format_tag_search('#@Hello!'), 'Hello')
 
     def test_output_keeps_underscores_from_input(self):
-        self.assertEqual(remove_special_chars('Hello_World!'), 'Hello_World')
+        self.assertEqual(format_tag_search('Hello_World!'), 'Hello_World')
 
     def test_output_keeps_dashes_from_input(self):
-        self.assertEqual(remove_special_chars('Hello-World!'), 'Hello-World')
+        self.assertEqual(format_tag_search('Hello-World!'), 'Hello-World')
+
+    def test_function_replaces_spaces_with_plus(self):
+        self.assertEqual(format_tag_search('Hello World!'), 'Hello+World')
 
 
 unittest.main()
