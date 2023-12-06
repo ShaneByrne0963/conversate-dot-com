@@ -95,6 +95,7 @@ class SearchTag(View):
 
     def get(self, request, tag_query):
         tag_list = tag_query.split('+')
+        search_result = ''
 
         if tag_list:
             query = Q(tags__icontains=tag_list[0])
@@ -110,13 +111,16 @@ class SearchTag(View):
             heading += ' tagged with '
             for i in range(len(tag_list)):
                 heading += f'"{tag_list[i]}"'
+                search_result += f'#{tag_list[i]}'
                 if i < len(tag_list) - 1:
                     heading += ', '
+                    search_result += ' '
 
             # Adding the extra details to the context
             context = get_post_list_context(request, posts)
             context['heading'] = heading
             context['selected_tab'] = 'Tags'
+            context['search_result'] = search_result
 
             return render(
                 request,
