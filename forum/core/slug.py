@@ -1,4 +1,5 @@
-import random, re
+import random
+import re
 from django.utils.text import slugify
 from forum.tests import test_instance, test_index
 

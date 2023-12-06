@@ -8,6 +8,8 @@ urlpatterns = [
          views.SortPosts.as_view(), name='sort_posts'),
     path('<slug:slug>/', views.ViewPost.as_view(), name='view_post'),
     path('results', views.SearchPost.as_view(), name='search_post'),
+    path('tags/<str:tag_query>', views.SearchTag.as_view(),
+         name='search_tag'),
     path('category/<slug:category_slug>', views.CategorisedPosts.as_view(),
          name='categories'),
     path('categories/browse', views.BrowseCategories.as_view(),

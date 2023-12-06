@@ -59,6 +59,7 @@ class SearchPost(View):
         # Searching by tags if a hashtag is at the beginning of the search
         if search_input.strip()[0] == '#':
             search_formatted = format_tag_search(search_input)
+            print(search_formatted)
             return HttpResponseRedirect(reverse('search_tag',
                                                 args=[search_formatted]))
 
@@ -92,8 +93,36 @@ class SearchPost(View):
 
 class SearchTag(View):
 
-    def get(self, request):
-        pass
+    def get(self, request, tag_query):
+        tag_list = tag_query.split('+')
+
+        if tag_list:
+            query = Q(tags__icontains=tag_list[0])
+            for tag in range(1, len(tag_list)):
+                query = query | Q(tags__icontains=tag_list[tag])
+            posts = Post.objects.filter(query)
+            number_of_results = len(list(posts))
+
+            # Constructing the heading
+            heading = f'{number_of_results} Post'
+            if number_of_results != 1:
+                heading += 's'
+            heading += ' tagged with '
+            for i in range(len(tag_list)):
+                heading += f'"{tag_list[i]}"'
+                if i < len(tag_list) - 1:
+                    heading += ', '
+
+            # Adding the extra details to the context
+            context = get_post_list_context(request, posts)
+            context['heading'] = heading
+            context['selected_tab'] = 'Tags'
+
+            return render(
+                request,
+                'post_list.html',
+                context,
+            )
 
 
 class CategorisedPosts(View):
