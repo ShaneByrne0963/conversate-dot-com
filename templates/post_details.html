@@ -18,7 +18,7 @@
     {% if post.tags %}
         <div id="post-tags">
             {% for tag in post.tag_list %}
-                <a class="tag-list-item mr-2 mb-2 p-1 anchor-no-style" href="#">
+                <a class="tag-list-item mr-2 mb-2 p-1 anchor-no-style" href="{% url 'search_tag' tag %}">
                     <em>#{{ tag }}</em>
                 </a>
             {% endfor %}

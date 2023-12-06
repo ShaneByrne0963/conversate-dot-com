@@ -35,7 +35,7 @@
             <div class="col-12">
                 <hr>
                 {% for tag in post.tag_list %}
-                    <a class="tag-list-item mr-2 anchor-no-style" href="#">
+                    <a class="tag-list-item mr-2 anchor-no-style" href="{% url 'search_tag' tag %}">
                         <em>#{{ tag }}</em>
                     </a>
                 {% endfor %}
