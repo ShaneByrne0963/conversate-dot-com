@@ -95,5 +95,5 @@ def remove_special_chars(my_string):
     # Error Handling
     test_instance(my_string, str, "my_string must be a string")
 
-    formatted_string = re.sub(r'\W', '', my_string)
+    formatted_string = ''.join(re.findall(r'[a-zA-Z0-9_-]', my_string))
     return formatted_string
