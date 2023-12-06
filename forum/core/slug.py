@@ -92,5 +92,8 @@ def remove_special_chars(my_string):
     Removes all special characters, with the exception of "-" and "_",
     from a string, and replaces spaces with "+"
     """
+    # Error Handling
     test_instance(my_string, str, "my_string must be a string")
-    return ""
+
+    formatted_string = re.sub(r'\W', '', my_string)
+    return formatted_string
