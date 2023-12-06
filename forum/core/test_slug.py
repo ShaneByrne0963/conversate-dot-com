@@ -92,6 +92,9 @@ class TestRemoveSpecialChars(unittest.TestCase):
 
     def test_removes_special_characters_from_input(self):
         self.assertEqual(remove_special_chars('#@Hello!'), 'Hello')
+    
+    def test_output_keeps_underscores_from_input(self):
+        self.assertEqual(remove_special_chars('Hello_World!'), 'Hello_World')
 
 
 unittest.main()
