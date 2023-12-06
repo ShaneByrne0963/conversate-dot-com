@@ -93,3 +93,4 @@ def remove_special_chars(my_string):
     from a string, and replaces spaces with "+"
     """
     test_instance(my_string, str, "my_string must be a string")
+    return ""

@@ -87,5 +87,8 @@ class TestRemoveSpecialChars(unittest.TestCase):
     def test_throws_error_if_my_string_is_not_string(self):
         self.assertRaises(TypeError, remove_special_chars, 12)
 
+    def test_remove_special_chars_returns_string(self):
+        self.assertIsInstance(remove_special_chars("Hello World"), str)
+
 
 unittest.main()
