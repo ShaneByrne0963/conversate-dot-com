@@ -197,6 +197,13 @@ a:hover {
     outline: none;
 }
 
+#search-hint {
+    font-size: .875em;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
 /* ------------------------------------------------------Default Template------------------------------------------------------ */
 
 #main-page {
