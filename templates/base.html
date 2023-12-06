@@ -11,6 +11,12 @@
         integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
     <!-- Font Awesome -->
     <script src="https://kit.fontawesome.com/1a1e78fae2.js" crossorigin="anonymous"></script>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&family=Roboto+Slab:wght@100&family=Roboto:wght@300&display=swap"
+        rel="stylesheet">
     <!-- CSS -->
     <link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css">
     <title>
@@ -30,8 +36,7 @@
             <ul class="nav justify-content-end">
                 {% if user.is_authenticated %}
                     <li class="nav mr-2 mr-lg-4">
-                        <a class="nav-icon" href="{% url 'new_post' %}" data-toggle="tooltip"
-                            data-placement="bottom" title="New Post" aria-label="Create a new post">
+                        <a class="nav-icon" href="{% url 'new_post' %}">
                             <i class="fa-solid fa-plus"></i>
                         </a>
                     </li>
@@ -71,7 +76,8 @@
                 <nav class="d-none d-md-block col-4">
                     <!-- Search Bar -->
                     <form action="{% url 'search_post' %}" method="GET" autocomplete="off">
-                        <div class="search-bar mt-4">
+                        <div class="search-bar mt-4" role="button" data-toggle="popover"
+                            data-placement="bottom">
                             <div class="center-to-container">
                                 <i class="fa-solid fa-magnifying-glass"></i>
                             </div>
