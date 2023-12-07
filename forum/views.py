@@ -216,7 +216,7 @@ class AddPost(View):
         image_url = None
         if request.FILES:
             image = request.FILES['post-image']
-            image_url = cloudinary.uploader.upload(image)
+            image_url = cloudinary.uploader.upload(image)['public_id']
 
         # Generating the slug for the post
         site_data = get_object_or_404(SiteData)
@@ -313,6 +313,8 @@ class DeletePost(View):
 
     def get(self, request, slug):
         post = get_object_or_404(Post, slug=slug)
+        if post.image:
+            cloudinary.uploader.destroy(post.image.public_id)
         post.delete()
         return redirect('home')
 
