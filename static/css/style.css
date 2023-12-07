@@ -286,6 +286,11 @@ a:hover {
     background-color: #FFEFD4;
 }
 
-#image-preview {
+#preview {
+    height: auto;
     min-height: 245px;
+}
+
+#preview-image {
+    width: 100%;
 }

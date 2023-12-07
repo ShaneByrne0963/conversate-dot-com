@@ -28,6 +28,21 @@ $('#tag-input-text').on('input', checkTagInput);
 // Adds the remove tag functionality for already existing tags in the post edit page
 $('.tag-list-item').find('button').click(removeTag);
 
+// Displays a preview of the uploaded image.
+// Source: https://stackoverflow.com/questions/18457340/how-to-preview-selected-image-in-input-type-file-in-popup-using-jquery
+$('#post-image').change(() => {
+    let reader = new FileReader();
+    let imageFiles = $("#post-image").prop('files');
+    if (imageFiles && imageFiles[0]) {
+        reader.readAsDataURL(imageFiles[0]);
+
+        reader.onload = function (event) {
+            $("#preview-image").removeClass('d-none').attr('src', event.target.result);
+            $('#preview-empty').addClass('d-none');
+        };
+    }
+});
+
 
 /**
  * Checks the value in the tag text input, updating the add button and feedback

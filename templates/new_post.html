@@ -35,14 +35,16 @@ New Post - Conversate
                 <div class="form-group">
                     <label for="post-image">Image</label>
                     <div class="custom-file clickable">
-                        <input type="file" class="custom-file-input clickable" id="post-image">
+                        <input type="file" class="custom-file-input clickable" id="post-image"
+                            name="post-image" accept="image/png, image/jpeg, image/webp">
                         <span class="custom-file-label clickable">Choose file...</label>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="image-preview">Preview</label>
-                    <div id="image-preview" class="form-control center-to-container clickable">
-                        <span>No file chosen.</span>
+                    <label for="preview">Preview</label>
+                    <div id="preview" class="form-control center-to-container clickable">
+                        <img id="preview-image" class="d-none" src="#" alt="Your selected image">
+                        <span id="preview-empty">No file chosen.</span>
                     </div>
                 </div>
                 <div class="input-group mb-3">
