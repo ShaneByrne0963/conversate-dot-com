@@ -2,65 +2,101 @@
 {% load static %}
 
 {% block title %}
-Edit Post - Conversate
+New Post - Conversate
 {% endblock title %}
 
 {% block content %}
 
 <h1>Edit your Post:</h1>
 <hr>
-<form method="POST">
+<form enctype="multipart/form-data" method="POST">
     {% csrf_token %}
-    <div class="form-group">
-        <label for="title">Title</label>
-        <input type="text" class="form-control" id="title" name="title"
-            maxlength="100" value="{{ post.title }}" required>
-    </div>
-    <div class="form-group">
-        <label for="category">Category</label>
-        <select id="category" list="category" name="category" class="form-control" required>
-            {% for category in category_list %}
-                <option value="{{ category.name }}"{% if category == post.category %} selected{% endif %}>
-                    {{ category.name }}
-                </option>
-            {% endfor %}
-        </select>
-    </div>
-    <div class="form-group">
-        <label for="content">Body</label>
-        <textarea class="form-control" id="content" name="content" rows="6" required>{{ post.content }}</textarea>
-    </div>
-    <div class="form-group">
-        <input type="hidden" name="tags" id="tags" value="{{ post.tags }}">
-        <label for="tag-input-text" class="mb-0">Tags</label>
-        <div id="tags-list" class="mt-2">
-            {% for tag in post.tag_list %}
-                <div class="tag-list-item mr-2 mb-2">
-                    <div class="d-flex align-items-center justify-space-between p-1">
-                        <em class="tag-name">#{{ tag }}</em>
-                        <button type="button" class="close ml-2 mr-1" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
+    <div class="container-fluid px-0">
+        <div class="row">
+            <div class="col-12 col-xl-6">
+                <div class="form-group">
+                    <label for="title">Title</label>
+                    <input type="text" class="form-control" id="title" name="title"
+                        maxlength="100" value="{{ post.title }}" required>
+                </div>
+                <div class="form-group">
+                    <label for="category">Category</label>
+                    <select id="category" list="category" name="category" class="form-control" required>
+                        {% for category in category_list %}
+                            <option value="{{ category.name }}" {% if category == post.category %} selected{% endif %}>
+                                {{ category.name }}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="content">Body</label>
+                    <textarea class="form-control" id="content" name="content" rows="6" required>{{ post.content }}</textarea>
+                </div>
+                <!-- Tags -->
+                <div class="form-group">
+                    <input type="hidden" name="tags" id="tags">
+                    <label for="tag-input-text" class="mb-0">Tags</label>
+                    <div id="tags-list" class="mt-2">
+                        {% for tag in post.tag_list %}
+                        <div class="tag-list-item mr-2 mb-2">
+                            <div class="d-flex align-items-center justify-space-between p-1">
+                                <em class="tag-name">#{{ tag }}</em>
+                                <button type="button" class="close ml-2 mr-1" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <div class="container-fluid px-0">
+                        <div class="row">
+                            <div class="col col-md-8 col-lg-6 col-xl-12" id="tag-input">
+                                <input type="text" class="form-control" id="tag-input-text" maxlength="30">
+                                <button class="btn ml-2 disabled" id="add-tag" disabled>Add</button>
+                                <div id="tag-feedback" class="invalid-feedback d-block"></div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            {% endfor %}
-        </div>
-        <div class="container-fluid px-0">
-            <div class="row">
-                <div class="col col-lg-6" id="tag-input">
-                    <input type="text" class="form-control" id="tag-input-text" maxlength="30">
-                    <button class="btn ml-2 disabled" id="add-tag" disabled>Add</button>
-                    <div id="tag-feedback" class="invalid-feedback d-block"></div>
+            </div>
+            <!-- Upload image option -->
+            <div class="col-12 col-xl-6">
+                <div class="form-group">
+                    <label for="post-image">Image</label>
+                    <div class="custom-file clickable">
+                        <input type="file" class="custom-file-input clickable" id="post-image" name="post-image"
+                            accept="image/png, image/jpeg, image/webp">
+                        <span class="custom-file-label clickable">Choose file...</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="preview">Preview</label>
+                    <div id="preview" class="form-control center-to-container clickable">
+                        <img id="preview-image"{% if not post.image %} class="d-none"{% endif %} src="{{ post.image.url }}" alt="Your selected image">
+                        <span id="preview-empty"{% if post.image %} class="d-none"{% endif %}>No file chosen.</span>
+                    </div>
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <label class="input-group-text" for="image-position">Image Position</label>
+                    </div>
+                    <select class="custom-select" id="image-position">
+                        <option value="0" selected>Top of post</option>
+                        <option value="-1">Bottom of post</option>
+                    </select>
                 </div>
             </div>
         </div>
     </div>
-    <button type="submit" class="btn form-button btn-primary">Save</button>
-    <a href="{% url 'view_post' post.slug %}" class="btn form-button btn-primary">Cancel</a>
+    <div class="d-flex d-md-block justify-content-center mt-2">
+        <button type="submit" class="btn form-button btn-primary mr-1 mr-sm-2 mr-md-0">Post</button>
+        <button type="reset" class="btn form-button btn-primary ml-1 ml-sm-2 ml-md-0">Clear</button>
+    </div>
 </form>
 
 {% endblock content %}
 
 {% block scripts %}
-    <script src="{% static 'js/posting.js' %}"></script>
+<script src="{% static 'js/posting.js' %}"></script>
 {% endblock scripts %}
