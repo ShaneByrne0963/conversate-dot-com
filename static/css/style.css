@@ -285,3 +285,7 @@ a:hover {
     display: inline-block;
     background-color: #FFEFD4;
 }
+
+#image-preview {
+    min-height: 245px;
+}
