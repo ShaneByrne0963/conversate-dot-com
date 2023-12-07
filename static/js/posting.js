@@ -31,15 +31,28 @@ $('.tag-list-item').find('button').click(removeTag);
 // Displays a preview of the uploaded image.
 // Source: https://stackoverflow.com/questions/18457340/how-to-preview-selected-image-in-input-type-file-in-popup-using-jquery
 $('#post-image').change(() => {
-    let reader = new FileReader();
-    let imageFiles = $("#post-image").prop('files');
+    let imageFiles = $('#post-image').prop('files');
+    $('#post-image').removeClass('is-invalid');
+    $('#image-feedback').removeClass('d-block');
     if (imageFiles && imageFiles[0]) {
-        reader.readAsDataURL(imageFiles[0]);
+        // Validation of the upload, ensuring it is an image
+        let uploadFile = imageFiles[0].type;
+        let allowedFiles = $('#post-image').attr('accept').replace(' ', '').split(',');
 
-        reader.onload = function (event) {
-            $("#preview-image").removeClass('d-none').attr('src', event.target.result);
-            $('#preview-empty').addClass('d-none');
-        };
+        if (allowedFiles.includes(uploadFile)) {
+            let reader = new FileReader();
+            reader.readAsDataURL(imageFiles[0]);
+            reader.onload = function (event) {
+                $('#preview-image').removeClass('d-none').attr('src', event.target.result);
+                $('#preview-empty').addClass('d-none');
+            };
+        }
+        else {
+            $('#post-image').addClass('is-invalid').val(null);
+            $('#image-feedback').addClass('d-block');
+            $('#preview-image').addClass('d-none');
+            $('#preview-empty').removeClass('d-none');
+        }
     }
 });
 

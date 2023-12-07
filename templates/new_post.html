@@ -55,6 +55,7 @@ New Post - Conversate
                             name="post-image" accept="image/png, image/jpeg, image/webp">
                         <span class="custom-file-label clickable">Choose file...</label>
                     </div>
+                    <div id="image-feedback" class="invalid-feedback">File must be an image</div>
                 </div>
                 <div class="form-group">
                     <label for="preview">Preview</label>
@@ -67,7 +68,7 @@ New Post - Conversate
                     <div class="input-group-prepend">
                         <label class="input-group-text" for="image-position">Image Position</label>
                     </div>
-                    <select class="custom-select" id="image-position">
+                    <select class="custom-select" id="image-position" name="image-position">
                         <option value="0" selected>Top of post</option>
                         <option value="-1">Bottom of post</option>
                     </select>
