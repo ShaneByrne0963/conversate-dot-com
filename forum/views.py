@@ -274,6 +274,15 @@ class EditPost(View):
         post.category = Category.objects.get(name=category)
         post.tags = tags
 
+        # Updating the image if a new one has been selected
+        if request.FILES:
+            image = request.FILES['post-image']
+            image_url = cloudinary.uploader.upload(image)['public_id']
+            # Removing any previous image from cloudinary
+            if post.image:
+                cloudinary.uploader.destroy(post.image.public_id)
+            post.image = image_url
+
         post.save()
         return HttpResponseRedirect(reverse('view_post', args=[post.slug]))
 
