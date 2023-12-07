@@ -35,7 +35,7 @@ Edit Post - Conversate
                 </div>
                 <!-- Tags -->
                 <div class="form-group">
-                    <input type="hidden" name="tags" id="tags">
+                    <input type="hidden" name="tags" id="tags" value="{{ post.tags }}">
                     <label for="tag-input-text" class="mb-0">Tags</label>
                     <div id="tags-list" class="mt-2">
                         {% for tag in post.tag_list %}
