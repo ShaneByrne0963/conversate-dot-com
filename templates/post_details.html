@@ -14,6 +14,9 @@
         {% endif %}
     </span>
     <br><br>
+    {% if post.image %}
+        <img src="{{ post.image.url }}">
+    {% endif %}
     <div id="post-content" class="mb-3">{{ post.content|safe }}</div>
     {% if post.tags %}
         <div id="post-tags">

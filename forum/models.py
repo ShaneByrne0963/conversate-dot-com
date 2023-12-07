@@ -40,6 +40,8 @@ class Post(models.Model):
     slug = models.SlugField(max_length=100, unique=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE,
                                  related_name='tagged_posts')
+    image = CloudinaryField('image', blank=True)
+    image_position = models.IntegerField(blank=True, null=True)
     posted_by = models.ForeignKey(User, on_delete=models.CASCADE,
                                   related_name='added_posts')
     posted_on = models.DateTimeField(auto_now_add=True)

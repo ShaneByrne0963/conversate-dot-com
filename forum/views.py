@@ -9,6 +9,7 @@ from .core.pagination import get_paginated_items
 from .core.slug import generate_slug, format_tag_search
 from .core.posting import convert_post_content
 import urllib.parse
+import cloudinary
 
 
 class ListPosts(View):
@@ -212,6 +213,11 @@ class AddPost(View):
         tags = request.POST.get('tags')
         category_object = Category.objects.get(name=category)
 
+        image_url = None
+        if request.FILES:
+            image = request.FILES['post-image']
+            image_url = cloudinary.uploader.upload(image)
+
         # Generating the slug for the post
         site_data = get_object_or_404(SiteData)
         total_posts = site_data.total_posts_created
@@ -224,6 +230,7 @@ class AddPost(View):
             title=title,
             slug=post_slug,
             content=content,
+            image=image_url,
             category=category_object,
             tags=tags,
             posted_by=request.user

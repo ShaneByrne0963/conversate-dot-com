@@ -9,7 +9,7 @@ New Post - Conversate
 
 <h1>Create a New Post:</h1>
 <hr>
-<form method="POST">
+<form enctype="multipart/form-data" method="POST">
     {% csrf_token %}
     <div class="container-fluid px-0">
         <div class="row">
