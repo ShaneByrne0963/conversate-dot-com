@@ -214,9 +214,11 @@ class AddPost(View):
         category_object = Category.objects.get(name=category)
 
         image_url = None
+        image_position = None
         if request.FILES:
             image = request.FILES['post-image']
             image_url = cloudinary.uploader.upload(image)['public_id']
+        image_position = request.POST.get('image-position')
 
         # Generating the slug for the post
         site_data = get_object_or_404(SiteData)
@@ -231,6 +233,7 @@ class AddPost(View):
             slug=post_slug,
             content=content,
             image=image_url,
+            image_position=image_position,
             category=category_object,
             tags=tags,
             posted_by=request.user
@@ -282,6 +285,7 @@ class EditPost(View):
             if post.image:
                 cloudinary.uploader.destroy(post.image.public_id)
             post.image = image_url
+        post.image_position = request.POST.get('image-position')
 
         post.save()
         return HttpResponseRedirect(reverse('view_post', args=[post.slug]))

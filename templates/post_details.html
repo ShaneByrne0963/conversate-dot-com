@@ -14,10 +14,13 @@
         {% endif %}
     </span>
     <br><br>
-    {% if post.image %}
-        <img src="{{ post.image.url }}">
+    {% if post.image and post.image_position == 0 %}
+        <img src="{{ post.image.url }}" alt="Image for the post" class="post-image">
     {% endif %}
     <div id="post-content" class="mb-3">{{ post.content|safe }}</div>
+    {% if post.image and post.image_position == -1 %}
+        <img src="{{ post.image.url }}" alt="Image for the post" class="post-image">
+    {% endif %}
     {% if post.tags %}
         <div id="post-tags">
             {% for tag in post.tag_list %}
