@@ -25,7 +25,7 @@ $('#add-tag').click((event) => {
 // Updates the add tag button to be enabled only when the tag is valid
 $('#tag-input-text').on('input', checkTagInput);
 
-// Adds the remove tag functionality for already existing tags in the post edit page
+// Adds the ability to remove already entered tags
 $('.tag-list-item').find('button').click(removeTag);
 
 // Displays a preview of the uploaded image.
