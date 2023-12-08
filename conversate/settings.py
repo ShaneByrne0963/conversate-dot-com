@@ -32,7 +32,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 DEBUG = os.environ.get('DEVELOPMENT') == 'True'
 
 ALLOWED_HOSTS = [
-    '8000-shanebyrne0963-conversat-uarkb6c1s8.us2.codeanyapp.com',
+    '8000-shanebyrne0963-conversat-flu774i0ov.us2.codeanyapp.com',
     'conversate-55f06929cde1.herokuapp.com',
 ]
 

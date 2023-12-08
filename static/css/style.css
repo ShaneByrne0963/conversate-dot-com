@@ -283,7 +283,8 @@ a:hover {
     width: 128px;
 }
 
-#tag-input {
+#tag-input,
+#answer-input {
     display: grid;
     grid-template-columns: 1fr auto;
 }

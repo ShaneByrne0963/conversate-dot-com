@@ -392,3 +392,17 @@ class DeleteComment(View):
         slug = post.slug
         comment.delete()
         return HttpResponseRedirect(reverse('view_post', args=[slug]))
+
+
+class AddPoll(View):
+
+    def get(self, request):
+        # Redirects the user to the login page if not logged in
+        if not request.user.is_authenticated:
+            return redirect('/accounts/login')
+        context = get_base_context(request)
+        return render(
+            request,
+            'new_poll.html',
+            context,
+        )

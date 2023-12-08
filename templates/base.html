@@ -35,9 +35,14 @@
             <!-- User-specific actions -->
             <ul class="nav justify-content-end">
                 {% if user.is_authenticated %}
-                    <li class="nav mr-2 mr-lg-4">
+                    <li class="nav mr-3 mr-md-2">
                         <a class="nav-icon" href="{% url 'new_post' %}">
-                            <i class="fa-solid fa-plus"></i>
+                            <i class="fa-solid fa-pen-to-square"></i>
+                        </a>
+                    </li>
+                    <li class="nav mr-3 mr-md-2">
+                        <a class="nav-icon" href="{% url 'new_poll' %}">
+                            <i class="fa-solid fa-square-poll-vertical"></i>
                         </a>
                     </li>
                     <li class="nav dropdown center-to-container">
