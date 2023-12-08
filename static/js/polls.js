@@ -1,4 +1,7 @@
 $('#answers').on('input', checkAnswerInput);
+$('#add-answer').click(addAnswer);
+const maxAnswers = 5;
+
 
 /**
  * Validates an answer input, only enabling the "Add" button when there is an
@@ -9,7 +12,7 @@ function checkAnswerInput() {
     let validInput = false;
     let answerInput = $('#answers').val();
 
-    if (answerInput) {
+    if (answerInput && $('.answer').length < maxAnswers) {
         validInput = true;
         let existingAnswers = $('.answer').get();
         for (let answer of existingAnswers) {
@@ -20,9 +23,23 @@ function checkAnswerInput() {
         }
     }
     if (!validInput) {
-        $('#add-answer').addClass('disabled').attr('disabled');
+        $('#add-answer').addClass('disabled').attr('disabled', true);
     }
 }
+
+
+/**
+ * Adds the entered answer to the list of answers
+ */
+function addAnswer() {
+    let answerInput = $('#answers').val();
+    let currentAnswers = $('#answer-list').html();
+    currentAnswers += `<li class="answer list-group-item">${answerInput}</li>`;
+    $('#answer-list').html(currentAnswers);
+    $('#answers').val('');
+    $('#add-answer').addClass('disabled').attr('disabled', true);
+}
+
 
 /**
  * Updates the value of the due date to be the next day
