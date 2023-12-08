@@ -1,7 +1,10 @@
-$('#answers').on('input', checkAnswerInput);
-$('#add-answer').click(addAnswer);
 const maxAnswers = 5;
 
+// Answer validation
+$('#answers').on('input', checkAnswerInput);
+
+// Adding the answer to the list
+$('#add-answer').click(addAnswer);
 
 /**
  * Validates an answer input, only enabling the "Add" button when there is an
@@ -34,10 +37,25 @@ function checkAnswerInput() {
 function addAnswer() {
     let answerInput = $('#answers').val();
     let currentAnswers = $('#answer-list').html();
-    currentAnswers += `<li class="answer list-group-item">${answerInput}</li>`;
+    currentAnswers += `
+        <li class="answer list-group-item">
+            <span>${answerInput}</span>
+            <button type="button" class="close" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </li>
+    `;
     $('#answer-list').html(currentAnswers);
     $('#answers').val('');
     $('#add-answer').addClass('disabled').attr('disabled', true);
+    
+    // Removing all event listeners and re-adding them to avoid duplicates
+    $('.answer').unbind('click').click(removeAnswer);
+}
+
+
+function removeAnswer(event) {
+    event.target.parentNode.parentNode.remove();
 }
 
 
