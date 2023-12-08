@@ -16,7 +16,7 @@ New Poll - Conversate
             <div class="col col-lg-8">
                 <div class="form-group">
                     <label for="title">Title</label>
-                    <input type="text" class="form-control" name="title" id="title" maxlength="200">
+                    <input type="text" class="form-control" name="title" id="title" maxlength="200" required>
                 </div>
                 <div class="form-group">
                     <label for="answers">Answers</label>
@@ -28,7 +28,7 @@ New Poll - Conversate
                 </div>
                 <div class="form-group">
                     <label for="end-date">Due by</label>
-                    <input type="date" class="form-control" name="end-date" id="end-date" maxlength="200">
+                    <input type="date" class="form-control" name="end-date" id="end-date" required>
                 </div>
                 <div class="d-flex d-md-block justify-content-center mt-2">
                     <button type="submit" class="btn form-button btn-primary mr-1 mr-sm-2 mr-md-0">Post</button>
@@ -42,5 +42,5 @@ New Poll - Conversate
 {% endblock content %}
 
 {% block scripts %}
-    <script src="{% static 'js/posting.js' %}"></script>
+    <script src="{% static 'js/polls.js' %}"></script>
 {% endblock scripts %}
