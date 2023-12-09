@@ -11,6 +11,7 @@ from .core.posting import convert_post_content
 from datetime import datetime
 import urllib.parse
 import cloudinary
+import re
 
 
 class ListPosts(View):
@@ -429,8 +430,10 @@ class AddPoll(View):
 
         for input_name in request.POST:
             if 'answer-' in input_name:
+                position = int(''.join(re.findall(r'[0-9]', input_name)))
                 PollAnswer.objects.create(
                     body=request.POST[input_name],
                     poll=poll,
+                    position=position
                 )
         return redirect('home')

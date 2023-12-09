@@ -16,7 +16,6 @@ function checkAnswerInput() {
     $('#answer-feedback').removeClass('d-block');
     let validInput = false;
     let answerInput = $('#answers').val();
-    console.log('Here');
 
     if (answerInput && $('.answer').length < maxAnswers) {
         validInput = true;
@@ -45,7 +44,7 @@ function addAnswer() {
     let numAnswers = $('.answer').length + 1;
     currentAnswers += `
         <li class="answer list-group-item">
-            <input type="hidden" name="answer-${numAnswers}" value="${answerInput}" aria-hidden="true">
+            <input type="hidden" class="answer-val" name="answer-${numAnswers}" value="${answerInput}" aria-hidden="true">
             <span class="answer-text">${answerInput}</span>
             <button type="button" class="close" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
@@ -76,7 +75,23 @@ function addAnswer() {
  * @param {Event} event The triggered event
  */
 function removeAnswer(event) {
-    event.target.parentNode.parentNode.remove();
+    let parentElement = event.target.parentNode.parentNode;
+
+    // Getting the position of the deleting element, because answers are ordered
+    let position = parentElement.querySelector('.answer-val').getAttribute('name');
+    let numPosition = getNumbersFromString(position);
+    parentElement.remove();
+
+    // Making sure all positions are incremental (1, 2, 3...) with no gaps
+    let existingAnswers = document.getElementsByClassName('answer');
+    for (let answer of existingAnswers) {
+        let valueInput = answer.querySelector('.answer-val');
+        let newNumPos = getNumbersFromString(valueInput.getAttribute('name'));
+        if (newNumPos > numPosition) {
+            newNumPos--;
+            valueInput.setAttribute('name', `answer-${newNumPos}`);
+        }
+    }
 
     if ($('.answer').length < 2) {
         setValidAnswers(false);
@@ -106,6 +121,16 @@ function updateDueDate() {
     let dueDay = `${dueDate.getDate()}`.padStart(2, '0');
     let dateValue = `${dueDate.getFullYear()}-${dueMonth}-${dueDay}`;
     $('#end-date').attr('min', dateValue).val(dateValue);
+}
+
+
+/**
+ * Extracts digits from a string and converts them into an integer
+ * @param {String} myString The string to extract numbers from
+ * @returns {Integer} All numbers found in the string
+ */
+function getNumbersFromString(myString) {
+    return parseInt(myString.match(/[0-9]/)[0]);
 }
 
 updateDueDate();

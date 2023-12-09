@@ -115,9 +115,13 @@ class Poll(models.Model):
 
 class PollAnswer(models.Model):
     body = models.CharField(max_length=100)
+    position = models.IntegerField()
     poll = models.ForeignKey(Poll, related_name='answers',
                              on_delete=models.CASCADE)
     votes = models.ManyToManyField(User, related_name='votes')
+
+    class Meta:
+        ordering = ['position']
 
     def __str__(self):
         return f'{self.poll} => {self.body}'
