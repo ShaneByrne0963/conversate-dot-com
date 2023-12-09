@@ -71,15 +71,15 @@ function checkTagInput() {
     }
     else if (!tagObeysCharLimit(tagName)) {
         tagIsValid = false;
-        feedbackMessage = 'You have exceeded your tag character limit';
+        feedbackMessage = 'You have exceeded your tag character limit.';
     }
     else if (!tagHasAllowedChars(tagName)) {
         tagIsValid = false;
-        feedbackMessage = 'Tag must only contain letters, numbers, "-" or "_"';
+        feedbackMessage = 'Tag must only contain letters, numbers, "-" or "_".';
     }
     else if (!tagIsUnique(tagName)) {
         tagIsValid = false;
-        feedbackMessage = "You have already entered this tag";
+        feedbackMessage = "You have already entered this tag.";
     }
     setTagAddState(tagIsValid, feedbackMessage);
 }

@@ -12,15 +12,20 @@ $('#add-answer').click(addAnswer);
  */
 function checkAnswerInput() {
     $('#add-answer').removeClass('disabled').removeAttr('disabled');
+    $('#answers').removeClass('is-invalid');
+    $('#answer-feedback').removeClass('d-block');
     let validInput = false;
     let answerInput = $('#answers').val();
+    console.log('Here');
 
     if (answerInput && $('.answer').length < maxAnswers) {
         validInput = true;
-        let existingAnswers = $('.answer').get();
+        let existingAnswers = $('.answer-text').get();
         for (let answer of existingAnswers) {
             if (answerInput == answer.innerText) {
                 validInput = false;
+                $('#answers').addClass('is-invalid');
+                $('#answer-feedback').addClass('d-block');
                 break;
             }
         }
@@ -39,7 +44,7 @@ function addAnswer() {
     let currentAnswers = $('#answer-list').html();
     currentAnswers += `
         <li class="answer list-group-item">
-            <span>${answerInput}</span>
+            <span class="answer-text">${answerInput}</span>
             <button type="button" class="close" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
@@ -53,8 +58,14 @@ function addAnswer() {
     $('.close').unbind('click').click(removeAnswer);
 
     // Making this part of the form valid if there are 2 or more answers
-    if ($('.answer').length >= 2) {
+    let numAnswers = $('.answer').length;
+    if (numAnswers >= 2) {
         setValidAnswers(true);
+
+        // Removing the add answer input from the view once all answers have been given
+        if (numAnswers >= maxAnswers) {
+            $('#answer-input').addClass('d-none');
+        }
     }
 }
 
@@ -69,6 +80,8 @@ function removeAnswer(event) {
     if ($('.answer').length < 2) {
         setValidAnswers(false);
     }
+    // If the max number of answers existed, now there is space to add another
+    $('#answer-input').removeClass('d-none');
 }
 
 
