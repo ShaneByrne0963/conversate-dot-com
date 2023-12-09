@@ -51,11 +51,34 @@ function addAnswer() {
     
     // Removing all event listeners and re-adding them to avoid duplicates
     $('.close').unbind('click').click(removeAnswer);
+
+    // Making this part of the form valid if there are 2 or more answers
+    if ($('.answer').length >= 2) {
+        setValidAnswers(true);
+    }
 }
 
 
+/**
+ * Deletes a poll answer
+ * @param {Event} event The triggered event
+ */
 function removeAnswer(event) {
     event.target.parentNode.parentNode.remove();
+
+    if ($('.answer').length < 2) {
+        setValidAnswers(false);
+    }
+}
+
+
+/**
+ * 
+ * @param {Boolean} value If there are at least 2 answers
+ */
+function setValidAnswers(value) {
+    let feedback = (value) ? '' : 'Need at least 2 answers.';
+    $('#answers').get(0).setCustomValidity(feedback);
 }
 
 
@@ -72,3 +95,4 @@ function updateDueDate() {
 }
 
 updateDueDate();
+setValidAnswers(false);
