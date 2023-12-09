@@ -14,10 +14,21 @@ New Poll - Conversate
     <div class="container-fluid px-0">
         <div class="row">
             <div class="col col-lg-8">
+                <!-- Title -->
                 <div class="form-group">
                     <label for="title">Title</label>
                     <input type="text" class="form-control" name="title" id="title" maxlength="200" required>
                 </div>
+                <!-- Category -->
+                <div class="form-group">
+                    <label for="category">Category</label>
+                    <select id="category" list="category" name="category" class="form-control" required>
+                        {% for category in category_list %}
+                            <option value="{{ category.name }}">{{ category.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <!-- Answers -->
                 <div class="form-group">
                     <label for="answers">Answers</label>
                     <ul id="answer-list" class="list-group"></ul>
@@ -27,6 +38,7 @@ New Poll - Conversate
                     </div>
                     <div id="answer-feedback" class="invalid-feedback">You have already entered this answer.</div>
                 </div>
+                <!-- Due Date -->
                 <div class="form-group">
                     <label for="due-date">Due by</label>
                     <input type="date" class="form-control" name="due-date" id="due-date" required>

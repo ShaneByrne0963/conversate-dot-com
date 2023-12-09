@@ -48,7 +48,7 @@ class CategoryAdmin(SummernoteModelAdmin):
 @admin.register(Poll)
 class PollAdmin(SummernoteModelAdmin):
 
-    list_display = ('title', 'due_date')
+    list_display = ('title', 'asked_by', 'number_of_answers', 'due_date')
 
 
 @admin.register(PollAnswer)

@@ -212,7 +212,7 @@ class AddPost(View):
         content = request.POST.get('content')
         content = convert_post_content(content)
         tags = request.POST.get('tags')
-        category_object = Category.objects.get(name=category)
+        category_object = get_object_or_404(Category, name=category)
 
         image_url = None
         image_position = None
@@ -275,7 +275,7 @@ class EditPost(View):
         post.content = content
         post.edited = True
         post.approved = False
-        post.category = Category.objects.get(name=category)
+        post.category = get_object_or_404(Category, name=category)
         post.tags = tags
 
         # Updating the image if a new one has been selected
@@ -402,6 +402,8 @@ class AddPoll(View):
         if not request.user.is_authenticated:
             return redirect('/accounts/login')
         context = get_base_context(request)
+        categories = Category.objects.all()
+        context['category_list'] = categories
         return render(
             request,
             'new_poll.html',
@@ -410,6 +412,8 @@ class AddPoll(View):
 
     def post(self, request):
         title = request.POST.get('title')
+        category = request.POST.get('category')
+        category_object = get_object_or_404(Category, name=category)
         due_date = request.POST.get('due-date')
         # Date format: YYYY-MM-DD
         due_year = int(due_date[:4])
@@ -418,6 +422,8 @@ class AddPoll(View):
 
         poll = Poll.objects.create(
             title=title,
+            category=category_object,
+            asked_by=request.user,
             due_date=datetime(due_year, due_month, due_day)
         )
 
