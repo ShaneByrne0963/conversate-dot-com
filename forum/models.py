@@ -101,9 +101,18 @@ class Poll(models.Model):
     title = models.CharField(max_length=200)
     due_date = models.DateTimeField()
 
+    class Meta:
+        ordering = ['-due_date']
+    
+    def __str__(self):
+        return self.title
+
 
 class PollAnswer(models.Model):
     body = models.CharField(max_length=100)
     poll = models.ForeignKey(Poll, related_name='answers',
                              on_delete=models.CASCADE)
     votes = models.ManyToManyField(User, related_name='votes')
+
+    def __str__(self):
+        return f'{self.poll} => {self.body}'

@@ -42,8 +42,10 @@ function checkAnswerInput() {
 function addAnswer() {
     let answerInput = $('#answers').val();
     let currentAnswers = $('#answer-list').html();
+    let numAnswers = $('.answer').length + 1;
     currentAnswers += `
         <li class="answer list-group-item">
+            <input type="hidden" name="answer-${numAnswers}" value="${answerInput}" aria-hidden="true">
             <span class="answer-text">${answerInput}</span>
             <button type="button" class="close" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
@@ -58,7 +60,6 @@ function addAnswer() {
     $('.close').unbind('click').click(removeAnswer);
 
     // Making this part of the form valid if there are 2 or more answers
-    let numAnswers = $('.answer').length;
     if (numAnswers >= 2) {
         setValidAnswers(true);
 

@@ -1,5 +1,6 @@
 from django.contrib import admin
-from .models import Profile, Post, Comment, Category, SiteData
+from .models import Profile, Post, Comment, Category, SiteData, Poll, \
+                    PollAnswer
 from django_summernote.admin import SummernoteModelAdmin
 
 
@@ -42,6 +43,18 @@ class CommentAdmin(SummernoteModelAdmin):
 class CategoryAdmin(SummernoteModelAdmin):
 
     list_display = ('name', 'slug', 'number_of_posts')
+
+
+@admin.register(Poll)
+class PollAdmin(SummernoteModelAdmin):
+
+    list_display = ('title', 'due_date')
+
+
+@admin.register(PollAnswer)
+class PollAnswerAdmin(SummernoteModelAdmin):
+
+    list_display = ('body', 'poll')
 
 
 @admin.register(SiteData)

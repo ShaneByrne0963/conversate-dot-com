@@ -2,12 +2,13 @@ from django.shortcuts import render, redirect, get_object_or_404, reverse
 from django.views import View
 from django.http import HttpResponseRedirect
 from django.db.models import Q, Count
-from .models import Post, Category, Comment, SiteData
+from .models import Post, Category, Comment, SiteData, Poll, PollAnswer
 from .core.content import get_profile, get_post_list_context, \
                           get_base_context, get_category_list_context
 from .core.pagination import get_paginated_items
 from .core.slug import generate_slug, format_tag_search
 from .core.posting import convert_post_content
+from datetime import datetime
 import urllib.parse
 import cloudinary
 
@@ -406,3 +407,24 @@ class AddPoll(View):
             'new_poll.html',
             context,
         )
+
+    def post(self, request):
+        title = request.POST.get('title')
+        due_date = request.POST.get('due-date')
+        # Date format: YYYY-MM-DD
+        due_year = int(due_date[:4])
+        due_month = int(due_date[5:7])
+        due_day = int(due_date[8:])
+
+        poll = Poll.objects.create(
+            title=title,
+            due_date=datetime(due_year, due_month, due_day)
+        )
+
+        for input_name in request.POST:
+            if 'answer-' in input_name:
+                PollAnswer.objects.create(
+                    body=request.POST[input_name],
+                    poll=poll,
+                )
+        return redirect('home')
