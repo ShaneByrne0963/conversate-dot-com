@@ -50,7 +50,7 @@ function addAnswer() {
     $('#add-answer').addClass('disabled').attr('disabled', true);
     
     // Removing all event listeners and re-adding them to avoid duplicates
-    $('.answer').unbind('click').click(removeAnswer);
+    $('.close').unbind('click').click(removeAnswer);
 }
 
 

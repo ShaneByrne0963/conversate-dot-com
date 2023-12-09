@@ -95,3 +95,15 @@ class Comment(models.Model):
 
     def number_of_replies(self):
         return self.replies.count()
+
+
+class Poll(models.Model):
+    title = models.CharField(max_length=200)
+    due_date = models.DateTimeField()
+
+
+class PollAnswer(models.Model):
+    body = models.CharField(max_length=100)
+    poll = models.ForeignKey(Poll, related_name='answers',
+                             on_delete=models.CASCADE)
+    votes = models.ManyToManyField(User, related_name='votes')
