@@ -33,14 +33,53 @@ New Post - Conversate
                 <!-- Tags -->
                 <div class="form-group">
                     <input type="hidden" name="tags" id="tags">
-                    <label for="tag-input-text" class="mb-0">Tags</label>
-                    <div id="tags-list" class="mt-2"></div>
-                    <div class="container-fluid px-0">
-                        <div class="row">
-                            <div class="col col-md-8 col-lg-6 col-xl-12" id="tag-input">
-                                <input type="text" class="form-control" id="tag-input-text" maxlength="30">
-                                <button class="btn ml-2 disabled" id="add-tag" disabled>Add</button>
-                                <div id="tag-feedback" class="invalid-feedback d-block"></div>
+                    <label for="tag-input-text">Tags</label>
+                    <div class="card">
+                        <div class="card-body">
+                            <div id="tags-list" class="mb-"></div>
+                            <div class="container-fluid px-0">
+                                <div class="row">
+                                    <div class="col col-md-8 col-lg-6 col-xl-12" id="tag-input">
+                                        <input type="text" class="form-control" id="tag-input-text" maxlength="30">
+                                        <button class="btn ml-2 disabled" id="add-tag" disabled>Add</button>
+                                        <div id="tag-feedback" class="invalid-feedback"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Poll -->
+                <div class="form-group">
+                    <label for="poll-group">Poll</label>
+                    <div id="poll-group" class="card mb-3">
+                        <div class="card-body">
+                            <div class="form-group form-check mb-0">
+                                <input type="checkbox" class="form-check-input" id="has-poll" data-toggle="collapse"
+                                    data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                                <label class="form-check-label" for="has-poll">Include a poll in this post</label>
+                            </div>
+                            <div class="collapse" id="collapseExample">
+                                <!-- Poll Title -->
+                                <div class="form-group mt-2">
+                                    <label for="title">Title</label>
+                                    <input type="text" class="form-control" name="title" id="title" maxlength="200" required>
+                                </div>
+                                <!-- Poll Answers -->
+                                <div class="form-group">
+                                    <label for="answers">Answers</label>
+                                    <ul id="answer-list" class="list-group"></ul>
+                                    <div id="answer-input" class="mt-2">
+                                        <input type="text" class="form-control" id="answers" maxlength="100">
+                                        <button class="btn ml-2 disabled" id="add-answer" disabled>Add</button>
+                                    </div>
+                                    <div id="answer-feedback" class="invalid-feedback">You have already entered this answer.</div>
+                                </div>
+                                <!-- Poll Due Date -->
+                                <div class="form-group">
+                                    <label for="due-date">Due by</label>
+                                    <input type="date" class="form-control" name="due-date" id="due-date" required>
+                                </div>
                             </div>
                         </div>
                     </div>
