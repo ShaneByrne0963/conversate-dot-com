@@ -56,6 +56,14 @@ $('#post-image').change(() => {
     }
 });
 
+// Is called when the user resets the form
+$('form').on('reset', () => {
+    $('.tag-list-item').remove();
+    $('#poll-collapse').collapse('hide');
+    $('#preview-image').attr('src', '').removeClass('d-none').addClass('d-none');
+    $('#preview-empty').removeClass('d-none');
+});
+
 
 /**
  * Checks the value in the tag text input, updating the add button and feedback
