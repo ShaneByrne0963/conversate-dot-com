@@ -6,6 +6,13 @@ $('#answers').on('input', checkAnswerInput);
 // Adding the answer to the list
 $('#add-answer').click(addAnswer);
 
+// Is called when the user resets the form
+$('form').on('reset', () => {
+    $('.answer').remove();
+    setValidAnswers(false);
+});
+
+
 /**
  * Validates an answer input, only enabling the "Add" button when there is an
  * answer that doesn't match any other existing answer
@@ -120,7 +127,7 @@ function updateDueDate() {
     let dueMonth = `${dueDate.getMonth() + 1}`.padStart(2, '0');
     let dueDay = `${dueDate.getDate()}`.padStart(2, '0');
     let dateValue = `${dueDate.getFullYear()}-${dueMonth}-${dueDay}`;
-    $('#end-date').attr('min', dateValue).val(dateValue);
+    $('#due-date').attr('min', dateValue).val(dateValue);
 }
 
 

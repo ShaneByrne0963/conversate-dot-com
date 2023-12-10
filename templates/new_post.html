@@ -62,8 +62,8 @@ New Post - Conversate
                             <div class="collapse" id="poll-collapse">
                                 <!-- Poll Title -->
                                 <div class="form-group mt-2">
-                                    <label for="title">Title</label>
-                                    <input type="text" class="form-control" name="title" id="title" maxlength="200" required>
+                                    <label for="poll-title">Title</label>
+                                    <input type="text" class="form-control" name="poll-title" id="poll-title" maxlength="200" required>
                                 </div>
                                 <!-- Poll Answers -->
                                 <div class="form-group">
@@ -125,4 +125,5 @@ New Post - Conversate
 
 {% block scripts %}
     <script src="{% static 'js/posting.js' %}"></script>
+    <script src="{% static 'js/polls.js' %}"></script>
 {% endblock scripts %}
