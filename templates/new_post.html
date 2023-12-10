@@ -63,7 +63,7 @@ New Post - Conversate
                                 <!-- Poll Title -->
                                 <div class="form-group mt-2">
                                     <label for="poll-title">Title</label>
-                                    <input type="text" class="form-control" name="poll-title" id="poll-title" maxlength="200" required>
+                                    <input type="text" class="form-control" name="poll-title" id="poll-title" maxlength="200">
                                 </div>
                                 <!-- Poll Answers -->
                                 <div class="form-group">
@@ -78,7 +78,7 @@ New Post - Conversate
                                 <!-- Poll Due Date -->
                                 <div class="form-group">
                                     <label for="due-date">Due by</label>
-                                    <input type="date" class="form-control" name="due-date" id="due-date" required>
+                                    <input type="date" class="form-control" name="due-date" id="due-date">
                                 </div>
                             </div>
                         </div>
@@ -124,6 +124,6 @@ New Post - Conversate
 {% endblock content %}
 
 {% block scripts %}
-    <script src="{% static 'js/posting.js' %}"></script>
     <script src="{% static 'js/polls.js' %}"></script>
+    <script src="{% static 'js/posting.js' %}"></script>
 {% endblock scripts %}

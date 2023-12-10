@@ -10,6 +10,8 @@ $('#add-answer').click(addAnswer);
 $('form').on('reset', () => {
     $('.answer').remove();
     setValidAnswers(false);
+    // The timeout prevents the form clear from overriding the preset
+    setTimeout(updateDueDate, 1);
 });
 
 
@@ -99,18 +101,23 @@ function removeAnswer(event) {
             valueInput.setAttribute('name', `answer-${newNumPos}`);
         }
     }
-
-    if ($('.answer').length < 2) {
-        setValidAnswers(false);
-    }
+    checkEnoughAnswers();
     // If the max number of answers existed, now there is space to add another
     $('#answer-input').removeClass('d-none');
 }
 
 
 /**
- * 
- * @param {Boolean} value If there are at least 2 answers
+ * Makes the answer input invalid if there are less than 2 answers given
+ */
+function checkEnoughAnswers() {
+    setValidAnswers($('.answer').length >= 2);
+}
+
+
+/**
+ * Sets the answer input's validity, preventing the form from submitting if invalid
+ * @param {Boolean} value If the answer input is valid
  */
 function setValidAnswers(value) {
     let feedback = (value) ? '' : 'Need at least 2 answers.';

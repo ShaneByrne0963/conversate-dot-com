@@ -64,6 +64,19 @@ $('form').on('reset', () => {
     $('#preview-empty').removeClass('d-none');
 });
 
+// Only makes the poll inputs required if the user selected to include a poll
+$('#poll-collapse').on('show.bs.collapse', () => {
+    console.log('Hi');
+    $('#poll-title').attr('required', 'true');
+    $('#due-date').attr('required', 'true');
+    checkEnoughAnswers();
+});
+$('#poll-collapse').on('hide.bs.collapse', () => {
+    $('#poll-title').removeAttr('required');
+    $('#due-date').removeAttr('required');
+    setValidAnswers(true);
+});
+
 
 /**
  * Checks the value in the tag text input, updating the add button and feedback
@@ -174,3 +187,9 @@ function removeTag(event) {
     checkTagInput();
     updateTagListValue();
 }
+
+
+// Sets the answer input to valid on load as by default it is disabled
+$(document).ready(() => {
+    setValidAnswers(true);
+});

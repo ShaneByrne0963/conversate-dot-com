@@ -230,16 +230,16 @@ class AddPost(View):
         site_data.total_posts_created = total_posts
         site_data.save()
 
-        Post.objects.create(
-            title=title,
-            slug=post_slug,
-            content=content,
-            image=image_url,
-            image_position=image_position,
-            category=category_object,
-            tags=tags,
-            posted_by=request.user
-        )
+        # Post.objects.create(
+        #     title=title,
+        #     slug=post_slug,
+        #     content=content,
+        #     image=image_url,
+        #     image_position=image_position,
+        #     category=category_object,
+        #     tags=tags,
+        #     posted_by=request.user
+        # )
         return redirect('home')
 
 
