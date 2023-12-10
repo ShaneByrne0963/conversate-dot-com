@@ -102,6 +102,8 @@ class Poll(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     asked_by = models.ForeignKey(User, on_delete=models.CASCADE)
     due_date = models.DateTimeField()
+    post = models.OneToOneField(Post, on_delete=models.CASCADE,
+                                related_name='poll', blank=True, null=True)
 
     class Meta:
         ordering = ['-due_date']

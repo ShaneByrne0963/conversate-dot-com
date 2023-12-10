@@ -215,6 +215,7 @@ class AddPost(View):
         tags = request.POST.get('tags')
         category_object = get_object_or_404(Category, name=category)
 
+        # Uploading the image to Cloudinary if one was given
         image_url = None
         image_position = None
         if request.FILES:
@@ -230,16 +231,41 @@ class AddPost(View):
         site_data.total_posts_created = total_posts
         site_data.save()
 
-        # Post.objects.create(
-        #     title=title,
-        #     slug=post_slug,
-        #     content=content,
-        #     image=image_url,
-        #     image_position=image_position,
-        #     category=category_object,
-        #     tags=tags,
-        #     posted_by=request.user
-        # )
+        post = Post.objects.create(
+            title=title,
+            slug=post_slug,
+            content=content,
+            image=image_url,
+            image_position=image_position,
+            category=category_object,
+            tags=tags,
+            posted_by=request.user
+        )
+
+        # Adding a poll if one is found
+        if request.POST.get('has-poll'):
+            poll_title = request.POST.get('poll-title')
+            due_date = request.POST.get('due-date')
+            # Date format: YYYY-MM-DD
+            due_year = int(due_date[:4])
+            due_month = int(due_date[5:7])
+            due_day = int(due_date[8:])
+
+            poll = Poll.objects.create(
+                title=poll_title,
+                category=category_object,
+                asked_by=request.user,
+                due_date=datetime(due_year, due_month, due_day),
+                post=post
+            )
+            for input_name in request.POST:
+                if 'answer-' in input_name:
+                    position = int(''.join(re.findall(r'[0-9]', input_name)))
+                    PollAnswer.objects.create(
+                        body=request.POST[input_name],
+                        poll=poll,
+                        position=position
+                    )
         return redirect('home')
 
 
