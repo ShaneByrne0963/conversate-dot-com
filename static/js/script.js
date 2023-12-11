@@ -22,6 +22,8 @@ window.addEventListener('DOMContentLoaded', () => {
             html: true
         });
     });
+
+    startPollAnimation();
 });
 
 // Displays instructions on how to search by tag, appearing only once per session
@@ -35,4 +37,14 @@ $('#search-input').focus(() => {
 // Hiding the search hint when the close button is clicked
 $('#search-hint-close').click(() => {
     $('#search-hint').addClass('d-none');
-})
+});
+
+/**
+ * Updates the width of each poll result to animate them
+ */
+function startPollAnimation() {
+    let answers = document.getElementsByClassName('poll-result');
+    for (let answer of answers) {
+        answer.style.width = answer.innerText;
+    }
+}

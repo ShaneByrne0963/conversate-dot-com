@@ -26,26 +26,38 @@
         <div class="card mb-3">
             <div class="card-body">
                 <h5 class="card-title">{{ post.poll.title }}</h5>
-                <form method="POST" action="{% url 'vote_poll' post.poll.id request.path %}">
-                    {% csrf_token %}
+                {% if has_voted %}
                     {% for answer in post.poll.answers.all %}
-                        <div class="form-check mb-2 ml-sm-3 ml-md-2 ml-lg-4">
-                            <input class="form-check-input" type="radio" name="poll-vote" id="answer-{{ answer.position }}"
-                                value="{{ answer.position }}" required>
-                            <label class="form-check-label" for="answer-{{ answer.position }}">
-                                {{ answer.body }}
-                            </label>
+                        <div>{{ answer.body }}</div>
+                        <div class="progress mb-3">
+                            {% with answer.vote_percentage as votes %}
+                            <div class="progress-bar poll-result" role="progressbar" style="width: 0%;" aria-valuenow="{{ votes }}"
+                                aria-valuemin="0" aria-valuemax="100" data-animation="on">{{ votes }}%</div>
+                            {% endwith %}
                         </div>
                     {% endfor %}
-                    <div class="mt-2">
-                        <input type="submit" class="btn" value="Vote">
-                        <input type="reset" class="btn" value="Clear">
-                    </div>
-                </form>
+                {% else %}
+                    <form method="POST" action="{% url 'vote_poll' post.poll.id request.path %}">
+                        {% csrf_token %}
+                        {% for answer in post.poll.answers.all %}
+                            <div class="form-check mb-2 ml-sm-3 ml-md-2 ml-lg-4">
+                                <input class="form-check-input" type="radio" name="poll-vote" id="answer-{{ answer.position }}"
+                                    value="{{ answer.position }}" required>
+                                <label class="form-check-label" for="answer-{{ answer.position }}">
+                                    {{ answer.body }}
+                                </label>
+                            </div>
+                        {% endfor %}
+                        <div class="mt-2">
+                            <input type="submit" class="btn" value="Vote">
+                            <input type="reset" class="btn" value="Clear">
+                        </div>
+                    </form>
+                {% endif %}
             </div>
         </div>
-        
     {% endif %}
+
     <!-- Tags -->
     {% if post.tags %}
         <div id="post-tags">

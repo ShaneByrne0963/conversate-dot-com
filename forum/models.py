@@ -113,6 +113,13 @@ class Poll(models.Model):
     
     def number_of_answers(self):
         return self.answers.count()
+    
+    def user_has_voted(self, user_id):
+        answers = list(self.answers.all())
+        for answer in answers:
+            if answer.votes.filter(id=user_id).exists():
+                return True
+        return False
 
 
 class PollAnswer(models.Model):
@@ -130,3 +137,10 @@ class PollAnswer(models.Model):
     
     def number_of_votes(self):
         return self.votes.count()
+    
+    def vote_percentage(self):
+        total_votes = 0
+        poll_answers = self.poll.answers.all()
+        for answer in poll_answers:
+            total_votes += answer.votes.count()
+        return round((self.votes.count() / total_votes) * 100)
