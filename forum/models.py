@@ -127,3 +127,6 @@ class PollAnswer(models.Model):
 
     def __str__(self):
         return f'{self.poll} => {self.body}'
+    
+    def number_of_votes(self):
+        return self.votes.count()

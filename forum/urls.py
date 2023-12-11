@@ -27,5 +27,7 @@ urlpatterns = [
          name='edit_comment'),
     path('delete-comment/<int:comment_id>', views.DeleteComment.as_view(),
          name='delete_comment'),
-    path('new-poll', views.AddPoll.as_view(), name='new_poll')
+    path('new-poll', views.AddPoll.as_view(), name='new_poll'),
+    path('vote-<int:poll_id><path:current_dir>', views.VotePoll.as_view(),
+         name='vote_poll')
 ]

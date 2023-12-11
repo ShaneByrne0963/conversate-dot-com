@@ -54,7 +54,7 @@ class PollAdmin(SummernoteModelAdmin):
 @admin.register(PollAnswer)
 class PollAnswerAdmin(SummernoteModelAdmin):
 
-    list_display = ('body', 'poll', 'position')
+    list_display = ('body', 'poll', 'number_of_votes')
 
 
 @admin.register(SiteData)

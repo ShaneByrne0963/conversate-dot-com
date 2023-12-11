@@ -463,3 +463,17 @@ class AddPoll(View):
                     position=position
                 )
         return redirect('home')
+
+
+class VotePoll(View):
+
+    def post(self, request, poll_id, current_dir):
+        vote_answer = int(request.POST.get('poll-vote'))
+        poll = get_object_or_404(Poll, id=poll_id)
+        poll_answers = list(poll.answers.all())
+
+        for answer in poll_answers:
+            if answer.position == vote_answer:
+                answer.votes.add(request.user)
+                answer.save()
+                return redirect(current_dir)
