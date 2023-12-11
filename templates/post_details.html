@@ -26,17 +26,7 @@
         <div class="card mb-3">
             <div class="card-body">
                 <h5 class="card-title">{{ post.poll.title }}</h5>
-                {% if has_voted %}
-                    {% for answer in post.poll.answers.all %}
-                        <div>{{ answer.body }}</div>
-                        <div class="progress mb-3">
-                            {% with answer.vote_percentage as votes %}
-                            <div class="progress-bar poll-result" role="progressbar" style="width: 0%;" aria-valuenow="{{ votes }}"
-                                aria-valuemin="0" aria-valuemax="100" data-animation="on">{{ votes }}%</div>
-                            {% endwith %}
-                        </div>
-                    {% endfor %}
-                {% else %}
+                {% if poll_status == 0 %}
                     <form method="POST" action="{% url 'vote_poll' post.poll.id request.path %}">
                         {% csrf_token %}
                         {% for answer in post.poll.answers.all %}
@@ -53,6 +43,22 @@
                             <input type="reset" class="btn" value="Clear">
                         </div>
                     </form>
+                {% else %}
+                    {% for answer in post.poll.answers.all %}
+                        <div class="d-flex justify-content-between">
+                            <span>{{ answer.body }}</span>
+                            {% with answer.number_of_votes as vote_num %}
+                                <span>{{ vote_num }} vote{% if vote_num != 1 %}s{% endif %}</span>
+                            {% endwith %}
+                        </div>
+                        <div class="progress mb-3{% if poll_status == answer.position %} answer-chosen{% endif %}">
+                            {% with answer.vote_percentage as votes %}
+                            <div class="progress-bar poll-result"
+                                role="progressbar" style="width: 0%;" aria-valuenow="{{ votes }}"
+                                aria-valuemin="0" aria-valuemax="100" data-animation="on">{{ votes }}%</div>
+                            {% endwith %}
+                        </div>
+                    {% endfor %}
                 {% endif %}
             </div>
         </div>
