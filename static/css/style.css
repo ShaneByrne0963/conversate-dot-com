@@ -142,12 +142,12 @@ a:hover {
     border: 1px solid rgba(0, 0, 0, 0.25);
 }
 
-/* Removing the extra thick border between "Categories" and "Your Posts" */
-#category-collapse {
+/* Removing the extra thick border between collapsible navigation buttons */
+#category-collapse, #poll-collapse {
     border-bottom: none;
 }
 
-#side-nav-categories {
+#side-nav-categories, #side-nav-polls {
     border-radius: 0;
 }
 

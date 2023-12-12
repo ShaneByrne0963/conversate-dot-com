@@ -285,11 +285,7 @@ class EditPost(View):
         context['post'] = post
         categories = Category.objects.all()
         context['category_list'] = categories
-        return render(
-            request,
-            'edit_post.html',
-            context,
-        )
+        return render(request, 'edit_post.html', context)
 
     def post(self, request, id):
         title = request.POST.get('title')
@@ -337,11 +333,7 @@ class ViewPost(View):
             'liked': liked,
             'poll_status': poll_status
         })
-        return render(
-            request,
-            'post_details.html',
-            context
-        )
+        return render(request, 'post_details.html', context)
 
 
 class LikePost(View):

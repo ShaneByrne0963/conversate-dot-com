@@ -78,7 +78,7 @@
         <div class="container-fluid">
             <div class="row">
                 <!-- Side nav -->
-                <nav class="d-none d-md-block col-4">
+                <nav class="d-none d-md-block col-4" >
                     <!-- Search Bar -->
                     <form action="{% url 'search_post' %}" method="GET" autocomplete="off">
                         <div class="search-bar mt-4" role="button" data-toggle="popover"
@@ -145,21 +145,26 @@
                         </div>
                     </div>
                     <!-- Post navigation -->
-                    <div class="list-group side-nav">
+                    <div class="list-group side-nav accordion" id="side-nav-list">
+                        <!-- Home -->
                         <a class="list-group-item list-group-item-action side-nav-btn
                             {% if selected_tab == 'Home' %} active{% endif %}" href="{% url 'home' %}">
                             <i class="fa-solid fa-house center-to-container"></i>
                             <span class="d-inline-block ml-lg-2">Home</span>
                         </a>
+                        <!-- Categories -->
                         <a id="category-collapse" class="list-group-item list-group-item-action side-nav-btn clickable
                             {% if 'Categories' in selected_tab %} active{% endif %}" data-toggle="collapse"
                             href="#side-nav-categories" role="button" aria-expanded="false" aria-controls="side-nav-categories">
+
                             <i class="fa-solid fa-list center-to-container"></i>
                             <div class="ml-lg-2">Categories</div>
                             <i class="fa-solid fa-caret-down center-to-container"></i>
                         </a>
                         <!-- Collapsible side nav categories -->
-                        <div id="side-nav-categories" class="list-group collapse">
+                        <div id="side-nav-categories" class="list-group collapse"
+                            aria-describedby="#category-collapse" data-parent="#side-nav-list">
+
                             {% for top_category in top_categories %}
                                 <a href="{% url 'categories' top_category.slug %}" class="list-group-item list-group-item-action
                                     side-nav-btn{% if selected_tab == 'Category/'|add:top_category.name %} active{% endif %} pl-lg-5">
@@ -182,7 +187,34 @@
                                 </a>
                             {% endif %}
                         </div>
-                        <!-- /.collapsible -->
+                        <!-- Polls -->
+                        <a id="poll-collapse" class="list-group-item list-group-item-action side-nav-btn clickable
+                            {% if 'Categories' in selected_tab %} active{% endif %}" data-toggle="collapse"
+                            href="#side-nav-polls" role="button" aria-expanded="false" aria-controls="side-nav-polls">
+                            <i class="fa-solid fa-square-poll-vertical center-to-container"></i>
+                            <div class="ml-lg-2">Polls</div>
+                            <i class="fa-solid fa-caret-down center-to-container"></i>
+                        </a>
+                        <!-- Collapsible side nav polls -->
+                        <div id="side-nav-polls" class="list-group collapse"
+                            aria-describedby="#poll-collapse" data-parent="#side-nav-list">
+                            <a href="#" class="list-group-item list-group-item-action
+                                side-nav-btn{% if selected_tab == 'Category/'|add:top_category.name %} active{% endif %} pl-lg-5">
+                                <i class="fa-solid fa-square-check center-to-container"></i>
+                                <div class="ml-lg-2">
+                                    <em>Open</em>
+                                </div>
+                            </a>
+                            <a class="list-group-item list-group-item-action side-nav-btn
+                                {% if selected_tab == 'Browse Categories' %} active{% endif %} pl-lg-5"
+                                href="{% url 'browse_categories' %}">
+                                <i class="fa-solid fa-list-check center-to-container"></i>
+                                <div class="ml-lg-2">
+                                    <em>All</em>
+                                </div>
+                            </a>
+                        </div>
+                        <!-- User's polls -->
                         <a class="list-group-item list-group-item-action side-nav-btn clickable"
                             href="{% url 'my_posts' %}">
                             <i class="fa-solid fa-message center-to-container"></i>
