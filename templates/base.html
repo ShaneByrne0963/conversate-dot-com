@@ -188,7 +188,7 @@
                             {% endif %}
                         </div>
                         <!-- Polls -->
-                        <a id="poll-collapse" class="list-group-item list-group-item-action side-nav-btn clickable
+                        <a id="poll-list-collapse" class="list-group-item list-group-item-action side-nav-btn clickable
                             {% if 'Categories' in selected_tab %} active{% endif %}" data-toggle="collapse"
                             href="#side-nav-polls" role="button" aria-expanded="false" aria-controls="side-nav-polls">
                             <i class="fa-solid fa-square-poll-vertical center-to-container"></i>
@@ -197,7 +197,7 @@
                         </a>
                         <!-- Collapsible side nav polls -->
                         <div id="side-nav-polls" class="list-group collapse"
-                            aria-describedby="#poll-collapse" data-parent="#side-nav-list">
+                            aria-describedby="#poll-list-collapse" data-parent="#side-nav-list">
                             <a href="#" class="list-group-item list-group-item-action
                                 side-nav-btn{% if selected_tab == 'Category/'|add:top_category.name %} active{% endif %} pl-lg-5">
                                 <i class="fa-solid fa-square-check center-to-container"></i>
