@@ -478,23 +478,22 @@ class VotePoll(View):
                 return redirect(current_dir)
 
 
-class OpenPolls(View):
+class BrowsePolls(View):
 
-    def get(self, request):
-        pass
-
-
-class ClosedPolls(View):
-
-    def get(self, request):
+    def get(self, request, poll_type):
         # Redirects the user to the login page if not logged in
         if not request.user.is_authenticated:
             return redirect('/accounts/login')
-        polls = Poll.objects.exclude(due_date__gt=datetime.now())
+        poll_type = poll_type.capitalize()
+        polls = None
+        if poll_type == 'Open':
+            polls = Poll.objects.filter(due_date__gt=datetime.now())
+        else:
+            polls = Poll.objects.exclude(due_date__gt=datetime.now())
 
         context = get_poll_list_context(request, polls)
-        context['heading'] = "Closed Polls"
-        context['selected_tab'] = 'Polls/Closed'
+        context['heading'] = f"{poll_type} Polls"
+        context['selected_tab'] = f'Polls/{poll_type}'
 
         return render(
             request,

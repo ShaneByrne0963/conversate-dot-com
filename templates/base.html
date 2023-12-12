@@ -198,7 +198,7 @@
                         <!-- Collapsible side nav polls -->
                         <div id="side-nav-polls" class="list-group collapse"
                             aria-describedby="#poll-list-collapse" data-parent="#side-nav-list">
-                            <a href="#" class="list-group-item list-group-item-action
+                            <a href="{% url 'browse_polls' 'open' %}" class="list-group-item list-group-item-action
                                 side-nav-btn{% if selected_tab == 'Category/'|add:top_category.name %} active{% endif %} pl-lg-5">
                                 <i class="fa-solid fa-square-check center-to-container"></i>
                                 <div class="ml-lg-2">
@@ -207,7 +207,7 @@
                             </a>
                             <a class="list-group-item list-group-item-action side-nav-btn
                                 {% if selected_tab == 'Browse Categories' %} active{% endif %} pl-lg-5"
-                                href="{% url 'closed_polls' %}">
+                                href="{% url 'browse_polls' 'closed' %}">
                                 <i class="fa-solid fa-square-xmark center-to-container"></i>
                                 <div class="ml-lg-2">
                                     <em>Closed</em>
