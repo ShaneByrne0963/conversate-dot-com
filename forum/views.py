@@ -484,17 +484,17 @@ class OpenPolls(View):
         pass
 
 
-class AllPolls(View):
+class ClosedPolls(View):
 
     def get(self, request):
         # Redirects the user to the login page if not logged in
         if not request.user.is_authenticated:
             return redirect('/accounts/login')
-        polls = Poll.objects.all()
+        polls = Poll.objects.exclude(due_date__gt=datetime.now())
 
         context = get_poll_list_context(request, polls)
-        context['heading'] = "All Polls"
-        context['selected_tab'] = 'Polls/All'
+        context['heading'] = "Closed Polls"
+        context['selected_tab'] = 'Polls/Closed'
 
         return render(
             request,
