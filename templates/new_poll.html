@@ -19,15 +19,6 @@ New Poll - Conversate
                     <label for="title">Title</label>
                     <input type="text" class="form-control" name="title" id="title" maxlength="200" required>
                 </div>
-                <!-- Category -->
-                <div class="form-group">
-                    <label for="category">Category</label>
-                    <select id="category" list="category" name="category" class="form-control" required>
-                        {% for category in category_list %}
-                            <option value="{{ category.name }}">{{ category.name }}</option>
-                        {% endfor %}
-                    </select>
-                </div>
                 <!-- Answers -->
                 <div class="form-group">
                     <label for="answers">Answers</label>

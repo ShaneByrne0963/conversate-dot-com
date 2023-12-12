@@ -100,7 +100,6 @@ class Comment(models.Model):
 
 class Poll(models.Model):
     title = models.CharField(max_length=200)
-    category = models.ForeignKey(Category, on_delete=models.CASCADE)
     asked_by = models.ForeignKey(User, on_delete=models.CASCADE)
     due_date = models.DateTimeField()
     post = models.OneToOneField(Post, on_delete=models.CASCADE,
@@ -110,7 +109,7 @@ class Poll(models.Model):
         ordering = ['-due_date']
     
     def __str__(self):
-        return f'[{self.category}] {self.title}'
+        return self.title
     
     def number_of_answers(self):
         return self.answers.count()
