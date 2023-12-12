@@ -127,6 +127,12 @@ class Poll(models.Model):
             if answer.votes.filter(id=user_id).exists():
                 return answer.position
         return -1 if self.has_expired() else 0
+    
+    def number_of_votes(self):
+        total_votes = 0
+        for answer in self.answers.all():
+            total_votes += answer.number_of_votes()
+        return total_votes
 
     def has_expired(self):
         current_time = datetime.now().timestamp()
@@ -154,5 +160,7 @@ class PollAnswer(models.Model):
         total_votes = 0
         poll_answers = self.poll.answers.all()
         for answer in poll_answers:
-            total_votes += answer.votes.count()
-        return round((self.votes.count() / total_votes) * 100)
+            total_votes += answer.number_of_votes()
+        if total_votes == 0:
+            return 0
+        return round((self.number_of_votes() / total_votes) * 100)

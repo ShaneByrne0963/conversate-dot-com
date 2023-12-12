@@ -327,7 +327,7 @@ class ViewPost(View):
         liked = post.likes.filter(id=request.user.id).exists()
 
         poll_status = -1
-        if post.poll:
+        if hasattr(post, 'poll'):
             poll_status = post.poll.poll_status(request.user.id)
 
         context = get_base_context(request)

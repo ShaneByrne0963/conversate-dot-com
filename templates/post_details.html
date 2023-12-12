@@ -26,8 +26,8 @@
         <div class="card mb-3">
             <div class="card-body">
                 <h5 class="card-title">{{ post.poll.title }}</h5>
-                {% if poll_status == 0 %}
-                    <form method="POST" action="{% url 'vote_poll' post.poll.id request.path %}">
+                {% if poll_status == 0 and post.posted_by != user %}
+                    <form method="POST" class="mt-2" action="{% url 'vote_poll' post.poll.id request.path %}">
                         {% csrf_token %}
                         {% for answer in post.poll.answers.all %}
                             <div class="form-check mb-2 ml-sm-3 ml-md-2 ml-lg-4">
@@ -38,12 +38,17 @@
                                 </label>
                             </div>
                         {% endfor %}
-                        <div class="mt-2">
+                        <div class="mt-3">
                             <input type="submit" class="btn" value="Vote">
                             <input type="reset" class="btn" value="Clear">
                         </div>
                     </form>
                 {% else %}
+                    <h6 class="card-subtitle text-muted mb-3">
+                        {% with post.poll.number_of_votes as vote_num %}
+                            <span>{{ vote_num }} vote{% if vote_num != 1 %}s{% endif %}</span>
+                        {% endwith %}
+                    </h6>
                     {% for answer in post.poll.answers.all %}
                         <div class="d-flex justify-content-between">
                             <span>{{ answer.body }}</span>
