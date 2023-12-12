@@ -1,7 +1,7 @@
 from forum.models import Post, Profile
 from .categories import get_top_categories
 from .pagination import get_paginated_items, POSTS_PER_PAGE, \
-                        CATEGORIES_PER_PAGE
+                        CATEGORIES_PER_PAGE, POLLS_PER_PAGE
 from django.contrib.auth.models import User
 from django.db.models import Count
 
@@ -40,6 +40,16 @@ def get_category_list_context(request, category_list):
     context['item_list'] = category_list
     context.update(get_paginated_items(request, category_list,
                                        CATEGORIES_PER_PAGE))
+    return context
+
+
+def get_poll_list_context(request, poll_list):
+    """
+    Builds the minimum context required for the poll_list template to function
+    """
+    context = get_base_context(request)
+    context['item_list'] = poll_list
+    context.update(get_paginated_items(request, poll_list, POLLS_PER_PAGE))
     return context
 
 

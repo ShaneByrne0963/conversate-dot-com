@@ -4,7 +4,8 @@ from django.http import HttpResponseRedirect
 from django.db.models import Q, Count
 from .models import Post, Category, Comment, SiteData, Poll, PollAnswer
 from .core.content import get_profile, get_post_list_context, \
-                          get_base_context, get_category_list_context
+                          get_base_context, get_category_list_context, \
+                          get_poll_list_context
 from .core.pagination import get_paginated_items
 from .core.slug import generate_slug, format_tag_search
 from .core.posting import convert_post_content
@@ -475,3 +476,28 @@ class VotePoll(View):
                 answer.votes.add(request.user)
                 answer.save()
                 return redirect(current_dir)
+
+
+class OpenPolls(View):
+
+    def get(self, request):
+        pass
+
+
+class AllPolls(View):
+
+    def get(self, request):
+        # Redirects the user to the login page if not logged in
+        if not request.user.is_authenticated:
+            return redirect('/accounts/login')
+        polls = Poll.objects.all()
+
+        context = get_poll_list_context(request, polls)
+        context['heading'] = "All Polls"
+        context['selected_tab'] = 'Polls/All'
+
+        return render(
+            request,
+            'poll_list.html',
+            context,
+        )

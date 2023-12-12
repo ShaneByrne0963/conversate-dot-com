@@ -7,6 +7,7 @@ from forum.tests import test_instance, test_index
 NUM_PAGES = 9
 POSTS_PER_PAGE = 20
 CATEGORIES_PER_PAGE = 48
+POLLS_PER_PAGE = 10
 
 
 def get_paginated_items(request, object_list, items_per_page):

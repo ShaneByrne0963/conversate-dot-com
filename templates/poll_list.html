@@ -1,0 +1,122 @@
+{% extends "base.html" %}
+
+{% block title %}
+{{ heading }} - Conversate
+{% endblock title %}
+
+{% block content %}
+
+<h1>{{ heading }}:</h1>
+<hr>
+{% for poll in item_list %}
+    <div class="card mb-5">
+        <div class="card-body">
+            <h5 class="card-title">{{ poll.title }}</h5>
+            {% if poll_status == 0 and poll.asked_by != user %}
+                <form method="POST" class="mt-2" action="{% url 'vote_poll' post.poll.id request.path %}">
+                    {% csrf_token %}
+                    {% for answer in poll.answers.all %}
+                        <div class="form-check mb-2 ml-sm-3 ml-md-2 ml-lg-4">
+                            <input class="form-check-input" type="radio" name="poll-vote" id="answer-{{ answer.position }}"
+                                value="{{ answer.position }}" required>
+                            <label class="form-check-label" for="answer-{{ answer.position }}">
+                                {{ answer.body }}
+                            </label>
+                        </div>
+                    {% endfor %}
+                    <div class="mt-3">
+                        <input type="submit" class="btn" value="Vote">
+                        <input type="reset" class="btn" value="Clear">
+                    </div>
+                </form>
+            {% else %}
+                <h6 class="card-subtitle text-muted mb-3">
+                    {% with poll.number_of_votes as vote_num %}
+                        <span>{{ vote_num }} vote{% if vote_num != 1 %}s{% endif %}</span>
+                    {% endwith %}
+                </h6>
+                {% for answer in poll.answers.all %}
+                    <div class="d-flex justify-content-between">
+                        <span>{{ answer.body }}</span>
+                        {% with answer.number_of_votes as vote_num %}
+                            <span>{{ vote_num }} vote{% if vote_num != 1 %}s{% endif %}</span>
+                        {% endwith %}
+                    </div>
+                    <div class="progress mb-3{% if poll_status == answer.position %} answer-chosen{% endif %}">
+                        {% with answer.vote_percentage as votes %}
+                            <div class="progress-bar poll-result" role="progressbar" style="width: 0%;" aria-valuenow="{{ votes }}"
+                                aria-valuemin="0" aria-valuemax="100" data-animation="on">{{ votes }}%</div>
+                        {% endwith %}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+        <div class="card-footer text-muted">
+            {% with poll.due_date|date:"d/m/y" as end_date %}
+            {% if poll.has_expired %}Poll ended {{ end_date }}
+            {% else %}Poll ends on {{ end_date }}
+            {% endif %}
+            {% endwith %}
+        </div>
+    </div>
+{% endfor %}
+
+<!-- Pagination -->
+{% if item_list.has_other_pages %}
+
+<nav aria-label="Page navigation">
+    <ul class="pagination justify-content-center">
+        {% if item_list.has_previous %}
+            <li class="page-item">
+                {% if selected_tab == 'Search' %}
+                    <a class="page-link" href="{{ search_url }}&page={{ item_list.previous_page_number }}">&lt;</a>
+                {% else %}
+                    <a class="page-link" href="?page={{ item_list.previous_page_number }}">&lt;</a>
+                {% endif %}
+        {% else %}
+            <li class="page-item disabled">
+                <div class="page-link">&lt;</div>
+        {% endif %}
+        </li>
+
+        {% for page in page_range %}
+            {% if forloop.last and end_gap %}
+                <li class="page-item disabled">
+                    <span class="page-link pagination-gap b-none">...</span>
+                </li>
+            {% endif %}
+            {% if page == item_list.number %}
+                <li class="page-item active">
+            {% else %}
+                <li class="page-item">
+            {% endif %}
+                {% if selected_tab == 'Search' %}
+                    <a class="page-link" href="{{ search_url }}&page={{ page }}">{{ page }}</a>
+                {% else %}
+                    <a class="page-link" href="?page={{ page }}">{{ page }}</a>
+                {% endif %}
+            </li>
+            {% if forloop.first and start_gap %}
+                <li class="page-item disabled">
+                    <span class="page-link pagination-gap b-none">...</span>
+                </li>
+            {% endif %}
+        {% endfor %}
+
+        {% if item_list.has_next %}
+            <li class="page-item">
+                {% if selected_tab == 'Search' %}
+                    <a class="page-link" href="{{ search_url }}&page={{ item_list.next_page_number }}">&gt;</a>
+                {% else %}
+                    <a class="page-link" href="?page={{ item_list.next_page_number }}">&gt;</a>
+                {% endif %}
+        {% else %}
+            <li class="page-item disabled">
+                <div class="page-link">&gt;</div>
+        {% endif %}
+        </li>
+    </ul>
+</nav>
+{% endif %}
+
+{% endblock content %}
