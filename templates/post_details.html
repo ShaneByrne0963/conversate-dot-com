@@ -61,6 +61,13 @@
                     {% endfor %}
                 {% endif %}
             </div>
+            <div class="card-footer text-muted">
+                {% with post.poll.due_date|date:"d/m/y" as end_date %}
+                {% if post.poll.has_expired %}Poll ended {{ end_date }}
+                {% else %}Poll ends on {{ end_date }}
+                {% endif %}
+                {% endwith %}
+            </div>
         </div>
     {% endif %}
 

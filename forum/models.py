@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from cloudinary.models import CloudinaryField
+from datetime import datetime
 
 
 class SiteData(models.Model):
@@ -125,7 +126,12 @@ class Poll(models.Model):
         for answer in answers:
             if answer.votes.filter(id=user_id).exists():
                 return answer.position
-        return 0
+        return -1 if self.has_expired() else 0
+
+    def has_expired(self):
+        current_time = datetime.now().timestamp()
+        end_time = self.due_date.timestamp()
+        return current_time > end_time
 
 
 class PollAnswer(models.Model):

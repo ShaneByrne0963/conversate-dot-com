@@ -313,12 +313,11 @@ a:hover {
     transition: width .8s ease-in-out;
 }
 
-.answer-chosen {
-    border: 1px solid #007bff;
-    
+.progress.answer-chosen {
+    border: 2px solid #cbcdcf;
+    height: 28px;
 }
 
 .answer-chosen>.progress-bar {
     font-weight: bold;
-    background-color: #4c9df5;
 }
