@@ -22,6 +22,11 @@ h3 {
     text-decoration: none;
 }
 
+.button-no-style {
+    background: none;
+    border: none;
+}
+
 a,
 h1,
 h2,

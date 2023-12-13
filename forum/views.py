@@ -387,10 +387,7 @@ class LikeComment(View):
             comment.likes.remove(request.user)
         else:
             comment.likes.add(request.user)
-
-        # Finding the slug of the post the comment is on
-        post = comment.post
-        slug = post.slug
+        slug = comment.post.slug
         return HttpResponseRedirect(reverse('view_post', args=[slug]))
 
 
@@ -403,10 +400,7 @@ class EditComment(View):
         comment.content = updated_body
         comment.edited = True
         comment.save()
-
-        # Finding the slug of the post the comment is on
-        post = comment.post
-        slug = post.slug
+        slug = comment.post.slug
         return HttpResponseRedirect(reverse('view_post', args=[slug]))
 
 
@@ -414,8 +408,7 @@ class DeleteComment(View):
 
     def get(self, request, comment_id):
         comment = get_object_or_404(Comment, id=comment_id)
-        post = comment.post
-        slug = post.slug
+        slug = comment.post.slug
         comment.delete()
         return HttpResponseRedirect(reverse('view_post', args=[slug]))
 
@@ -499,3 +492,11 @@ class BrowsePolls(View):
             'poll_list.html',
             context,
         )
+
+
+class DeletePoll(View):
+
+    def get(self, request, poll_id):
+        poll = get_object_or_404(Poll, id=poll_id)
+        poll.delete()
+        return redirect('home')
