@@ -121,7 +121,9 @@ function checkEnoughAnswers() {
  */
 function setValidAnswers(value) {
     let feedback = (value) ? '' : 'Need at least 2 answers.';
-    $('#answers').get(0).setCustomValidity(feedback);
+    if ($('#answers').length > 0) {
+        $('#answers').get(0).setCustomValidity(feedback);
+    }
 }
 
 

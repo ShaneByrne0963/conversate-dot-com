@@ -311,6 +311,29 @@ class EditPost(View):
             post.image = image_url
         post.image_position = request.POST.get('image-position')
 
+        # Adding a poll if one is found
+        if request.POST.get('has-poll'):
+            poll_title = request.POST.get('poll-title')
+            due_date = request.POST.get('due-date')
+            # Date format: YYYY-MM-DD
+            due_year = int(due_date[:4])
+            due_month = int(due_date[5:7])
+            due_day = int(due_date[8:])
+
+            poll = Poll.objects.create(
+                title=poll_title,
+                asked_by=request.user,
+                due_date=datetime(due_year, due_month, due_day),
+                post=post
+            )
+            for input_name in request.POST:
+                if 'answer-' in input_name:
+                    position = int(''.join(re.findall(r'[0-9]', input_name)))
+                    PollAnswer.objects.create(
+                        body=request.POST[input_name],
+                        poll=poll,
+                        position=position
+                    )
         post.save()
         return HttpResponseRedirect(reverse('view_post', args=[post.slug]))
 
