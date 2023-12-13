@@ -345,16 +345,11 @@ class ViewPost(View):
         comments = post.comments.order_by('-posted_on')
         liked = post.likes.filter(id=request.user.id).exists()
 
-        poll_status = -1
-        if hasattr(post, 'poll'):
-            poll_status = post.poll.poll_status(request.user.id)
-
         context = get_base_context(request)
         context.update({
             'post': post,
             'comments': comments,
             'liked': liked,
-            'poll_status': poll_status
         })
         return render(request, 'post_details.html', context)
 
