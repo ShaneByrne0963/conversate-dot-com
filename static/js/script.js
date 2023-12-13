@@ -8,11 +8,6 @@ window.addEventListener('DOMContentLoaded', () => {
         $('[data-toggle="tooltip"]').tooltip();
     });
 
-    // Modals
-    $('#modal-logout').on('shown.bs.modal', function () {
-        $('#nav-logout').trigger('focus');
-    });
-
     // Alerts
     $('.alert').alert();
 
