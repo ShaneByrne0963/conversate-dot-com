@@ -12,6 +12,12 @@
     <div class="card mb-5">
         <div class="card-body">
             <h5 class="card-title">{{ poll.title }}</h5>
+            <div class="card-subtitle mb-4">Asked by <em>{{ poll.asked_by }}</em>
+                {% if poll.post %}as part of post 
+                    <a href="{% url 'view_post' poll.post.slug %}">{{ poll.post.title }}</a>
+                {% endif %}
+            </div>
+            
             {% if poll_status == 0 and poll.asked_by != user %}
                 <form method="POST" class="mt-2" action="{% url 'vote_poll' post.poll.id request.path %}">
                     {% csrf_token %}

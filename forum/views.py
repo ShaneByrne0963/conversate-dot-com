@@ -484,8 +484,11 @@ class BrowsePolls(View):
         if poll_type == 'Open':
             polls = Poll.objects.filter(due_date__gt=datetime.now()) \
                         .order_by('due_date')
-        else:
+        elif poll_type == 'Closed':
             polls = Poll.objects.exclude(due_date__gt=datetime.now())
+        else:
+            polls = Poll.objects.filter(asked_by=request.user)
+            poll_type = 'Your'
 
         context = get_poll_list_context(request, polls)
         context['heading'] = f"{poll_type} Polls"

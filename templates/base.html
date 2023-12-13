@@ -189,7 +189,7 @@
                         </div>
                         <!-- Polls -->
                         <a id="poll-list-collapse" class="list-group-item list-group-item-action side-nav-btn clickable
-                            {% if 'Categories' in selected_tab %} active{% endif %}" data-toggle="collapse"
+                            {% if 'Polls' in selected_tab %} active{% endif %}" data-toggle="collapse"
                             href="#side-nav-polls" role="button" aria-expanded="false" aria-controls="side-nav-polls">
                             <i class="fa-solid fa-square-poll-vertical center-to-container"></i>
                             <div class="ml-lg-2">Polls</div>
@@ -199,26 +199,34 @@
                         <div id="side-nav-polls" class="list-group collapse"
                             aria-describedby="#poll-list-collapse" data-parent="#side-nav-list">
                             <a href="{% url 'browse_polls' 'open' %}" class="list-group-item list-group-item-action
-                                side-nav-btn{% if selected_tab == 'Category/'|add:top_category.name %} active{% endif %} pl-lg-5">
+                                side-nav-btn{% if selected_tab == 'Polls/Open' %} active{% endif %} pl-lg-5">
                                 <i class="fa-solid fa-square-check center-to-container"></i>
                                 <div class="ml-lg-2">
                                     <em>Open</em>
                                 </div>
                             </a>
                             <a class="list-group-item list-group-item-action side-nav-btn
-                                {% if selected_tab == 'Browse Categories' %} active{% endif %} pl-lg-5"
+                                {% if selected_tab == 'Polls/Closed' %} active{% endif %} pl-lg-5"
                                 href="{% url 'browse_polls' 'closed' %}">
                                 <i class="fa-solid fa-square-xmark center-to-container"></i>
                                 <div class="ml-lg-2">
                                     <em>Closed</em>
                                 </div>
                             </a>
+                            <a class="list-group-item list-group-item-action side-nav-btn
+                                {% if selected_tab == 'Polls/Your' %} active{% endif %} pl-lg-5"
+                                href="{% url 'browse_polls' 'owned' %}">
+                                <i class="fa-solid fa-folder-open center-to-container"></i>
+                                <div class="ml-lg-2">
+                                    <em>My Polls</em>
+                                </div>
+                            </a>
                         </div>
                         <!-- User's polls -->
                         <a class="list-group-item list-group-item-action side-nav-btn clickable"
                             href="{% url 'my_posts' %}">
-                            <i class="fa-solid fa-message center-to-container"></i>
-                            <span class="d-inline-block ml-lg-2">Your Posts</span>
+                            <i class="fa-solid fa-folder-open center-to-container"></i>
+                            <span class="d-inline-block ml-lg-2">My Posts</span>
                         </a>
                     </div>
                 </nav>
