@@ -2,7 +2,8 @@ from django.shortcuts import render, redirect, get_object_or_404, reverse
 from django.views import View
 from django.http import HttpResponseRedirect
 from django.db.models import Q, Count
-from .models import Post, Category, Comment, SiteData, Poll, PollAnswer
+from .models import Post, Category, Comment, SiteData, Poll, PollAnswer, \
+                    Report
 from .core.content import get_profile, get_post_list_context, \
                           get_base_context, get_category_list_context, \
                           get_poll_list_context
@@ -376,9 +377,29 @@ class DeletePost(View):
         return redirect('home')
 
 
+class ReportPost(View):
+
+    def post(self, request, slug):
+        # Redirects the user to the login page if not logged in
+        if not request.user.is_authenticated:
+            return redirect('/accounts/login')
+
+        post = get_object_or_404(Post, slug=slug)
+        reason = request.POST.get('offence')
+        Report.objects.create(
+            post=post,
+            reason=reason,
+            reported_by=request.user
+        )
+        return redirect('home')
+
+
 class SendComment(View):
 
     def post(self, request, slug):
+        # Redirects the user to the login page if not logged in
+        if not request.user.is_authenticated:
+            return redirect('/accounts/login')
         post = get_object_or_404(Post, slug=slug)
         comment_text = request.POST.get('content')
         reply_id = request.POST.get('reply')
@@ -399,6 +420,9 @@ class SendComment(View):
 class LikeComment(View):
 
     def post(self, request, comment_id):
+        # Redirects the user to the login page if not logged in
+        if not request.user.is_authenticated:
+            return redirect('/accounts/login')
         comment = get_object_or_404(Comment, id=comment_id)
 
         if comment.likes.filter(id=request.user.id).exists():

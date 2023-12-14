@@ -1,6 +1,6 @@
 from django.contrib import admin
 from .models import Profile, Post, Comment, Category, SiteData, Poll, \
-                    PollAnswer
+                    PollAnswer, Report
 from django_summernote.admin import SummernoteModelAdmin
 
 
@@ -62,3 +62,9 @@ class PollAnswerAdmin(SummernoteModelAdmin):
 class SiteDataAdmin(SummernoteModelAdmin):
 
     list_display = ('total_posts_created',)
+    
+
+@admin.register(Report)
+class CategoryAdmin(SummernoteModelAdmin):
+
+    list_display = ('post', 'reason', 'reported_by')

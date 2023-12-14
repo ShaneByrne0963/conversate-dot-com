@@ -8,6 +8,7 @@ $('.trigger-logout').click(setLogoutModal);
 
 // Reporting posts and comments
 $('.trigger-report-post').click({ itemType: 'Post' }, setReportModal);
+$('.trigger-report-comment').click({ itemType: 'Comment' }, setReportModal);
 
 
 /**

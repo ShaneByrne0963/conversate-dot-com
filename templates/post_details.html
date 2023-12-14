@@ -142,7 +142,8 @@
                 </button>
             <!-- Buttons specifically for non-user-owned posts -->
             {% else %}
-                <button class="btn py-0 trigger-report-post" aria-label="Report this post" data-url="#">
+                <button class="btn py-0 trigger-report-post" aria-label="Report this post"
+                    data-url="{% url 'report_post' post.slug %}">
                     <i class="fa-solid fa-flag"></i>
                     Report
                 </button>
