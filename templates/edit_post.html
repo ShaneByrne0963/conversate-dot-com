@@ -53,7 +53,7 @@ Edit Post - Conversate
                         <div class="row">
                             <div class="col col-md-8 col-lg-6 col-xl-12" id="tag-input">
                                 <input type="text" class="form-control" id="tag-input-text" maxlength="30">
-                                <button class="btn ml-2 disabled" id="add-tag" disabled>Add</button>
+                                <button type="button" class="btn ml-2 disabled" id="add-tag" disabled>Add</button>
                                 <div id="tag-feedback" class="invalid-feedback d-block"></div>
                             </div>
                         </div>
@@ -68,8 +68,8 @@ Edit Post - Conversate
                                 {% with post.poll as poll %}
                                 <div class="d-flex justify-content-between mb-2">
                                     <h5 class="card-title mb-0">{{ poll.title }}</h5>
-                                    <button class="button-no-style px-1" type="button" data-toggle="modal"
-                                        data-target="#modal-poll-delete">
+                                    <button type="button" class="button-no-style px-1 trigger-delete-poll"
+                                        data-url="{% url 'delete_poll' post.poll.id %}">
                                         <h5 class="fa-solid fa-trash mb-0 text-muted"></h5>
                                     </button>
                                 </div>
@@ -97,7 +97,7 @@ Edit Post - Conversate
                                         <ul id="answer-list" class="list-group"></ul>
                                         <div id="answer-input" class="mt-2">
                                             <input type="text" class="form-control" id="answers" maxlength="100">
-                                            <button class="btn ml-2 disabled" id="add-answer" disabled>Add</button>
+                                            <button type="button" class="btn ml-2 disabled" id="add-answer" disabled>Add</button>
                                         </div>
                                         <div id="answer-feedback" class="invalid-feedback">You have already entered this answer.</div>
                                     </div>
@@ -153,33 +153,6 @@ Edit Post - Conversate
         <a href="{% url 'view_post' post.slug %}" class="btn form-button btn-primary ml-1 ml-sm-2 ml-md-0">Cancel</a>
     </div>
 </form>
-
-<!-- Modal to delete the poll -->
-{% if post.poll %}
-    <div class="modal fade" id="modal-poll-delete" tabindex="-1">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Confirm Poll Delete</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <p>Are you sure you want to delete this poll?</p>
-                    <p>Deleting this post cannot be undone and will remove all user answers.</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal"
-                        aria-label="Keep poll">Cancel</button>
-                    <a href="{% url 'delete_poll' post.poll.id %}" class="btn btn-primary"
-                        aria-label="Confirm poll delete">Delete</a>
-                </div>
-            </div>
-        </div>
-    </div>
-{% endif %}
-<!-- /.modal -->
 
 {% endblock content %}
 

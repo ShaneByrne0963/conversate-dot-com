@@ -140,6 +140,7 @@
                     <i class="fa-solid fa-trash"></i>
                     Delete
                 </button>
+            <!-- Buttons specifically for non-user-owned posts -->
             {% else %}
                 <button class="btn py-0 trigger-report-post" aria-label="Report this post" data-url="#">
                     <i class="fa-solid fa-flag"></i>
@@ -281,38 +282,6 @@
             {% endfor %}
         {% endif %}
     </div>
-
-    <!-- Obsolete Modal for reporting post -->
-    <div class="modal fade" id="modal-post-report" tabindex="-1">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Report Post</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <form method="POST">
-                    {% csrf_token %}
-                    <div class="modal-body">
-                        <label for="offence">Please select the reason for reporting the post.</label>
-                        <select name="offence" id="offence" class="form-control">
-                            <option value="hateful">Offensive/Hateful content</option>
-                            <option value="bully">Bullying/Harassment</option>
-                            <option value="spam">Spam</option>
-                            <option value="graphic">Graphic/Violent Imagery</option>
-                            <option value="misinfo">Misinformation</option>
-                        </select>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal" aria-label="Keep post">Cancel</button>
-                        <input type="submit" class="btn btn-primary" aria-label="Send report" value="Send">
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-    <!-- /.modals -->
 {% endblock %}
 
 {% block scripts %}

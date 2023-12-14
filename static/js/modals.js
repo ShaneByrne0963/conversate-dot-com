@@ -3,8 +3,11 @@ $('.trigger-delete-post').click({ itemType: 'Post' }, setDeleteModal);
 $('.trigger-delete-comment').click({ itemType: 'Comment' }, setDeleteModal);
 $('.trigger-delete-poll').click({ itemType: 'Poll' }, setDeleteModal);
 
-//Logging out
+// Logging out
 $('.trigger-logout').click(setLogoutModal);
+
+// Reporting posts and comments
+$('.trigger-report-post').click({ itemType: 'Post' }, setReportModal);
 
 
 /**
@@ -15,8 +18,8 @@ function setModal(infoObject) {
     $('#modal-all').find('.modal-title').text(infoObject.title);
     $('#modal-all').find('.modal-body').html(infoObject.body);
     $('#modal-all').find('.modal-cancel').attr('aria-label', infoObject.ariaCancel);
-    $('#modal-all').find('.modal-confirm').attr('aria-label', infoObject.title)
-        .text(infoObject.textConfirm).attr('href', infoObject.url);
+    $('#modal-all').find('.modal-confirm').attr('aria-label', infoObject.title).text(infoObject.textConfirm);
+    $('#modal-all').find('form').attr('action', infoObject.url);
     $('#modal-all').modal();
 }
 
@@ -73,6 +76,31 @@ function setLogoutModal() {
         url: url,
         textConfirm: 'Log out',
         ariaCancel: `Stay logged in`
+    };
+    setModal(modalObject);
+}
+
+
+function setReportModal(event) {
+    let url = this.getAttribute('data-url');
+    let itemType = event.data.itemType;
+    let bodyHtml = `
+    <label for="offence">Please select the reason for reporting the post.</label>
+    <select name="offence" id="offence" class="form-control">
+        <option value="hateful">Offensive/Hateful content</option>
+        <option value="bully">Bullying/Harassment</option>
+        <option value="spam">Spam</option>
+        <option value="graphic">Graphic/Violent Imagery</option>
+        <option value="misinfo">Misinformation</option>
+    </select>
+    `;
+
+    let modalObject = {
+        title: `Report ${itemType}.`,
+        body: bodyHtml,
+        url: url,
+        textConfirm: 'Send',
+        ariaCancel: 'Cancel report'
     };
     setModal(modalObject);
 }

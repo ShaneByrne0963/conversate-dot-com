@@ -255,13 +255,16 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body">Modal body</div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary modal-cancel" data-dismiss="modal"
-                        aria-label="Cancel aria label">Cancel</button>
-                    <a href="#" class="btn btn-primary modal-confirm"
-                        aria-label="Confirm aria label">Confirm</a>
-                </div>
+                <form method="POST">
+                    {% csrf_token %}
+                    <div class="modal-body">Modal body</div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary modal-cancel" data-dismiss="modal"
+                            aria-label="Cancel aria label">Cancel</button>
+                        <button type="submit" class="btn btn-primary modal-confirm"
+                            aria-label="Confirm aria label">Confirm</a>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

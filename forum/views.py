@@ -368,7 +368,7 @@ class LikePost(View):
 
 class DeletePost(View):
 
-    def get(self, request, slug):
+    def post(self, request, slug):
         post = get_object_or_404(Post, slug=slug)
         if post.image:
             cloudinary.uploader.destroy(post.image.public_id)
@@ -424,7 +424,7 @@ class EditComment(View):
 
 class DeleteComment(View):
 
-    def get(self, request, comment_id):
+    def post(self, request, comment_id):
         comment = get_object_or_404(Comment, id=comment_id)
         slug = comment.post.slug
         comment.delete()
@@ -514,7 +514,7 @@ class BrowsePolls(View):
 
 class DeletePoll(View):
 
-    def get(self, request, poll_id):
+    def post(self, request, poll_id):
         poll = get_object_or_404(Poll, id=poll_id)
         poll.delete()
         return redirect('home')
