@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load static %}
 {% load template_tags %}
 
 {% block title %}
@@ -15,34 +16,10 @@
             <div class="d-flex justify-content-between mb-2">
                 <h5 class="card-title mb-0">{{ poll.title }}</h5>
                 {% if poll.asked_by == user %}
-                    <button class="button-no-style px-1" type="button" data-toggle="modal"
-                        data-target="#modal-poll-{{ poll.id }}-delete">
+                    <button class="button-no-style px-1 trigger-delete-poll" type="button"
+                        data-url="{% url 'delete_poll' poll.id %}">
                         <h5 class="fa-solid fa-trash mb-0 text-muted"></h5>
                     </button>
-                    <!-- Modal to delete the poll -->
-                    <div class="modal fade" id="modal-poll-{{ poll.id }}-delete" tabindex="-1">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title">Confirm Poll Delete</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    <p>Are you sure you want to delete this poll?</p>
-                                    <p>Deleting this post cannot be undone and will remove all user answers.</p>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal"
-                                        aria-label="Keep poll">Cancel</button>
-                                    <a href="{% url 'delete_poll' poll.id %}" class="btn btn-primary"
-                                        aria-label="Confirm poll delete">Delete</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- /.modal -->
                 {% endif %}
             </div>
             <div class="card-subtitle mb-4">Asked by <em>{{ poll.asked_by }}</em>
@@ -164,4 +141,32 @@
 </nav>
 {% endif %}
 
+<!-- Modal to delete polls -->
+<div class="modal fade" id="modal-all" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Confirm Poll Delete</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to delete this poll?</p>
+                <p>Deleting this post cannot be undone and will remove all user answers.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary modal-cancel" data-dismiss="modal"
+                    aria-label="Keep poll">Cancel</button>
+                <a href="#" class="btn btn-primary modal-confirm" aria-label="Confirm poll delete">Delete</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /.modal -->
+
 {% endblock content %}
+
+{% block scripts %}
+    <script src="{% static 'js/modals.js' %}"></script>
+{% endblock scripts %}
