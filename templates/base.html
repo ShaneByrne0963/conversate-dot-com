@@ -63,8 +63,8 @@
                         <div class="dropdown-menu dropdown-menu-right">
                             <a class="dropdown-item" href="#" aria-label="View and edit your account settings">Account Settings</a>
                             <div class="dropdown-divider"></div>
-                            <a id="nav-logout" class="dropdown-item clickable" data-toggle="modal"
-                                data-target="#modal-logout" aria-label="Log out of your account">Log out</a>
+                            <a id="nav-logout" class="dropdown-item clickable trigger-logout"
+                                aria-label="Log out of your account" data-url="{% url 'account_logout' %}">Log out</a>
                         </div>
                     </li>
                 {% else %}
@@ -245,26 +245,27 @@
         </div>
     </div>
 
-    <!-- Modal for logging out -->
-    <div class="modal fade" id="modal-logout" tabindex="-1">
+    <!-- Modal -->
+    <div class="modal fade" id="modal-all" tabindex="-1">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Confirm Logout</h5>
+                    <h5 class="modal-title">Modal title</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body">
-                    <p>Are you sure you want to log out?</p>
-                </div>
+                <div class="modal-body">Modal body</div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal" aria-label="Dismiss logout">Cancel</button>
-                    <a href="{% url 'account_logout' %}" class="btn btn-primary" aria-label="Confirm logout">Log Out</a>
+                    <button type="button" class="btn btn-secondary modal-cancel" data-dismiss="modal"
+                        aria-label="Cancel aria label">Cancel</button>
+                    <a href="#" class="btn btn-primary modal-confirm"
+                        aria-label="Confirm aria label">Confirm</a>
                 </div>
             </div>
         </div>
     </div>
+    <!-- /.modal -->
 
     <!-- jQuery -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.js"
@@ -276,6 +277,7 @@
         crossorigin="anonymous"></script>
     <!-- Custom JavaScript -->
     <script src="{% static 'js/script.js' %}"></script>
+    <script src="{% static 'js/modals.js' %}"></script>
     {% block scripts %}
     {% endblock scripts %}
 </body>
