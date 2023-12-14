@@ -123,9 +123,9 @@
                 </span>
             {% endif %}
             {% if user.is_authenticated %}
-                <a class="btn py-0 line-separate" href="#post-comment" aria-label="Post a comment">
+                <a class="btn py-0{% if user == post.posted_by %} line-separate{% endif %}" href="#post-comment" aria-label="Post a comment">
             {% else %}
-                <a class="btn py-0 line-separate" href="#comments" aria-label="View the post's comments">
+                <a class="btn py-0{% if user == post.posted_by %} line-separate{% endif %}" href="#comments" aria-label="View the post's comments">
             {% endif %}
                 <i class="fa-regular fa-comment"></i>
                 {{ post.number_of_comments }}
@@ -139,13 +139,6 @@
                 <button class="btn py-0 trigger-delete-post" aria-label="Delete this post" data-url="{% url 'delete_post' post.slug %}">
                     <i class="fa-solid fa-trash"></i>
                     Delete
-                </button>
-            <!-- Buttons specifically for non-user-owned posts -->
-            {% else %}
-                <button class="btn py-0 trigger-report-post" aria-label="Report this post"
-                    data-url="{% url 'report_post' post.slug %}">
-                    <i class="fa-solid fa-flag"></i>
-                    Report
                 </button>
             {% endif %}
         </div>

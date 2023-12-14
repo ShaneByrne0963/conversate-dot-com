@@ -19,7 +19,6 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE,
                                 primary_key=True, related_name='profile')
     sort_by_new = models.BooleanField(default=False)
-    penalty_points = models.IntegerField(default=0)
 
     def __str__(self):
         return self.user.username
@@ -151,20 +150,3 @@ class PollAnswer(models.Model):
         if total_votes == 0:
             return 0
         return round((self.number_of_votes() / total_votes) * 100)
-
-
-class Report(models.Model):
-    post = models.ForeignKey(Post, related_name='post_reports',
-                             on_delete=models.CASCADE)
-    comment = models.ForeignKey(Post, related_name='comment_reports',
-                                on_delete=models.CASCADE, blank=True,
-                                null=True)
-    reason = models.CharField(max_length=10)
-    reported_by = models.ForeignKey(User, related_name='user_reports',
-                                    on_delete=models.CASCADE)
-    resolved = models.BooleanField(default=False)
-
-    def __str__(self):
-        if self.comment:
-            return f'Report on {self.comment}'
-        return f'Report on {self.post}'

@@ -6,10 +6,6 @@ $('.trigger-delete-poll').click({ itemType: 'Poll' }, setDeleteModal);
 // Logging out
 $('.trigger-logout').click(setLogoutModal);
 
-// Reporting posts and comments
-$('.trigger-report-post').click({ itemType: 'Post' }, setReportModal);
-$('.trigger-report-comment').click({ itemType: 'Comment' }, setReportModal);
-
 
 /**
  * Sets the display information of a modal, and triggers it's display
@@ -77,31 +73,6 @@ function setLogoutModal() {
         url: url,
         textConfirm: 'Log out',
         ariaCancel: `Stay logged in`
-    };
-    setModal(modalObject);
-}
-
-
-function setReportModal(event) {
-    let url = this.getAttribute('data-url');
-    let itemType = event.data.itemType;
-    let bodyHtml = `
-    <label for="offence">Please select the reason for reporting the post.</label>
-    <select name="offence" id="offence" class="form-control">
-        <option value="hateful">Offensive/Hateful content</option>
-        <option value="bully">Bullying/Harassment</option>
-        <option value="spam">Spam</option>
-        <option value="graphic">Graphic/Violent Imagery</option>
-        <option value="misinfo">Misinformation</option>
-    </select>
-    `;
-
-    let modalObject = {
-        title: `Report ${itemType}.`,
-        body: bodyHtml,
-        url: url,
-        textConfirm: 'Send',
-        ariaCancel: 'Cancel report'
     };
     setModal(modalObject);
 }
