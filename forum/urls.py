@@ -35,5 +35,6 @@ urlpatterns = [
     path('polls/delete/<int:poll_id>', views.DeletePoll.as_view(),
          name='delete_poll'),
     path('account-settings', views.AccountSettings.as_view(),
-         name='account_settings')
+         name='account_settings'),
+    path('edit-account', views.EditAccount.as_view(), name='edit_account')
 ]

@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404, reverse
 from django.views import View
 from django.http import HttpResponseRedirect
 from django.db.models import Q, Count
+from django.contrib.auth import authenticate
 from .models import Post, Category, Comment, SiteData, Poll, PollAnswer
 from .core.content import get_profile, get_post_list_context, \
                           get_base_context, get_category_list_context, \
@@ -539,3 +540,28 @@ class AccountSettings(View):
             'account_settings.html',
             context
         )
+    
+    def post(self, request):
+
+        password = request.POST.get('password')
+        user = authenticate(request, username=request.user.username,
+                            password=password)
+        if user is not None:
+            return redirect('edit_account')
+        else:
+            return redirect('account_settings')
+
+
+class EditAccount(View):
+
+    def get(self, request):
+        # Redirects the user to the login page if not logged in
+        if not request.user.is_authenticated:
+            return redirect('/accounts/login')
+        context = get_base_context(request)
+        return render(
+            request,
+            'edit_account.html',
+            context
+        )
+

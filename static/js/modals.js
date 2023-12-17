@@ -89,7 +89,7 @@ function setAccountEditModal() {
     let bodyHtml = `
     <p>Please enter your password to edit your account</p>
     <label for="password">Password</label>
-    <input type="password" id="password" name="password" class="form-control">
+    <input type="password" id="password" name="password" class="form-control" required>
     `;
 
     let modalObject = {
