@@ -9,6 +9,9 @@ $('.trigger-logout').click(setLogoutModal);
 // Edit account
 $('.trigger-account-edit').click(setAccountEditModal);
 
+// Delete account
+$('.trigger-account-delete').click(setAccountDeleteModal);
+
 
 /**
  * Sets the display information of a modal, and triggers it's display
@@ -94,6 +97,32 @@ function setAccountEditModal() {
 
     let modalObject = {
         title: `Confirm Identity.`,
+        body: bodyHtml,
+        url: url,
+        textConfirm: 'Confirm',
+        ariaCancel: `Cancel`
+    };
+    setModal(modalObject);
+}
+
+
+/**
+ * Activates a modal to confirm the deletion of the user's account, requesting
+ * their password for authentication
+ */
+function setAccountDeleteModal() {
+    let url = this.getAttribute('data-url');
+    let bodyHtml = `
+    <p>Are you sure you want to delete your account?</p>
+    <p><strong>WARNING</strong>: Deleting your account cannot be undone,
+    and will remove all posts, polls, likes and comments you have posted!</p>
+    <p>Please enter your password to confirm your decision.</p>
+    <label for="password">Password</label>
+    <input type="password" id="password" name="password" class="form-control" required>
+    `;
+
+    let modalObject = {
+        title: `Confirm Account Delete.`,
         body: bodyHtml,
         url: url,
         textConfirm: 'Confirm',

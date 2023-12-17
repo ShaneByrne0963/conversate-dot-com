@@ -3,6 +3,7 @@ from django.views import View
 from django.http import HttpResponseRedirect
 from django.db.models import Q, Count
 from django.contrib.auth import authenticate, update_session_auth_hash
+from django.contrib.auth.models import User
 from django.contrib.auth.forms import SetPasswordForm
 from .models import Post, Category, Comment, SiteData, Poll, PollAnswer
 from .forms import UpdateUserForm
@@ -594,3 +595,17 @@ class EditAccount(View):
                 'edit_account.html',
                 context
             )
+
+
+class DeleteAccount(View):
+
+    def post(self, request):
+        password = request.POST.get('password')
+        user = authenticate(request, username=request.user.username,
+                            password=password)
+        if user is not None:
+            user = get_object_or_404(User, id=request.user.id)
+            user.delete()
+            return redirect('/accounts/login')
+        else:
+            return redirect('account_settings')

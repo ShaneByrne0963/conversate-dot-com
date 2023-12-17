@@ -27,7 +27,8 @@ Account Settings - Conversate
                 {% endif %}
             </div>
         </div>
-        <button class="btn btn-danger">Delete Account</button>
+        <button class="btn btn-danger trigger-account-delete"
+            data-url="{% url 'delete_account' %}">Delete Account</button>
     </div>
 </div>
 
