@@ -2,7 +2,8 @@ from django.shortcuts import render, redirect, get_object_or_404, reverse
 from django.views import View
 from django.http import HttpResponseRedirect
 from django.db.models import Q, Count
-from django.contrib.auth import authenticate
+from django.contrib.auth import authenticate, update_session_auth_hash
+from django.contrib.auth.forms import SetPasswordForm
 from .models import Post, Category, Comment, SiteData, Poll, PollAnswer
 from .core.content import get_profile, get_post_list_context, \
                           get_base_context, get_category_list_context, \
@@ -559,9 +560,18 @@ class EditAccount(View):
         if not request.user.is_authenticated:
             return redirect('/accounts/login')
         context = get_base_context(request)
+        context['form'] = SetPasswordForm(request.user)
         return render(
             request,
             'edit_account.html',
             context
         )
-
+    
+    def post(self, request):
+        password_change = SetPasswordForm(request.user, request.POST)
+        if password_change.is_valid():
+            user = password_change.save()
+            update_session_auth_hash(request, user)
+            return redirect('account_settings')
+        else:
+            return redirect('edit_account')
