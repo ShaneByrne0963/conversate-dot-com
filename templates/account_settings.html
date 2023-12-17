@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block title %}
+Account Settings - Conversate
+{% endblock title %}
+
+{% block content %}
+
+<h1>Account Settings:</h1>
+<hr>
+<div class="row">
+    <div class="col col-md-8 col-xl-6">
+        <div class="mb-4">Username
+            <div class="account-setting">
+                <div class="form-control">{{ request.user }}</div>
+                <button class="btn ml-2">Edit</button>
+            </div>
+        </div>
+        <div class="mb-4">Email
+            <div class="account-setting">
+                <div class="form-control">{{ request.user }}</div>
+                <button class="btn ml-2">Edit</button>
+            </div>
+        </div>
+        <button class="btn btn-danger">Delete Account</button>
+    </div>
+</div>
+
+{% endblock content %}

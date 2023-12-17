@@ -61,7 +61,8 @@
                         
                         <!-- Dropdown menu -->
                         <div class="dropdown-menu dropdown-menu-right">
-                            <a class="dropdown-item" href="#" aria-label="View and edit your account settings">Account Settings</a>
+                            <a class="dropdown-item" href="{% url 'account_settings' %}"
+                                aria-label="View and edit your account settings">Account Settings</a>
                             <div class="dropdown-divider"></div>
                             <a id="nav-logout" class="dropdown-item clickable trigger-logout"
                                 aria-label="Log out of your account" data-url="{% url 'account_logout' %}">Log out</a>

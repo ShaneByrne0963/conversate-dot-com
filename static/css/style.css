@@ -326,3 +326,11 @@ a:hover {
 .answer-chosen>.progress-bar {
     font-weight: bold;
 }
+
+/* ------------------------------------------------------Account Settings------------------------------------------------------ */
+
+.account-setting {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr auto;
+}

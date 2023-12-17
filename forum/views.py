@@ -524,3 +524,18 @@ class DeletePoll(View):
         poll = get_object_or_404(Poll, id=poll_id)
         poll.delete()
         return redirect('home')
+
+
+class AccountSettings(View):
+
+    def get(self, request):
+        # Redirects the user to the login page if not logged in
+        if not request.user.is_authenticated:
+            return redirect('/accounts/login')
+
+        context = get_base_context(request)
+        return render(
+            request,
+            'account_settings.html',
+            context
+        )
