@@ -334,3 +334,7 @@ a:hover {
     display: grid;
     grid-template-columns: 1fr auto;
 }
+
+.account-setting>em {
+    line-height: 32px;
+}

@@ -13,13 +13,18 @@ Account Settings - Conversate
         <div class="mb-4">Username
             <div class="account-setting">
                 <div class="form-control">{{ request.user }}</div>
-                <button class="btn ml-2">Edit</button>
+                <button class="btn ml-2 trigger-account-edit" data-url="#">Edit</button>
             </div>
         </div>
         <div class="mb-4">Email
             <div class="account-setting">
-                <div class="form-control">{{ request.user }}</div>
-                <button class="btn ml-2">Edit</button>
+                {% if request.user.email %}
+                    <div class="form-control">{{ request.user.email }}</div>
+                    <button class="btn ml-2 trigger-account-edit" data-url="#">Edit</button>
+                {% else %}
+                    <em>No email found.</em>
+                    <button class="btn ml-2 trigger-account-edit" data-url="#">Add</button>
+                {% endif %}
             </div>
         </div>
         <button class="btn btn-danger">Delete Account</button>

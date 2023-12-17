@@ -6,6 +6,9 @@ $('.trigger-delete-poll').click({ itemType: 'Poll' }, setDeleteModal);
 // Logging out
 $('.trigger-logout').click(setLogoutModal);
 
+// Edit account
+$('.trigger-account-edit').click(setAccountEditModal);
+
 
 /**
  * Sets the display information of a modal, and triggers it's display
@@ -73,6 +76,28 @@ function setLogoutModal() {
         url: url,
         textConfirm: 'Log out',
         ariaCancel: `Stay logged in`
+    };
+    setModal(modalObject);
+}
+
+
+/**
+ * Activates a modal to request the user's password before editing their account
+ */
+function setAccountEditModal() {
+    let url = this.getAttribute('data-url');
+    let bodyHtml = `
+    <p>Please enter your password to edit your account</p>
+    <label for="password">Password</label>
+    <input type="password" id="password" name="password" class="form-control">
+    `;
+
+    let modalObject = {
+        title: `Confirm Identity.`,
+        body: bodyHtml,
+        url: url,
+        textConfirm: 'Confirm',
+        ariaCancel: `Cancel`
     };
     setModal(modalObject);
 }
