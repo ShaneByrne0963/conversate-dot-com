@@ -11,3 +11,8 @@ function updatePasswordCollapse() {
         $('#password2').removeAttr('required');
     }
 }
+
+// Sets the password change input to valid if the checkbox is checked
+$(document).ready(() => {
+    updatePasswordCollapse();
+});

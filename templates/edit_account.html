@@ -16,12 +16,13 @@ Account Settings - Conversate
             <!-- Username -->
             <div class="form-group">
                 <label for="username">Username</label>
-                <input type="text" class="form-control" id="username" name="username" value="{{ request.user }}">
+                {{ user_form.username }}
             </div>
             <!-- Email -->
             <div class="form-group">
                 <label for="username">Email</label>
-                <input type="email" class="form-control" id="email" name="email" value="{{ request.user.email }}">
+                <!-- <input type="email" class="form-control" id="email" name="email" value="{{ request.user.email }}"> -->
+                {{ user_form.email }}
             </div>
             <!-- Password change -->
             <div class="form-group">
@@ -52,6 +53,21 @@ Account Settings - Conversate
         </form>
     </div>
 </div>
+
+{% if user_form.errors %}
+    <ul>
+        {% for key,value in user_form.errors.items %} 
+            <li>{{ key|escape }} : {{ value|escape }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}
+{% if password_form.errors %}
+    <ul>
+        {% for key,value in password_form.errors.items %} 
+            <li>{{ key|escape }} : {{ value|escape }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}
 
 {% endblock content %}
 

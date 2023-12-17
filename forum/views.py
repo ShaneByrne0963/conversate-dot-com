@@ -5,6 +5,7 @@ from django.db.models import Q, Count
 from django.contrib.auth import authenticate, update_session_auth_hash
 from django.contrib.auth.forms import SetPasswordForm
 from .models import Post, Category, Comment, SiteData, Poll, PollAnswer
+from .forms import UpdateUserForm
 from .core.content import get_profile, get_post_list_context, \
                           get_base_context, get_category_list_context, \
                           get_poll_list_context
@@ -560,7 +561,8 @@ class EditAccount(View):
         if not request.user.is_authenticated:
             return redirect('/accounts/login')
         context = get_base_context(request)
-        context['form'] = SetPasswordForm(request.user)
+        context['user_form'] = UpdateUserForm(instance=request.user)
+        context['password_form'] = SetPasswordForm(request.user)
         return render(
             request,
             'edit_account.html',
@@ -568,10 +570,27 @@ class EditAccount(View):
         )
     
     def post(self, request):
-        password_change = SetPasswordForm(request.user, request.POST)
-        if password_change.is_valid():
-            user = password_change.save()
-            update_session_auth_hash(request, user)
+        form_valid = False
+        user_form = UpdateUserForm(request.POST, instance=request.user)
+        password_form = None
+        if user_form.is_valid():
+            if request.POST.get('change-password'):
+                password_form = SetPasswordForm(request.user, request.POST)
+                if password_form.is_valid():
+                    form_valid = True
+                    user = password_form.save()
+                    update_session_auth_hash(request, user)
+            else:
+                form_valid = True
+        if form_valid:
+            user_form.save()
             return redirect('account_settings')
         else:
-            return redirect('edit_account')
+            context = get_base_context(request)
+            context['user_form'] = user_form
+            context['password_form'] = password_form
+            return render(
+                request,
+                'edit_account.html',
+                context
+            )
