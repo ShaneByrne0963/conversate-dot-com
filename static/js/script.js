@@ -43,3 +43,16 @@ function startPollAnimation() {
         answer.style.width = answer.innerText;
     }
 }
+
+
+/**
+ * Gets if a checkbox that triggers a collapse is checked, and sets the state of
+ * the collapse accordingly
+ * @returns {Boolean} If the checkbox that enables the collapse is checked
+ */
+function getCheckboxCollapse() {
+    let checked = $('.check-collapse').is(':checked');
+    let collapseState = (checked) ? 'show' : 'hide';
+    $('.check-collapse-content').collapse(collapseState);
+    return checked;
+}

@@ -64,18 +64,26 @@ $('form').on('reset', () => {
     $('#preview-empty').removeClass('d-none');
 });
 
-// Only makes the poll inputs required if the user selected to include a poll
-$('#poll-collapse').on('show.bs.collapse', () => {
-    console.log('Hi');
-    $('#poll-title').attr('required', 'true');
-    $('#due-date').attr('required', 'true');
-    checkEnoughAnswers();
-});
-$('#poll-collapse').on('hide.bs.collapse', () => {
-    $('#poll-title').removeAttr('required');
-    $('#due-date').removeAttr('required');
-    setValidAnswers(true);
-});
+// Updates the poll collapse when the user clicks on the checkbox
+$('.check-collapse').on('input', updatePollCollapse);
+
+
+/**
+ * Shows or hides the poll collapse div, depending on if the checkbox is
+ * checked or not
+ */
+function updatePollCollapse() {
+    if (getCheckboxCollapse()) {
+        $('#poll-title').attr('required', 'true');
+        $('#due-date').attr('required', 'true');
+        checkEnoughAnswers();
+    }
+    else {
+        $('#poll-title').removeAttr('required');
+        $('#due-date').removeAttr('required');
+        setValidAnswers(true);
+    }
+}
 
 
 /**
@@ -189,7 +197,7 @@ function removeTag(event) {
 }
 
 
-// Sets the answer input to valid on load as by default it is disabled
+// Sets the poll answer input to valid if the checkbox is checked
 $(document).ready(() => {
-    setValidAnswers(true);
+    updatePollCollapse();
 });
