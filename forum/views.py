@@ -12,7 +12,6 @@ from .core.content import get_profile, get_post_list_context, \
                           get_poll_list_context
 from .core.pagination import get_paginated_items
 from .core.slug import generate_slug, format_tag_search
-from .core.posting import convert_post_content
 from datetime import datetime
 import urllib.parse
 import cloudinary
@@ -217,7 +216,6 @@ class AddPost(View):
         title = request.POST.get('title')
         category = request.POST.get('category')
         content = request.POST.get('body')
-        content = convert_post_content(content)
         tags = request.POST.get('tags')
         category_object = get_object_or_404(Category, name=category)
 
