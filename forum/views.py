@@ -290,11 +290,12 @@ class EditPost(View):
         context['post'] = post
         categories = Category.objects.all()
         context['category_list'] = categories
+        context['content_form'] = PostContentForm()
         return render(request, 'edit_post.html', context)
 
     def post(self, request, id):
         title = request.POST.get('title')
-        content = request.POST.get('content')
+        content = request.POST.get('body')
         category = request.POST.get('category')
         tags = request.POST.get('tags')
         post = get_object_or_404(Post, id=id)

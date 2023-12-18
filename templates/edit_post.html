@@ -29,9 +29,11 @@ Edit Post - Conversate
                         {% endfor %}
                     </select>
                 </div>
-                <div class="form-group">
-                    <label for="content">Body</label>
-                    <textarea class="form-control" id="content" name="content" rows="6" required>{{ post.content }}</textarea>
+                <!-- Summernote text editor for post body -->
+                <div class="form-group" id="summernote-content">
+                    {{ content_form }}
+                    <input type="text" id="summernote-feedback">
+                    <div class="d-none" id="previous-content">{{ post.content }}</div>
                 </div>
                 <!-- Tags -->
                 <div class="form-group">

@@ -205,6 +205,12 @@ function summernoteInit() {
     let contentField = iFrame.contentWindow.document.querySelector('.note-editing-area');
     if (contentField) {
         contentField.addEventListener('input', checkBodyValid);
+        // Prepopulating the text field if the post is being edited
+        let previousInput = document.querySelector('#previous-content');
+        if (previousInput) {
+            contentField.querySelector('.note-editable').innerHTML = previousInput.innerText;
+            previousInput.remove();
+        }
     }
     else {
         // document.onload runs before iframe is fully loaded

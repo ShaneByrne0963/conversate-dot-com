@@ -150,19 +150,18 @@ SUMMERNOTE_CONFIG = {
     'airMode': True,
     'width': 'auto',
     'height': '480',
-      'toolbar': [
-        # ['style', ['style']],
+    'toolbar': [
+        ['style', ['style']],
         ['font', ['bold', 'italic', 'underline', 'superscript', 'subscript', 'strikethrough', 'clear']],
-        # ['fontname', ['fontname']],
         ['fontsize', ['fontsize']],
-        # ['color', ['color']],
         ['para', ['ul', 'ol', 'paragraph']],
         ['height', ['height']],
         ['table', ['table']],
-        ['insert', ['link', 'picture', 'hr']],
+        ['insert', ['link', 'hr']],
         ['view', ['fullscreen', 'codeview']],
         ['help', ['help']],
-      ], }
+    ],
+}
 SUMMERNOTE_THEME = 'bs4'
 
 
