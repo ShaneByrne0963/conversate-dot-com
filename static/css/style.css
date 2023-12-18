@@ -292,6 +292,18 @@ a:hover {
     width: 100%;
 }
 
+#summernote-content {
+    position: relative;
+}
+
+#summernote-feedback {
+    border: none;
+    z-index: -1;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
 #tag-input,
 #answer-input {
     display: grid;

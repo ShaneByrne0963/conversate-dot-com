@@ -67,15 +67,6 @@ $('form').on('reset', () => {
 // Updates the poll collapse when the user clicks on the checkbox
 $('.check-collapse').on('input', updatePollCollapse);
 
-// 
-$('#body-input').on('input', updateBodyText);
-
-function updateBodyText() {
-    console.clear();
-    console.log($('#body-input').text());
-    console.log($('#body-input').html());
-}
-
 
 /**
  * Shows or hides the poll collapse div, depending on if the checkbox is
@@ -206,7 +197,53 @@ function removeTag(event) {
 }
 
 
+/**
+ * Attaches the input event listener to the summernote text field when it is created
+ */
+function summernoteInit() {
+    let iFrame = $('iframe').get(0);
+    let contentField = iFrame.contentWindow.document.querySelector('.note-editing-area');
+    if (contentField) {
+        contentField.addEventListener('input', checkBodyValid);
+    }
+    else {
+        // document.onload runs before iframe is fully loaded
+        // window.onload also runs before iframe is fully loaded
+        // The best way to attach the event listener is to keep checking until
+        // the specific "".note-editing-area" element is found
+        setTimeout(summernoteInit, 1);
+    }
+}
+
+/**
+ * Checks if there is any text within the main body for the post to be valid
+ */
+function checkBodyValid() {
+    let feedback = $('#summernote-feedback').get(0);
+    feedback.setCustomValidity('Please fill out this field.');
+    let iFrame = $('iframe').get(0);
+    let contentField = iFrame.contentWindow.document.querySelector('.note-editing-area');
+    if (contentField) {
+        // Summernote uses HTML to display their text
+        // We want to make sure there is some inner text within any of the elements
+        // for the form to be valid
+        let contentElements = contentField.children;
+        for (let element of contentElements) {
+            let text = element.innerText;
+            text = text.trim();
+            text = text.replace('\n', '');
+            if (text !== '') {
+                feedback.setCustomValidity('');
+                break;
+            }
+        }
+    }
+}
+
+
 // Sets the poll answer input to valid if the checkbox is checked
 $(document).ready(() => {
     updatePollCollapse();
+    checkBodyValid();
+    summernoteInit();
 });
