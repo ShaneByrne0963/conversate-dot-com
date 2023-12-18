@@ -287,34 +287,9 @@ a:hover {
     width: 128px;
 }
 
-#body-input {
-    border-bottom-left-radius: 0;
-    border-bottom-right-radius: 0;
-    padding: .375rem .75rem;
-    height: 200px;
-    overflow-x: hidden;
-    overflow-y: auto;
-}
-
-#body-input-footer {
-    background-color: #FA7336;
-    border-bottom-left-radius: 0.25rem;
-    border-bottom-right-radius: 0.25rem;
-    padding: 2px;
-    font-size: 1.2em;
-}
-
-#body-input-footer>button {
-    color: white;
-}
-
 /* Fixing the summernote text editor size */
-#id_content_iframe {
+#id_body_iframe {
     width: 100%;
-}
-
-.panel-heading.note-toolbar {
-    background-color: #FA7336;
 }
 
 #tag-input,

@@ -146,10 +146,10 @@ USE_TZ = True
 # Summernote configuration
 
 SUMMERNOTE_CONFIG = {
-    'iframe': True,
+    'iframe': False,
     'airMode': True,
     'width': 'auto',
-    'height': '400',
+    'height': '480',
       'toolbar': [
         # ['style', ['style']],
         ['font', ['bold', 'italic', 'underline', 'superscript', 'subscript', 'strikethrough', 'clear']],
@@ -163,6 +163,7 @@ SUMMERNOTE_CONFIG = {
         ['view', ['fullscreen', 'codeview']],
         ['help', ['help']],
       ], }
+SUMMERNOTE_THEME = 'bs4'
 
 
 # Static files (CSS, JavaScript, Images)

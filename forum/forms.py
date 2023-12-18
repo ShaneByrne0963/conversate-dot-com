@@ -5,7 +5,7 @@ from django_summernote.widgets import SummernoteWidget
 
 
 class PostContentForm(forms.Form):
-    content = forms.CharField(
+    body = forms.CharField(
         required=True,
         widget=SummernoteWidget()
     )

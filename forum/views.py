@@ -216,7 +216,7 @@ class AddPost(View):
     def post(self, request):
         title = request.POST.get('title')
         category = request.POST.get('category')
-        content = request.POST.get('content')
+        content = request.POST.get('body')
         content = convert_post_content(content)
         tags = request.POST.get('tags')
         category_object = get_object_or_404(Category, name=category)
