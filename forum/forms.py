@@ -1,5 +1,14 @@
 from django import forms
 from django.contrib.auth.models import User
+from .models import Post
+from django_summernote.widgets import SummernoteWidget
+
+
+class PostContentForm(forms.Form):
+    content = forms.CharField(
+        required=True,
+        widget=SummernoteWidget()
+    )
 
 
 class UpdateUserForm(forms.ModelForm):

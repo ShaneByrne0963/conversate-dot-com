@@ -308,6 +308,15 @@ a:hover {
     color: white;
 }
 
+/* Fixing the summernote text editor size */
+#id_content_iframe {
+    width: 100%;
+}
+
+.panel-heading.note-toolbar {
+    background-color: #FA7336;
+}
+
 #tag-input,
 #answer-input {
     display: grid;

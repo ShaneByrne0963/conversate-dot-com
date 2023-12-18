@@ -6,7 +6,7 @@ from django.contrib.auth import authenticate, update_session_auth_hash
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import SetPasswordForm
 from .models import Post, Category, Comment, SiteData, Poll, PollAnswer
-from .forms import UpdateUserForm
+from .forms import UpdateUserForm, PostContentForm
 from .core.content import get_profile, get_post_list_context, \
                           get_base_context, get_category_list_context, \
                           get_poll_list_context
@@ -206,6 +206,7 @@ class AddPost(View):
         context = get_base_context(request)
         categories = Category.objects.all()
         context['category_list'] = categories
+        context['content_form'] = PostContentForm()
         return render(
             request,
             'new_post.html',

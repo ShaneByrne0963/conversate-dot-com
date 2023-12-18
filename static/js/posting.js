@@ -67,6 +67,15 @@ $('form').on('reset', () => {
 // Updates the poll collapse when the user clicks on the checkbox
 $('.check-collapse').on('input', updatePollCollapse);
 
+// 
+$('#body-input').on('input', updateBodyText);
+
+function updateBodyText() {
+    console.clear();
+    console.log($('#body-input').text());
+    console.log($('#body-input').html());
+}
+
 
 /**
  * Shows or hides the poll collapse div, depending on if the checkbox is

@@ -143,6 +143,28 @@ USE_L10N = True
 USE_TZ = True
 
 
+# Summernote configuration
+
+SUMMERNOTE_CONFIG = {
+    'iframe': True,
+    'airMode': True,
+    'width': 'auto',
+    'height': '400',
+      'toolbar': [
+        # ['style', ['style']],
+        ['font', ['bold', 'italic', 'underline', 'superscript', 'subscript', 'strikethrough', 'clear']],
+        # ['fontname', ['fontname']],
+        ['fontsize', ['fontsize']],
+        # ['color', ['color']],
+        ['para', ['ul', 'ol', 'paragraph']],
+        ['height', ['height']],
+        ['table', ['table']],
+        ['insert', ['link', 'picture', 'hr']],
+        ['view', ['fullscreen', 'codeview']],
+        ['help', ['help']],
+      ], }
+
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 

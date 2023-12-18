@@ -28,6 +28,7 @@ New Post - Conversate
                 </div>
                 <div class="form-group">
                     <label for="body-input">Body</label>
+                    {{ content_form|safe }}
                     <div id="body-input" class="form-control" contenteditable="true"></div>
                     <div id="body-input-footer">
                         <button type="button" class="button-no-style line-separate align-middle">
