@@ -10,6 +10,13 @@ class PostContentForm(forms.Form):
         widget=SummernoteWidget()
     )
 
+    def __init__(self, *args, **kwargs):
+        """
+        Removes the suffix ":" from the form label
+        """
+        super().__init__(*args, **kwargs)
+        self.label_suffix = ""
+
 
 class UpdateUserForm(forms.ModelForm):
     username = forms.CharField(
