@@ -27,8 +27,32 @@ New Post - Conversate
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="content">Body</label>
-                    <textarea class="form-control" id="content" name="content" rows="6" required></textarea>
+                    <label for="body-input">Body</label>
+                    <div id="body-input" class="form-control" contenteditable="true"></div>
+                    <div id="body-input-footer">
+                        <button type="button" class="button-no-style line-separate align-middle">
+                            <i class="fa-solid fa-bold"></i>
+                        </button>
+                        <button type="button" class="button-no-style line-separate align-middle">
+                            <i class="fa-solid fa-italic"></i>
+                        </button>
+                        <button type="button" class="button-no-style line-separate align-middle">
+                            <i class="fa-solid fa-underline"></i>
+                        </button>
+                        <button type="button" class="button-no-style line-separate align-middle">
+                            <i class="fa-solid fa-strikethrough"></i>
+                        </button>
+                        <button type="button" class="button-no-style line-separate align-middle">
+                            <i class="fa-solid fa-list"></i>
+                        </button>
+                        <button type="button" class="button-no-style line-separate align-middle">
+                            <i class="fa-solid fa-minus"></i>
+                        </button>
+                        <button type="button" class="button-no-style align-middle">
+                            <i class="fa-solid fa-image"></i>
+                        </button>
+                    </div>
+                    <!-- <textarea class="form-control" id="body-input" name="content" rows="6" required></textarea> -->
                 </div>
                 <!-- Tags -->
                 <div class="form-group">

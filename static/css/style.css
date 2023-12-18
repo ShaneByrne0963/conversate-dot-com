@@ -222,7 +222,7 @@ a:hover {
     /* The full height of the screen minus the height of the navbar */
     height: calc(100vh - 56px);
     overflow-y: auto;
-    /* Forces the footer to the bototm of the page */
+    /* Forces the footer to the bottom of the page */
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: 1fr auto;
@@ -285,6 +285,27 @@ a:hover {
 
 .form-button {
     width: 128px;
+}
+
+#body-input {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    padding: .375rem .75rem;
+    height: 200px;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+#body-input-footer {
+    background-color: #FA7336;
+    border-bottom-left-radius: 0.25rem;
+    border-bottom-right-radius: 0.25rem;
+    padding: 2px;
+    font-size: 1.2em;
+}
+
+#body-input-footer>button {
+    color: white;
 }
 
 #tag-input,
