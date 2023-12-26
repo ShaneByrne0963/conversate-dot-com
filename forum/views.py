@@ -2,7 +2,6 @@ from django.shortcuts import render, redirect, get_object_or_404, reverse
 from django.views import View
 from django.http import HttpResponseRedirect
 from django.db.models import Q, Count
-from django.contrib import messages
 from django.contrib.auth import authenticate, update_session_auth_hash
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import SetPasswordForm
@@ -12,6 +11,7 @@ from .core.content import get_profile, get_post_list_context, \
                           get_base_context, get_category_list_context, \
                           get_poll_list_context, get_post_context
 from .core.slug import generate_slug, format_tag_search
+from .core.feedback import deny_access
 from datetime import datetime
 import urllib.parse
 import cloudinary
@@ -281,17 +281,8 @@ class EditPost(View):
 
         # Preventing users that do not own the post from being able to edit it
         if post.posted_by != request.user:
-            context = get_post_context(request, post)
-            messages.add_message(
-                request,
-                messages.ERROR,
-                'You do not have permission to perform that action'
-            )
-            return render(
-                request,
-                'post_details.html',
-                context
-            )
+            deny_access(request)
+            return HttpResponseRedirect(reverse('view_post', args=[post.slug]))
 
         context = get_base_context(request)
         context['post'] = post

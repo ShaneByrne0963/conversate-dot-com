@@ -222,22 +222,7 @@ a:hover {
     /* Forces the footer to the bottom of the page */
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: 1fr auto;
-    position: relative;
-}
-
-#alert-section {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    /* Preventing the alert div from blocking any clickable elements in the main section */
-    pointer-events: none;
-    padding: 32px;
-}
-
-/* Only allowing the alerts to be interacted with */
-#alert-section>* {
-    pointer-events: auto;
+    grid-template-rows: auto 1fr auto;
 }
 
 .alert-error {
