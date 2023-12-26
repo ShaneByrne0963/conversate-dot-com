@@ -12,6 +12,17 @@ def display_error(request, message):
     )
 
 
+def display_success(request, message):
+    """
+    Adds an success message to the list of messages displayed to the user
+    """
+    messages.add_message(
+        request,
+        messages.SUCCESS,
+        message
+    )
+
+
 def deny_access(request):
     """
     Adds an error message that notifies the user they are not allowed to

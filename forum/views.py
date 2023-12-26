@@ -11,7 +11,8 @@ from .core.content import get_profile, get_post_list_context, \
                           get_base_context, get_category_list_context, \
                           get_poll_list_context, get_post_context
 from .core.slug import generate_slug, format_tag_search
-from .core.messages import display_error, deny_access, display_form_errors
+from .core.messages import display_error, display_success, deny_access, \
+                           display_form_errors
 from datetime import datetime
 import urllib.parse
 import cloudinary
@@ -268,7 +269,8 @@ class AddPost(View):
                         poll=poll,
                         position=position
                     )
-        return redirect('home')
+        display_success(request, 'Your post was created successfully!')
+        return HttpResponseRedirect(reverse('view_post', args=[post_slug]))
 
 
 class EditPost(View):
@@ -339,6 +341,7 @@ class EditPost(View):
                         position=position
                     )
         post.save()
+        display_success(request, 'Your post has been updated!')
         return HttpResponseRedirect(reverse('view_post', args=[post.slug]))
 
 
@@ -369,6 +372,7 @@ class DeletePost(View):
         if post.image:
             cloudinary.uploader.destroy(post.image.public_id)
         post.delete()
+        display_success(request, 'Your post has been deleted')
         return redirect('home')
 
 
@@ -392,6 +396,7 @@ class SendComment(View):
             posted_by=request.user,
             reply_to=reply_to
         )
+        display_success(request, 'Your comment was sent successfully!')
         return HttpResponseRedirect(reverse('view_post', args=[slug]))
 
 
@@ -421,6 +426,7 @@ class EditComment(View):
         comment.edited = True
         comment.save()
         slug = comment.post.slug
+        display_success(request, 'Your comment has been updated!')
         return HttpResponseRedirect(reverse('view_post', args=[slug]))
 
 
@@ -430,6 +436,7 @@ class DeleteComment(View):
         comment = get_object_or_404(Comment, id=comment_id)
         slug = comment.post.slug
         comment.delete()
+        display_success(request, 'Your comment has been deleted!')
         return HttpResponseRedirect(reverse('view_post', args=[slug]))
 
 
@@ -456,7 +463,6 @@ class AddPoll(View):
 
         poll = Poll.objects.create(
             title=title,
-            category=category_object,
             asked_by=request.user,
             due_date=datetime(due_year, due_month, due_day)
         )
@@ -469,7 +475,8 @@ class AddPoll(View):
                     poll=poll,
                     position=position
                 )
-        return redirect('home')
+        display_success(request, 'Your poll was created successfully!')
+        return HttpResponseRedirect(reverse('browse_polls', args=['owned']))
 
 
 class VotePoll(View):
@@ -483,6 +490,7 @@ class VotePoll(View):
             if answer.position == vote_answer:
                 answer.votes.add(request.user)
                 answer.save()
+                display_success(request, 'Your vote has been sent!')
                 return redirect(current_dir)
 
 
@@ -500,7 +508,8 @@ class BrowsePolls(View):
         elif poll_type == 'Closed':
             polls = Poll.objects.exclude(due_date__gt=datetime.now())
         else:
-            polls = Poll.objects.filter(asked_by=request.user)
+            polls = Poll.objects.filter(asked_by=request.user) \
+                        .order_by('due_date')
             poll_type = 'Your'
 
         context = get_poll_list_context(request, polls)
@@ -519,6 +528,7 @@ class DeletePoll(View):
     def post(self, request, poll_id):
         poll = get_object_or_404(Poll, id=poll_id)
         poll.delete()
+        display_success(request, 'Your poll has been deleted')
         return redirect('home')
 
 
@@ -580,6 +590,7 @@ class EditAccount(View):
                 form_valid = True
         if form_valid:
             user_form.save()
+            display_success(request, 'Your details have been updated!')
             return redirect('account_settings')
         else:
             display_form_errors(request, user_form)
@@ -605,6 +616,7 @@ class DeleteAccount(View):
         if user is not None:
             user = get_object_or_404(User, id=request.user.id)
             user.delete()
+            display_success(request, 'Your account has been deleted')
             return redirect('/accounts/login')
         else:
             return redirect('account_settings')
