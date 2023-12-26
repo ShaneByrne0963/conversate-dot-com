@@ -16,6 +16,13 @@ def get_base_context(request):
     return context
 
 
+def get_post_context(request, post):
+    context = get_base_context(request)
+    context['post'] = post
+    context['comments'] = post.comments.order_by('-posted_on')
+    return context
+
+
 def get_post_list_context(request, post_list):
     """
     Builds the minimum context required for the post_list template to function

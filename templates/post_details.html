@@ -106,7 +106,7 @@
             {% if user.is_authenticated %}
             <form class="d-inline" method="POST" action="{% url 'like_post' post.slug %}">
                 {% csrf_token %}
-                {% if liked %}
+                {% if user in post.likes.all %}
                     <button type="submit" class="btn py-0 line-separate" aria-label="Unlike this post">
                         <i class="fa-solid fa-thumbs-up"></i>
                 {% else %}

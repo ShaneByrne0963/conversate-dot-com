@@ -9,8 +9,7 @@ from .models import Post, Category, Comment, SiteData, Poll, PollAnswer
 from .forms import UpdateUserForm, PostContentForm
 from .core.content import get_profile, get_post_list_context, \
                           get_base_context, get_category_list_context, \
-                          get_poll_list_context
-from .core.pagination import get_paginated_items
+                          get_poll_list_context, get_post_context
 from .core.slug import generate_slug, format_tag_search
 from datetime import datetime
 import urllib.parse
@@ -66,7 +65,6 @@ class SearchPost(View):
         # Searching by tags if a hashtag is at the beginning of the search
         if search_input.strip()[0] == '#':
             search_formatted = format_tag_search(search_input)
-            print(search_formatted)
             return HttpResponseRedirect(reverse('search_tag',
                                                 args=[search_formatted]))
 
@@ -282,7 +280,16 @@ class EditPost(View):
 
         # Preventing users that do not own the post from being able to edit it
         if post.posted_by != request.user:
-            return HttpResponseRedirect(reverse('view_post', args=[post.slug]))
+            context = get_post_context(request, post)
+            context['feedback'] = [{
+                'message': 'You do not have permission to perform that action',
+                'status': 'danger'
+            }]
+            return render(
+                request,
+                'post_details.html',
+                context
+            )
 
         context = get_base_context(request)
         context['post'] = post
@@ -346,15 +353,7 @@ class ViewPost(View):
 
     def get(self, request, slug):
         post = get_object_or_404(Post, slug=slug)
-        comments = post.comments.order_by('-posted_on')
-        liked = post.likes.filter(id=request.user.id).exists()
-
-        context = get_base_context(request)
-        context.update({
-            'post': post,
-            'comments': comments,
-            'liked': liked,
-        })
+        context = get_post_context(request, post)
         return render(request, 'post_details.html', context)
 
 
