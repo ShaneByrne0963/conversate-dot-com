@@ -11,7 +11,7 @@ from .core.content import get_profile, get_post_list_context, \
                           get_base_context, get_category_list_context, \
                           get_poll_list_context, get_post_context
 from .core.slug import generate_slug, format_tag_search
-from .core.feedback import deny_access
+from .core.messages import display_error, deny_access
 from datetime import datetime
 import urllib.parse
 import cloudinary
@@ -544,6 +544,8 @@ class AccountSettings(View):
         if user is not None:
             return redirect('edit_account')
         else:
+            display_error(request,
+                          'The password you have entered is incorrect.')
             return redirect('account_settings')
 
 
