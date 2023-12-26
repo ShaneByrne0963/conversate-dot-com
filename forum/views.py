@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404, reverse
 from django.views import View
 from django.http import HttpResponseRedirect
 from django.db.models import Q, Count
+from django.contrib import messages
 from django.contrib.auth import authenticate, update_session_auth_hash
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import SetPasswordForm
@@ -281,10 +282,11 @@ class EditPost(View):
         # Preventing users that do not own the post from being able to edit it
         if post.posted_by != request.user:
             context = get_post_context(request, post)
-            context['feedback'] = [{
-                'message': 'You do not have permission to perform that action',
-                'status': 'danger'
-            }]
+            messages.add_message(
+                request,
+                messages.ERROR,
+                'You do not have permission to perform that action'
+            )
             return render(
                 request,
                 'post_details.html',
