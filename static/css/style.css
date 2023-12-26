@@ -205,9 +205,6 @@ a:hover {
 
 #search-hint {
     font-size: .875em;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
 }
 
 /* ------------------------------------------------------Default Template------------------------------------------------------ */

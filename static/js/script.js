@@ -29,11 +29,6 @@ $('#search-input').focus(() => {
     }
 });
 
-// Hiding the search hint when the close button is clicked
-$('#search-hint-close').click(() => {
-    $('#search-hint').addClass('d-none');
-});
-
 /**
  * Updates the width of each poll result to animate them
  */
