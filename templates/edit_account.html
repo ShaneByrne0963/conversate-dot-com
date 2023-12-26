@@ -53,21 +53,6 @@ Account Settings - Conversate
     </div>
 </div>
 
-{% if user_form.errors %}
-    <ul>
-        {% for key,value in user_form.errors.items %} 
-            <li>{{ key|escape }} : {{ value|escape }}</li>
-        {% endfor %}
-    </ul>
-{% endif %}
-{% if password_form.errors %}
-    <ul>
-        {% for key,value in password_form.errors.items %} 
-            <li>{{ key|escape }} : {{ value|escape }}</li>
-        {% endfor %}
-    </ul>
-{% endif %}
-
 {% endblock content %}
 
 {% block scripts %}

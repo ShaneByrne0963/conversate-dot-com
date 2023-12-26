@@ -11,7 +11,7 @@ from .core.content import get_profile, get_post_list_context, \
                           get_base_context, get_category_list_context, \
                           get_poll_list_context, get_post_context
 from .core.slug import generate_slug, format_tag_search
-from .core.messages import display_error, deny_access
+from .core.messages import display_error, deny_access, display_form_errors
 from datetime import datetime
 import urllib.parse
 import cloudinary
@@ -568,8 +568,9 @@ class EditAccount(View):
         form_valid = False
         user_form = UpdateUserForm(request.POST, instance=request.user)
         password_form = None
+        password_change = request.POST.get('change-password')
         if user_form.is_valid():
-            if request.POST.get('change-password'):
+            if password_change:
                 password_form = SetPasswordForm(request.user, request.POST)
                 if password_form.is_valid():
                     form_valid = True
@@ -581,6 +582,10 @@ class EditAccount(View):
             user_form.save()
             return redirect('account_settings')
         else:
+            display_form_errors(request, user_form)
+            if password_change:
+                display_form_errors(request, password_form)
+            
             context = get_base_context(request)
             context['user_form'] = user_form
             context['password_form'] = password_form
