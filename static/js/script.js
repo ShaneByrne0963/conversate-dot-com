@@ -29,6 +29,15 @@ $('#search-input').focus(() => {
     }
 });
 
+
+/**
+ * Rearranges elements in the DOM depending on the screen size
+ */
+function resizeScreen() {
+    
+}
+
+
 /**
  * Updates the width of each poll result to animate them
  */
