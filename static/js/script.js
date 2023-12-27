@@ -45,6 +45,7 @@ $('#side-nav-button').click(() => {
     }
 });
 
+// Prevents the mobile side nav appearing temporarily when resizing the screen
 $('#side-nav-collapse').on('transitionend', function() {
     $(this).removeClass('expanding');
     console.log('Finished');
