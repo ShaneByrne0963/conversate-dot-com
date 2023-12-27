@@ -291,12 +291,6 @@ a:hover {
 
 /* ------------------------------------------------------Posts------------------------------------------------------ */
 
-.post {
-    margin: 32px 0;
-    padding: 16px 0;
-    background-color: #FFEFD4;
-}
-
 .category {
     background-color: #FA7336;
     color: white;
