@@ -163,6 +163,8 @@ a:hover {
     left: -90vw;
     transition: left 0.6s ease-in-out;
     background-color: #FFEFD4;
+    padding-left: 15px;
+    padding-right: 15px;
 }
 
 #side-nav-collapse.expanded {

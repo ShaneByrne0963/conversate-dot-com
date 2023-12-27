@@ -34,8 +34,9 @@
                 <strong class="d-none d-md-inline">Conversate</strong>
             </a>
         </div>
+        <!-- Side nav collapse for small screens -->
         <div class="nav">
-            <button class="btn d-inline d-md-none">
+            <button id="side-nav-button" class="btn d-inline d-md-none">
                 <i class="fa-solid fa-bars"></i>
             </button>
         </div>
@@ -86,158 +87,161 @@
         <div class="container-fluid">
             <div class="row">
                 <!-- Side nav -->
-                <nav class="d-none d-md-block col-4" >
-                    <!-- Search Bar -->
-                    <form action="{% url 'search_post' %}" method="GET" autocomplete="off">
-                        <div class="search-bar mt-4" role="button" data-toggle="popover"
-                            data-placement="bottom">
-                            <div class="center-to-container">
-                                <i class="fa-solid fa-magnifying-glass"></i>
+                <div id="side-nav-large" class="d-none d-md-block col-4">
+                    <nav id="side-nav-container">
+                        <!-- Search Bar -->
+                        <form action="{% url 'search_post' %}" method="GET" autocomplete="off">
+                            <div class="search-bar mt-4" role="button" data-toggle="popover"
+                                data-placement="bottom">
+                                <div class="center-to-container">
+                                    <i class="fa-solid fa-magnifying-glass"></i>
+                                </div>
+                                <label for="search-input" class="sr-only">Search for a post</label>
+                                <input type="text" id="search-input" name="search_query"
+                                    {% if search_result %} value="{{ search_result }}"{% endif %} placeholder="Search..." required>
+                                <input type="submit" class="side-nav-btn" value="Go!">
                             </div>
-                            <label for="search-input" class="sr-only">Search for a post</label>
-                            <input type="text" id="search-input" name="search_query"
-                                {% if search_result %} value="{{ search_result }}"{% endif %} placeholder="Search..." required>
-                            <input type="submit" class="side-nav-btn" value="Go!">
+                        </form>
+                        <!-- Hint that tells the user how to search by tag -->
+                        <div id="search-hint" class="alert alert-secondary alert-dismissible fade show d-none mt-2" role="alert">
+                            <strong>Hint:</strong> Use a hashtag "#" at the beginning of your search to filter by tags
+                            <button type="button" class="close pt-2" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
                         </div>
-                    </form>
-                    <!-- Hint that tells the user how to search by tag -->
-                    <div id="search-hint" class="alert alert-secondary alert-dismissible fade show d-none mt-2" role="alert">
-                        <strong>Hint:</strong> Use a hashtag "#" at the beginning of your search to filter by tags
-                        <button type="button" class="close pt-2" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <!-- Post filter by Popular/New -->
-                    <div class="container-fluid px-0 mt-4 mb-2">
-                        <div class="row">
-                            {% with request.path|add:"?"|add:request.GET.urlencode as current_path %}
-                            <div class="col-6">
-                                {% if disable_sort %}
-                                    <div>
-                                {% elif request.GET.urlencode %}
-                                    <a href="{% url 'sort_posts' 0 current_path %}" class="anchor-no-style">
-                                {% else %}
-                                    <a href="{% url 'sort_posts' 0 request.path %}" class="anchor-no-style">
-                                {% endif %}
-                                    <div class="btn btn-block side-nav-btn
-                                        {% if disable_sort %} disabled{% elif not user.profile.sort_by_new %} active{% endif %}">
-                                        <i class="fa-solid fa-fire mr-lg-1"></i>
-                                        Popular
-                                    </div>
-                                {% if disable_sort %}
-                                    </div>
-                                {% else %}
+                        <!-- Post filter by Popular/New -->
+                        <div class="container-fluid px-0 mt-4 mb-2">
+                            <div class="row">
+                                {% with request.path|add:"?"|add:request.GET.urlencode as current_path %}
+                                <div class="col-6">
+                                    {% if disable_sort %}
+                                        <div>
+                                    {% elif request.GET.urlencode %}
+                                        <a href="{% url 'sort_posts' 0 current_path %}" class="anchor-no-style">
+                                    {% else %}
+                                        <a href="{% url 'sort_posts' 0 request.path %}" class="anchor-no-style">
+                                    {% endif %}
+                                        <div class="btn btn-block side-nav-btn
+                                            {% if disable_sort %} disabled{% elif not user.profile.sort_by_new %} active{% endif %}">
+                                            <i class="fa-solid fa-fire mr-lg-1"></i>
+                                            Popular
+                                        </div>
+                                    {% if disable_sort %}
+                                        </div>
+                                    {% else %}
+                                        </a>
+                                    {% endif %}
+                                </div>
+                                <div class="col-6">
+                                    {% if disable_sort %}
+                                        <div>
+                                    {% elif request.GET.urlencode %}
+                                        <a href="{% url 'sort_posts' 1 current_path %}" class="anchor-no-style">
+                                    {% else %}
+                                        <a href="{% url 'sort_posts' 1 request.path %}" class="anchor-no-style">
+                                    {% endif %}
+                                        <div class="btn btn-block side-nav-btn
+                                            {% if disable_sort %} disabled{% elif user.profile.sort_by_new %} active{% endif %}">
+                                            <i class="fa-solid fa-clock mr-lg-1"></i>
+                                            New
+                                        </div>
+                                    {% if disable_sort %}
+                                        </div>
+                                    {% else %}
+                                        </a>
+                                    {% endif %}
+                                </div>
+                                {% endwith %}
+                            </div>
+                        </div>
+                        <!-- Post navigation -->
+                        <div class="list-group side-nav accordion" id="side-nav-list">
+                            <!-- Home -->
+                            <a class="list-group-item list-group-item-action side-nav-btn
+                                {% if selected_tab == 'Home' %} active{% endif %}" href="{% url 'home' %}">
+                                <i class="fa-solid fa-house center-to-container"></i>
+                                <span class="d-inline-block ml-lg-2">Home</span>
+                            </a>
+                            <!-- Categories -->
+                            <a id="category-collapse" class="list-group-item list-group-item-action side-nav-btn clickable
+                                {% if 'Categories' in selected_tab %} active{% endif %}" data-toggle="collapse"
+                                href="#side-nav-categories" role="button" aria-expanded="false" aria-controls="side-nav-categories">
+
+                                <i class="fa-solid fa-list center-to-container"></i>
+                                <div class="ml-lg-2">Categories</div>
+                                <i class="fa-solid fa-caret-down center-to-container"></i>
+                            </a>
+                            <!-- Collapsible side nav categories -->
+                            <div id="side-nav-categories" class="list-group collapse"
+                                aria-describedby="#category-collapse" data-parent="#side-nav-list">
+
+                                {% for top_category in top_categories %}
+                                    <a href="{% url 'categories' top_category.slug %}" class="list-group-item list-group-item-action
+                                        side-nav-btn{% if selected_tab == 'Category/'|add:top_category.name %} active{% endif %} pl-lg-5">
+                                        <i class="fa-solid {{ top_category.icon }} center-to-container"></i>
+                                        <div class="ml-lg-2">
+                                            <em>{{ top_category.name }}</em>
+                                        </div>
+                                        <span class="badge badge-primary badge-pill center-to-container">
+                                            {{ top_category.number_of_posts }}
+                                        </span>
+                                    </a>
+                                {% endfor %}
+                                <!-- Browse categories anchor -->
+                                {% if has_more_categories %}
+                                    <a class="list-group-item list-group-item-action side-nav-btn
+                                        {% if selected_tab == 'Browse Categories' %} active{% endif %} pl-lg-5"
+                                        href="{% url 'browse_categories' %}">
+                                        <i class="fa-solid fa-earth-americas center-to-container"></i>
+                                        <span class="d-inline-block ml-lg-2">Browse All {{ num_categories }} Categories...</span>
                                     </a>
                                 {% endif %}
                             </div>
-                            <div class="col-6">
-                                {% if disable_sort %}
-                                    <div>
-                                {% elif request.GET.urlencode %}
-                                    <a href="{% url 'sort_posts' 1 current_path %}" class="anchor-no-style">
-                                {% else %}
-                                    <a href="{% url 'sort_posts' 1 request.path %}" class="anchor-no-style">
-                                {% endif %}
-                                    <div class="btn btn-block side-nav-btn
-                                        {% if disable_sort %} disabled{% elif user.profile.sort_by_new %} active{% endif %}">
-                                        <i class="fa-solid fa-clock mr-lg-1"></i>
-                                        New
-                                    </div>
-                                {% if disable_sort %}
-                                    </div>
-                                {% else %}
-                                    </a>
-                                {% endif %}
-                            </div>
-                            {% endwith %}
-                        </div>
-                    </div>
-                    <!-- Post navigation -->
-                    <div class="list-group side-nav accordion" id="side-nav-list">
-                        <!-- Home -->
-                        <a class="list-group-item list-group-item-action side-nav-btn
-                            {% if selected_tab == 'Home' %} active{% endif %}" href="{% url 'home' %}">
-                            <i class="fa-solid fa-house center-to-container"></i>
-                            <span class="d-inline-block ml-lg-2">Home</span>
-                        </a>
-                        <!-- Categories -->
-                        <a id="category-collapse" class="list-group-item list-group-item-action side-nav-btn clickable
-                            {% if 'Categories' in selected_tab %} active{% endif %}" data-toggle="collapse"
-                            href="#side-nav-categories" role="button" aria-expanded="false" aria-controls="side-nav-categories">
-
-                            <i class="fa-solid fa-list center-to-container"></i>
-                            <div class="ml-lg-2">Categories</div>
-                            <i class="fa-solid fa-caret-down center-to-container"></i>
-                        </a>
-                        <!-- Collapsible side nav categories -->
-                        <div id="side-nav-categories" class="list-group collapse"
-                            aria-describedby="#category-collapse" data-parent="#side-nav-list">
-
-                            {% for top_category in top_categories %}
-                                <a href="{% url 'categories' top_category.slug %}" class="list-group-item list-group-item-action
-                                    side-nav-btn{% if selected_tab == 'Category/'|add:top_category.name %} active{% endif %} pl-lg-5">
-                                    <i class="fa-solid {{ top_category.icon }} center-to-container"></i>
+                            <!-- Polls -->
+                            <a id="poll-list-collapse" class="list-group-item list-group-item-action side-nav-btn clickable
+                                {% if 'Polls' in selected_tab %} active{% endif %}" data-toggle="collapse"
+                                href="#side-nav-polls" role="button" aria-expanded="false" aria-controls="side-nav-polls">
+                                <i class="fa-solid fa-square-poll-vertical center-to-container"></i>
+                                <div class="ml-lg-2">Polls</div>
+                                <i class="fa-solid fa-caret-down center-to-container"></i>
+                            </a>
+                            <!-- Collapsible side nav polls -->
+                            <div id="side-nav-polls" class="list-group collapse"
+                                aria-describedby="#poll-list-collapse" data-parent="#side-nav-list">
+                                <a href="{% url 'browse_polls' 'open' %}" class="list-group-item list-group-item-action
+                                    side-nav-btn{% if selected_tab == 'Polls/Open' %} active{% endif %} pl-lg-5">
+                                    <i class="fa-solid fa-square-check center-to-container"></i>
                                     <div class="ml-lg-2">
-                                        <em>{{ top_category.name }}</em>
+                                        <em>Open</em>
                                     </div>
-                                    <span class="badge badge-primary badge-pill center-to-container">
-                                        {{ top_category.number_of_posts }}
-                                    </span>
                                 </a>
-                            {% endfor %}
-                            <!-- Browse categories anchor -->
-                            {% if has_more_categories %}
                                 <a class="list-group-item list-group-item-action side-nav-btn
-                                    {% if selected_tab == 'Browse Categories' %} active{% endif %} pl-lg-5"
-                                    href="{% url 'browse_categories' %}">
-                                    <i class="fa-solid fa-earth-americas center-to-container"></i>
-                                    <span class="d-inline-block ml-lg-2">Browse All {{ num_categories }} Categories...</span>
+                                    {% if selected_tab == 'Polls/Closed' %} active{% endif %} pl-lg-5"
+                                    href="{% url 'browse_polls' 'closed' %}">
+                                    <i class="fa-solid fa-square-xmark center-to-container"></i>
+                                    <div class="ml-lg-2">
+                                        <em>Closed</em>
+                                    </div>
                                 </a>
-                            {% endif %}
-                        </div>
-                        <!-- Polls -->
-                        <a id="poll-list-collapse" class="list-group-item list-group-item-action side-nav-btn clickable
-                            {% if 'Polls' in selected_tab %} active{% endif %}" data-toggle="collapse"
-                            href="#side-nav-polls" role="button" aria-expanded="false" aria-controls="side-nav-polls">
-                            <i class="fa-solid fa-square-poll-vertical center-to-container"></i>
-                            <div class="ml-lg-2">Polls</div>
-                            <i class="fa-solid fa-caret-down center-to-container"></i>
-                        </a>
-                        <!-- Collapsible side nav polls -->
-                        <div id="side-nav-polls" class="list-group collapse"
-                            aria-describedby="#poll-list-collapse" data-parent="#side-nav-list">
-                            <a href="{% url 'browse_polls' 'open' %}" class="list-group-item list-group-item-action
-                                side-nav-btn{% if selected_tab == 'Polls/Open' %} active{% endif %} pl-lg-5">
-                                <i class="fa-solid fa-square-check center-to-container"></i>
-                                <div class="ml-lg-2">
-                                    <em>Open</em>
-                                </div>
-                            </a>
-                            <a class="list-group-item list-group-item-action side-nav-btn
-                                {% if selected_tab == 'Polls/Closed' %} active{% endif %} pl-lg-5"
-                                href="{% url 'browse_polls' 'closed' %}">
-                                <i class="fa-solid fa-square-xmark center-to-container"></i>
-                                <div class="ml-lg-2">
-                                    <em>Closed</em>
-                                </div>
-                            </a>
-                            <a class="list-group-item list-group-item-action side-nav-btn
-                                {% if selected_tab == 'Polls/Your' %} active{% endif %} pl-lg-5"
-                                href="{% url 'browse_polls' 'owned' %}">
+                                <a class="list-group-item list-group-item-action side-nav-btn
+                                    {% if selected_tab == 'Polls/Your' %} active{% endif %} pl-lg-5"
+                                    href="{% url 'browse_polls' 'owned' %}">
+                                    <i class="fa-solid fa-folder-open center-to-container"></i>
+                                    <div class="ml-lg-2">
+                                        <em>My Polls</em>
+                                    </div>
+                                </a>
+                            </div>
+                            <!-- User's polls -->
+                            <a class="list-group-item list-group-item-action side-nav-btn clickable"
+                                href="{% url 'my_posts' %}">
                                 <i class="fa-solid fa-folder-open center-to-container"></i>
-                                <div class="ml-lg-2">
-                                    <em>My Polls</em>
-                                </div>
+                                <span class="d-inline-block ml-lg-2">My Posts</span>
                             </a>
                         </div>
-                        <!-- User's polls -->
-                        <a class="list-group-item list-group-item-action side-nav-btn clickable"
-                            href="{% url 'my_posts' %}">
-                            <i class="fa-solid fa-folder-open center-to-container"></i>
-                            <span class="d-inline-block ml-lg-2">My Posts</span>
-                        </a>
-                    </div>
-                </nav>
+                    </nav>
+                    <!-- /.side-nav -->
+                </div>
                 <!-- Main content -->
                 <div id="main-content" class="col col-md-8">
                     <!-- Feedback messages -->

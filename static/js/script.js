@@ -1,3 +1,5 @@
+const mobileBreakpoint = 768;
+
 // Enabling Bootstrap's components
 window.addEventListener('DOMContentLoaded', () => {
     // Dropdown menus
@@ -29,12 +31,31 @@ $('#search-input').focus(() => {
     }
 });
 
+// Toggles the side nav collapse for mobile screens
+$('#side-nav-button').click(() => {
+    if ($('#side-nav-collapse').hasClass('expanded')) {
+        $('#side-nav-collapse').removeClass('expanded');
+    }
+    else {
+        $('#side-nav-collapse').addClass('expanded');
+    }
+});
+
+$(window).resize(resizeScreen);
+
 
 /**
  * Rearranges elements in the DOM depending on the screen size
  */
 function resizeScreen() {
-    
+    let screenWidth = $(document).width();
+    let sideNav = $('#side-nav-container').detach();
+    if (screenWidth < mobileBreakpoint) {
+        $('#side-nav-collapse').append(sideNav);
+    }
+    else {
+        $('#side-nav-large').append(sideNav);
+    }
 }
 
 
