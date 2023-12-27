@@ -64,14 +64,25 @@ a:hover {
     border-right: 1px solid white;
 }
 
-/* --------------------------------------------------------Login--------------------------------------------------------- */
+/* --------------------------------------------------------Accounts--------------------------------------------------------- */
+
+#account-container {
+    min-height: 100vh;
+    display: grid;
+    grid-template-rows: 1fr auto;
+}
+
+#account-upper,
+#account-upper>div {
+    height: 100%;
+}
 
 .login-heading {
     font-size: 4em;
 }
 
 #form-account {
-    height: 100vh;
+    height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -86,10 +97,11 @@ a:hover {
     align-items: center;
     justify-content: center;
     row-gap: 16px;
+    padding: 25px;
 }
 
 #form-shell>form {
-    width: 90%;
+    width: 100%;
 }
 
 /* Removing the underline from the information icon when hovered over */
