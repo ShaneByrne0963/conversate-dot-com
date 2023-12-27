@@ -21,6 +21,7 @@ window.addEventListener('DOMContentLoaded', () => {
     });
 
     startPollAnimation();
+    resizeScreen();
 });
 
 // Displays instructions on how to search by tag, appearing only once per session
@@ -33,12 +34,20 @@ $('#search-input').focus(() => {
 
 // Toggles the side nav collapse for mobile screens
 $('#side-nav-button').click(() => {
+    if (!$('#side-nav-collapse').hasClass('expanding')) {
+        $('#side-nav-collapse').addClass('expanding');
+    }
     if ($('#side-nav-collapse').hasClass('expanded')) {
         $('#side-nav-collapse').removeClass('expanded');
     }
     else {
         $('#side-nav-collapse').addClass('expanded');
     }
+});
+
+$('#side-nav-collapse').on('transitionend', function() {
+    $(this).removeClass('expanding');
+    console.log('Finished');
 });
 
 $(window).resize(resizeScreen);
