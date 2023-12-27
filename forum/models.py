@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from cloudinary.models import CloudinaryField
+from .core.dates import get_time_elapsed
 from datetime import datetime
 
 
@@ -69,6 +70,9 @@ class Post(models.Model):
         # Removes the blank tag at the start of the list
         tags_separate.pop(0)
         return tags_separate
+    
+    def time_elapsed(self):
+        return get_time_elapsed(self.posted_on)
 
 
 class Comment(models.Model):
@@ -96,6 +100,9 @@ class Comment(models.Model):
 
     def number_of_replies(self):
         return self.replies.count()
+    
+    def time_elapsed(self):
+        return get_time_elapsed(self.posted_on)
 
 
 class Poll(models.Model):
