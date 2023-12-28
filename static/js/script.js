@@ -74,7 +74,6 @@ function resizeScreen() {
  */
 function compactPostContent() {
     let posts = document.getElementsByClassName('post');
-    console.log(posts.length);
     for (let post of posts) {
         let anchorOverlay = post.querySelector('.post-anchor-overlay');
         let readMore = post.querySelector('.read-more');

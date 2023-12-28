@@ -302,6 +302,17 @@ a:hover {
     overflow: hidden;
 }
 
+/* Code snippets */
+pre {
+    background-color: rgba(0, 0, 0, .1);
+    padding: 4px;
+}
+
+/* Allowing code snippets to adjust to screen sizes */
+code {
+    white-space: normal;
+}
+
 /* Links cannot be clicked on in the preview, so they will have the appearance of regular text */
 .post-preview a {
     color: #212529;
