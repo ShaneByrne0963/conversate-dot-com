@@ -296,6 +296,37 @@ a:hover {
     color: white;
 }
 
+.post-preview {
+    position: relative;
+    max-height: 150px;
+    overflow: hidden;
+}
+
+/* Links cannot be clicked on in the preview, so they will have the appearance of regular text */
+.post-preview a {
+    color: #212529;
+    text-decoration: none;
+}
+
+/* Gives the appearance of the preview text fading out at the bottom */
+.hidden-text {
+    background: rgb(0, 0, 0);
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 1) 100%);
+}
+
+.read-more {
+    display: inline-block;
+}
+
+/* Invisible anchor overlay that takes the user to the post detail page */
+.post-anchor-overlay {
+    position: absolute;
+    top: -1.25rem;
+    left: -1.25rem;
+    width: calc(100% + 2.5rem);
+    height: calc(100% + 2.5rem);
+}
+
 #post-footer {
     background-color: #FA7336;
     padding: 8px;

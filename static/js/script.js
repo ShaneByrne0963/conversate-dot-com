@@ -65,6 +65,33 @@ function resizeScreen() {
     else {
         $('#side-nav-large').append(sideNav);
     }
+    compactPostContent();
+}
+
+
+/**
+ * 
+ */
+function compactPostContent() {
+    let posts = document.getElementsByClassName('post');
+    console.log(posts.length);
+    for (let post of posts) {
+        let anchorOverlay = post.querySelector('.post-anchor-overlay');
+        let readMore = post.querySelector('.read-more');
+
+        anchorOverlay.classList.remove('hidden-text');
+        readMore.classList.remove('d-none');
+
+        let outerHeight = post.querySelector('.post-preview').offsetHeight;
+        let innerHeight = post.querySelector('.post-preview-inner').offsetHeight;
+
+        if (innerHeight > outerHeight) {
+            anchorOverlay.classList.add('hidden-text');
+        }
+        else {
+            readMore.classList.add('d-none');
+        }
+    }
 }
 
 

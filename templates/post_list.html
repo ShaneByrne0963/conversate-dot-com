@@ -9,7 +9,7 @@
 <h1>{{ heading }}:</h1>
 <hr>
 {% for post in item_list %}
-    <div class="card mb-5">
+    <div class="post card mb-5">
         <div class="card-header">
             <div class="post-title">
                 <a href="{% url 'view_post' post.slug %}" class="anchor-no-style">
@@ -24,9 +24,13 @@
                 <span>{{ post.posted_by }}, {{ post.time_elapsed }}</span>
             </div>
         </div>
-        <div class="card-body">
-            <div class="mt-2">{{ post.content|safe }}</div>
-            <a href="{% url 'view_post' post.slug %}">Read More...</a>
+        <div class="card-body post-list-body">
+            <div class="post-preview">
+                <div class="post-preview-inner">{{ post.content|safe }}</div>
+                <a class="post-anchor-overlay" href="{% url 'view_post' post.slug %}"></a>
+            </div>
+            <!-- "Read More..." text that appears when a post is too big to fit in the preview -->
+            <a class="read-more d-none mt-2" href="{% url 'view_post' post.slug %}">Read More...</a>
             {% if post.tags %}
                 <div>
                     <hr>
