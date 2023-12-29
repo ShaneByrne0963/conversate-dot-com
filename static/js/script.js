@@ -1,4 +1,6 @@
 const mobileBreakpoint = 768;
+const messageCloseTime = 5000;
+const messageCloseTimeGap = 500;
 
 // Enabling Bootstrap's components
 window.addEventListener('DOMContentLoaded', () => {
@@ -25,6 +27,7 @@ window.addEventListener('DOMContentLoaded', () => {
     if ($('#list-of-posts').length > 0) {
         finishLoading();
     }
+    setTimeout(closeAlertMessage, messageCloseTime);
 });
 
 // Displays instructions on how to search by tag, appearing only once per session
@@ -53,8 +56,6 @@ $('#side-nav-collapse').on('transitionend', function() {
     $(this).removeClass('expanding');
 });
 
-$(window).resize(resizeScreen);
-
 
 /**
  * Rearranges elements in the DOM depending on the screen size
@@ -70,6 +71,7 @@ function resizeScreen() {
     }
     compactPostContent();
 }
+$(window).resize(resizeScreen);
 
 
 /**
@@ -127,4 +129,15 @@ function getCheckboxCollapse() {
     let collapseState = (checked) ? 'show' : 'hide';
     $('.check-collapse-content').collapse(collapseState);
     return checked;
+}
+
+
+/**
+ * Closes any alert messages on the page, one at a time
+ */
+function closeAlertMessage() {
+    $('.alert-message').first().alert('close');
+    if ($('.alert-message').length > 1) {
+        setTimeout(closeAlertMessage, messageCloseTimeGap);
+    }
 }
