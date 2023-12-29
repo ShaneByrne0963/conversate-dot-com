@@ -285,6 +285,10 @@ a:hover {
     border-color: #f5c6cb;
 }
 
+.alert-message {
+    width: 100%;
+}
+
 /* Pagination */
 .page-link {
     background-color: #FA7336;

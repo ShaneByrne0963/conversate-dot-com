@@ -5,9 +5,18 @@ Conversate - Log In
 {% endblock title %}
 
 {% block content %}
+{% for message in messages %}
+<div class="alert{% if message.tags %} alert-{{ message.tags }}{% endif %} mb-0
+                                alert-dismissible alert-message fade show" role="alert">
+    {{ message }}
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+{% endfor %}
 <!-- Error that will appear if the user's details are incorrect -->
 {% if form.errors %}
-    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+    <div class="alert alert-danger alert-dismissible alert-message fade show mb-0" role="alert">
         The username or password you have entered is incorrect. Please try again.
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
