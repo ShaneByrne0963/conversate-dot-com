@@ -134,11 +134,11 @@
             {% if user == post.posted_by %}
                 <a class="btn py-0 line-separate" href="{% url 'edit_post' post.id %}" aria-label="Edit this post">
                     <i class="fa-solid fa-pen"></i>
-                    Edit
+                    <span class="d-none d-md-inline">Edit</span>
                 </a>
                 <button class="btn py-0 trigger-delete-post" aria-label="Delete this post" data-url="{% url 'delete_post' post.slug %}">
                     <i class="fa-solid fa-trash"></i>
-                    Delete
+                    <span class="d-none d-md-inline">Delete</span>
                 </button>
             {% endif %}
         </div>
@@ -171,109 +171,116 @@
         {% if comments %}
             <h3>Comments</h3>
             <hr>
-            {% for comment in comments %}
-                {% if comment.reply_to %}
-                <div id="comment-{{ comment.id }}" data-timestamp="{{ comment.posted_on.timestamp }}"
-                    data-reply-to="{{ comment.reply_to.id }}" class="comment reply ml-3 ml-sm-4 ml-lg-5 py-3 d-none">
-                {% else %}
-                <div id="comment-{{ comment.id }}" class="comment my-4 py-1">
-                {% endif %}
-                    <!-- Comment content -->
-                    <div class="comment-header">
-                        <strong>{{ comment.posted_by }}</strong> -
-                        <em>{{ comment.time_elapsed }}
-                            {% if comment.edited %}
-                                (Edited)
-                            {% endif %}
-                        </em>
-                    </div>
-                    <div class="comment-body">
-                        <p class="mb-1 comment-text">{{ comment.content }}</p>
-
-                        <!-- Menu buttons underneath the comment -->
-                        <form method="POST" class="d-inline" action="{% url 'like_comment' comment.id %}">
-                            {% csrf_token %}
-                            {% if user in comment.likes.all %}
-                            <button type="submit" class="btn btn-small py-0">
-                                <i class="fa-solid fa-thumbs-up"></i>
-                            {% else %}
-                            <button type="submit" class="btn btn-small py-0">
-                                <i class="fa-regular fa-thumbs-up"></i>
-                            {% endif %}
-                                {{ comment.number_of_likes }}
-                            </button>
-                        </form>
-                        <button class="btn btn-small py-0" type="button" data-toggle="collapse"
-                            data-target="#reply-toggle-{{ comment.id }}" aria-expanded="false" aria-controls="reply-toggle-{{ comment.id }}">
-                            <i class="fa-regular fa-comment"></i>
-                            Reply
-                        </button>
-                        {% if user == comment.posted_by %}
-                            <button class="btn edit-comment py-0" aria-label="Edit this comment">
-                                <i class="fa-solid fa-pen"></i>
-                                Edit
-                            </button>
-                            <button class="btn py-0 trigger-delete-comment" aria-label="Delete this comment"
-                                data-url="{% url 'delete_comment' comment.id %}">
-                                <i class="fa-solid fa-trash"></i>
-                                Delete
-                            </button>
-                        {% endif %}
-                        <!-- Reply textarea dropdown -->
-                        <form method="POST" action="{% url 'send_comment' post.slug %}" class="collapse reply-collapse" id="reply-toggle-{{ comment.id }}">
-                            {% csrf_token %}
-
-                            <!-- Hidden input to tell the view which comment is being replied to -->
-                            {% if comment.reply_to %}
-                                <input type="hidden" name="reply" value="{{ comment.reply_to.id }}" aria-hidden="true">
-                            {% else %}
-                                <input type="hidden" name="reply" value="{{ comment.id }}" aria-hidden="true">
-                            {% endif %}
-
-                            <div class="form-group mb-1">
-                                {% if comment.reply_to and not comment.posted_by == comment.reply_to.posted_by and not comment.posted_by == user %}
-                                    <textarea class="form-control reply-to-reply" data-reply-user="{{ comment.posted_by.username }}"
-                                        name="content" rows="3" required></textarea>
-                                {% else %}
-                                    <textarea class="form-control" name="content" rows="3" required></textarea>
-                                {% endif %}
-                            </div>
-                            <input type="submit" class="btn" value="Reply"></input>
-                            <input type="reset" class="btn" value="Cancel" data-toggle="collapse"
-                                data-target="#reply-toggle-{{ comment.id }}" aria-expanded="false" aria-controls="reply-toggle-{{ comment.id }}"></input>
-                        </form>
-                        <!-- /.reply -->
-                    </div>
-
-                    <!-- Text area to replace comment body when editing -->
-                    <form method="POST" action="{% url 'edit_comment' comment.id %}" class="comment-edit-field mb-3 d-none">
-                        {% csrf_token %}
-                        <div class="form-group mb-1">
-                            <textarea class="form-control" name="content" rows="3" required></textarea>
-                        </div>
-                        <input type="submit" class="btn" value="Save"></input>
-                        <button class="btn cancel-edit" type="button">Cancel</button>
-                    </form>
-
-                    <!-- Replies section -->
-                    {% if comment.number_of_replies %}
-                        <a href="#reply-section-{{ comment.id }}" class="reply-toggle d-inline-block mt-2" type="button"
-                            data-toggle="collapse" aria-expanded="false" data-control="reply-section-{{ comment.id }}" data-parent="#comments">
-                            {% if comment.number_of_replies == 1 %}
-                                View 1 Reply
-                            {% else %}
-                                View {{ comment.number_of_replies }} Replies
-                            {% endif %}
-                        </a>
-                        <div id="reply-section-{{ comment.id }}" class="replies collapse" data-parent="#comments"></div>
-                    {% endif %}
+            <div class="pre-load center-to-container">
+                <div class="spinner-border" role="status">
+                    <span class="sr-only">Loading...</span>
                 </div>
-                {% if not comment.reply_to %}
-                    {% if not forloop.last %}
-                        <hr>
+            </div>
+            <div class="comment-list d-none after-load">
+                {% for comment in comments %}
+                    {% if comment.reply_to %}
+                    <div id="comment-{{ comment.id }}" data-timestamp="{{ comment.posted_on.timestamp }}"
+                        data-reply-to="{{ comment.reply_to.id }}" class="comment reply ml-3 ml-sm-4 ml-lg-5 py-3 d-none">
+                    {% else %}
+                    <div id="comment-{{ comment.id }}" class="comment my-4 py-1">
                     {% endif %}
-                {% endif %}
-            {% endfor %}
+                        <!-- Comment content -->
+                        <div class="comment-header">
+                            <strong>{{ comment.posted_by }}</strong> -
+                            <em>{{ comment.time_elapsed }}
+                                {% if comment.edited %}
+                                    (Edited)
+                                {% endif %}
+                            </em>
+                        </div>
+                        <div class="comment-body">
+                            <p class="mb-1 comment-text">{{ comment.content }}</p>
+
+                            <!-- Menu buttons underneath the comment -->
+                            <form method="POST" class="d-inline" action="{% url 'like_comment' comment.id %}">
+                                {% csrf_token %}
+                                {% if user in comment.likes.all %}
+                                <button type="submit" class="btn btn-small py-0">
+                                    <i class="fa-solid fa-thumbs-up"></i>
+                                {% else %}
+                                <button type="submit" class="btn btn-small py-0">
+                                    <i class="fa-regular fa-thumbs-up"></i>
+                                {% endif %}
+                                    {{ comment.number_of_likes }}
+                                </button>
+                            </form>
+                            <button class="btn btn-small py-0" type="button" data-toggle="collapse"
+                                data-target="#reply-toggle-{{ comment.id }}" aria-expanded="false" aria-controls="reply-toggle-{{ comment.id }}">
+                                <i class="fa-regular fa-comment"></i>
+                                Reply
+                            </button>
+                            {% if user == comment.posted_by %}
+                                <button class="btn edit-comment py-0" aria-label="Edit this comment">
+                                    <i class="fa-solid fa-pen"></i>
+                                    Edit
+                                </button>
+                                <button class="btn py-0 trigger-delete-comment" aria-label="Delete this comment"
+                                    data-url="{% url 'delete_comment' comment.id %}">
+                                    <i class="fa-solid fa-trash"></i>
+                                    Delete
+                                </button>
+                            {% endif %}
+                            <!-- Reply textarea dropdown -->
+                            <form method="POST" action="{% url 'send_comment' post.slug %}" class="collapse reply-collapse" id="reply-toggle-{{ comment.id }}">
+                                {% csrf_token %}
+
+                                <!-- Hidden input to tell the view which comment is being replied to -->
+                                {% if comment.reply_to %}
+                                    <input type="hidden" name="reply" value="{{ comment.reply_to.id }}" aria-hidden="true">
+                                {% else %}
+                                    <input type="hidden" name="reply" value="{{ comment.id }}" aria-hidden="true">
+                                {% endif %}
+
+                                <div class="form-group mb-1">
+                                    {% if comment.reply_to and not comment.posted_by == comment.reply_to.posted_by and not comment.posted_by == user %}
+                                        <textarea class="form-control reply-to-reply" data-reply-user="{{ comment.posted_by.username }}"
+                                            name="content" rows="3" required></textarea>
+                                    {% else %}
+                                        <textarea class="form-control" name="content" rows="3" required></textarea>
+                                    {% endif %}
+                                </div>
+                                <input type="submit" class="btn" value="Reply"></input>
+                                <input type="reset" class="btn" value="Cancel" data-toggle="collapse"
+                                    data-target="#reply-toggle-{{ comment.id }}" aria-expanded="false" aria-controls="reply-toggle-{{ comment.id }}"></input>
+                            </form>
+                            <!-- /.reply -->
+                        </div>
+
+                        <!-- Text area to replace comment body when editing -->
+                        <form method="POST" action="{% url 'edit_comment' comment.id %}" class="comment-edit-field mb-3 d-none">
+                            {% csrf_token %}
+                            <div class="form-group mb-1">
+                                <textarea class="form-control" name="content" rows="3" required></textarea>
+                            </div>
+                            <input type="submit" class="btn" value="Save"></input>
+                            <button class="btn cancel-edit" type="button">Cancel</button>
+                        </form>
+
+                        <!-- Replies section -->
+                        {% if comment.number_of_replies %}
+                            <a href="#reply-section-{{ comment.id }}" class="reply-toggle d-inline-block mt-2" type="button"
+                                data-toggle="collapse" aria-expanded="false" data-control="reply-section-{{ comment.id }}" data-parent="#comments">
+                                {% if comment.number_of_replies == 1 %}
+                                    View 1 Reply
+                                {% else %}
+                                    View {{ comment.number_of_replies }} Replies
+                                {% endif %}
+                            </a>
+                            <div id="reply-section-{{ comment.id }}" class="replies collapse" data-parent="#comments"></div>
+                        {% endif %}
+                    </div>
+                    {% if not comment.reply_to %}
+                        {% if not forloop.last %}
+                            <hr>
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}
+            </div>
         {% endif %}
     </div>
 {% endblock %}

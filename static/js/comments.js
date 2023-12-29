@@ -52,6 +52,7 @@ function organizeReplies() {
             reply.element.classList.remove('d-none');
         }
     }
+    finishLoading();
 }
 
 

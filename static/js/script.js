@@ -70,7 +70,17 @@ function resizeScreen() {
 
 
 /**
- * 
+ * Removes any loading bar and displays any hidden content. Should be called
+ * once all the Javascript called on the page load has completed
+ */
+function finishLoading() {
+    $('.pre-load').remove();
+    $('.after-load').removeClass('d-none');
+}
+
+
+/**
+ * Hides text in the post preview if the content is too big for it
  */
 function compactPostContent() {
     let posts = document.getElementsByClassName('post');
