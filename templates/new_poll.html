@@ -9,7 +9,12 @@ New Poll - Conversate
 
 <h1>Create a New Poll:</h1>
 <hr>
-<form id="poll-form" method="POST">
+<form id="poll-form" class="after-load" method="POST">
+    <div class="pre-load">
+        <div class="spinner-border" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
     {% csrf_token %}
     <div class="container-fluid px-0">
         <div class="row">

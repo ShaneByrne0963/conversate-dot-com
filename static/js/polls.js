@@ -149,5 +149,8 @@ function getNumbersFromString(myString) {
     return parseInt(myString.match(/[0-9]/)[0]);
 }
 
-updateDueDate();
-setValidAnswers(false);
+$(document).ready(() => {
+    updateDueDate();
+    setValidAnswers(false);
+    finishLoading();
+});

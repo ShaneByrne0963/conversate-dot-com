@@ -211,6 +211,8 @@ function summernoteInit() {
             contentField.querySelector('.note-editable').innerHTML = previousInput.innerText;
             previousInput.remove();
         }
+        // Reveals the form when all elements are in place
+        finishLoading();
     }
     else {
         // document.onload runs before iframe is fully loaded

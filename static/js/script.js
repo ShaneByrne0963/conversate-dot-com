@@ -22,6 +22,9 @@ window.addEventListener('DOMContentLoaded', () => {
 
     startPollAnimation();
     resizeScreen();
+    if ($('#list-of-posts').length > 0) {
+        finishLoading();
+    }
 });
 
 // Displays instructions on how to search by tag, appearing only once per session
@@ -75,7 +78,6 @@ function resizeScreen() {
  */
 function finishLoading() {
     $('.pre-load').remove();
-    $('.after-load').removeClass('d-none');
 }
 
 
