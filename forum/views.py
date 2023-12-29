@@ -17,6 +17,18 @@ from datetime import datetime
 import urllib.parse
 import cloudinary
 import re
+from django.template.loader import render_to_string
+from django.http import HttpResponseNotFound
+
+
+def error_404(request, exception):
+    context = get_base_context(request)
+    content = render_to_string(
+        '404.html',
+        context,
+        request
+    )
+    return HttpResponseNotFound(content)
 
 
 class ListPosts(View):

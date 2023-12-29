@@ -40,3 +40,5 @@ urlpatterns = [
     path('delete-account', views.DeleteAccount.as_view(),
          name='delete_account')
 ]
+
+handler404 = views.error_404
