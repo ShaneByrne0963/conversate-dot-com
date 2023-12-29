@@ -374,6 +374,10 @@ code {
     display: inline-block;
 }
 
+#no-content {
+    height: 80%;
+}
+
 /* Invisible anchor overlay that takes the user to the post detail page */
 .post-anchor-overlay {
     position: absolute;

@@ -8,116 +8,132 @@
 
 <h1>{{ heading }}:</h1>
 <hr>
-<div id="list-of-posts" class="after-load">
-    <div class="pre-load">
-        <div class="spinner-border" role="status">
-            <span class="sr-only">Loading...</span>
-        </div>
-    </div>
-    {% for post in item_list %}
-        <div class="post card mb-5">
-            <div class="card-header">
-                <div class="post-title">
-                    <a href="{% url 'view_post' post.slug %}" class="anchor-no-style">
-                        <h2 class="align-middle">{{ post.title }}</h2>
-                    </a>
-                </div>
-                <div>
-                    {% if post.category.slug != 'none' %}
-                        <a href="{% url 'categories' post.category.slug %}"
-                            class="btn btn-sm category align-middle my-2">{{ post.category }}</a>
-                    {% endif %}
-                    <span>{{ post.posted_by }}, {{ post.time_elapsed }}</span>
-                </div>
+{% if item_list %}
+    <div id="list-of-posts" class="after-load">
+        <div class="pre-load">
+            <div class="spinner-border" role="status">
+                <span class="sr-only">Loading...</span>
             </div>
-            <div class="card-body post-list-body">
-                <div class="post-preview">
-                    <div class="post-preview-inner">{{ post.content|safe }}</div>
-                    <a class="post-anchor-overlay" href="{% url 'view_post' post.slug %}"></a>
-                </div>
-                <!-- "Read More..." text that appears when a post is too big to fit in the preview -->
-                <a class="read-more d-none mt-2" href="{% url 'view_post' post.slug %}">Read More...</a>
-                {% if post.tags %}
-                    <div>
-                        <hr>
-                        {% for tag in post.tag_list %}
-                            <a class="tag-list-item mr-2 anchor-no-style" href="{% url 'search_tag' tag %}">
-                                <em>#{{ tag }}</em>
-                            </a>
-                        {% endfor %}
+        </div>
+        {% for post in item_list %}
+            <div class="post card mb-5">
+                <div class="card-header">
+                    <div class="post-title">
+                        <a href="{% url 'view_post' post.slug %}" class="anchor-no-style">
+                            <h2 class="align-middle">{{ post.title }}</h2>
+                        </a>
                     </div>
-                {% endif %}
+                    <div>
+                        {% if post.category.slug != 'none' %}
+                            <a href="{% url 'categories' post.category.slug %}"
+                                class="btn btn-sm category align-middle my-2">{{ post.category }}</a>
+                        {% endif %}
+                        <span>{{ post.posted_by }}, {{ post.time_elapsed }}</span>
+                    </div>
+                </div>
+                <div class="card-body post-list-body">
+                    <div class="post-preview">
+                        <div class="post-preview-inner">{{ post.content|safe }}</div>
+                        <a class="post-anchor-overlay" href="{% url 'view_post' post.slug %}"></a>
+                    </div>
+                    <!-- "Read More..." text that appears when a post is too big to fit in the preview -->
+                    <a class="read-more d-none mt-2" href="{% url 'view_post' post.slug %}">Read More...</a>
+                    {% if post.tags %}
+                        <div>
+                            <hr>
+                            {% for tag in post.tag_list %}
+                                <a class="tag-list-item mr-2 anchor-no-style" href="{% url 'search_tag' tag %}">
+                                    <em>#{{ tag }}</em>
+                                </a>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+                <div class="card-footer">
+                    {% if user in post.likes.all %}
+                        <i class="fa-solid fa-thumbs-up"></i>
+                    {% else %}
+                        <i class="fa-regular fa-thumbs-up"></i>
+                    {% endif %}
+                    {{ post.number_of_likes }}
+                    <i class="fa-regular fa-comment pl-3"></i>
+                    {{ post.number_of_comments }}
+                </div>
             </div>
-            <div class="card-footer">
-                {% if user in post.likes.all %}
-                    <i class="fa-solid fa-thumbs-up"></i>
-                {% else %}
-                    <i class="fa-regular fa-thumbs-up"></i>
-                {% endif %}
-                {{ post.number_of_likes }}
-                <i class="fa-regular fa-comment pl-3"></i>
-                {{ post.number_of_comments }}
-            </div>
-        </div>
-    {% endfor %}
-</div>
-
-<!-- Pagination -->
-{% if item_list.has_other_pages %}
-
-<nav aria-label="Page navigation">
-    <ul class="pagination justify-content-center">
-        {% if item_list.has_previous %}
-            <li class="page-item">
-                {% if selected_tab == 'Search' %}
-                    <a class="page-link" href="{{ search_url }}&page={{ item_list.previous_page_number }}">&lt;</a>
-                {% else %}
-                    <a class="page-link" href="?page={{ item_list.previous_page_number }}">&lt;</a>
-                {% endif %}
-        {% else %}
-            <li class="page-item disabled">
-                <div class="page-link">&lt;</div>
-        {% endif %}
-        </li>
-
-        {% for page in page_range %}
-            {% if forloop.last and end_gap %}
-                <li class="page-item disabled">
-                    <span class="page-link pagination-gap b-none">...</span>
-                </li>
-            {% endif %}
-            {% if page == item_list.number %}
-                <li class="page-item active">
-            {% else %}
-                <li class="page-item">
-            {% endif %}
-                {% if selected_tab == 'Search' %}
-                    <a class="page-link" href="{{ search_url }}&page={{ page }}">{{ page }}</a>
-                {% else %}
-                    <a class="page-link" href="?page={{ page }}">{{ page }}</a>
-                {% endif %}
-            </li>
-            {% if forloop.first and start_gap %}
-                <li class="page-item disabled">
-                    <span class="page-link pagination-gap b-none">...</span>
-                </li>
-            {% endif %}
         {% endfor %}
+    </div>
 
-        {% if item_list.has_next %}
-            <li class="page-item">
-                {% if selected_tab == 'Search' %}
-                    <a class="page-link" href="{{ search_url }}&page={{ item_list.next_page_number }}">&gt;</a>
-                {% else %}
-                    <a class="page-link" href="?page={{ item_list.next_page_number }}">&gt;</a>
+    <!-- Pagination -->
+    {% if item_list.has_other_pages %}
+
+    <nav aria-label="Page navigation">
+        <ul class="pagination justify-content-center">
+            {% if item_list.has_previous %}
+                <li class="page-item">
+                    {% if selected_tab == 'Search' %}
+                        <a class="page-link" href="{{ search_url }}&page={{ item_list.previous_page_number }}">&lt;</a>
+                    {% else %}
+                        <a class="page-link" href="?page={{ item_list.previous_page_number }}">&lt;</a>
+                    {% endif %}
+            {% else %}
+                <li class="page-item disabled">
+                    <div class="page-link">&lt;</div>
+            {% endif %}
+            </li>
+
+            {% for page in page_range %}
+                {% if forloop.last and end_gap %}
+                    <li class="page-item disabled">
+                        <span class="page-link pagination-gap b-none">...</span>
+                    </li>
                 {% endif %}
+                {% if page == item_list.number %}
+                    <li class="page-item active">
+                {% else %}
+                    <li class="page-item">
+                {% endif %}
+                    {% if selected_tab == 'Search' %}
+                        <a class="page-link" href="{{ search_url }}&page={{ page }}">{{ page }}</a>
+                    {% else %}
+                        <a class="page-link" href="?page={{ page }}">{{ page }}</a>
+                    {% endif %}
+                </li>
+                {% if forloop.first and start_gap %}
+                    <li class="page-item disabled">
+                        <span class="page-link pagination-gap b-none">...</span>
+                    </li>
+                {% endif %}
+            {% endfor %}
+
+            {% if item_list.has_next %}
+                <li class="page-item">
+                    {% if selected_tab == 'Search' %}
+                        <a class="page-link" href="{{ search_url }}&page={{ item_list.next_page_number }}">&gt;</a>
+                    {% else %}
+                        <a class="page-link" href="?page={{ item_list.next_page_number }}">&gt;</a>
+                    {% endif %}
+            {% else %}
+                <li class="page-item disabled">
+                    <div class="page-link">&gt;</div>
+            {% endif %}
+            </li>
+        </ul>
+    </nav>
+    {% endif %}
+{% else %}
+    <!-- No results notification -->
+    <div id="no-content" class="center-to-container flex-column text-center">
+        {% if selected_tab == 'Home' %}
+            <h2 class="mb-3">No Posts Found!</h2>
+            <p class="mb-2">Looks like you're the first one here...</p>
+            <p>Start the conversation by <a href="{% url 'new_post' %}">creating your own post</a>!</p>
         {% else %}
-            <li class="page-item disabled">
-                <div class="page-link">&gt;</div>
+            <h2 class="mb-3">No Results Found!</h2>
+            <p class="mb-2">Sorry, but we couldn't find any posts that matched what you were looking for!</p>
+            <p>You can <a href="{% url 'home' %}">go back to the home page</a> or
+                <a href="{% url 'new_post' %}"> create your own post</a>!</p>
         {% endif %}
-        </li>
-    </ul>
-</nav>
+    </div>
 {% endif %}
 
 {% endblock content %}
