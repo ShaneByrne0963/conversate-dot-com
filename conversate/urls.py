@@ -22,3 +22,5 @@ urlpatterns = [
     path('', include('forum.urls'), name='forum_urls'),
     path('accounts/', include('allauth.urls')),
 ]
+
+handler404 = 'forum.views.handler404'

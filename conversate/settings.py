@@ -30,10 +30,12 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('DEVELOPMENT') == 'True'
+DEBUG = False
 
 ALLOWED_HOSTS = [
     '8000-shanebyrne0963-conversat-flu774i0ov.us2.codeanyapp.com',
     'conversate-55f06929cde1.herokuapp.com',
+    '*'
 ]
 
 
@@ -90,6 +92,8 @@ TEMPLATES = [
         },
     },
 ]
+
+handler404 = 'forum.views.handler404'
 
 WSGI_APPLICATION = 'conversate.wsgi.application'
 

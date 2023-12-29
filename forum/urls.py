@@ -38,7 +38,5 @@ urlpatterns = [
          name='account_settings'),
     path('edit-account', views.EditAccount.as_view(), name='edit_account'),
     path('delete-account', views.DeleteAccount.as_view(),
-         name='delete_account')
+         name='delete_account'),
 ]
-
-handler404 = views.error_404
