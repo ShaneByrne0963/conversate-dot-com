@@ -296,6 +296,9 @@ class EditPost(View):
     def post(self, request, id):
         title = request.POST.get('title')
         content = request.POST.get('body')
+        # Prevents the text from deleting if the user doesn't click the editor
+        if content == '':
+            content = request.POST.get('content-backup')
         category = request.POST.get('category')
         tags = request.POST.get('tags')
         post = get_object_or_404(Post, id=id)

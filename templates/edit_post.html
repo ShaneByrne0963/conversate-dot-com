@@ -33,7 +33,7 @@ Edit Post - Conversate
                 <div class="form-group" id="summernote-content">
                     {{ content_form }}
                     <input type="text" id="summernote-feedback">
-                    <div class="d-none" id="previous-content">{{ post.content }}</div>
+                    <input type="hidden" id="previous-content" name="content-backup" value="{{ post.content }}">
                 </div>
                 <!-- Tags -->
                 <div class="form-group">

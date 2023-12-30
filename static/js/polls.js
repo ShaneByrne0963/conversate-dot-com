@@ -152,5 +152,4 @@ function getNumbersFromString(myString) {
 $(document).ready(() => {
     updateDueDate();
     setValidAnswers(false);
-    finishLoading();
 });

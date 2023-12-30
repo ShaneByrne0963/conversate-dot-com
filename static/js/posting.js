@@ -208,8 +208,8 @@ function summernoteInit() {
         // Prepopulating the text field if the post is being edited
         let previousInput = document.querySelector('#previous-content');
         if (previousInput) {
-            contentField.querySelector('.note-editable').innerHTML = previousInput.innerText;
-            previousInput.remove();
+            contentField.querySelector('.note-editable').innerHTML = previousInput.getAttribute('value');
+            checkBodyValid();
         }
         // Reveals the form when all elements are in place
         finishLoading();
