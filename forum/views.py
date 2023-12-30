@@ -525,11 +525,11 @@ class BrowsePolls(View):
 
 class DeletePoll(View):
 
-    def post(self, request, poll_id):
+    def post(self, request, poll_id, current_dir):
         poll = get_object_or_404(Poll, id=poll_id)
         poll.delete()
         display_success(request, 'Your poll has been deleted')
-        return redirect('home')
+        return redirect(current_dir)
 
 
 class AccountSettings(View):
