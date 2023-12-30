@@ -30,7 +30,6 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('DEVELOPMENT') == 'True'
-DEBUG = False
 
 ALLOWED_HOSTS = [
     '8000-shanebyrne0963-conversat-flu774i0ov.us2.codeanyapp.com',
@@ -64,10 +63,12 @@ LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/accounts/login'
 ACCOUNT_LOGOUT_ON_GET = True
 
+ADMINS = [('Shane Byrne', 'shanebyrne0963@gmail.com'),]
+
 MIDDLEWARE = [
-    'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
+    'django.middleware.security.SecurityMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
@@ -92,8 +93,6 @@ TEMPLATES = [
         },
     },
 ]
-
-handler404 = 'forum.views.handler404'
 
 WSGI_APPLICATION = 'conversate.wsgi.application'
 

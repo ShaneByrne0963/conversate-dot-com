@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404, reverse
 from django.views import View
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponseNotFound
 from django.db.models import Q, Count
 from django.contrib.auth import authenticate, update_session_auth_hash
 from django.contrib.auth.models import User
@@ -17,14 +17,6 @@ from datetime import datetime
 import urllib.parse
 import cloudinary
 import re
-
-
-def handler404(request, exception):
-    return render(
-        request,
-        '404.html',
-        status=404
-    )
 
 
 class ListPosts(View):
@@ -628,3 +620,11 @@ class DeleteAccount(View):
             return redirect('/accounts/login')
         else:
             return redirect('account_settings')
+
+
+class Error404(View):
+
+    def get(self, request, *args, **kwargs):
+        context = get_base_context(request)
+        error_page = render(request, '404.html', context)
+        return HttpResponseNotFound(error_page.content)

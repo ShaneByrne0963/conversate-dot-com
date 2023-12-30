@@ -17,8 +17,9 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls import handler404
+from forum.views import Error404
 
-handler404 = 'forum.views.handler404'
+handler404 = Error404.as_view()
 
 urlpatterns = [
     path('admin/', admin.site.urls),
