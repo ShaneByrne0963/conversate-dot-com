@@ -392,15 +392,24 @@ code {
     height: calc(100% + 2.5rem);
 }
 
-#post-footer {
+.post-footer {
     background-color: #FA7336;
     padding: 8px;
     color: white;
 }
 
-#post-footer button,
-#post-footer a {
+.post-footer button,
+.post-footer a {
     background: none;
+}
+
+.footer-blocked {
+    color: #cbcdcf;
+    padding: .375rem .75rem;
+}
+
+.comment-footer {
+    padding: 4px;
 }
 
 .post-image {

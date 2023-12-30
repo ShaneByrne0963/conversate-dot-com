@@ -101,9 +101,9 @@
         </div>
     {% endif %}
     <!-- Post footer -->
-    <div id="post-footer" class="d-flex justify-content-between mt-2">
+    <div class="post-footer d-flex justify-content-between mt-2">
         <div class="post-footer-buttons">
-            {% if user.is_authenticated %}
+            {% if user.is_authenticated and post.posted_by != request.user %}
             <form class="d-inline" method="POST" action="{% url 'like_post' post.slug %}">
                 {% csrf_token %}
                 {% if user in post.likes.all %}
@@ -117,7 +117,7 @@
                 </button>
             </form>
             {% else %}
-                <span class="btn disabled py-0" aria-disabled="true">
+                <span class="footer-blocked py-0 line-separate" aria-disabled="true">
                     <i class="fa-regular fa-thumbs-up"></i>
                     {{ post.number_of_likes }}
                 </span>
@@ -192,34 +192,45 @@
                             <p class="mb-1 comment-text word-break">{{ comment.content }}</p>
 
                             <!-- Menu buttons underneath the comment -->
-                            <form method="POST" class="d-inline" action="{% url 'like_comment' comment.id %}">
-                                {% csrf_token %}
-                                {% if user in comment.likes.all %}
-                                <button type="submit" class="btn btn-small py-0">
-                                    <i class="fa-solid fa-thumbs-up"></i>
+                            <div class="post-footer comment-footer">
+                                {% if user.is_authenticated and user != comment.posted_by %}
+                                    <form method="POST" class="d-inline" action="{% url 'like_comment' comment.id %}">
+                                        {% csrf_token %}
+                                        {% if user in comment.likes.all %}
+                                        <button type="submit" class="btn btn-small py-0 line-separate">
+                                            <i class="fa-solid fa-thumbs-up"></i>
+                                        {% else %}
+                                        <button type="submit" class="btn btn-small py-0 line-separate">
+                                            <i class="fa-regular fa-thumbs-up"></i>
+                                        {% endif %}
+                                            {{ comment.number_of_likes }}
+                                        </button>
+                                    </form>
                                 {% else %}
-                                <button type="submit" class="btn btn-small py-0">
-                                    <i class="fa-regular fa-thumbs-up"></i>
+                                    <span class="footer-blocked py-0 line-separate" aria-disabled="true">
+                                        <i class="fa-regular fa-thumbs-up"></i>
+                                        {{ post.number_of_likes }}
+                                    </span>
                                 {% endif %}
-                                    {{ comment.number_of_likes }}
-                                </button>
-                            </form>
-                            <button class="btn btn-small py-0" type="button" data-toggle="collapse"
-                                data-target="#reply-toggle-{{ comment.id }}" aria-expanded="false" aria-controls="reply-toggle-{{ comment.id }}">
-                                <i class="fa-regular fa-comment"></i>
-                                Reply
-                            </button>
-                            {% if user == comment.posted_by %}
-                                <button class="btn edit-comment py-0" aria-label="Edit this comment">
-                                    <i class="fa-solid fa-pen"></i>
-                                    Edit
-                                </button>
-                                <button class="btn py-0 trigger-delete-comment" aria-label="Delete this comment"
-                                    data-url="{% url 'delete_comment' comment.id %}">
-                                    <i class="fa-solid fa-trash"></i>
-                                    Delete
-                                </button>
-                            {% endif %}
+                                {% if user.is_authenticated %}
+                                    <button class="btn btn-small py-0 line-separate" type="button" data-toggle="collapse"
+                                        data-target="#reply-toggle-{{ comment.id }}" aria-expanded="false" aria-controls="reply-toggle-{{ comment.id }}">
+                                        <i class="fa-regular fa-comment"></i>
+                                        Reply
+                                    </button>
+                                    {% if user == comment.posted_by %}
+                                        <button class="btn edit-comment py-0 line-separate" aria-label="Edit this comment">
+                                            <i class="fa-solid fa-pen"></i>
+                                            Edit
+                                        </button>
+                                        <button class="btn py-0 trigger-delete-comment" aria-label="Delete this comment"
+                                            data-url="{% url 'delete_comment' comment.id %}">
+                                            <i class="fa-solid fa-trash"></i>
+                                            Delete
+                                        </button>
+                                    {% endif %}
+                                {% endif %}
+                            </div>
                             <!-- Reply textarea dropdown -->
                             <form method="POST" action="{% url 'send_comment' post.slug %}" class="collapse reply-collapse" id="reply-toggle-{{ comment.id }}">
                                 {% csrf_token %}
