@@ -17,6 +17,9 @@ $('.reply-collapse').on('show.bs.collapse', (event) => {
     }
 });
 
+$('.edit-comment').click({ enable: true }, editComment);
+$('.cancel-edit').click({ enable: false }, editComment);
+
 
 /**
  * Is called when the post details page is loaded. Puts replies within their
@@ -135,6 +138,16 @@ function editComment(event) {
 }
 
 
-window.addEventListener('DOMContentLoaded', organizeReplies);
-$('.edit-comment').click({ enable: true }, editComment);
-$('.cancel-edit').click({ enable: false }, editComment);
+$(document).ready(() => {
+    organizeReplies();
+
+    // Changes the reply dropdown text from "View" to "Hide", depending on if the section is collapsed
+    $('.reply-toggle').click(function() {
+        if ($(this).attr('aria-expanded') == 'true') {
+            this.innerText = this.innerText.replace('Hide', 'View');
+        }
+        else {
+            this.innerText = this.innerText.replace('View', 'Hide');
+        }
+    });
+});
