@@ -7,7 +7,7 @@
 {% endblock %}
 
 {% block content %}
-    <h1>{{ post.title }}</h1>
+    <h1 class="word-break">{{ post.title }}</h1>
     <a class="btn btn-sm category" href="{% url 'categories' post.category.slug %}">{{ post.category }}</a>
     <span>{{ post.posted_by }}
         {% if post.edited %}
@@ -18,7 +18,7 @@
     {% if post.image and post.image_position == 0 %}
         <img src="{{ post.image.url }}" alt="Image for the post" class="post-image">
     {% endif %}
-    <div id="post-content" class="mb-3">{{ post.content|safe }}</div>
+    <div id="post-content" class="mb-3 word-break">{{ post.content|safe }}</div>
     {% if post.image and post.image_position == -1 %}
         <img src="{{ post.image.url }}" alt="Image for the post" class="post-image">
     {% endif %}
@@ -189,7 +189,7 @@
                             </em>
                         </div>
                         <div class="comment-body">
-                            <p class="mb-1 comment-text">{{ comment.content }}</p>
+                            <p class="mb-1 comment-text word-break">{{ comment.content }}</p>
 
                             <!-- Menu buttons underneath the comment -->
                             <form method="POST" class="d-inline" action="{% url 'like_comment' comment.id %}">

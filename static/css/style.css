@@ -9,6 +9,7 @@ h1,
 h2,
 h3 {
     font-family: 'Montserrat', sans-serif;
+    word-break: break-word;
 }
 
 /* Gives the mouse cursor a pointer effect when hovering over the element */
@@ -81,6 +82,10 @@ a:hover {
 /* What the loading icon covers. Must contain .pre-load as a child element */
 .after-load {
     position: relative;
+}
+
+.word-break {
+    word-break: break-word;
 }
 
 /* --------------------------------------------------------Accounts--------------------------------------------------------- */

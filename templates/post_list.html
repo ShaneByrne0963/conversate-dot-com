@@ -20,7 +20,7 @@
                 <div class="card-header">
                     <div class="post-title">
                         <a href="{% url 'view_post' post.slug %}" class="anchor-no-style">
-                            <h2 class="align-middle">{{ post.title }}</h2>
+                            <h2 class="align-middle word-break">{{ post.title }}</h2>
                         </a>
                     </div>
                     <div>
@@ -33,7 +33,7 @@
                 </div>
                 <div class="card-body post-list-body">
                     <div class="post-preview">
-                        <div class="post-preview-inner">{{ post.content|safe }}</div>
+                        <div class="post-preview-inner word-break">{{ post.content|safe }}</div>
                         <a class="post-anchor-overlay" href="{% url 'view_post' post.slug %}"></a>
                     </div>
                     <!-- "Read More..." text that appears when a post is too big to fit in the preview -->
@@ -43,7 +43,7 @@
                             <hr>
                             {% for tag in post.tag_list %}
                                 <a class="tag-list-item mr-2 anchor-no-style" href="{% url 'search_tag' tag %}">
-                                    <em>#{{ tag }}</em>
+                                    <em class="word-break">#{{ tag }}</em>
                                 </a>
                             {% endfor %}
                         </div>
