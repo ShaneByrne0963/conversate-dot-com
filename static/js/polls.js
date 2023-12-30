@@ -152,4 +152,7 @@ function getNumbersFromString(myString) {
 $(document).ready(() => {
     updateDueDate();
     setValidAnswers(false);
+    if ($('#poll-form').length > 0) {
+        finishLoading();
+    }
 });

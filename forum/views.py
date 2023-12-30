@@ -6,17 +6,17 @@ from django.contrib.auth import authenticate, update_session_auth_hash
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import SetPasswordForm
 from .models import Post, Category, Comment, SiteData, Poll, PollAnswer
-from .forms import UpdateUserForm, PostContentForm
+from .forms import UpdateUserForm
 from .core.content import get_profile, get_post_list_context, \
                           get_base_context, get_category_list_context, \
-                          get_poll_list_context, get_post_context
+                          get_poll_list_context, get_post_context, \
+                          get_post_form_context, create_poll
 from .core.slug import generate_slug, format_tag_search
 from .core.messages import display_error, display_success, deny_access, \
                            display_form_errors
 from datetime import datetime
 import urllib.parse
 import cloudinary
-import re
 
 
 class ListPosts(View):
@@ -202,10 +202,7 @@ class AddPost(View):
         # Redirects the user to the login page if not logged in
         if not request.user.is_authenticated:
             return redirect('/accounts/login')
-        context = get_base_context(request)
-        categories = Category.objects.all()
-        context['category_list'] = categories
-        context['content_form'] = PostContentForm()
+        context = get_post_form_context(request)
         return render(
             request,
             'new_post.html',
@@ -248,67 +245,42 @@ class AddPost(View):
 
         # Adding a poll if one is found
         if request.POST.get('has-poll'):
-            poll_title = request.POST.get('poll-title')
-            due_date = request.POST.get('due-date')
-            # Date format: YYYY-MM-DD
-            due_year = int(due_date[:4])
-            due_month = int(due_date[5:7])
-            due_day = int(due_date[8:])
-
-            poll = Poll.objects.create(
-                title=poll_title,
-                asked_by=request.user,
-                due_date=datetime(due_year, due_month, due_day),
-                post=post
-            )
-            for input_name in request.POST:
-                if 'answer-' in input_name:
-                    position = int(''.join(re.findall(r'[0-9]', input_name)))
-                    PollAnswer.objects.create(
-                        body=request.POST[input_name],
-                        poll=poll,
-                        position=position
-                    )
+            create_poll(request, post)
         display_success(request, 'Your post was created successfully!')
         return HttpResponseRedirect(reverse('view_post', args=[post_slug]))
 
 
 class EditPost(View):
 
-    def get(self, request, id):
+    def get(self, request, post_id):
         # Redirects the user to the login page if not logged in
         if not request.user.is_authenticated:
             return redirect('/accounts/login')
-        post = get_object_or_404(Post, id=id)
+        post = get_object_or_404(Post, id=post_id)
 
         # Preventing users that do not own the post from being able to edit it
         if post.posted_by != request.user:
             deny_access(request)
             return HttpResponseRedirect(reverse('view_post', args=[post.slug]))
 
-        context = get_base_context(request)
+        context = get_post_form_context(request)
         context['post'] = post
-        categories = Category.objects.all()
-        context['category_list'] = categories
-        context['content_form'] = PostContentForm()
         return render(request, 'edit_post.html', context)
 
-    def post(self, request, id):
-        title = request.POST.get('title')
-        content = request.POST.get('body')
+    def post(self, request, post_id):
+        post = get_object_or_404(Post, id=post_id)
         # Prevents the text from deleting if the user doesn't click the editor
+        content = request.POST.get('body')
         if content == '':
             content = request.POST.get('content-backup')
         category = request.POST.get('category')
-        tags = request.POST.get('tags')
-        post = get_object_or_404(Post, id=id)
 
-        post.title = title
+        post.title = request.POST.get('title')
         post.content = content
         post.edited = True
         post.approved = False
         post.category = get_object_or_404(Category, name=category)
-        post.tags = tags
+        post.tags = request.POST.get('tags')
 
         # Updating the image if a new one has been selected
         if request.FILES:
@@ -322,27 +294,7 @@ class EditPost(View):
 
         # Adding a poll if one is found
         if request.POST.get('has-poll'):
-            poll_title = request.POST.get('poll-title')
-            due_date = request.POST.get('due-date')
-            # Date format: YYYY-MM-DD
-            due_year = int(due_date[:4])
-            due_month = int(due_date[5:7])
-            due_day = int(due_date[8:])
-
-            poll = Poll.objects.create(
-                title=poll_title,
-                asked_by=request.user,
-                due_date=datetime(due_year, due_month, due_day),
-                post=post
-            )
-            for input_name in request.POST:
-                if 'answer-' in input_name:
-                    position = int(''.join(re.findall(r'[0-9]', input_name)))
-                    PollAnswer.objects.create(
-                        body=request.POST[input_name],
-                        poll=poll,
-                        position=position
-                    )
+            create_poll(request, post)
         post.save()
         display_success(request, 'Your post has been updated!')
         return HttpResponseRedirect(reverse('view_post', args=[post.slug]))
@@ -457,27 +409,7 @@ class AddPoll(View):
         )
 
     def post(self, request):
-        title = request.POST.get('title')
-        due_date = request.POST.get('due-date')
-        # Date format: YYYY-MM-DD
-        due_year = int(due_date[:4])
-        due_month = int(due_date[5:7])
-        due_day = int(due_date[8:])
-
-        poll = Poll.objects.create(
-            title=title,
-            asked_by=request.user,
-            due_date=datetime(due_year, due_month, due_day)
-        )
-
-        for input_name in request.POST:
-            if 'answer-' in input_name:
-                position = int(''.join(re.findall(r'[0-9]', input_name)))
-                PollAnswer.objects.create(
-                    body=request.POST[input_name],
-                    poll=poll,
-                    position=position
-                )
+        create_poll(request)
         display_success(request, 'Your poll was created successfully!')
         return HttpResponseRedirect(reverse('browse_polls', args=['owned']))
 
@@ -511,8 +443,7 @@ class BrowsePolls(View):
         elif poll_type == 'Closed':
             polls = Poll.objects.exclude(due_date__gt=datetime.now())
         else:
-            polls = Poll.objects.filter(asked_by=request.user) \
-                        .order_by('due_date')
+            polls = Poll.objects.filter(asked_by=request.user)
             poll_type = 'Your'
 
         context = get_poll_list_context(request, polls)
