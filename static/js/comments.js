@@ -10,8 +10,8 @@ $('.reply-collapse').on('shown.bs.collapse', (event) => {
 });
 
 // Prepopulate the text area with the referred username on reply to reply
-$('.reply-collapse').on('show.bs.collapse', (event) => {
-    let replyToReply = event.target.querySelector('.reply-to-reply');
+$('.reply-collapse').on('show.bs.collapse', function() {
+    let replyToReply = this.querySelector('.reply-to-reply');
     if (replyToReply !== null) {
         replyToReply.value = `@${replyToReply.getAttribute('data-reply-user')} `;
     }

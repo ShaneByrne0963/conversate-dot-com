@@ -1,4 +1,6 @@
 $('.check-collapse').on('input', updatePasswordCollapse);
+$('.check-collapse-content').on('shown.bs.collapse', updatePasswordCollapse);
+$('.check-collapse-content').on('hidden.bs.collapse', updatePasswordCollapse);
 
 
 function updatePasswordCollapse() {
