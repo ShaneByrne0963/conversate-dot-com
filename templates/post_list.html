@@ -26,28 +26,30 @@
                     <div>
                         {% if post.category.slug != 'none' %}
                             <a href="{% url 'categories' post.category.slug %}"
-                                class="btn btn-sm category align-middle my-2">{{ post.category }}</a>
+                                class="btn btn-sm category align-middle">{{ post.category }}</a>
                         {% endif %}
                         <span>{{ post.posted_by }}, {{ post.time_elapsed }}</span>
                     </div>
                 </div>
                 <div class="card-body post-list-body">
-                    <div class="post-preview">
-                        <div class="post-preview-inner word-break">{{ post.content|safe }}</div>
-                        <a class="post-anchor-overlay" href="{% url 'view_post' post.slug %}"></a>
-                    </div>
-                    <!-- "Read More..." text that appears when a post is too big to fit in the preview -->
-                    <a class="read-more d-none mt-2" href="{% url 'view_post' post.slug %}">Read More...</a>
-                    {% if post.tags %}
-                        <div>
-                            <hr>
-                            {% for tag in post.tag_list %}
-                                <a class="tag-list-item mr-2 anchor-no-style" href="{% url 'search_tag' tag %}">
-                                    <em class="word-break">#{{ tag }}</em>
-                                </a>
-                            {% endfor %}
+                    <div class="post-list-body-inner">
+                        <div class="post-preview">
+                            <div class="post-preview-inner word-break">{{ post.content|safe }}</div>
+                            <a class="post-anchor-overlay" href="{% url 'view_post' post.slug %}"></a>
                         </div>
-                    {% endif %}
+                        <!-- "Read More..." text that appears when a post is too big to fit in the preview -->
+                        <a class="read-more d-none mt-2" href="{% url 'view_post' post.slug %}">Read More...</a>
+                        {% if post.tags %}
+                            <div>
+                                <hr>
+                                {% for tag in post.tag_list %}
+                                    <a class="tag-list-item mr-2 anchor-no-style" href="{% url 'search_tag' tag %}">
+                                        <em class="word-break">#{{ tag }}</em>
+                                    </a>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                    </div>
                 </div>
                 <div class="card-footer">
                     {% if user in post.likes.all %}
