@@ -9,7 +9,7 @@ New Poll - Conversate
 
 <h1>Create a New Poll:</h1>
 <hr>
-<form id="poll-form" class="after-load" method="POST">
+<form id="poll-form" class="after-load create-form" method="POST">
     <div class="pre-load">
         <div class="spinner-border" role="status">
             <span class="sr-only">Loading...</span>
@@ -52,4 +52,5 @@ New Poll - Conversate
 
 {% block scripts %}
     <script src="{% static 'js/polls.js' %}"></script>
+    <script src="{% static 'js/forms.js' %}"></script>
 {% endblock scripts %}

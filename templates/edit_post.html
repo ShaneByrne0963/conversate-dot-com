@@ -9,7 +9,7 @@ Edit Post - Conversate
 
 <h1>Edit your Post:</h1>
 <hr>
-<form enctype="multipart/form-data" class="after-load" method="POST">
+<form enctype="multipart/form-data" class="after-load create-form" method="POST">
     {% csrf_token %}
     <div class="container-fluid px-0">
         <div class="row">
@@ -170,4 +170,5 @@ Edit Post - Conversate
 {% block scripts %}
     <script src="{% static 'js/polls.js' %}"></script>
     <script src="{% static 'js/posting.js' %}"></script>
+    <script src="{% static 'js/forms.js' %}"></script>
 {% endblock scripts %}
