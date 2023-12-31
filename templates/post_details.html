@@ -107,36 +107,35 @@
             <form class="d-inline" method="POST" action="{% url 'like_post' post.slug %}">
                 {% csrf_token %}
                 {% if user in post.likes.all %}
-                    <button type="submit" class="btn py-0 line-separate" aria-label="Unlike this post">
+                    <button type="submit" class="btn post-footer-item py-0 line-separate" aria-label="Unlike this post">
                         <i class="fa-solid fa-thumbs-up"></i>
                 {% else %}
-                    <button type="submit" class="btn py-0 line-separate" aria-label="Like this post">
+                    <button type="submit" class="btn post-footer-item py-0 line-separate" aria-label="Like this post">
                         <i class="fa-regular fa-thumbs-up"></i>
                 {% endif %}
                     {{ post.number_of_likes }}
                 </button>
             </form>
             {% else %}
-                <span class="footer-blocked py-0 line-separate" aria-disabled="true">
+                <span class="post-footer-item footer-blocked py-0 line-separate" aria-disabled="true">
                     <i class="fa-regular fa-thumbs-up"></i>
                     {{ post.number_of_likes }}
                 </span>
             {% endif %}
-            {% if user.is_authenticated %}
-                <a class="btn py-0{% if user == post.posted_by %} line-separate{% endif %}" href="#post-comment" aria-label="Post a comment">
-            {% else %}
-                <a class="btn py-0{% if user == post.posted_by %} line-separate{% endif %}" href="#comments" aria-label="View the post's comments">
-            {% endif %}
+            <a class="btn post-footer-item py-0{% if user == post.posted_by %} line-separate{% endif %}"
+                {% if user.is_authenticated %} href="#post-comment" aria-label="Post a comment"
+                {% else %} href="#comments" aria-label="View the post's comments"{% endif %}>
+                
                 <i class="fa-regular fa-comment"></i>
                 {{ post.number_of_comments }}
             </a>
             <!-- Buttons specifically for user-owned posts -->
             {% if user == post.posted_by %}
-                <a class="btn py-0 line-separate" href="{% url 'edit_post' post.id %}" aria-label="Edit this post">
+                <a class="btn post-footer-item py-0 line-separate" href="{% url 'edit_post' post.id %}" aria-label="Edit this post">
                     <i class="fa-solid fa-pen"></i>
                     <span class="d-none d-md-inline">Edit</span>
                 </a>
-                <button class="btn py-0 trigger-delete-post" aria-label="Delete this post" data-url="{% url 'delete_post' post.slug %}">
+                <button class="btn post-footer-item py-0 trigger-delete-post" aria-label="Delete this post" data-url="{% url 'delete_post' post.slug %}">
                     <i class="fa-solid fa-trash"></i>
                     <span class="d-none d-md-inline">Delete</span>
                 </button>
@@ -197,10 +196,10 @@
                                     <form method="POST" class="d-inline" action="{% url 'like_comment' comment.id %}">
                                         {% csrf_token %}
                                         {% if user in comment.likes.all %}
-                                        <button type="submit" class="btn btn-small py-0 line-separate">
+                                        <button type="submit" class="btn post-footer-item btn-small py-0 line-separate">
                                             <i class="fa-solid fa-thumbs-up"></i>
                                         {% else %}
-                                        <button type="submit" class="btn btn-small py-0 line-separate">
+                                        <button type="submit" class="btn post-footer-item btn-small py-0 line-separate">
                                             <i class="fa-regular fa-thumbs-up"></i>
                                         {% endif %}
                                             {{ comment.number_of_likes }}
@@ -213,18 +212,18 @@
                                     </span>
                                 {% endif %}
                                 {% if user.is_authenticated %}
-                                    <button class="btn btn-small py-0 line-separate" type="button" data-toggle="collapse"
+                                    <button class="btn post-footer-item btn-small py-0 line-separate" type="button" data-toggle="collapse"
                                         data-target="#reply-toggle-{{ comment.id }}" aria-expanded="false" aria-controls="reply-toggle-{{ comment.id }}">
                                         <i class="fa-regular fa-comment"></i>
                                         Reply
                                     </button>
                                     {% if user == comment.posted_by %}
-                                        <button class="btn edit-comment py-0 line-separate" aria-label="Edit this comment">
+                                        <button class="btn post-footer-item edit-comment py-0 line-separate" aria-label="Edit this comment">
                                             <i class="fa-solid fa-pen"></i>
                                             Edit
                                         </button>
-                                        <button class="btn py-0 trigger-delete-comment" aria-label="Delete this comment"
-                                            data-url="{% url 'delete_comment' comment.id %}">
+                                        <button class="btn post-footer-item py-0 trigger-delete-comment"
+                                            aria-label="Delete this comment" data-url="{% url 'delete_comment' comment.id %}">
                                             <i class="fa-solid fa-trash"></i>
                                             Delete
                                         </button>
