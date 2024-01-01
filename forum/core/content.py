@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 from forum.forms import PostContentForm
 from django.db.models import Count
 from datetime import datetime
+import cloudinary
 import re
 
 
@@ -128,3 +129,11 @@ def sort_posts(post_list, by_new):
     else:
         return post_list.annotate(num_likes=Count('likes')) \
                         .order_by('-num_likes')
+
+
+def delete_image(post):
+    """
+    Deletes an image from a post
+    """
+    if post.image:
+        cloudinary.uploader.destroy(post.image.public_id)

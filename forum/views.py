@@ -10,7 +10,7 @@ from .forms import UpdateUserForm
 from .core.content import get_profile, get_post_list_context, \
                           get_base_context, get_category_list_context, \
                           get_poll_list_context, get_post_context, \
-                          get_post_form_context, create_poll
+                          get_post_form_context, create_poll, delete_image
 from .core.slug import generate_slug, format_tag_search
 from .core.messages import display_error, display_success, deny_access, \
                            display_form_errors
@@ -290,9 +290,7 @@ class EditPost(View):
         if request.FILES:
             image = request.FILES['post-image']
             image_url = cloudinary.uploader.upload(image)['public_id']
-            # Removing any previous image from cloudinary
-            if post.image:
-                cloudinary.uploader.destroy(post.image.public_id)
+            delete_image(post)
             post.image = image_url
         post.image_position = request.POST.get('image-position')
 
@@ -553,6 +551,12 @@ class DeleteAccount(View):
                             password=password)
         if user is not None:
             user = get_object_or_404(User, id=request.user.id)
+
+            # Removing all images uploaded by the user from cloudinary
+            posts = list(user.added_posts.all())
+            for post in posts:
+                delete_image(post)
+
             user.delete()
             display_success(request, 'Your account has been deleted')
             return redirect('/accounts/login')
