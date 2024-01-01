@@ -125,6 +125,13 @@ a:hover {
     color: #e65418;
 }
 
+#mobile-header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+}
+
 #form-account {
     height: 100%;
     display: flex;

@@ -22,20 +22,28 @@
 </head>
 
 <body id="account-container">
+    <header id="mobile-header" class="d-block d-lg-none navbar navbar-dark">
+        <div>
+            <a class="navbar-brand" href="{% url 'home' %}" aria-label="Go to the home page">
+                <i class="fa-solid fa-message"></i>
+                <strong>Conversate</strong>
+            </a>
+        </div>
+    </header>
     <div id="account-upper" class="container">
         <div class="row">
-            <div class="col-lg-6 d-none d-lg-flex align-items-center">
+            <aside class="col-lg-6 d-none d-lg-flex align-items-center">
                 <div class="text-center">
                     <h1 class="login-heading"><i class="fa-solid fa-message"></i> Conversate</h1>
                     <p>Where Every Word Sparks Connection!</p>
                 </div>
-            </div>
-            <div id="form-account" class="col-lg-6">
+            </aside>
+            <section id="form-account" class="col-lg-6">
                 <div id="form-shell">
                     {% block content %}
                     {% endblock content %}
                 </div>
-            </div>
+            </section>
         </div>
     </div>
     <footer>
