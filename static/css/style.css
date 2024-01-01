@@ -309,10 +309,17 @@ a:hover {
     position: relative;
 }
 
-.alert-error {
+.alert-success {
+    color: #214104;
+    background-color: #97c57a;
+    border-color: #919d6c;
+}
+
+.alert-error,
+.alert-danger {
     color: #721c24;
-    background-color: #f8d7da;
-    border-color: #f5c6cb;
+    background-color: #cf949a;
+    border-color: #af757b;
 }
 
 .alert-message {
