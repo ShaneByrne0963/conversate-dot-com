@@ -440,9 +440,14 @@ code {
 }
 
 .post-footer {
-    background-color: #9fab35;
+    background-color: #d27638;
     padding: 8px;
     color: white;
+}
+
+.post-footer-buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
 }
 
 .post-footer-item {
@@ -451,8 +456,9 @@ code {
 }
 
 .footer-blocked {
-    color: #4d521f;
+    color: #841722;
     padding: .375rem .75rem;
+    text-align: center;
 }
 
 .comment-footer {
