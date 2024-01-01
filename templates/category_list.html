@@ -10,10 +10,10 @@ Browse Categories - Conversate
 <hr>
 <div class="row">
     {% for category in item_list %}
-        <div class="col-sm-6 col-lg-3 mb-2">
+        <div class="col-12 col-sm-6 col-xl-4 mb-3">
             <a class="btn btn-block d-flex align-items-center justify-content-between"
                 href="{% url 'categories' category.slug %}">
-                <span>{{ category.name }}</span>
+                <span><i class="fa-solid {{ category.icon }} mr-2"></i>{{ category.name }}</span>
                 <span>{{ category.number_of_posts }}</span>
             </a>
         </div>

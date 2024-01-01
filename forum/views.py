@@ -146,7 +146,10 @@ class CategorisedPosts(View):
         posts = Post.objects.filter(category=category)
 
         context = get_post_list_context(request, posts)
-        context['heading'] = f'Posts in "{category.name}"'
+        if category.slug == 'none':
+            context['heading'] = f'Posts with {category.name}'
+        else:
+            context['heading'] = f'Posts in Category "{category.name}"'
         context['selected_tab'] = f'Category/{category.name}'
 
         return render(
@@ -165,6 +168,7 @@ class BrowseCategories(View):
 
         categories = Category.objects \
                              .annotate(num_posts=Count('tagged_posts')) \
+                             .filter(num_posts__gt=0) \
                              .order_by('-num_posts')
 
         context = get_category_list_context(request, categories)
