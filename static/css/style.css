@@ -522,11 +522,18 @@ code {
 #preview {
     height: auto;
     min-height: 245px;
+    position: relative;
 }
 
 #preview-image {
     max-width: 100%;
     max-height: 500px;
+}
+
+#delete-image {
+    position: absolute;
+    top: 4px;
+    right: 4px;
 }
 
 /* ------------------------------------------------------Polls------------------------------------------------------ */

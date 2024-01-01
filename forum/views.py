@@ -326,11 +326,21 @@ class DeletePost(View):
 
     def post(self, request, slug):
         post = get_object_or_404(Post, slug=slug)
-        if post.image:
-            cloudinary.uploader.destroy(post.image.public_id)
+        delete_image(post)
         post.delete()
         display_success(request, 'Your post has been deleted')
         return redirect('home')
+
+
+class ClearImage(View):
+
+    def post(self, request, post_id):
+        post = get_object_or_404(Post, id=post_id)
+        delete_image(post)
+        post.save()
+        display_success(request, 'The image has been deleted')
+        return HttpResponseRedirect(reverse('edit_post', args=[post_id]))
+
 
 
 class SendComment(View):

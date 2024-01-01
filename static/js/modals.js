@@ -2,6 +2,7 @@
 $('.trigger-delete-post').click({ itemType: 'Post' }, setDeleteModal);
 $('.trigger-delete-comment').click({ itemType: 'Comment' }, setDeleteModal);
 $('.trigger-delete-poll').click({ itemType: 'Poll' }, setDeleteModal);
+$('.trigger-delete-image').click({ itemType: 'Image' }, setDeleteModal);
 
 // Logging out
 $('.trigger-logout').click(setLogoutModal);
@@ -53,6 +54,8 @@ function setDeleteModal(event) {
             <p>Deleting this poll cannot be undone and will remove all user answers.</p>`;
             break;
         default:
+            bodyHtml = `
+            <p>Are you sure you want to delete this ${itemType.toLowerCase()}?</p>`;
             break;
     }
     let modalObject = {

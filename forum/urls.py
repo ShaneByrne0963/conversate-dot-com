@@ -19,6 +19,8 @@ urlpatterns = [
     path('edit/<int:post_id>', views.EditPost.as_view(), name='edit_post'),
     path('like/<slug:slug>', views.LikePost.as_view(), name='like_post'),
     path('delete/<slug:slug>', views.DeletePost.as_view(), name='delete_post'),
+    path('clear-image/<int:post_id>', views.ClearImage.as_view(),
+         name='clear_image'),
     path('comment/<slug:slug>', views.SendComment.as_view(),
          name='send_comment'),
     path('like-comment/<int:comment_id>', views.LikeComment.as_view(),

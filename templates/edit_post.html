@@ -135,9 +135,15 @@ Edit Post - Conversate
                 </div>
                 <div class="form-group">
                     <label for="preview">Preview</label>
-                    <div id="preview" class="form-control center-to-container clickable">
+                    <div id="preview" class="form-control center-to-container">
                         <img id="preview-image"{% if not post.image %} class="d-none"{% endif %} src="{{ post.image.url }}" alt="Your selected image">
                         <span id="preview-empty"{% if post.image %} class="d-none"{% endif %}>No file chosen.</span>
+                        {% if post.image %}
+                            <button type="button" id="delete-image" class="btn trigger-delete-image"
+                                aria-label="Remove your image." data-url="{% url 'clear_image' post.id %}">
+                                <i class="fa-solid fa-trash"></i>
+                            </button>
+                        {% endif %}
                     </div>
                 </div>
                 <div class="input-group mb-3">

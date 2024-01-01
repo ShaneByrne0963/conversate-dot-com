@@ -45,6 +45,7 @@ $('#post-image').change(() => {
             reader.onload = function (event) {
                 $('#preview-image').removeClass('d-none').attr('src', event.target.result);
                 $('#preview-empty').addClass('d-none');
+                addClearImageButton();
             };
         }
         else {
@@ -60,8 +61,7 @@ $('#post-image').change(() => {
 $('form').on('reset', () => {
     $('.tag-list-item').remove();
     $('#poll-collapse').collapse('hide');
-    $('#preview-image').attr('src', '').removeClass('d-none').addClass('d-none');
-    $('#preview-empty').removeClass('d-none');
+    clearImage();
 });
 
 // Updates the poll collapse when the user clicks on the checkbox
@@ -69,6 +69,33 @@ $('.check-collapse').on('input', updatePollCollapse);
 $('.check-collapse-content').on('shown.bs.collapse', updatePollCollapse);
 $('.check-collapse-content').on('hidden.bs.collapse', updatePollCollapse);
 
+
+/**
+ * Adds a button to clear an image from the post
+ */
+function addClearImageButton() {
+    if ($('#delete-image').length == 0) {
+        let deleteButton = document.createElement('button');
+        deleteButton.id = 'delete-image';
+        deleteButton.setAttribute('type', 'button');
+        deleteButton.setAttribute('aria-label', 'Delete this image.');
+        deleteButton.innerHTML = `<i class="fa-solid fa-trash"></i>`;
+        deleteButton.className += 'btn';
+        deleteButton.addEventListener('click', clearImage);
+        $('#preview').append(deleteButton);
+    }
+}
+
+
+/**
+ * Removes an image that has not yet been uploaded to cloudinary from the post
+ */
+function clearImage() {
+    $('#post-image').val('');
+    $('#preview-image').attr('src', '').removeClass('d-none').addClass('d-none');
+    $('#preview-empty').removeClass('d-none');
+    $('#delete-image').remove();
+}
 
 
 /**

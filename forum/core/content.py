@@ -136,4 +136,6 @@ def delete_image(post):
     Deletes an image from a post
     """
     if post.image:
-        cloudinary.uploader.destroy(post.image.public_id)
+        cloudinary.uploader.destroy(post.image.public_id, invalidate=True)
+        post.image = None
+        post.save()
