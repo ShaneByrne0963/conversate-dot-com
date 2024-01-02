@@ -4,7 +4,7 @@
 
 Conversate&#46;com is a forum website where people can connect with each other by writing posts, uploading images and creating polls for other people to vote on. The aim of this website is to provide a platform that gives its users a wide range of ways to express their thoughts and opinions, as well as making those expressions as accessible to other users as possible. Conversate was made using the Django framework and designed using Bootstrap
 
-### Design Thinking Process
+## Design Thinking Process
 
 > *"Why would a user want to visit our website?"*
 
@@ -39,10 +39,6 @@ Conversate&#46;com is a forum website where people can connect with each other b
 - **Encouraged to interact with the community**
   - Users are required to be logged in to navigate through the majority of the website, which means if they discover a post that interests them they will always have the opportunity to like and comment on that post, as well as vote in polls they discover.
 
-### Agile Methodologies
-
-### Wireframes
-
 ## Features
 
 ## Design
@@ -52,6 +48,39 @@ Conversate&#46;com is a forum website where people can connect with each other b
 ### Color Scheme
 
 ### Typography
+
+### Wireframes
+
+## Agile Methodologies
+
+This website was completed using an agile development system.
+
+- Each feature was broken down into user stories, which are comprised of the following:
+  - A set of acceptance criteria to know when the feature is complete
+  - Tasks to achieve in order to implement it
+  - Story points to give an estimate on how long it will take to complete.
+  - An epic which groups similar user stories together
+
+![List of user stories](readme_images/agile/user_stories.JPG)
+
+![Details of a user story](readme_images/agile/user_story_details.JPG)
+
+- Once finalized, these user stories were transferred to the product backlog, which was where all incomplete user stories that were not being worked on were kept.
+
+![The product backlog](readme_images/agile/product_backlog.JPG)
+
+- The work done was divided into week-long iterations, with a total of 7 iterations occuring to implement all the features in the website.
+  - For each iteration, I added a set of user stories which I was to complete within the week, taken from the product backlog, with the aim of having the total story point number resting between 8 and 10 story points
+  - Each user story was given a label:
+    - "Must Have", given to user stories that must be completed within the iteration timeframe
+    - "Should Have", given to user stories that don't have to be completed for this iteration, but should if possible
+    - "Could Have", which are user stories that can be completed if all other user stories are finished
+  - For each iteration, no more than 60% of all of its user stories were labelled with "Must have"
+  - If user stories were still remaining once an iteration came to a close, they were returned to the product backlog, where they could be selected for future iterations
+
+![Iterations for Conversate](readme_images/agile/iterations.JPG)
+
+Looking back on my agile development, I was able to complete 100% of the "Must Have" user stories set out, but the majority of my "Should Have" and "Could Have" stories were pushed back into the product backlog. Upon reflection, I will consider balancing the story points I assign myself for a given iteration (i.e. not having all "Must Have"s that have a high story point count), in order to allow for a less tight schedule
 
 ## Data Models
 
@@ -81,7 +110,7 @@ Conversate&#46;com is a forum website where people can connect with each other b
 
 ## Deployment and Local Development
 
-### Deploy to Heroku
+### Deployment to Heroku
 
 ### Cloning Repositories
 
