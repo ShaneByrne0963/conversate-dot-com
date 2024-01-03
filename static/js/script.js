@@ -27,7 +27,7 @@ window.addEventListener('DOMContentLoaded', () => {
     if ($('#list-of-posts').length > 0) {
         finishLoading();
     }
-    //setTimeout(closeAlertMessage, messageCloseTime);
+    setTimeout(closeAlertMessage, messageCloseTime);
 });
 
 // Displays instructions on how to search by tag, appearing only once per session
