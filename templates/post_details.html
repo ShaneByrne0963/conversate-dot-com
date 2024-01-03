@@ -103,7 +103,8 @@
         </div>
     {% endif %}
     <!-- Post footer -->
-    <div class="post-footer d-flex flex-column flex-md-row justify-content-md-between mt-2 mb-5">
+    <div class="post-footer d-flex flex-md-row justify-content-md-between mt-2 mb-5
+        {% if post.posted_by == user %} flex-column{% else %} flex-row post-not-owned justify-content-between{% endif %}">
         <div class="post-footer-buttons">
             {% if user.is_authenticated and post.posted_by != request.user %}
             <form class="d-inline" method="POST" action="{% url 'like_post' post.slug %}">
@@ -143,7 +144,7 @@
                 </button>
             {% endif %}
         </div>
-        <div class="align-middle text-right mt-2 mt-md-0">
+        <div class="align-middle text-right{% if user == post.posted_by %} mt-2{% endif %} mt-md-0">
             <strong>{{ post.posted_on|date:"d/m/y G:i" }}</strong>
         </div>
     </div>
@@ -193,7 +194,7 @@
 
                             <!-- Menu buttons underneath the comment -->
                             <div class="post-footer comment-footer">
-                                <div class="post-footer-buttons d-md-flex">
+                                <div class="post-footer-buttons{% if user != comment.posted_by %} d-flex{% endif %} d-md-flex">
                                     {% if user.is_authenticated and user != comment.posted_by %}
                                         <form method="POST" class="d-inline" action="{% url 'like_comment' comment.id %}">
                                             {% csrf_token %}

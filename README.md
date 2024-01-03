@@ -43,8 +43,12 @@ Conversate&#46;com is a forum website where people can connect with each other b
 
 - Posts
   - Posts are the main attraction to Conversate. Posts are created by users to send their thoughts out to the world for all to see.
-  - All posts are made up of a title and a main body of text, with the option of having a category, image, poll or set of tags accompanying them.<br>![A user post](readme_images/features/posts.JPG)
-  - Users can like posts, and comment on them to share thoughts of their own
+  - All posts are made up of a title and a main body of text, with the option of having a category, image, poll or set of tags accompanying them.<br>![The top of a user post](readme_images/features/post_top.JPG)<br>![The bottom of the post](readme_images/features/post_bottom.JPG)
+  - Users can like posts, and comment on them to share thoughts of their own.
+  - Comments can also be replied to so that a conversation can be started among the site's users
+![A conversation within the comments](readme_images/features/comments.JPG)
+- Polls
+  - Polls are an excellent way to 
 
 ## Design
 

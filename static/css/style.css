@@ -460,6 +460,10 @@ code {
     grid-template-columns: 1fr 1fr 1fr 1fr;
 }
 
+.post-footer.post-not-owned>.post-footer-buttons {
+    grid-template-columns: 1fr 1fr;
+}
+
 .post-footer-item {
     background: none;
     border-radius: 0;
