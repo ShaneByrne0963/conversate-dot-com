@@ -450,7 +450,7 @@ code {
 }
 
 .post-footer {
-    background-color: #d27638;
+    background-color: #9fab35;
     padding: 8px;
     color: white;
 }
@@ -466,7 +466,7 @@ code {
 }
 
 .footer-blocked {
-    color: #841722;
+    color: #314e16;
     padding: .375rem .75rem;
     text-align: center;
 }
@@ -490,6 +490,7 @@ code {
 /* Fixing the summernote text editor size */
 #id_body_iframe {
     width: 100%;
+    overflow: visible;
 }
 
 #summernote-content {

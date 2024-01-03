@@ -80,8 +80,6 @@ This website was completed using an agile development system.
 
 ![Iterations for Conversate](readme_images/agile/iterations.JPG)
 
-Looking back on my agile development, I was able to complete 100% of the "Must Have" user stories set out, but the majority of my "Should Have" and "Could Have" stories were pushed back into the product backlog. Upon reflection, I will consider balancing the story points I assign myself for a given iteration (i.e. not having all "Must Have"s that have a high story point count), in order to allow for a less tight schedule
-
 ## Data Models
 
 ## Testing

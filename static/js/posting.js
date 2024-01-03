@@ -232,7 +232,8 @@ function removeTag(event) {
  */
 function summernoteInit() {
     let iFrame = $('iframe').get(0);
-    let contentField = iFrame.contentWindow.document.querySelector('.note-editing-area');
+    let summernote = iFrame.contentWindow.document;
+    let contentField = summernote.querySelector('.note-editing-area');
     if (contentField) {
         contentField.addEventListener('input', checkBodyValid);
         // Prepopulating the text field if the post is being edited
@@ -241,6 +242,9 @@ function summernoteInit() {
             contentField.querySelector('.note-editable').innerHTML = previousInput.getAttribute('value');
             checkBodyValid();
         }
+        // Preventing the toolbar dropdowns from overflowing out of the editor
+        $('iframe').attr('scrolling', 'no');
+
         // Reveals the form when all elements are in place
         finishLoading();
     }
