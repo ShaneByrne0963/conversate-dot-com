@@ -42,13 +42,22 @@ Conversate&#46;com is a forum website where people can connect with each other b
 ## Features
 
 - **Posts**
-  - Posts are the main attraction to Conversate. They are blocks of text created by users to send their thoughts out to the world for all to see.
-  - All posts are made up of a title and a main body of text
+  - Posts are the main attraction to Conversate. They are blocks of text created by users to send their thoughts out to the world for all to see.<br>
     ![A user post](readme_images/features/post_content.JPG)
-  - Images can also be added to a post. A picture is worth a thousand words
-  - Users can like posts, and comment on them to share thoughts of their own.
-  - Comments can also be replied to so that a conversation can be started among the site's users
-![A conversation within the comments](readme_images/features/comments.JPG)
+  - All posts are made up of a title and a main body of text. The site uses Summernote's text editor to give users the ability to add style to their posts. They can add headings, paragraphs, bullet points, links, tables and horizontal rules. Text can also be styled in a number of ways, including changing the font size and setting the font to bold, italics or underlined
+    ![A post using different styles of text](readme_images/features/post_styled.JPG)<br>
+  - Categories can be added to a post in order to group it with other posts of a similar nature. There are a selection of categories created by the site administrators that can be chosen from
+  - Images can also be added to a post. A picture is worth a thousand words, so adding one can add an invaluable layer of depth to the story the poster is trying to tell. Images can be placed above or below the main body of text<br>
+    ![A post with an image at the top](readme_images/features/post_image.JPG)
+  - Posts can be tagged with a list of keywords. These tags can be clicked on, revealing all posts that also have this tag
+  - Users can choose to like posts to show appreciation to the poster. Posts with more likes are more likely to be found by exploring users. Posters cannot like their own posts
+    ![A list of keywords tagging the post](readme_images/features/post_tags.JPG)
+- **Comments**
+  - Users can comment on posts to share thoughts or add insight of their own
+  - If a user sees a comment they appreciate, they can like that comment
+    ![A comment left under a post](readme_images/features/comment.JPG)
+  - Comments can also be replied to so that a conversation can be started with the commenter. Replies can be replied to in a similar manner
+    ![A conversation within the comments](readme_images/features/comment_replies.JPG)
 - **Polls**
   - Polls are an excellent way to collect answers and gather statistics from the site's community. They are made up of a question (title), a list of between 2 and 5 answers, and an end date.
     ![A user submitted poll](readme_images/features/poll.JPG)
@@ -58,7 +67,15 @@ Conversate&#46;com is a forum website where people can connect with each other b
   - Answers from other users cannot be seen until the user has voted, in order to prevent people from only selecting the most popular vote
     ![A poll that has revealed its answers after a vote](readme_images/features/poll_voted.JPG)
   - Once a poll has passed its due date, votes will no longer be accepted and the final results will be shown
-![A poll that has ended](readme_images/features/poll_ended.JPG)
+    ![A poll that has ended](readme_images/features/poll_ended.JPG)
+- **The Home Page**
+  - When the user first logs in to Conversate, the home page is the first step on their journey.
+  - They are welcomed with any possible kind of post made, allowing them to explore a wide variety of content until they find something that interests them.
+    ![The home page](readme_images/features/home_page.JPG)
+- **Categories**
+  - If users are looking for something a little more specific, they can search for posts by what category they belong to.
+  - A list of categories is present within the navigation that shows the categories with the most posts, making more content easily available to the user
+    ![](readme_images/features/category_navigation.JPG)
 
 ## Design
 

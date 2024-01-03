@@ -33,7 +33,7 @@ class ListPosts(View):
         if user_profile.sort_by_new:
             context['heading'] = "What's New"
         else:
-            context['heading'] = "What's Trending"
+            context['heading'] = "What's Popular"
         context['selected_tab'] = 'Home'
 
         return render(

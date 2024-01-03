@@ -51,7 +51,6 @@ class Post(models.Model):
     tags = models.CharField(max_length=200, blank=True)
     edited = models.BooleanField(default=False)
     likes = models.ManyToManyField(User, related_name='post_likes', blank=True)
-    approved = models.BooleanField(default=False)
 
     class Meta:
         ordering = ['-posted_on']

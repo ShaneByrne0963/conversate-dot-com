@@ -151,8 +151,8 @@ Edit Post - Conversate
                         <label class="input-group-text" for="image-position">Image Position</label>
                     </div>
                     <select class="custom-select" id="image-position" name="image-position">
-                        <option value="0" selected>Top of post</option>
-                        <option value="-1">Bottom of post</option>
+                        <option value="0"{% if not post.image_position or post.image_position == 0 %} selected{% endif %}>Top of post</option>
+                        <option value="-1"{% if post.image_position and post.image_position == -1 %} selected{% endif %}>Bottom of post</option>
                     </select>
                 </div>
             </div>
