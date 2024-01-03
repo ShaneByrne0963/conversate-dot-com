@@ -57,6 +57,14 @@ class Post(models.Model):
 
     def __str__(self):
         return f'({self.category}) {self.title}'
+    
+    def title_preview(self):
+        """
+        Returns the first 50 characters of a post's title for the post list page
+        """
+        if len(self.title) > 50:
+            return f'{self.title[:50]}...'
+        return self.title
 
     def number_of_likes(self):
         return self.likes.count()
@@ -65,6 +73,9 @@ class Post(models.Model):
         return self.comments.count()
 
     def tag_list(self):
+        """
+        Splits the tag string into separate items in a list
+        """
         tags_separate = self.tags.split('#')
         # Removes the blank tag at the start of the list
         tags_separate.pop(0)

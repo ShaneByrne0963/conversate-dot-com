@@ -75,7 +75,7 @@ Conversate&#46;com is a forum website where people can connect with each other b
 - **Categories**
   - If users are looking for something a little more specific, they can search for posts by what category they belong to.
   - A list of categories is present within the navigation that shows the categories with the most posts, making more content easily available to the user
-    ![](readme_images/features/category_navigation.JPG)
+    ![A list of categories available from the navigation](readme_images/features/category_navigation.JPG)
 
 ## Design
 

@@ -282,7 +282,6 @@ class EditPost(View):
         post.title = request.POST.get('title')
         post.content = content
         post.edited = True
-        post.approved = False
         post.category = get_object_or_404(Category, name=category)
         post.tags = request.POST.get('tags')
 
