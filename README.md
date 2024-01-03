@@ -41,14 +41,24 @@ Conversate&#46;com is a forum website where people can connect with each other b
 
 ## Features
 
-- Posts
-  - Posts are the main attraction to Conversate. Posts are created by users to send their thoughts out to the world for all to see.
-  - All posts are made up of a title and a main body of text, with the option of having a category, image, poll or set of tags accompanying them.<br>![The top of a user post](readme_images/features/post_top.JPG)<br>![The bottom of the post](readme_images/features/post_bottom.JPG)
+- **Posts**
+  - Posts are the main attraction to Conversate. They are blocks of text created by users to send their thoughts out to the world for all to see.
+  - All posts are made up of a title and a main body of text
+    ![A user post](readme_images/features/post_content.JPG)
+  - Images can also be added to a post. A picture is worth a thousand words
   - Users can like posts, and comment on them to share thoughts of their own.
   - Comments can also be replied to so that a conversation can be started among the site's users
 ![A conversation within the comments](readme_images/features/comments.JPG)
-- Polls
-  - Polls are an excellent way to 
+- **Polls**
+  - Polls are an excellent way to collect answers and gather statistics from the site's community. They are made up of a question (title), a list of between 2 and 5 answers, and an end date.
+    ![A user submitted poll](readme_images/features/poll.JPG)
+  - Polls can be included within a post, giving the user the ability to add more context to the poll, as well as allowing people to respond in the comments
+    ![A poll that is part of a post](readme_images/features/poll_post.JPG)
+  - Users can only vote for one answer in the list, and once they vote on their decision, they are unable to change their vote
+  - Answers from other users cannot be seen until the user has voted, in order to prevent people from only selecting the most popular vote
+    ![A poll that has revealed its answers after a vote](readme_images/features/poll_voted.JPG)
+  - Once a poll has passed its due date, votes will no longer be accepted and the final results will be shown
+![A poll that has ended](readme_images/features/poll_ended.JPG)
 
 ## Design
 
