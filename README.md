@@ -106,8 +106,6 @@ Conversate&#46;com is a forum website where people can connect with each other b
 ### User Interface
 
 - **The Login/Signup Page**
-  - When a 
-
 
 ### Color Scheme
 
@@ -140,31 +138,35 @@ I chose to use these fonts simply because they are easy to read, and work well w
 
 #### Desktop
 
-- Login Page<br>![Login page wireframe for desktop](readme_images/wireframes/login_desktop.jpg)
-- Signup Page<br>![Signup page wireframe for desktop](readme_images/wireframes/signup_desktop.jpg)
-- Home Page (Post List)<br>![Home page wireframe for desktop](readme_images/wireframes/post_list_desktop.jpg)
-- Post Details Page<br>![Post details page wireframe for desktop](readme_images/wireframes/post_details_desktop.jpg)
-  <br>![Post comment section wireframe for desktop](readme_images/wireframes/post_comments_desktop.jpg)
-- New/Edit Post Pages<br>![Top of new post page wireframe for desktop](readme_images/wireframes/new_post_top_desktop.jpg)
-  <br>![Bottom of new post page wireframe for desktop](readme_images/wireframes/new_post_bottom_desktop.jpg)
-- New Poll Page<br>![New poll page wireframe for desktop](readme_images/wireframes/new_poll_desktop.jpg)
-- Poll List Page<br>![Poll list page wireframe for desktop](readme_images/wireframes/poll_list_desktop.jpg)
-- Category List Page<br>![Category list page wireframe for desktop](readme_images/wireframes/category_list_desktop.jpg)
-- Account Settings Page<br>![Account Settings page wireframe for desktop](readme_images/wireframes/account_settings_desktop.jpg)
+<details><summary>Login Page</summary><img src="readme_images/wireframes/login_desktop.jpg" alt="Login page wireframe for desktop"></details>
+<details><summary>Signup Page</summary><img src="readme_images/wireframes/signup_desktop.jpg" alt="Signup page wireframe for desktop"></details>
+<details><summary>Home Page (Post List)</summary><img src="readme_images/wireframes/post_list_desktop.jpg" alt="Home page wireframe for desktop"></details>
+<details><summary>Post Details Page</summary>
+  <img src="readme_images/wireframes/post_details_desktop.jpg" alt="Post details page wireframe for desktop">
+  <img src="readme_images/wireframes/post_comments_desktop.jpg" alt="Post comment section wireframe for desktop"></details>
+<details><summary>New/Edit Post Pages</summary>
+  <img src="readme_images/wireframes/new_post_top_desktop.jpg" alt="Top of new post page wireframe for desktop">
+  <img src="readme_images/wireframes/new_post_bottom_desktop.jpg" alt="Bottom of new post page wireframe for desktop"></details>
+<details><summary>New Poll Page</summary><img src="readme_images/wireframes/new_poll_desktop.jpg" alt="New poll page wireframe for desktop"></details>
+<details><summary>Poll List Page</summary><img src="readme_images/wireframes/poll_list_desktop.jpg" alt="Poll list page wireframe for desktop"></details>
+<details><summary>Category List Page</summary><img src="readme_images/wireframes/category_list_desktop.jpg" alt="Category list page wireframe for desktop"></details>
+<details><summary>Account Settings Page</summary><img src="readme_images/wireframes/account_settings_desktop.jpg" alt="Account Settings page wireframe for desktop"></details>
 
 #### Mobile
 
-- Login Page<br>![Login page wireframe for mobile](readme_images/wireframes/login_mobile.jpg)
-- Signup Page<br>![Signup page wireframe for mobile](readme_images/wireframes/signup_mobile.jpg)
-- Home Page (Post List)<br>![Home page wireframe for mobile](readme_images/wireframes/post_list_mobile.jpg)
-- Post Details Page<br>![Post details page wireframe for mobile](readme_images/wireframes/post_details_mobile.jpg)
-  <br>![Post comment section wireframe for mobile](readme_images/wireframes/post_comments_mobile.jpg)
-- New/Edit Post Pages<br>![Top of new post page wireframe for mobile](readme_images/wireframes/new_post_top_mobile.jpg)
-  <br>![Bottom of new post page wireframe for mobile](readme_images/wireframes/new_post_bottom_mobile.jpg)
-- New Poll Page<br>![New poll page wireframe for mobile](readme_images/wireframes/new_poll_mobile.jpg)
-- Poll List Page<br>![Poll list page wireframe for mobile](readme_images/wireframes/poll_list_mobile.jpg)
-- Category List Page<br>![Category list page wireframe for mobile](readme_images/wireframes/category_list_mobile.jpg)
-- Account Settings Page<br>![Account Settings page wireframe for mobile](readme_images/wireframes/account_settings_mobile.jpg)
+<details><summary>Login Page</summary><img src="readme_images/wireframes/login_mobile.jpg" alt="Login page wireframe for mobile"></details>
+<details><summary>Signup Page</summary><img src="readme_images/wireframes/signup_mobile.jpg" alt="Signup page wireframe for mobile"></details>
+<details><summary>Home Page (Post List)</summary><img src="readme_images/wireframes/post_list_mobile.jpg" alt="Home page wireframe for mobile"></details>
+<details><summary>Post Details Page</summary>
+  <img src="readme_images/wireframes/post_details_mobile.jpg" alt="Post details page wireframe for mobile">
+  <img src="readme_images/wireframes/post_comments_mobile.jpg" alt="Post comment section wireframe for mobile"></details>
+<details><summary>New/Edit Post Pages</summary>
+  <img src="readme_images/wireframes/new_post_top_mobile.jpg" alt="Top of new post page wireframe for mobile">
+  <img src="readme_images/wireframes/new_post_bottom_mobile.jpg" alt="Bottom of new post page wireframe for mobile"></details>
+<details><summary>New Poll Page</summary><img src="readme_images/wireframes/new_poll_mobile.jpg" alt="New poll page wireframe for mobile"></details>
+<details><summary>Poll List Page</summary><img src="readme_images/wireframes/poll_list_mobile.jpg" alt="Poll list page wireframe for mobile"></details>
+<details><summary>Category List Page</summary><img src="readme_images/wireframes/category_list_mobile.jpg" alt="Category list page wireframe for mobile"></details>
+<details><summary>Account Settings Page</summary><img src="readme_images/wireframes/account_settings_mobile.jpg" alt="Account Settings page wireframe for mobile"></details>
 
 ## Agile Methodologies
 
@@ -196,6 +198,8 @@ This website was completed using an agile development system.
 ![Iterations for Conversate](readme_images/agile/iterations.JPG)
 
 ## Data Models
+
+### CRUD Functionality
 
 ## Testing
 

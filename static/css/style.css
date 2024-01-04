@@ -503,6 +503,7 @@ code {
 
 #summernote-feedback {
     border: none;
+    outline: none;
     z-index: -1;
     position: absolute;
     bottom: 0;
