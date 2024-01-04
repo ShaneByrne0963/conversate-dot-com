@@ -49,7 +49,7 @@ Conversate&#46;com is a forum website where people can connect with each other b
   - Categories can be added to a post in order to group it with other posts of a similar nature. There are a selection of categories created by the site administrators that can be chosen from
   - Images can also be added to a post. A picture is worth a thousand words, so adding one can add an invaluable layer of depth to the story the poster is trying to tell. Images can be placed above or below the main body of text<br>
     ![A post with an image at the top](readme_images/features/post_image.JPG)
-  - Posts can be tagged with a list of keywords. These tags can be clicked on, revealing all posts that also have this tag
+  - Posts can be tagged with a list of keywords. These tags can be clicked on, revealing all posts that also have this tag. Using hashtags can increase the likelihood of the post to be seen, as it provides an extra method for posts to be queried
   - Users can choose to like posts to show appreciation to the poster. Posts with more likes are more likely to be found by exploring users. Posters cannot like their own posts
     ![A list of keywords tagging the post](readme_images/features/post_tags.JPG)
 - **Comments**
@@ -76,6 +76,16 @@ Conversate&#46;com is a forum website where people can connect with each other b
   - If users are looking for something a little more specific, they can search for posts by what category they belong to.
   - A list of categories is present within the navigation that shows the categories with the most posts, making more content easily available to the user
     ![A list of categories available from the navigation](readme_images/features/category_navigation.JPG)
+    ![Results for searching by category](readme_images/features/category_search.JPG)
+- **Search Posts**
+  - For users that are specifically looking for posts that contain certain words or phrases, they can use the search bar and find those posts
+    ![Searching for posts with the word "chocolate" in the search bar](readme_images/features/search_bar.JPG)
+    ![The results found 2 posts with the word "chocolate"](readme_images/features/search_results.JPG)
+  - Users also have the option to search for post tags by prefixing their search with a hashtag ("#")<br>
+    ![Searching for posts with the tag "Alps"](readme_images/features/search_tags.JPG)
+    ![The results found 2 posts tagged with "Alps"](readme_images/features/search_tag_results.JPG)
+- **"My Posts"**
+  - Users can easily jump to their created posts to monitor interactions by clicking on the "My Posts" button within the navigation
 
 ## Design
 

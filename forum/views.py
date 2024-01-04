@@ -150,7 +150,7 @@ class CategorisedPosts(View):
             context['heading'] = f'Posts with {category.name}'
         else:
             context['heading'] = f'Posts in Category "{category.name}"'
-        context['selected_tab'] = f'Category/{category.name}'
+        context['selected_tab'] = f'Categories/{category.name}'
 
         return render(
             request,

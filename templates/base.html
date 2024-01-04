@@ -232,8 +232,9 @@
                                     </div>
                                 </a>
                             </div>
-                            <!-- User's polls -->
-                            <a class="list-group-item list-group-item-action side-nav-btn clickable"
+                            <!-- User's posts -->
+                            <a class="list-group-item list-group-item-action side-nav-btn clickable
+                                {% if selected_tab == 'My Posts' %} active{% endif %}"
                                 href="{% url 'my_posts' %}">
                                 <i class="fa-solid fa-folder-open center-to-container"></i>
                                 <span class="d-inline-block ml-lg-2">My Posts</span>

@@ -129,6 +129,10 @@
             <h2 class="mb-3">No Posts Found!</h2>
             <p class="mb-2">Looks like you're the first one here...</p>
             <p>Start the conversation by <a href="{% url 'new_post' %}">creating your own post</a>!</p>
+        {% elif selected_tab == 'My Posts' %}
+            <h2 class="mb-3">No Posts Found!</h2>
+            <p class="mb-2">Looks like you haven't posted anything yet...</p>
+            <p>How about we change that? <a href="{% url 'new_post' %}">Create your own post</a></p>
         {% else %}
             <h2 class="mb-3">No Results Found!</h2>
             <p class="mb-2">Sorry, but we couldn't find any posts that matched what you were looking for!</p>
