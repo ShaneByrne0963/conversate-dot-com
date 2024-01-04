@@ -3,7 +3,7 @@ from django.db.models import Count
 
 
 # The maximum amount of tags that can be displayed in the side navigation
-CATEGORY_COLLAPSIBLE_LIMIT = 2
+CATEGORY_COLLAPSIBLE_LIMIT = 6
 
 
 def get_top_categories(limit=CATEGORY_COLLAPSIBLE_LIMIT):
