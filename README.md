@@ -107,6 +107,20 @@ Conversate&#46;com is a forum website where people can connect with each other b
 
 ### Color Scheme
 
+I decided to use a 2-hue color scheme to design Conversate
+
+- **Primary Color**: I chose to use a *red-orange* hue as the primary color. This hue is used mostly to decorate the user interface and headings, so it covers a significant portion of the page. I decided on this because orange is often associated with warmth, positivity, sociability and creativity, all of which are important emotions we want the users to feel in order to be encouraged to interact with the community and create content.
+
+![The side navigation, with all elements colored a shade of orange](readme_images/design/colors/primary_color.JPG)
+
+- **Secondary Color**: I decided on using a *light green* hue as my secondary color. This color's main purpose is to draw attention to whatever is colored by it, so it is used to color buttons and links. Posts in the post list page also use this color, but as a lighter, less saturated form in order to not be too overpowering
+
+![A post item, showing different shades of green to attract the user's eye](readme_images/design/colors/secondary_color.JPG)
+
+I find these two colors compliment each other very well. They look good together, while at the same time being distinct from each other. The green color draws your attention from the orange, which helps guide you through the site in the direction it wants you to go
+
+![The two colors, side by side](readme_images/design/colors/combination.JPG)
+
 ### Typography
 
 ### Wireframes
