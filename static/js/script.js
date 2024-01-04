@@ -1,4 +1,5 @@
-const mobileBreakpoint = 768;
+const mediumBreakpoint = 768;
+const xlargeBreakpoint = 1200;
 const messageCloseTime = 5000;
 const messageCloseTimeGap = 500;
 
@@ -63,11 +64,24 @@ $('#side-nav-collapse').on('transitionend', function() {
 function resizeScreen() {
     let screenWidth = $(document).width();
     let sideNav = $('#side-nav-container').detach();
-    if (screenWidth < mobileBreakpoint) {
+    // Hiding the side navigation for mobile devices
+    if (screenWidth < mediumBreakpoint) {
         $('#side-nav-collapse').append(sideNav);
     }
     else {
         $('#side-nav-large').append(sideNav);
+    }
+    // Moving the image input for post creation under the body of text, and hiding the preview for no images
+    if ($('#post-form').length > 0) {
+        let imageUpload = $('#image-upload-group').detach();
+        let imageOptions = $('#image-options-group').detach();
+        if (screenWidth < xlargeBreakpoint) {
+            $('#image-upload-small').append(imageUpload);
+            $('#image-options-small').append(imageOptions);
+        }
+        else {
+            $('#image-inputs-large').append(imageUpload).append(imageOptions);
+        }
     }
     compactPostContent();
 }

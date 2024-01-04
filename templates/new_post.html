@@ -31,6 +31,11 @@ New Post - Conversate
                     {{ content_form }}
                     <input type="text" id="summernote-feedback">
                 </div>
+                <!-- Place to put image inputs for mobile screens -->
+                <div class="form-group d-xl-none">
+                    <div id="image-upload-small"></div>
+                    <div id="image-options-small" class="collapse"></div>
+                </div>
                 <!-- Tags -->
                 <div class="form-group">
                     <input type="hidden" name="tags" id="tags">
@@ -86,8 +91,8 @@ New Post - Conversate
                 </div>
             </div>
             <!-- Upload image option -->
-            <div class="col-12 col-xl-6">
-                <div class="form-group">
+            <div id="image-inputs-large" class="col-6 d-none d-xl-block">
+                <div id="image-upload-group" class="form-group">
                     <label for="post-image">Image</label>
                     <div class="custom-file clickable">
                         <input type="file" class="custom-file-input clickable" id="post-image"
@@ -96,21 +101,23 @@ New Post - Conversate
                     </div>
                     <div id="image-feedback" class="invalid-feedback">File must be an image.</div>
                 </div>
-                <div class="form-group">
-                    <label for="preview">Preview</label>
-                    <div id="preview" class="form-control center-to-container">
-                        <img id="preview-image" class="d-none" src="#" alt="Your selected image">
-                        <span id="preview-empty">No file chosen.</span>
+                <div id="image-options-group">
+                    <div class="form-group">
+                        <label for="preview">Preview</label>
+                        <div id="preview" class="form-control center-to-container">
+                            <img id="preview-image" class="d-none" src="#" alt="Your selected image">
+                            <span id="preview-empty">No file chosen.</span>
+                        </div>
                     </div>
-                </div>
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                        <label class="input-group-text" for="image-position">Image Position</label>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <label class="input-group-text" for="image-position">Image Position</label>
+                        </div>
+                        <select class="custom-select" id="image-position" name="image-position">
+                            <option value="0" selected>Top of post</option>
+                            <option value="-1">Bottom of post</option>
+                        </select>
                     </div>
-                    <select class="custom-select" id="image-position" name="image-position">
-                        <option value="0" selected>Top of post</option>
-                        <option value="-1">Bottom of post</option>
-                    </select>
                 </div>
             </div>
         </div>

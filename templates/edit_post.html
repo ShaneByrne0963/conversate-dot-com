@@ -9,7 +9,7 @@ Edit Post - Conversate
 
 <h1>Edit your Post:</h1>
 <hr>
-<form enctype="multipart/form-data" class="after-load create-form" method="POST">
+<form id="post-form" enctype="multipart/form-data" class="after-load create-form" method="POST">
     {% csrf_token %}
     <div class="container-fluid px-0">
         <div class="row">
@@ -34,6 +34,11 @@ Edit Post - Conversate
                     {{ content_form }}
                     <input type="text" id="summernote-feedback">
                     <input type="hidden" id="previous-content" name="content-backup" value="{{ post.content }}">
+                </div>
+                <!-- Place to put image inputs for mobile screens -->
+                <div class="form-group d-xl-none">
+                    <div id="image-upload-small"></div>
+                    <div id="image-options-small" class="collapse{% if post.image %} show{% endif %}"></div>
                 </div>
                 <!-- Tags -->
                 <div class="form-group">
@@ -124,36 +129,39 @@ Edit Post - Conversate
                 </div>
             </div>
             <!-- Upload image option -->
-            <div class="col-12 col-xl-6">
-                <div class="form-group">
+            <div id="image-inputs-large" class="col-6 d-none d-xl-block">
+                <div id="image-upload-group" class="form-group">
                     <label for="post-image">Image</label>
                     <div class="custom-file clickable">
                         <input type="file" class="custom-file-input clickable" id="post-image" name="post-image"
                             accept="image/png, image/jpeg, image/webp">
                         <span class="custom-file-label clickable">Choose file...</label>
                     </div>
+                    <div id="image-feedback" class="invalid-feedback">File must be an image.</div>
                 </div>
-                <div class="form-group">
-                    <label for="preview">Preview</label>
-                    <div id="preview" class="form-control center-to-container">
-                        <img id="preview-image"{% if not post.image %} class="d-none"{% endif %} src="{{ post.image.url }}" alt="Your selected image">
-                        <span id="preview-empty"{% if post.image %} class="d-none"{% endif %}>No file chosen.</span>
-                        {% if post.image %}
-                            <button type="button" id="delete-image" class="btn trigger-delete-image"
-                                aria-label="Remove your image." data-url="{% url 'clear_image' post.id %}">
-                                <i class="fa-solid fa-trash"></i>
-                            </button>
-                        {% endif %}
+                <div id="image-options-group">
+                    <div class="form-group">
+                        <label for="preview">Preview</label>
+                        <div id="preview" class="form-control center-to-container">
+                            <img id="preview-image"{% if not post.image %} class="d-none"{% endif %} src="{{ post.image.url }}" alt="Your selected image">
+                            <span id="preview-empty"{% if post.image %} class="d-none"{% endif %}>No file chosen.</span>
+                            {% if post.image %}
+                                <button type="button" id="delete-image" class="btn trigger-delete-image"
+                                    aria-label="Remove your image." data-url="{% url 'clear_image' post.id %}">
+                                    <i class="fa-solid fa-trash"></i>
+                                </button>
+                            {% endif %}
+                        </div>
                     </div>
-                </div>
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                        <label class="input-group-text" for="image-position">Image Position</label>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <label class="input-group-text" for="image-position">Image Position</label>
+                        </div>
+                        <select class="custom-select" id="image-position" name="image-position">
+                            <option value="0"{% if not post.image_position %} selected{% endif %}>Top of post</option>
+                            <option value="-1"{% if post.image_position == -1 %} selected{% endif %}>Bottom of post</option>
+                        </select>
                     </div>
-                    <select class="custom-select" id="image-position" name="image-position">
-                        <option value="0"{% if not post.image_position %} selected{% endif %}>Top of post</option>
-                        <option value="-1"{% if post.image_position == -1 %} selected{% endif %}>Bottom of post</option>
-                    </select>
                 </div>
             </div>
         </div>

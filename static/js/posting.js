@@ -45,6 +45,8 @@ $('#post-image').change(() => {
             reader.onload = function (event) {
                 $('#preview-image').removeClass('d-none').attr('src', event.target.result);
                 $('#preview-empty').addClass('d-none');
+                // Reveal the preview and image position for mobile screens
+                $('#image-options-small').collapse('show');
                 addClearImageButton();
             };
         }
@@ -53,6 +55,7 @@ $('#post-image').change(() => {
             $('#image-feedback').addClass('d-block');
             $('#preview-image').addClass('d-none');
             $('#preview-empty').removeClass('d-none');
+            $('#image-options-small').collapse('hide');
         }
     }
 });
@@ -95,6 +98,9 @@ function clearImage() {
     $('#preview-image').attr('src', '').removeClass('d-none').addClass('d-none');
     $('#preview-empty').removeClass('d-none');
     $('#delete-image').remove();
+
+    // Hide the preview and image position inputs for mobile
+    $('#image-options-small').collapse('hide');
 }
 
 
