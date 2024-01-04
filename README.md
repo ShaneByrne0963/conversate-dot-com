@@ -86,6 +86,20 @@ Conversate&#46;com is a forum website where people can connect with each other b
     ![The results found 2 posts tagged with "Alps"](readme_images/features/search_tag_results.JPG)
 - **"My Posts"**
   - Users can easily jump to their created posts to monitor interactions by clicking on the "My Posts" button within the navigation
+    ![All the user's posts in one place](readme_images/features/my_posts.JPG)
+- **Filter Posts by Likes/Newest**
+  - All of the above methods of finding posts can have the results of those queries sorted by "Popular" or "New", first displaying the posts with the highest number of likes or posts that were most recently created, respectively
+    ![Buttons to sort the selection of posts, with "Popular" being selected](readme_images/features/post_sort.JPG)
+    ![Posts with the highest number of likes are shown as a result](readme_images/features/post_sort_results.JPG)
+- **Browse Polls**
+  - Along with posts, users can also browse through and vote on polls, made easy through the use of the "Polls" navigation tab
+  - Here, polls are divided into 3 categories:
+    - *Open polls*, where users can engage with polls and contribute their opinion to the overall score
+    - *Closed polls*, if the user feels like gathering information about votes that occured in the past
+    - *"My polls"*, which is a place for the user to find the answers to all their asked questions<br>
+  - Posts as part of polls are included, with a link to the post so the user can get the full context of the poll, as well as engage with the comments
+  ![The poll dropdown in the navigation](readme_images/features/poll_navigation.JPG)
+  ![A list of open polls](readme_images/features/poll_list.JPG)
 
 ## Design
 
