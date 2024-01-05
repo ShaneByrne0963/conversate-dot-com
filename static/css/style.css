@@ -305,6 +305,7 @@ a:hover {
 /* ------------------------------------------------------Default Template------------------------------------------------------ */
 
 #main-content {
+    background-color: white;
     padding-top: 32px;
     /* The full height of the screen minus the height of the navbar */
     height: calc(100vh - 56px);
