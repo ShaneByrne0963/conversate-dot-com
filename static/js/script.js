@@ -29,6 +29,13 @@ window.addEventListener('DOMContentLoaded', () => {
         finishLoading();
     }
     setTimeout(closeAlertMessage, messageCloseTime);
+
+    // Creating the animation when hovering over the New Post/New Poll icons
+    $('.nav-icon-expand').addClass('applied').on('mouseenter', function() {
+        $(this).css('width', '6em').find('span').removeClass('d-none');
+    }).on('mouseleave', function() {
+        $(this).css('width', '').find('span').removeClass('d-none').addClass('d-none');
+    });
 });
 
 // Displays instructions on how to search by tag, appearing only once per session

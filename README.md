@@ -105,7 +105,35 @@ Conversate&#46;com is a forum website where people can connect with each other b
 
 ### User Interface
 
-- **The Login/Signup Page**
+<details><summary><strong>The Login/Signup Page</strong></summary><ul>
+<li>This is where the site users begin their journey. Compared to the rest of the site, the layout for these pages is simple, with the Conversate brand logo on the left, the form to log in/sign up on the right, and a simple post footer at the bottom to mark the end of the page</li>
+<li>For mobile devices, an orange navbar showing a minimized brand logo appears instead of the large logo, in order to confirm to the user that they are on the Conversate website</li>
+<li>I wanted these pages to be minimalistic prevent any distractions from the main action of these pages, which is to log in/sign up to the website</li>
+<p><strong>Desktop</strong></p>
+<img src="readme_images/design/user_interface/login_desktop.JPG" alt="The login page on a desktop screen">
+<img src="readme_images/design/user_interface/signup_desktop.JPG" alt="The signup page on a desktop screen">
+<p><strong>Mobile</strong></p>
+<img src="readme_images/design/user_interface/login_mobile.JPG" alt="The login page on a mobile screen">
+<img src="readme_images/design/user_interface/signup_mobile.JPG" alt="The signup page on a mobile screen">
+</ul></details>
+
+<details><summary><strong>The Main User Interface</strong></summary><ul>
+<li>Apart from the login and signup pages, all other pages use the same user interface to maintain consistency and prevent confusion among users when navigating the site</li>
+<li>The user interface is made up of 2 components:<ul>
+    <li>The top navigation, which holds the user action buttons such as creating posts and polls, and managing user settings</li>
+    <li>The side navigation, containing all the site navigation actions</li>
+</ul></li>
+
+
+<li>For mobile devices, an orange navbar showing a minimized brand logo appears instead of the large logo, in order to confirm to the user that they are on the Conversate website</li>
+<li>I wanted these pages to be minimalistic prevent any distractions from the main action of these pages, which is to log in/sign up to the website</li>
+<p><strong>Desktop</strong></p>
+<img src="readme_images/design/user_interface/login_desktop.JPG" alt="The login page on a desktop screen">
+<img src="readme_images/design/user_interface/signup_desktop.JPG" alt="The signup page on a desktop screen">
+<p><strong>Mobile</strong></p>
+<img src="readme_images/design/user_interface/login_mobile.JPG" alt="The login page on a mobile screen">
+<img src="readme_images/design/user_interface/signup_mobile.JPG" alt="The signup page on a mobile screen">
+</ul></details>
 
 ### Color Scheme
 
@@ -182,6 +210,8 @@ This website was completed using an agile development system.
 
 ![Details of a user story](readme_images/agile/user_story_details.JPG)
 
+![Epics that grouped user stories together](readme_images/agile/epics.JPG)
+
 - Once finalized, these user stories were transferred to the product backlog, which was where all incomplete user stories that were not being worked on were kept.
 
 ![The product backlog](readme_images/agile/product_backlog.JPG)
@@ -192,7 +222,7 @@ This website was completed using an agile development system.
     - "Must Have", given to user stories that must be completed within the iteration timeframe
     - "Should Have", given to user stories that don't have to be completed for this iteration, but should if possible
     - "Could Have", which are user stories that can be completed if all other user stories are finished
-  - For each iteration, no more than 60% of all of its user stories were labelled with "Must have"
+  - For each iteration, no more than 60% of all of its user stories were labelled with "Should have"
   - If user stories were still remaining once an iteration came to a close, they were returned to the product backlog, where they could be selected for future iterations
 
 ![Iterations for Conversate](readme_images/agile/iterations.JPG)
@@ -210,6 +240,8 @@ This website was completed using an agile development system.
 ### Automated Testing
 
 ### Browser Testing
+
+### Known Issues/Unfixed Bugs
 
 ## Validation
 
