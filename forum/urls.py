@@ -32,6 +32,8 @@ urlpatterns = [
     path('new-poll', views.AddPoll.as_view(), name='new_poll'),
     path('vote-<int:poll_id><path:current_dir>', views.VotePoll.as_view(),
          name='vote_poll'),
+    path('polls/edit/<int:poll_id><path:current_dir>',
+         views.EditPollDate.as_view(), name='edit_poll'),
     path('polls/<str:poll_type>', views.BrowsePolls.as_view(),
          name='browse_polls'),
     path('polls/delete/<int:poll_id><path:current_dir>',

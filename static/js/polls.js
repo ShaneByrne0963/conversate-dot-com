@@ -1,20 +1,5 @@
 const maxAnswers = 5;
 
-// Answer validation
-$('#answers').on('input', checkAnswerInput);
-
-// Adding the answer to the list
-$('#add-answer').click(addAnswer);
-
-// Is called when the user resets the form
-$('form').on('reset', () => {
-    $('.answer').remove();
-    setValidAnswers(false);
-    // The timeout prevents the form clear from overriding the preset
-    setTimeout(updateDueDate, 1);
-});
-
-
 /**
  * Validates an answer input, only enabling the "Add" button when there is an
  * answer that doesn't match any other existing answer
@@ -136,7 +121,7 @@ function updateDueDate() {
     let dueMonth = `${dueDate.getMonth() + 1}`.padStart(2, '0');
     let dueDay = `${dueDate.getDate()}`.padStart(2, '0');
     let dateValue = `${dueDate.getFullYear()}-${dueMonth}-${dueDay}`;
-    $('#due-date').attr('min', dateValue).val(dateValue);
+    $('.poll-date-input').attr('min', dateValue).val(dateValue);
 }
 
 
@@ -150,6 +135,34 @@ function getNumbersFromString(myString) {
 }
 
 $(document).ready(() => {
+    // Answer validation
+    $('#answers').on('input', checkAnswerInput);
+
+    // Adding the answer to the list
+    $('#add-answer').click(addAnswer);
+
+    // Is called when the user resets the form
+    $('.create-form').on('reset', () => {
+        $('.answer').remove();
+        setValidAnswers(false);
+        // The timeout prevents the form clear from overriding the preset
+        setTimeout(updateDueDate, 1);
+    });
+
+    // Allows the due date to be edited
+    $('.btn-edit-poll').click(function() {
+        updateDueDate();
+        let parentNode = $(this).parent().parent().parent();
+        $(parentNode).find('.poll-edit-form').removeClass('d-none');
+        $(parentNode).find('.poll-date-display').removeClass('d-none').addClass('d-none');
+    });
+
+    $('.poll-edit-cancel').click(function () {
+        let parentNode = $(this).parent().parent().parent().parent();
+        $(parentNode).find('.poll-edit-form').removeClass('d-none').addClass('d-none');
+        $(parentNode).find('.poll-date-display').removeClass('d-none');
+    });
+
     updateDueDate();
     setValidAnswers(false);
     if ($('#poll-form').length > 0) {

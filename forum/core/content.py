@@ -82,16 +82,13 @@ def create_poll(request, post=None):
     """
     title = request.POST.get('poll-title')
     due_date = request.POST.get('due-date')
-    # Date format: YYYY-MM-DD
-    due_year = int(due_date[:4])
-    due_month = int(due_date[5:7])
-    due_day = int(due_date[8:])
+    due_date_formatted = get_date(due_date)
 
     poll = Poll.objects.create(
         title=title,
         asked_by=request.user,
         post=post,
-        due_date=datetime(due_year, due_month, due_day)
+        due_date=due_date_formatted
     )
 
     # Creating each answer specified by the user
@@ -103,6 +100,16 @@ def create_poll(request, post=None):
                 poll=poll,
                 position=position
             )
+
+
+def get_date(date_string):
+    """
+    Returns a date input ("YYYY-MM-DD") as a datetime object
+    """
+    due_year = int(date_string[:4])
+    due_month = int(date_string[5:7])
+    due_day = int(date_string[8:])
+    return datetime(due_year, due_month, due_day)
 
 
 def get_profile(user_object):

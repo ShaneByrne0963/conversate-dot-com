@@ -499,7 +499,8 @@ for this model.
 post in the "New Post" page
 - **Read**: Polls can be found in the "Poll" tab group in the side navigation,
 or at the bottom of the post it is attached to
-- **Update**
+- **Update**: In order to make polls as legitimate and fair as possible, the
+polls cannot be edited
 - **Delete**
 
 #### PollAnswer
@@ -519,7 +520,9 @@ and converted into a customized miniature UUID, used to generate a part of the
 post's slug
 - **Update**: When this value is read, the number_of_posts value is increased
 by 1
-- **Delete**: The item in this model should not be deleted
+- **Delete**: The item in this model should not be deleted, but if it is, a new
+one will be created when the data is requested, setting the value of
+total_posts_created to 0
 
 ## Testing
 

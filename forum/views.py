@@ -10,7 +10,8 @@ from .forms import UpdateUserForm
 from .core.content import get_profile, get_post_list_context, \
                           get_base_context, get_category_list_context, \
                           get_poll_list_context, get_post_context, \
-                          get_post_form_context, create_poll, delete_image
+                          get_post_form_context, create_poll, delete_image, \
+                          get_date
 from .core.slug import generate_slug, format_tag_search
 from .core.messages import display_error, display_success, deny_access, \
                            display_form_errors
@@ -416,6 +417,17 @@ class AddPoll(View):
         create_poll(request)
         display_success(request, 'Your poll was created successfully!')
         return HttpResponseRedirect(reverse('browse_polls', args=['owned']))
+
+
+class EditPollDate(View):
+    
+    def post(self, request, poll_id, current_dir):
+        new_date = get_date(request.POST.get('new-date'))
+        poll = get_object_or_404(Poll, id=poll_id)
+        poll.due_date = new_date
+        poll.save()
+        display_success(request, 'Your poll has been updated!')
+        return redirect(current_dir)
 
 
 class VotePoll(View):

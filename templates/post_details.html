@@ -83,11 +83,34 @@
                 {% endif %}
             </div>
             <div class="card-footer card-faded">
-                {% with post.poll.due_date|date:"d/m/y" as end_date %}
-                {% if post.poll.has_expired %}Poll ended {{ end_date }}
-                {% else %}Poll ends on {{ end_date }}
+                <span class="poll-date-display">
+                    {% with post.poll.due_date|date:"d/m/y" as end_date %}
+                    {% if post.poll.has_expired %}Poll ended {{ end_date }}
+                    {% else %}Poll ends on {{ end_date }}
+                    {% endif %}
+                    {% endwith %}
+                    {% if post.poll.asked_by == user %}
+                        <button class="button-no-style ml-1 btn-edit-poll">
+                            <i class="fa-solid fa-pen"></i>
+                        </button>
+                    {% endif %}
+                </span>
+                <!-- Form to edit due date -->
+                {% if post.poll.asked_by == user %}
+                    <form action="{% url 'edit_poll' post.poll.id request.path %}" method="POST" class="poll-edit-form d-none">
+                        {% csrf_token %}
+                        <div class="form-row">
+                            <div class="col-auto mb-1">
+                                <label class="sr-only" for="new-date">New Due Date</label>
+                                <input type="date" class="form-control poll-date-input" id="new-date" name="new-date" required>
+                            </div>
+                            <div class="col-auto">
+                                <input type="submit" class="btn" value="Save">
+                                <button type="button" class="btn poll-edit-cancel">Cancel</button>
+                            </div>
+                        </div>
+                    </form>
                 {% endif %}
-                {% endwith %}
             </div>
         </div>
     {% endif %}
@@ -301,4 +324,5 @@
 
 {% block scripts %}
     <script src="{% static 'js/comments.js' %}"></script>
+    <script src="{% static 'js/polls.js' %}"></script>
 {% endblock scripts %}
