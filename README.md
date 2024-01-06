@@ -475,7 +475,8 @@ deleted, and all images will be removed from Cloudinary
 #### Comment
 
 - **Create**: Comments can be created in the comments section of a post, by
-either the comment input underneath the post
+either the comment input underneath the post, or under a comment for a reply
+![]
 - **Read**
 - **Update**
 - **Delete**

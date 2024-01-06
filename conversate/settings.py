@@ -164,11 +164,6 @@ SUMMERNOTE_CONFIG = {
 }
 SUMMERNOTE_THEME = 'bs4'
 
-# Allowing the ui.dev site to use this as an iframe to show responsiveness
-X_FRAME_OPTIONS = 'ALLOW-FROM https://ui.dev/amiresponsive/'
-SESSION_COOKIE_SAMESITE = 'None'
-SESSION_COOKIE_SECURE = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
