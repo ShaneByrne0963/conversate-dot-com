@@ -100,7 +100,7 @@ WSGI_APPLICATION = 'conversate.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-if not DEBUG:
+if DEBUG:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
@@ -167,7 +167,7 @@ SUMMERNOTE_CONFIG = {
 }
 SUMMERNOTE_THEME = 'bs4'
 
-# Allowing the ui.dev site to use this as an iframe
+# Allowing the ui.dev site to use this as an iframe to show responsiveness
 X_FRAME_OPTIONS = 'ALLOW-FROM https://ui.dev/amiresponsive/'
 
 
