@@ -2,24 +2,40 @@ import random
 import re
 from django.utils.text import slugify
 from forum.tests import test_instance, test_index
+from forum.models import SiteData
 
 
-def generate_slug(post_title, post_tag, total_posts):
+SLUG_CHARACTERS = 8
+
+
+def generate_slug(post_title, category_slug):
     """
-    Generates a slug for a post using it's title and tag, as well as the total
-    number of posts as a seed to generate a set of random characters
+    Generates a slug for a post using it's title and category, as well as the
+    total number of posts as a seed to generate a set of random characters
     """
     # Error handling
     test_instance(post_title, str, 'title must be a string')
-    test_instance(post_tag, str, 'tag must be a string')
-    test_instance(total_posts, int, 'total_posts must be an integer')
+    test_instance(category_slug, str, 'tag must be a string')
+
+    # Finding the total number of posts
+    site_data = list(SiteData.objects.all())
+    site_data_object = None
+    if len(site_data) == 0:
+        site_data_object = SiteData.objects.create()
+    else:
+        site_data_object = site_data[0]
+    total_posts = site_data_object.total_posts_created
 
     # Getting all the components of the slug
-    slugified_tag = slugify(post_tag)
-    character_set = generate_character_set(total_posts, 8)
+    character_set = generate_character_set(total_posts, SLUG_CHARACTERS)
     slugified_title = slugify(post_title)
 
-    return f'{slugified_tag}-{character_set}-{slugified_title}'
+    # Adding another post to the total posts created
+    total_posts += 1
+    site_data_object.total_posts_created = total_posts
+    site_data_object.save()
+
+    return f'{category_slug}-{character_set}-{slugified_title}'
 
 
 def generate_character_set(seed, number_of_characters):

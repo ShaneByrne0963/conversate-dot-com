@@ -427,7 +427,7 @@ This website was completed using an agile development system.
 
 ## Data Models
 
-![Spreadsheet of models used in Conversate](assets/images/data_model.JPG)
+![Spreadsheet of models used in Conversate](assets/images/models/data_model.JPG)
 
 ### CRUD Functionality
 
@@ -475,23 +475,30 @@ deleted, and all images will be removed from Cloudinary
 #### Comment
 
 - **Create**: Comments can be created in the comments section of a post, by
-either the comment input underneath the post, or under a comment for a reply
-![]
-- **Read**
-- **Update**
-- **Delete**
+either the comment input underneath the post, or under a comment for a reply<br>
+![Both types of inputs to send a comment/reply](assets/images/models/comment_inputs.JPG)
+- **Read**: Comments are loaded with the post they are commented on, and can be
+found at the bottom of the page
+- **Update**: Users can find the edit comment button in the comment footer. The
+comment is then replaced by a textarea input prepopulated with the original
+comment<br>
+![A comment in edit mode](assets/images/models/comment_edit.JPG)
+- **Delete**: Situated beside the edit button, the user can also delete the
+comment. If the user or post is deleted, the comment will be deleted as a
+result
 
 #### Category
 
-- **Create**
-- **Read**
-- **Update**
-- **Delete**
+Users do not have permission to create categories. They must be created by
+admins, so I decided to not implement CRUD functionality without the admin panel
+for this model.
 
 #### Poll
 
-- **Create**
-- **Read**
+- **Create**: Polls can be created in the "New Poll" page, or can be created as part of a
+post in the "New Post" page
+- **Read**: Polls can be found in the "Poll" tab group in the side navigation,
+or at the bottom of the post it is attached to
 - **Update**
 - **Delete**
 
@@ -504,10 +511,15 @@ either the comment input underneath the post, or under a comment for a reply
 
 #### SiteData
 
-- **Create**
-- **Read**
-- **Update**
-- **Delete**
+- **Create**: Only one item exists in this model, which is used for any
+variables the site needs to store. Currently it only stores the number of posts
+created
+- **Read**: Every time a post is created, the total_posts_created value is read
+and converted into a customized miniature UUID, used to generate a part of the
+post's slug
+- **Update**: When this value is read, the number_of_posts value is increased
+by 1
+- **Delete**: The item in this model should not be deleted
 
 ## Testing
 

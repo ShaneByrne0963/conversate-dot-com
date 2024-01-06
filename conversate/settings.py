@@ -149,14 +149,14 @@ USE_TZ = True
 # Summernote configuration
 
 SUMMERNOTE_CONFIG = {
-    'iframe': False,
+    'iframe': True,
     'airMode': True,
     'width': 'auto',
     'height': '480',
     'toolbar': [
         ['style', ['style']],
         ['font', ['bold', 'italic', 'underline', 'superscript', 'subscript', 'strikethrough', 'clear']],
-        ['para', ['ul', 'ol']],
+        ['para', ['ul', 'ol']], 
         ['insert', ['link', 'hr']],
         ['view', ['fullscreen', 'codeview']],
         ['help', ['help']],

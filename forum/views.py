@@ -5,7 +5,7 @@ from django.db.models import Q, Count
 from django.contrib.auth import authenticate, update_session_auth_hash
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import SetPasswordForm
-from .models import Post, Category, Comment, SiteData, Poll, PollAnswer
+from .models import Post, Category, Comment, Poll, PollAnswer
 from .forms import UpdateUserForm
 from .core.content import get_profile, get_post_list_context, \
                           get_base_context, get_category_list_context, \
@@ -219,6 +219,7 @@ class AddPost(View):
         content = request.POST.get('body')
         tags = request.POST.get('tags')
         category_object = get_object_or_404(Category, name=category)
+        post_slug = generate_slug(title, category_object.slug)
 
         # Uploading the image to Cloudinary if one was given
         image_url = None
@@ -227,14 +228,6 @@ class AddPost(View):
             image = request.FILES['post-image']
             image_url = cloudinary.uploader.upload(image)['public_id']
         image_position = request.POST.get('image-position')
-
-        # Generating the slug for the post
-        site_data = get_object_or_404(SiteData)
-        total_posts = site_data.total_posts_created
-        post_slug = generate_slug(title, category, total_posts)
-        total_posts += 1
-        site_data.total_posts_created = total_posts
-        site_data.save()
 
         post = Post.objects.create(
             title=title,
