@@ -495,20 +495,35 @@ for this model.
 
 #### Poll
 
-- **Create**: Polls can be created in the "New Poll" page, or can be created as part of a
-post in the "New Post" page
+- **Create**: Polls can be created in the "New Poll" page, or as part of a post
+in the "New Post" page
 - **Read**: Polls can be found in the "Poll" tab group in the side navigation,
 or at the bottom of the post it is attached to
-- **Update**: In order to make polls as legitimate and fair as possible, the
-polls cannot be edited
-- **Delete**
+- **Update**
+  - In order to make polls as legitimate and fair as possible, the
+poll title and answers cannot be edited. This prevents users from manipulating
+the question or answers to make the poll mean something different than what the
+voters have voted for
+  - However, what won't affect the results is the due date. Users are allowed to
+change the due date even if the poll has already ended
+![Interface to edit the poll's due date](assets/images/models/poll_edit.JPG)
+- **Delete**: Polls can be deleted by the user by clicking on the trash icon on
+the top-right corner of the poll. If the user or post it belongs to is deleted,
+the poll will be deleted as well
 
 #### PollAnswer
 
-- **Create**
-- **Read**
-- **Update**
-- **Delete**
+- **Create**: For each answer the user enters when creating a poll, a poll
+answer is created. I decided to do it this way so that the number of answers for
+a poll can be customized, with the number stored as the constant "maxAnswers" in
+the "polls.js" file
+- **Read**: These answers are loaded by their polls and used for radio inputs
+for the user to select their answer
+- **Update**: Like the poll, the body of these answers cannot be changed to keep
+the poll fair, However, when the user casts a vote, they are added to the
+selected poll answer's "votes" value
+- **Delete**: Answers can only be deleted when the poll they belong to is
+deleted
 
 #### SiteData
 
