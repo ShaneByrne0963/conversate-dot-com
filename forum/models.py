@@ -97,7 +97,6 @@ class Comment(models.Model):
     edited = models.BooleanField(default=False)
     likes = models.ManyToManyField(User, related_name="comment_likes",
                                    blank=True)
-    approved = models.BooleanField(default=False)
 
     class Meta:
         ordering = ['-posted_on']

@@ -427,7 +427,86 @@ This website was completed using an agile development system.
 
 ## Data Models
 
+![Spreadsheet of models used in Conversate](assets/images/data_model.JPG)
+
 ### CRUD Functionality
+
+#### Profile
+
+- **Create**: The Profile model is created when a user creates an account. It
+is used to store extra information about a user, currently only storing a single
+boolean value, sort_by_new. This stores the post order preference of the user so
+they do not have to keep setting their preference when entering the site
+- **Read**: It's value is read every time a page with a list of posts is
+loaded, checking the user's preference and ordering the posts according to what
+has been selected
+- **Update**: Every time the user clicks one of the post sorting buttons
+above the post navigation links, the page will refresh, update the sort_by_new
+value and order the posts by this new value
+- **Delete**: The Profile object is deleted when a user deletes their account
+
+#### Post
+
+- **Create**: Users can create a post in the "Create Post" page. If an image is
+included in the post, it is uploaded to Cloudinary
+- **Read**
+  - The post can be queried in a post list and displayed as a preview
+ along with other posts, where all fields, except the image, comments and poll,
+ can be seen.
+  - If the user clicks on this preview, the full post is shown with all fields
+in the model being put to use
+- **Update**
+  - Users can find a button in the footer of their own posts to edit
+that post.
+  - Once the user successfully edits a post, the "edited" boolean field
+is set to "True"
+  - If the image is updated, the old image is deleted from Cloudinary before the
+new one takes its place
+  - In the "Post Edit" page, the user can remove an image by clicking the delete
+icon in the top-right corner of the image container. This will remove the image
+from Cloudinary without having to save the edit
+- **Delete**
+  - Beside the post edit button, there is another button to delete the post.
+After confirming the delete, the post will be removed, and the image will be
+removed from Cloudinary
+  - If the user deletes their account, all posts belonging to them will be
+deleted, and all images will be removed from Cloudinary
+
+#### Comment
+
+- **Create**: Comments can be created in the comments section of a post, by
+either the comment input underneath the post
+- **Read**
+- **Update**
+- **Delete**
+
+#### Category
+
+- **Create**
+- **Read**
+- **Update**
+- **Delete**
+
+#### Poll
+
+- **Create**
+- **Read**
+- **Update**
+- **Delete**
+
+#### PollAnswer
+
+- **Create**
+- **Read**
+- **Update**
+- **Delete**
+
+#### SiteData
+
+- **Create**
+- **Read**
+- **Update**
+- **Delete**
 
 ## Testing
 
