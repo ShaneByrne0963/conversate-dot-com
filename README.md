@@ -2,7 +2,12 @@
 
 ## Introduction
 
-Conversate&#46;com is a forum website where people can connect with each other by writing posts, uploading images and creating polls for other people to vote on. The aim of this website is to provide a platform that gives its users a wide range of ways to express their thoughts and opinions, as well as making those expressions as accessible to other users as possible. Conversate was made using the Django framework and designed using Bootstrap
+Conversate&#46;com is a forum website where people can connect with each other
+by writing posts, uploading images and creating polls for other people to vote
+on. The aim of this website is to provide a platform that gives its users a
+wide range of ways to express their thoughts and opinions, as well as making
+those expressions as accessible to other users as possible. Conversate was made
+using the Django framework and designed using Bootstrap
 
 ## Design Thinking Process
 
@@ -25,33 +30,61 @@ Conversate&#46;com is a forum website where people can connect with each other b
 > *"Why would a user want to visit our website?"*
 
 - **To discover information easily and efficiently**
-  - Upon logging in to the site, users are introduced to the site's home page, where they can explore a wide range of posts the site has to offer. Having every kind of post available on the home page can help newcomers who are unsure about what they are looking for discover the kind of content that best suits them.
-  - If users are looking for something a little more specific, they have an option to search for posts using keywords.
-  - Posts can be sorted by "Popular" (Highest number of likes) or "New" (Most recently posted)
+  - Upon logging in to the site, users are introduced to the site's home page,
+where they can explore a wide range of posts the site has to offer. Having
+every kind of post available on the home page can help newcomers who are unsure
+about what they are looking for discover the kind of content that best suits
+them.
+  - If users are looking for something a little more specific, they have an
+option to search for posts using keywords.
+  - Posts can be sorted by "Popular" (Highest number of likes) or "New"
+(Most recently posted)
 - **To share their information with the world**
-  - Users can create posts, upload images and ask questions through the use of polls.
-  - Posts can be customized using a wide selection of styles, allowing the creators to add headings, divide their content into paragraphs, include lists and tables, and add links to other pages.
+  - Users can create posts, upload images and ask questions through the use
+of polls.
+  - Posts can be customized using a wide selection of styles, allowing the
+creators to add headings, divide their content into paragraphs, include lists
+and tables, and add links to other pages.
 - **To interact with a community that relates to them**
-  - Posts can have a category assigned to them. Users that are searching for a particular type of post can explore these categories and discover a community that is also interested in this topic.
+  - Posts can have a category assigned to them. Users that are searching for a
+particular type of post can explore these categories and discover a community
+that is also interested in this topic.
 
 > *"How do we want our users to feel while using our website?"*
 
 - **Encouraged to interact with the community**
-  - Users are required to be logged in to navigate through the majority of the website, which means if they discover a post that interests them they will always have the opportunity to like and comment on that post, as well as vote in polls they discover.
+  - Users are required to be logged in to navigate through the majority of the
+website, which means if they discover a post that interests them they will
+always have the opportunity to like and comment on that post, as well as vote
+in polls they discover.
 
 ## Features
 
 - **Posts**
-  - Posts are the main attraction to Conversate. They are blocks of text created by users to send their thoughts out to the world for all to see.<br>
-    ![A user post](assets/images/features/post_content.JPG)
-  - All posts are made up of a title and a main body of text. The site uses Summernote's text editor to give users the ability to add style to their posts. They can add headings, paragraphs, bullet points, links, tables and horizontal rules. Text can also be styled in a number of ways, including changing the font size and setting the font to bold, italics or underlined
-    ![A post using different styles of text](assets/images/features/post_styled.JPG)<br>
-  - Categories can be added to a post in order to group it with other posts of a similar nature. There are a selection of categories created by the site administrators that can be chosen from
-  - Images can also be added to a post. A picture is worth a thousand words, so adding one can add an invaluable layer of depth to the story the poster is trying to tell. Images can be placed above or below the main body of text<br>
-    ![A post with an image at the top](assets/images/features/post_image.JPG)
-  - Posts can be tagged with a list of keywords. These tags can be clicked on, revealing all posts that also have this tag. Using hashtags can increase the likelihood of the post to be seen, as it provides an extra method for posts to be queried
-  - Users can choose to like posts to show appreciation to the poster. Posts with more likes are more likely to be found by exploring users. Posters cannot like their own posts
-    ![A list of keywords tagging the post](assets/images/features/post_tags.JPG)
+  - Posts are the main attraction to Conversate. They are blocks of text
+created by users to send their thoughts out to the world for all to see.<br>
+![A user post](assets/images/features/post_content.JPG)
+  - All posts are made up of a title and a main body of text. The site uses
+Summernote's text editor to give users the ability to add style to their posts.
+They can add headings, paragraphs, bullet points, links and horizontal rules.
+Text can also be styled in a number of ways, including changing the font size
+and setting the font to bold, italics or underlined
+![A post using different styles of text](assets/images/features/post_styled.JPG)
+  - Categories can be added to a post in order to group it with other posts of
+a similar nature. There are a selection of categories created by the site
+administrators that can be chosen from
+  - Images can also be added to a post. A picture is worth a thousand words,
+so adding one can add an invaluable layer of depth to the story the poster is
+trying to tell. Images can be placed above or below the main body of text<br>
+![A post with an image at the top](assets/images/features/post_image.JPG)
+  - Posts can be tagged with a list of keywords. These tags can be clicked on,
+revealing all posts that also have this tag. Using hashtags can increase the
+likelihood of the post to be seen, as it provides an extra method for posts to
+be queried
+  - Users can choose to like posts to show appreciation to the poster. Posts
+with more likes are more likely to be found by exploring users. Posters
+cannot like their own posts
+![A list of keywords tagging the post](assets/images/features/post_tags.JPG)
 - **Comments**
   - Users can comment on posts to share thoughts or add insight of their own
   - If a user sees a comment they appreciate, they can like that comment
@@ -181,9 +214,124 @@ The user interface is made up of 2 components:<ul>
     </li>
 </ul></details>
 
+<details><summary><strong>Confirmation Modal</strong></summary><ul>
+    <li>When a user attempts to log out, edit or delete their account, or delete
+    a post, comment or poll, a modal will appear, asking for confirmation that
+    the user really wishes to perform this action. This is good practice to
+    provide an extra safety barrier in case the user accidentally clicks one of
+    these buttons<br>
+    <img src="assets/images/design/user_interface/modal.JPG" alt="A modal confirming the user action"></li>
+    <li>For extra sensitive actions, such as editing/deleting the account, the
+    modal is enforced with a password confirmation, to confirm the person
+    attempting the action is the owner of the account<br>
+    <img src="assets/images/design/user_interface/modal_password.JPG" alt="The modal requesting the user's password"></li>
+</ul></details>
+
+<details><summary><strong>Alerts</strong></summary><ul>
+    <li>Once a user performs an action, after the new page loads an alert
+    message will pop at the beginning of the main content section, alerting the
+    user if their action was successful or not</li>
+    <li>Users can dismiss alerts by clicking on their close icon, or will be
+    dismissed automatically after 5 seconds, so that the messages can get out
+    of the way of the main content once it has served its purpose</li>
+    <li>Successful alerts are green in color, and unsuccessful ones are red<br>
+    <img src="assets/images/design/user_interface/alert_success.JPG" alt="A successful login alert"></li>
+    <img src="assets/images/design/user_interface/alert_fail.JPG" alt="An unsuccessful alert"></li>
+</ul></details>
+
 ### Content Layout
 
-<details><summary><strong>Post Lists</strong></summary><ul>
+<details><summary><strong>Post Previews</strong></summary><ul>
+    <li>Post previews are made up of a header, main body and footer. They are a
+    sample of a post aimed at giving the user a sneak peak of the full post,
+    making them want to click on it to find out more or read the comments<br>
+    <img src="assets/images/design/layout/post_preview.JPG" alt="A preview of a post found on the home page"></li>
+    <li>The header is situated at the top of the preview, which is what the user
+    would see first, so it is made up of the post's main details such as the
+    title, category, user and time since posted</li>
+    <li>If the title of the post is too long, a reduced version of it will be
+    shown in the preview for space reduction<br>
+    <img src="assets/images/design/layout/post_header.JPG" alt="A post header"></li>
+    <li>The main body contains the post's main content and its tags. The post
+    preview has a limited height to prevent a single post from taking up too
+    much space, so if the content requires more space than given, the text will
+    appear to fade out at the bottom, and an anchor labelled "Read More..." will
+    also appear. This implies to the user that there is more to be seen within
+    the full post, tempting them to click to find out more</li>
+    <li>If the post has any tags, they will be shown just below the text body.
+    These tags can emphasise keywords that may not be visible in the body
+    preview, giving the user a more clear idea of the topic of the post without
+    having to click to get an understanding. The user should click out of
+    curiosity, not out of confusion!</li>
+    <li>Images or polls are not shown in the preview because they could take up
+    too much space on the screen, causing the user to have to scroll more
+    through posts they may not like<br>
+    <img src="assets/images/design/layout/post_body.JPG" alt="The post's main content"></li>
+    <li>The post footer rests at the end of the post, containing the post's
+    number of likes and comments. If the user has got to this point without
+    clicking, this is the last thing they see before moving on to the next post,
+    so maybe seeing the level of interactivity happening with this post might
+    convince them to click and see what the interactions are about<br>
+    <img src="assets/images/design/layout/post_footer.JPG" alt="A post footer"></li>
+</ul></details>
+
+<details><summary><strong>Post Details</strong></summary><ul>
+    <li>The post details page follows a near identical format to it's preview,
+    but with the title and content's full context, as well as showing images,
+    polls and comments</li>
+    <li>Images can be placed either before or after the text body, giving the
+    creative power to the user to decide what position workd best for their
+    post<br>
+    <img src="assets/images/design/layout/post_details.JPG" alt="The full context of a post"></li>
+    <li>Polls, however, are always included at the bottom of the post. Polls
+    attached to posts generally have something to do with the post itself, so
+    it is better for the user to read the post to get a better understanding on
+    the poll they are about to vote for<br>
+    <img src="assets/images/design/layout/post_poll.JPG" alt="A post with a poll at the bottom"></li>
+    <li>The post footer is almost the exact same as in the preview, with the
+    exception of the date of posting at the right hand side, as well as the
+    ability to interact with the like and comment buttons<br>
+    <img src="assets/images/design/layout/post_detail_footer.JPG" alt="Full post footer"></li>
+    <li>If the user created the post, 2 extra buttons appear to edit or delete
+    the post, giving the user full control over their posts even after creating
+    them<br>
+    <img src="assets/images/design/layout/post_footer_owned.JPG" alt="Post footer with extra buttons"></li>
+</ul></details>
+
+<details><summary><strong>Comments</strong></summary><ul>
+    <li>Comments begin by stating the name of the user who posted it, and how
+    long ago they posted it. I did this because I felt it's better to figure
+    out the "Who" and the "When" before moving on to the "What" of the
+    comment</li>
+    <li>The comment footer uses the exact same structure as the post footer
+    (except for the date), in order to have a consistent layout that is
+    easier to follow<br>
+    <img src="assets/images/design/layout/comment.JPG" alt="A comment beneath a post"></li>
+    <li>Comments are ordered by newest first, so the freshest conversations
+    are more likely to be seen<br>
+    <img src="assets/images/design/layout/comments_order.JPG" alt="Two comments, with the newest comment on top"></li>
+    <li>Replies are grouped with the comment they are replying to, with the
+    reply section required to be expanded, which neatly organizes comment
+    conversations together without taking up too much space</li>
+    <li>Replies are sorted by oldest first, so the conversation can be viewed
+    in the order it happened<br>
+    <img src="assets/images/design/layout/comment_replies.JPG" alt="The reply section expanded beneath the original comment"></li>
+</ul></details>
+
+<details><summary><strong>Polls</strong></summary><ul>
+    <li>Polls are made up of a title/question, a set of up to 5 answers and a
+    due date. They can have a post attached to them to add context and allow
+    other users to like and comment on the poll<br>
+    <li>Users can only see the results of a poll after they have voted or after
+    the due date, so that the user isn't biased towards the most popular vote.
+    For the same reason, users cannot change their vote once they make a
+    decision<br>
+    <img src="assets/images/design/layout/poll_unanswered.JPG" alt="An unanswered poll"></li>
+    <li>Creators of the poll cannot edit them, to prevent making them look like
+    people voted for something they didn't. If users want to change the poll,
+    they can delete the poll and start a new one, allowing other users to
+    change their vote accordingly<br>
+    <img src="assets/images/design/layout/poll_owned.JPG" alt="A poll with a delete button"></li>
 </ul></details>
 
 ### Color Scheme
@@ -209,7 +357,8 @@ Conversate's text is made up of 2 separate fonts:
 - **Roboto**: This font is used for all other types of text<br>
   ![A paragraph that useses the Roboto font](assets/images/design/typography/roboto.JPG)
 
-I chose to use these fonts simply because they are easy to read, and work well with the feel and color scheme selected for the site
+I chose to use these fonts simply because they are easy to read, and work well
+with the feel and color scheme selected for the site
 
 ### Wireframes
 

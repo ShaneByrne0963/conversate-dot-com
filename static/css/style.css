@@ -319,15 +319,15 @@ a:hover {
 
 .alert-success {
     color: #214104;
-    background-color: #97c57a;
-    border-color: #919d6c;
+    background-color: #87c734;
+    border-color: #81b63d;
 }
 
 .alert-error,
 .alert-danger {
-    color: #721c24;
-    background-color: #cf949a;
-    border-color: #af757b;
+    color: #3f0d12;
+    background-color: rgb(216, 115, 125);
+    border-color: rgb(170, 92, 100);
 }
 
 .alert-message {
