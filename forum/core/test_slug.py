@@ -11,20 +11,20 @@ class TestSlug(unittest.TestCase):
         self.assertRaises(TypeError, generate_slug, 0, 'Tag', 1)
 
     def test_throws_error_if_tag_is_not_string(self):
-        self.assertRaises(TypeError, generate_slug, 'Hello World', ['Tag'], 1)
-
-    def test_throws_error_if_total_posts_is_not_integer(self):
-        self.assertRaises(TypeError, generate_slug, 'Hello World', 'Tag', '42')
+        self.assertRaises(TypeError, generate_slug, 'Hello World', ['Tag'])
 
     def test_generate_slug_returns_string(self):
-        self.assertIsInstance(generate_slug('Hello World', 'Tag', 42), str)
+        self.assertIsInstance(generate_slug('Hello World', 'category'), str)
 
     def test_character_set_in_returned_string(self):
-        self.assertTrue('SoMUq2gZ' in generate_slug('Hello World', 'Tag', 0))
+        self.assertTrue('SoMUq2gZ' in generate_slug('Hello World', 'category'))
+    
+    def test_category_in_returned_string(self):
+        self.assertTrue('category' in generate_slug('Hello World', 'category'))
 
     def test_slugified_title_in_returned_string(self):
         self.assertTrue(
-            'hello-world' in generate_slug('Hello World', 'Tag', 0)
+            'hello-world' in generate_slug('Hello World', 'category')
         )
 
 
@@ -37,6 +37,12 @@ class TestRandomCharacterSet(unittest.TestCase):
 
     def test_throws_error_if_char_number_is_not_integer(self):
         self.assertRaises(TypeError, generate_character_set, 64, '15')
+    
+    def test_throws_error_if_char_number_is_less_than_1(self):
+        self.assertRaises(IndexError, generate_character_set, -5, -4)
+    
+    def test_throws_error_if_char_number_is_greater_than_100(self):
+        self.assertRaises(IndexError, generate_character_set, -5, 105)
 
     def test_generate_character_set_returns_string(self):
         self.assertIsInstance(generate_character_set(1000, 10), str)
@@ -78,7 +84,9 @@ class TestGetCharacter(unittest.TestCase):
 
 
 class TestFormatTagSearch(unittest.TestCase):
-
+    """
+    Test cases for slug.format_tag_search function
+    """
     def test_throws_error_if_tag_list_is_not_string(self):
         self.assertRaises(TypeError, format_tag_search, 12)
 

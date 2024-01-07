@@ -1,5 +1,5 @@
 import unittest
-from pagination import get_page_range, NUM_PAGES
+from .pagination import get_page_range, NUM_PAGES
 
 
 class TestPagination(unittest.TestCase):

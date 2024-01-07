@@ -43,8 +43,8 @@ option to search for posts using keywords.
   - Users can create posts, upload images and ask questions through the use
 of polls.
   - Posts can be customized using a wide selection of styles, allowing the
-creators to add headings, divide their content into paragraphs, include lists
-and tables, and add links to other pages.
+creators to add headings, divide their content into paragraphs, include lists,
+and add links to other pages.
 - **To interact with a community that relates to them**
   - Posts can have a category assigned to them. Users that are searching for a
 particular type of post can explore these categories and discover a community
@@ -543,9 +543,184 @@ total_posts_created to 0
 
 ### Bugs
 
+- **Tags disappear after post edit**
+  - *Expected result*: All previously entered tags should remain if kept by the
+user
+  - *Solution*: The hidden input used to store the tags did not have its value
+set to the original list of tags on page load, so if the user updates the post
+without editing the tags, the tag data is lost. To fix, set this input's value
+to the post's tags
+- **Clicking on the poll checkbox collapse again during the collapse animation**
+**will cause the collapse and the checkbox to become out of sync**
+  - *Expected result*: If the checkbox is checked, the poll collapse should be
+shown, and vice versa
+  - *Solution*: Once the collapse animation is finished, the checkbox is checked
+again, and if the checkbox and collapse are out of sync then the collapse is
+updated again to synchronize them once again
+- **Images remain on Cloudinary if the user deletes their account without**
+**deleting their posts first**
+  - *Expected result*: If the user deletes their account, all their posts, and
+their images along with it, should be deleted, as leaving them could cause a
+data overflow on Cloudinary
+  - *Solution*: If a user deletes their account, before the deletion, iterate
+through all their posts and delete the images individually
+- **Body text of post is sometimes deleted after editing a post**
+  - *Expected result*: The body text of the post should always save with what is
+in the text editor
+  - *Solution*: Summernote does not update its value unless the user clicks into
+it, so if the user edits the post without changing the content, the body input
+will be left blank. The solution I came up with was to store the original text
+in a hidden input, and if the body text is found to be blank on submission, set
+the text value to this input
+- **Image position moves to top of post after editing the post**
+  - *Expected result*: Image should stay in the position it was set to be in
+  - *Solution*: On the edit post page, the select input was always set to
+"Top of page", despite what the user had previously entered, so if the post
+were to be edited without altering this input, it would default to the top of
+the page. To fix this, add an if statement in the edit_post template to update
+the select input depending on what the original image_position is
+
 ### Manual Testing
 
+Manual testing can be found [here](TESTING.md)
+
 ### Automated Testing
+
+#### Unittest
+
+Unittest was used to test the following Python files:
+
+<details><summary><strong>slug.py</strong></summary>
+This file contains the functions responsible for handling
+slug creation. It consists of the following functions:<ul>
+<li><strong>generate_slug</strong>: This function generates a unique slug for
+each post, giving the ability for multiple posts with the same title to coexist.
+It takes the title of the post and the slug of the post's category as
+parameters. It does so by starting the slug with "(category_slug)-". It then
+sets the random seed to the total number of posts on the site, and generates 8
+random characters (digits or letters) using that seed. Finally, it will add the
+title, which will be converted to a slug-friendly format, to the end of the
+slug.<br>
+The rules I tested for this function are as follows:<ul>
+    <li>The "title" parameter must be a string</li>
+    <li>The "category_slug" parameter must be a string</li>
+    <li>The function returns a string</li>
+    <li>A set of 8 randomly generated characters is present in the output (This
+could be tested because the random numbers are seeded, so will always return
+"SoMUq2gZ" for seed 0)</li>
+    <li>The category slug is present in the output</li>
+    <li>A slugified version of the title input is present within the slug<br>
+<img src="assets/images/testing/test_generate_slug.JPG" alt="The test cases for generate_slug"></li>
+<li>This function contains also updates the SiteData Django model to add 1 to
+its total number of posts. This cannot be tested using unittest, as it requires
+Django configuration, but was tested manually to confirm it works. The automated
+test on this function was run without this code snippet and produced positive
+results</li>
+</ul></li>
+<li><strong>generate_character_set</strong>: This function returns a sequence of
+random characters as a string. It takes in 2 parameters, the seed for random
+generation and the amount of characters that will exist in the string<br>
+The rules I tested for this function are as follows:<ul>
+    <li>The "seed" parameter must be an integer</li>
+    <li>The "number_of_characters" parameter must be an integer</li>
+    <li>number_of_characters must be between 1 and 100 (negative seed numbers
+is fine)</li>
+    <li>The function returns a variable of type "string"</li>
+    <li>The length of the string equals the number_of_characters parameter</li>
+    <li>The output is consistent with the seed input (seed 0 always gives
+"SoMUq2gZ", seed 100 gives "9ttYNbJp")<br>
+<img src="assets/images/testing/test_generate_chars.JPG" alt="The test cases for generate_character_set"></li>
+</ul></li>
+<li><strong>get_character</strong>: This function takes in an index as a
+parameter and returns a specific character that has that index.<br>
+The rules I tested for this function are as follows:<ul>
+    <li>"index" parameter must be an integer</li>
+    <li>index must be between 0 and 61</li>
+    <li>The function returns a variable of type "string"</li>
+    <li>An index value of less than 10 returns a set number character</li>
+    <li>An index value between 10 and 35 returns a set lowercase letter</li>
+    <li>An index value between 36 and 61 returns a set uppercase letter<br>
+<img src="assets/images/testing/test_get_char.JPG" alt="The test cases for get_character"></li>
+</ul></li>
+<li><strong>format_tag_search</strong>: This function takes in a query entered
+by the user in the search bar and converts it into a useable URL, removing all
+special characters besides the allowed "_" and "-", and replaces any spaces with
+a "+" symbol<br>
+The rules I tested for this function are as follows:<ul>
+    <li>The "tag_list" parameter must be a string</li>
+    <li>The function returns a variable of type "string"</li>
+    <li>The output removes any special characters from the input</li>
+    <li>The output keeps underscores "_" in the input</li>
+    <li>The output keeps dashes "-" in the input</li>
+    <li>The output replaces spaces " " with pluses "+" in the input<br>
+<img src="assets/images/testing/test_format_tags.JPG" alt="The test cases for format_tag_search"></li>
+</ul></li>
+<li>All tests have passed on running the test file (after removing the model
+SiteData and all its references)<br>
+<img src="assets/images/testing/test_slug.JPG" alt="The results of test_slug.py"></li>
+</ul>
+</details>
+
+<details><summary><strong>pagination.py</strong></summary>
+This file is responsible for creating a list of page numbers for the pagination
+bar. Only a limited number of pages can be displayed, so the first page, last
+page and all pages within a specified radius of the current page is shown.<br>
+It contains only one function that was tested automatically:<ul>
+<li><strong>get_page_range</strong>: This function returns an object containing
+the range of numbers with the current page in the middle and has a length of the
+constant MAX_PAGES - 2 (The 2 missing is for the first and last page). For
+example, a current page of 24 with a MAX_PAGES of 9 will produce
+[20, 21, 23, 24, 25, 26, 27]<br>
+The rules I tested for this function are as follows:<ul>
+    <li>The "page_index" parameter must be an integer</li>
+    <li>The "last_page" parameter must be an integer</li>
+    <li>The "num_pages" parameter must be an integer</li>
+    <li>The "page_index" parameter must be between 1 and the "last_page"
+parameter</li>
+    <li>"last_page" cannot be less than "num_pages"</li>
+    <li>"num_pages" cannot be less than 1</li>
+    <li>"num_pages" must be an odd number (to allow the current page to be in
+the middle)</li>
+    <li>The "page_range" key of the object output must have a length of
+"num_pages"</li>
+    <li>If the current page is not at the beginning or end of the list of pages,
+then it sits directly in the middle of the list of pages</li>
+    <li>The list of pages always includes the first page</li>
+    <li>The list of pages always includes the last page</li>
+    <li>If there is a gap between the first page and the group of pages
+surrounding the current one, the returned key of "start_gap" must be True</li>
+    <li>If there isn't a gap, the returned key of "start_gap" must be False</li>
+    <li>If there is a gap between the last page and the group of pages
+surrounding the current one, the returned key of "end_gap" must be True</li>
+    <li>If there isn't a gap, the returned key of "end_gap" must be False<br>
+<img src="assets/images/testing/test_page_range_1.JPG" alt="First half of get_page_range test cases">
+<img src="assets/images/testing/test_page_range_2.JPG" alt="Second half of get_page_range test cases"></li>
+</ul></li>
+<li>All tests have passed on running the test file<br>
+<img src="assets/images/testing/test_pagination.JPG" alt="The results of test_pagination.py"></li>
+</ul>
+</details>
+
+I used the Red, Green, Refactor (RGR) method to implement these test cases. This
+involves creating a test case that is known to fail:
+
+![The "Red" part of a test life cycle](assets/images/testing/test_red.JPG)
+
+Then, the bare minimum amount of code is written to make the test pass:
+
+![The "Green" part of a test life cycle](assets/images/testing/test_green.JPG)
+
+And finally, where applicable, the code is refactored to make it more clean and
+reuseable, and the cycle of the test starts again. The benefir of using this
+system is that once the code has been completed, there is no need to manually
+test it afterwards, as all test cases have already been accounted for
+
+#### Jest
+
+All of my JavaScript files involve manipulating the DOM, so I decided that
+using the DOM to test my scripts instead of using Jest's mocking function was
+more efficient. See the [manual testing segment](TESTING.md) to see more about
+JavaScript testing
 
 ### Browser Testing
 
@@ -581,6 +756,7 @@ total_posts_created to 0
 
 - Conversate was made using the [Django Framework](https://www.djangoproject.com/)
 - The site was styled with the help of [Bootstrap](https://getbootstrap.com/)
-- The [Django Summernote text editor](https://github.com/summernote/django-summernote) was used for the post body input
+- The [Django Summernote text editor](https://github.com/summernote/django-summernote)
+was used for the post body input
 - Content used to populate the site was generated by [ChatGPT](https://chat.openai.com/)
 - Color scheme was decided with the assistance of [Colormind](http://colormind.io/)

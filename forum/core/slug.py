@@ -46,6 +46,7 @@ def generate_character_set(seed, number_of_characters):
     test_instance(seed, int, 'seed must be an integer')
     test_instance(number_of_characters, int,
                   'num_of_characters must be an integer')
+    test_index(number_of_characters, 1, 100)
 
     characters = ''
     random.seed(seed)
