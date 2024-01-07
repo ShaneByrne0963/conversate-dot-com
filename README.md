@@ -724,6 +724,23 @@ JavaScript testing
 
 ### Browser Testing
 
+- Google Chrome: Conversate was developed using Google Chrome, and all manual
+testing was done on this browser, with no issues detected
+- Microsoft Edge: Conversate was tested on Microsoft Edge with no issues. The
+design, functionality, animations and responsiveness remains the exact same as
+Google Chrome
+- Firefox: After testing Conversate on Firefox, the only difference I found is
+that the bold text in the navigation bar looks slightly wider than on Edge and
+Chrome. This is merely cosmetic so I don't find any issue with this
+
+Logo on Chrome:
+
+![Logo on Chrome](assets/images/testing/logo_chrome.JPG)
+
+Logo on Firefox:
+
+![Logo on Firefox](assets/images/testing/logo_firefox.JPG)
+
 ### Known Issues/Unfixed Bugs
 
 ## Validation
