@@ -743,6 +743,23 @@ Logo on Firefox:
 
 ### Known Issues/Unfixed Bugs
 
+The "required" attribute in the Summernote input field doesn't work, which
+allows users to submit a post without any body text. However, I was able to find
+a workaround for this:
+
+- I created a text input field, giving it the width of the Summernote container,
+positioning it at the bottom of the container and giving it a low z-index to
+hide it behind the screen
+- I gave this field a custom validation of "Please fill out this field.", which
+prevents the form from submitting
+- Every time the summernote text field is updated, it is checked for any content
+within it. If it has content, the custom validity is removed, but if there isn't,
+it will remain, or be created if it was already removed
+- This gives the illusion that the Summernote text area is requiring input within
+it
+
+![Feedback from the Summernote editor](assets/images/testing/summernote_required.JPG)
+
 ## Validation
 
 ### W3C HTML
@@ -752,10 +769,6 @@ Logo on Firefox:
 ### JSHint
 
 ### PEP8
-
-### Lighthouse Page Loading
-
-### WebAIM Color Contrast
 
 ## Deployment and Local Development
 
