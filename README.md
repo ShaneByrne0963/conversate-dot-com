@@ -590,7 +590,7 @@ Manual testing can be found [here](TESTING.md)
 
 Unittest was used to test the following Python files:
 
-<details><summary><strong>slug.py</strong></summary>
+<details><summary><strong>slug&#46;py</strong></summary>
 This file contains the functions responsible for handling
 slug creation. It consists of the following functions:<ul>
 <li><strong>generate_slug</strong>: This function generates a unique slug for
@@ -661,7 +661,7 @@ SiteData and all its references)<br>
 </ul>
 </details>
 
-<details><summary><strong>pagination.py</strong></summary>
+<details><summary><strong>pagination&#46;py</strong></summary>
 This file is responsible for creating a list of page numbers for the pagination
 bar. Only a limited number of pages can be displayed, so the first page, last
 page and all pages within a specified radius of the current page is shown.<br>
@@ -761,9 +761,71 @@ Logo on Firefox:
 
 ### Deployment to Heroku
 
+Converaste&#46;com has been deployed to Heroku. I ensured that the site was deployed
+here in the early stages of development in order to prevent any last-minute
+frustrations, and regularly kept an eye on the deployed version throughout the
+site's development to make sure that it didn't break in the process.
+
+Before pushing the Django project to GitHub, make sure:
+- All sensitive information, such as the secret key and any database links,
+are solely stored in the env&#46;py file, and that file is stored in the
+&#46;gitignore file
+- There is a list of all installed packages in the requirements&#46;txt file.
+This is so that Heroku knows what modules it needs for the website to function,
+and can be done by entering the command `pip3 freeze --local > requirements.txt`
+- The DEBUG variable is set to False on the deployed website
+
+The steps to deploy are as follows:
+
+- Navigate to Heroku's main dashboard
+- On the upper right hand side of the site, click on "New", then
+"Create new app"
+- Give the app a name, select your region, and click "Create app"
+- Once the app is created, navigate to the "Settings" tab
+- Scroll down to the "Config Vars" section and click "Reveal Config Vars".
+Two text input fields should appear: "KEY" and "VALUE":
+  - Add KEY "PORT" with VALUE "8000"
+  - Add KEY "IP" with VALUE "8000"
+  - Add KEY "SECRET_KEY" with the VALUE of your secret key
+  - Add KEY "DATABASE_URL" with the VALUE of the url of your database
+  - Add KEY "CLOUDINARY_URL" with the VALUE of the url of your cloudinary database
+  - For my project, I added an extra config var called "DEVELOPMENT", which
+    controlled the DEBUG setting, and set it to "False"
+- Navigate to the "Deploy" tab
+- In the Deployment method section, select GitHub and connect to GitHub
+underneath
+- Search for the desired repository and click "Connect" once found
+- Underneath, you can enable automatic deploys or deploy the workspace
+manually. Select one and the workspace will be deployed
+
 ### Cloning Repositories
 
+The site was cloned onto my desktop. The steps to clone are as follows:
+
+- In the GitHub repository, click on the green button that says "Code".
+A drop-down menu will appear
+- In the "Local" tab of the drop-down, there will be a link under the "HTTPS"
+section. Click the copy button to the right of the link.
+- In the search bar of your PC desktop, search for terminal and open.
+- Type the following command:
+`git clone https://github.com/ShaneByrne0963/conversate-dot-com.git`
+- The site will be cloned to your desktop.
+
 ### Forking Repositories
+
+The site was created using a forked repository created by Code Institute. This
+repository can be found
+[here](https://github.com/Code-Institute-Org/ci-full-template).
+
+The steps to fork are as follows:
+
+- Navigate to the page of the repository you wish to fork.
+- Click on the green button that says "Use this template". A drop-down will
+appear underneath, and select "create a new repository"
+- Enter a repository name where specified.
+- Ensure the site is set to public
+- Click "Create repository from template". GitHub will begin to build a
+new project from that template.
 
 ## Credits
 
