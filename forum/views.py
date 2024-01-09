@@ -102,6 +102,9 @@ class SearchPost(View):
 class SearchTag(View):
 
     def get(self, request, tag_query):
+        # Redirects the user to the login page if not logged in
+        if not request.user.is_authenticated:
+            return redirect('/accounts/login')
         tag_list = tag_query.split('+')
         search_result = ''
 
