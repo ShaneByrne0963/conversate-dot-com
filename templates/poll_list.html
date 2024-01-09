@@ -15,7 +15,7 @@
         <div class="card mb-5">
             <div class="card-body">
                 <div class="d-flex justify-content-between mb-2">
-                    <h5 class="card-title mb-0">{{ poll.title }}</h5>
+                    <h5 class="card-title mb-0 word-break">{{ poll.title }}</h5>
                     {% if poll.asked_by == user %}
                         <button class="button-no-style px-1 trigger-delete-poll" type="button"
                             data-url="{% url 'delete_poll' poll.id request.path %}">
@@ -23,7 +23,7 @@
                         </button>
                     {% endif %}
                 </div>
-                <div class="card-subtitle mb-4">Asked by <em>{{ poll.asked_by }}</em>
+                <div class="card-subtitle mb-4 word-break">Asked by <em>{{ poll.asked_by }}</em>
                     {% if poll.post %}as part of post 
                         <a href="{% url 'view_post' poll.post.slug %}">{{ poll.post.title_preview }}</a>
                     {% endif %}
@@ -40,7 +40,7 @@
                                         <input class="form-check-input clickable" type="radio" name="poll-vote"
                                             id="poll-{{ poll.id }}-answer-{{ answer.position }}"
                                             value="{{ answer.position }}" required>
-                                        <label class="form-check-label clickable"
+                                        <label class="form-check-label clickable word-break"
                                             for="poll-{{ poll.id }}-answer-{{ answer.position }}">
                                             {{ answer.body }}
                                         </label>
