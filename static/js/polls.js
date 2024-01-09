@@ -10,10 +10,15 @@ function checkAnswerInput() {
     $('#answer-feedback').removeClass('d-block');
     let validInput = false;
     let errorMessage = validateText('#answers');
+    checkEnoughAnswers();
 
     let answerInput = $('#answers').val();
     if (answerInput) {
         if (errorMessage) {
+            if (errorMessage.includes('Please')) {
+                errorMessage = 'Answer cannot be blank.';
+            }
+            errorMessage = errorMessage.replace('Field', 'Answer');
             $('#answers').addClass('is-invalid');
             $('#answer-feedback').addClass('d-block');
             $('#answer-feedback').text(errorMessage);
