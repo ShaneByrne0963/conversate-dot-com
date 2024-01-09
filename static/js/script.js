@@ -44,6 +44,21 @@ window.addEventListener('DOMContentLoaded', () => {
         // Removes any white space entered by the user
         $(this).val($(this).val().trim());
     });
+
+    // Replies to replies function the same, but will ignore the @username prefix
+    $('.reply-to-reply').on('input', function() {
+        validateText(this, '@' + $(this).attr('data-reply-user'));
+    }).on('change', function() {
+        let inputValue = $(this).val();
+        let replyName = '@' + $(this).attr('data-reply-user');
+        if (inputValue.includes(replyName)) {
+            inputValue = inputValue.replace(replyName, '').trim();
+            $(this).val(`${replyName} ${inputValue}`);
+        }
+        else {
+            $(this).val($(this).val().trim());
+        }
+    });
 });
 
 // Displays instructions on how to search by tag, appearing only once per session
@@ -180,11 +195,12 @@ function closeAlertMessage() {
 function validateText(instance, ...prefilledText) {
     let feedbackMessage = '';
     
-    let inputVal = $(instance).val().trim();
+    let inputVal = $(instance).val();
     for (let text of prefilledText) {
         inputVal = inputVal.replace(text, '');
     }
-    if (inputVal == '') {
+    inputVal = inputVal.trim();
+    if (!inputVal) {
         feedbackMessage = 'Please fill out this field.';
     }
     else {
