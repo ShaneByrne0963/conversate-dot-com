@@ -59,6 +59,11 @@ window.addEventListener('DOMContentLoaded', () => {
             $(this).val($(this).val().trim());
         }
     });
+
+    // Validates the search bar, ignoring any hashtags inputted by the user
+    $('#search-input').on('input', function() {
+        validateText(this, '#');
+    })
 });
 
 // Displays instructions on how to search by tag, appearing only once per session
