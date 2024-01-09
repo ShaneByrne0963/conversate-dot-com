@@ -204,7 +204,7 @@
         {% if comments %}
             <h3 class="mt-4">Comments</h3>
             <hr>
-            <div class="comment-list after-load">
+            <div id="list-of-comments" class="comment-list after-load accordion">
                 {% for comment in comments %}
                     {% if comment.reply_to %}
                     <div id="comment-{{ comment.id }}" data-timestamp="{{ comment.posted_on.timestamp }}"
@@ -267,7 +267,8 @@
                                 </div>
                             </div>
                             <!-- Reply textarea dropdown -->
-                            <form method="POST" action="{% url 'send_comment' post.slug %}" class="collapse reply-collapse" id="reply-toggle-{{ comment.id }}">
+                            <form method="POST" action="{% url 'send_comment' post.slug %}" class="collapse reply-collapse"
+                                id="reply-toggle-{{ comment.id }}" data-parent="#list-of-comments">
                                 {% csrf_token %}
 
                                 <!-- Hidden input to tell the view which comment is being replied to -->
