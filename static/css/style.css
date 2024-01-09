@@ -241,6 +241,7 @@ a:hover {
     background-color: #e7a977;
     padding-left: 15px;
     padding-right: 15px;
+    z-index: 10;
 }
 
 #side-nav-collapse.expanding {
