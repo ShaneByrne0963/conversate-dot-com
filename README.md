@@ -585,6 +585,7 @@ the select input depending on what the original image_position is
 Manual testing is broken into 3 categories, and can be found here:
 
 - [Buttons and anchors](TEST_BUTTONS.md)
+- [Form validation](TEST_FORMS.md)
 
 *Note*: All found issues stated in these documents have been resolved. `Look out
 for code snippet text to view found issues`
