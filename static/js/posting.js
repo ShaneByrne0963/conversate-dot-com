@@ -65,6 +65,12 @@ $('form').on('reset', () => {
     $('.tag-list-item').remove();
     $('#poll-collapse').collapse('hide');
     clearImage();
+
+    // Clearing the Summernote editor
+    let iFrame = $('iframe').get(0);
+    let contentField = iFrame.contentWindow.document.querySelector('.note-editable');
+    contentField.innerHTML = '';
+    checkBodyValid();
 });
 
 // Updates the poll collapse when the user clicks on the checkbox
@@ -238,8 +244,7 @@ function removeTag(event) {
  */
 function summernoteInit() {
     let iFrame = $('iframe').get(0);
-    let summernote = iFrame.contentWindow.document;
-    let contentField = summernote.querySelector('.note-editing-area');
+    let contentField = iFrame.contentWindow.document.querySelector('.note-editing-area');
     if (contentField) {
         contentField.addEventListener('input', checkBodyValid);
         // Prepopulating the text field if the post is being edited
