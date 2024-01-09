@@ -88,5 +88,7 @@ def format_tag_search(tag_list):
     test_instance(tag_list, str, "tag_list must be a string")
 
     formatted_tags = ''.join(re.findall(r'\s|[a-zA-Z0-9_-]', tag_list))
-    formatted_tags = formatted_tags.replace(' ', '+')
+    formatted_tags = formatted_tags.strip().replace(' ', '+')
+    while '++' in formatted_tags:
+        formatted_tags = formatted_tags.replace('++', '+')
     return formatted_tags
