@@ -116,12 +116,9 @@
                         <!-- Post filter by Popular/New -->
                         <div class="container-fluid px-0 mt-4 mb-2">
                             <div class="row">
-                                {% with request.path|add:"?"|add:request.GET.urlencode as current_path %}
                                 <div class="col-6">
                                     {% if disable_sort %}
                                         <div>
-                                    {% elif request.GET.urlencode %}
-                                        <a href="{% url 'sort_posts' 0 current_path %}" class="anchor-no-style">
                                     {% else %}
                                         <a href="{% url 'sort_posts' 0 request.path %}" class="anchor-no-style">
                                     {% endif %}
@@ -139,8 +136,6 @@
                                 <div class="col-6">
                                     {% if disable_sort %}
                                         <div>
-                                    {% elif request.GET.urlencode %}
-                                        <a href="{% url 'sort_posts' 1 current_path %}" class="anchor-no-style">
                                     {% else %}
                                         <a href="{% url 'sort_posts' 1 request.path %}" class="anchor-no-style">
                                     {% endif %}
@@ -155,7 +150,6 @@
                                         </a>
                                     {% endif %}
                                 </div>
-                                {% endwith %}
                             </div>
                         </div>
                         <!-- Post navigation -->
