@@ -528,6 +528,7 @@ class EditAccount(View):
         )
     
     def post(self, request):
+        print(request.user.username)
         form_valid = False
         user_form = UpdateUserForm(request.POST, instance=request.user)
         password_form = None
@@ -549,15 +550,7 @@ class EditAccount(View):
             display_form_errors(request, user_form)
             if password_change:
                 display_form_errors(request, password_form)
-            
-            context = get_base_context(request)
-            context['user_form'] = user_form
-            context['password_form'] = password_form
-            return render(
-                request,
-                'edit_account.html',
-                context
-            )
+            return redirect('edit_account')
 
 
 class DeleteAccount(View):
@@ -578,6 +571,8 @@ class DeleteAccount(View):
             display_success(request, 'Your account has been deleted')
             return redirect('/accounts/login')
         else:
+            display_error(request,
+                          'The password you have entered is incorrect.')
             return redirect('account_settings')
 
 
