@@ -156,6 +156,7 @@ $(document).ready(() => {
         setValidAnswers(false);
         // The timeout prevents the form clear from overriding the preset
         setTimeout(updateDueDate, 1);
+        $('#answer-input').removeClass('d-none');
     });
 
     // Allows the due date to be edited

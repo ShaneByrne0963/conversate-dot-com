@@ -61,7 +61,7 @@ $('#post-image').change(() => {
 });
 
 // Is called when the user resets the form
-$('form').on('reset', () => {
+$('.create-form').on('reset', () => {
     $('.tag-list-item').remove();
     $('#poll-collapse').collapse('hide');
     clearImage();
