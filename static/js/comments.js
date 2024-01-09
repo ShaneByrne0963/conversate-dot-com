@@ -142,12 +142,12 @@ $(document).ready(() => {
     organizeReplies();
 
     // Changes the reply dropdown text from "View" to "Hide", depending on if the section is collapsed
-    $('.reply-toggle').click(function() {
-        if ($(this).attr('aria-expanded') == 'true') {
-            this.innerText = this.innerText.replace('Hide', 'View');
-        }
-        else {
-            this.innerText = this.innerText.replace('View', 'Hide');
-        }
+    $('.replies').on('show.bs.collapse', function() {
+        let replyText = $(this).prev().text();
+        $(this).prev().text(replyText.replace('View', 'Hide'));
+    });
+    $('.replies').on('hide.bs.collapse', function() {
+        let replyText = $(this).prev().text();
+        $(this).prev().text(replyText.replace('Hide', 'View'));
     });
 });
