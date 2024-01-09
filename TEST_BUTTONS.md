@@ -89,6 +89,14 @@ filtered by if the due date has not been reached
   - Expected result: The user is taken to the poll list page, with posts
 filtered by if the due date has been reached
   - Result: Works as intended
+- **The "My Polls" button**
+  - Expected result: The user is taken to the poll list page, where they can find
+a list of all the polls they have created
+  - Result: Works as intended
+- **The "My Posts" button**
+  - Expected result: The user is taken to the post list page, where they can find
+a list of all the posts they have created
+  - Result: Works as intended
 - **The alert message dismiss**
   - Expected result: The message is dismissed
   - Result: Works as intended
