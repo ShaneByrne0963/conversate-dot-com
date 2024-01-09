@@ -1,11 +1,7 @@
-# Testing for Conversate&#46;com
+# Testing buttons and anchors for Conversate&#46;com
 
-*Note*: All found issues stated below have been resolved
-
-## Part 1 - Testing links
-
-This section assumes all information is valid when forms are submitted. See
-Part 2 for form input checks
+*Note*: All found issues stated below have been resolved. `Look out for code snippet
+text to view found issues`
 
 ### The Login Page
 
@@ -52,6 +48,9 @@ confirm they wish to log out
   - Expected Result: A popup appears under the search bar telling the user how
 to search by tag
   - Result: Works as intended
+- **The search hint dismiss button**
+  - Expected result: The search himt button is dismissed
+  - Result: Works as intended
 - **The search button**
   - Expected Result: The user is taken to the "Post list" page, with posts
 filtered by the query the user entered
@@ -90,6 +89,9 @@ filtered by if the due date has not been reached
   - Expected result: The user is taken to the poll list page, with posts
 filtered by if the due date has been reached
   - Result: Works as intended
+- **The alert message dismiss**
+  - Expected result: The message is dismissed
+  - Result: Works as intended
 
 ### The Post List Page
 
@@ -121,8 +123,11 @@ can find a list of all posts containing that tag
 can find a list of all posts within that category
   - Result: Works as intended
 - **Any links within the post's body**
-  - Expected result: The user is taken to the link
-  - Result: Works as intended
+  - Expected result: The user is taken to the link in a new tab
+  - Result: `When creating a link, the user has an option to open the link in
+a different tab or within the same tab. However, we want all outside links to
+always open in a different tab, as this is a good UX practice, so I will remove
+the checkbox using CSS to force all links to open in a new tab`
 - **A poll answer radio button**
   - Expected result: The vote is selected and all other votes are deselected
   - Result: `Works as intended, but the user has to click on the radio button
@@ -131,15 +136,31 @@ parts of the container, nothing happens. This can cause frustration if the
 user is trying to select the vote by clicking on the container, with no
 feedback being given.`
 - **The poll vote button**
-  - Expected result: The 
+  - Expected result: The vote is sent, the current results of the vote are
+displayed to the user and the user cannot vote again
+  - Result: Works as intended
 - **The clear answer button**
   - Expected result: The selected answer in the vote becomes deselected
+  - Result: Works as intended
+- **The Edit Poll" button**
+  - Expected result: The poll's due date is replaced by an inline form, with a
+date input, a "Save" button and a "Cancel" button
+  - Result: Works as intended
+- **The "Save Poll" button**
+  - Expected result: The poll's due date is updated
+  - Result: Works as intended
+- **The poll cancel edit button**
+  - Expected result: The inline form disappears, and is replaced by the original
+due date
+  - Result: Works as intended
+- **The "Delete Poll" button**
+  - Expected result: A modal appears, requesting confirmation to delete the poll
   - Result: Works as intended
 - **The post's tags**
   - Expected result: The user is taken to another post list page, where they
 can find a list of all posts containing that tag
   - Result: Works as intended
-- **The post like button, in a post not owned by the user
+- **The post like button, in a post not owned by the user**
   - Expected result: The user "likes"/"unlikes" the post, depending on if they
 had previously liked the post or not. The number of likes on the post
 increases/decreases by 1
@@ -159,7 +180,7 @@ and takes the user to the "Edit Post" page
   - Expected result: This button should only exist if the user owns the post,
 and causes a modal to appear asking for confirmation to delete the post
   - Result: Works as intended
-- The "Send Comment" button
+- **The "Send Comment" button**
   - Expected result: The user's comment is sent to the post, and sits at the top
 of the comments section
   - Result: Works as intended
@@ -198,6 +219,191 @@ by 2 buttons: "Save" and "Cancel"
   - Expected result: The textarea disappears, and is replaced with the
 original comment layout
   - Result: Works as intended
+- **The coment delete button**
+  - Expected result: A modal appears, asking the user for confirmation if
+they want to delete the comment
+  - Result: Works as intended
+- **View replies toggle**
+  - Expected result: The reply section dropdown is toggled, and the text
+changes to "View/Hide replies" depending on what is showing
+  - Result: `Works as intended, but double-clicking on the button can cause
+the text to go out of sync with the dropdown (i.e. the text says "Hide replies"
+when the replies are hidden. I will change the text update event from the toggle
+click to the Bootstrap collapse events`
+
+### The New Post Page
+
+- **The "Clear Image" button**
+  - Expected Result: The image is cleared from the preview, and will not
+persist after the post is created
+  - Result: Works as intended
+- **The "Add Tag" button**
+  - Expected result: A tag is added to the list of tags
+  - Result: Works as intended
+- **The "Remove Tag" button**
+  - Expected result: The tag is removed from the list of tags
+  - Result: Works as intended
+- **The "Include Poll" checkbox**
+  - Expected result: If checked, the poll collapse shows, and if not, the poll
+collapse hides
+  - Result: Works as intended
+- **The "Add Answer" button**
+  - Expected result: The answer is added, and if the number of answers has
+reached the maximum, the poll answer input disappears
+  - Result: Works as intended
+- **The "Delete Answer" button**
+  - Expected result: The answer is removed, and if the previous number of
+answers was the maximum, the poll answer input reappears
+  - Result: Works as intended
+- **The "Create Post" button**
+  - Expected result: The post is created, with all the properties specified
+by the user within the form
+  - Result: Works as intended
+- **The post form clear button**
+  - Expected result: All data previously entered by the user is cleared
+  - Result: `The content within the Summernote text editor remains, and even
+though the "Include Poll" checkbox is unchecked, the collapse doesn't hide`
+
+### The Edit Post Page
+
+- **The "Clear Image" button**
+  - Expected Result: If an image is already present before the edit, then a modal
+will appear, asking the user for confirmation to delete the image. If not, then
+the image is cleared from the preview, and will not persist after the post is
+created
+  - Result: Works as intended
+- **The "Add Tag" button**
+  - Expected result: A tag is added to the list of tags
+  - Result: Works as intended
+- **The "Remove Tag" button**
+  - Expected result: The tag is removed from the list of tags
+  - Result: Works as intended
+- **The "Include Poll" checkbox**
+  - Expected result: If checked, the poll collapse shows, and if not, the poll
+collapse hides
+  - Result: `Checkbox collapse always hides after showing`
+- **The "Add Answer" button**
+  - Expected result: The answer is added, and if the number of answers has
+reached the maximum, the poll answer input disappears
+  - Result: Works as intended
+- **The "Delete Answer" button**
+  - Expected result: The answer is removed, and if the previous number of
+answers was the maximum, the poll answer input reappears
+  - Result: Works as intended
+- **The "Delete Poll" button**
+  - Expected result: A modal appears asking the user for confirmation of the
+poll delete
+  - Result: Works as intended
+- **The "Save Post" button**
+  - Expected result: The post is updated, with all the properties specified
+by the user within the form
+  - Result: Works as intended
+- **The "Cancel Edit" button**
+  - Expected result: The user is taken back to the post detail page
+  - Result: Works as intended
+
+### The New Poll Page
+
+- **The "Add Answer" button**
+  - Expected result: The answer is added, and if the number of answers has
+reached the maximum, the poll answer input disappears
+  - Result: Works as intended
+- **The "Delete Answer" button**
+  - Expected result: The answer is removed, and if the previous number of
+answers was the maximum, the poll answer input reappears
+  - Result: Works as intended
+- **The form clear button**
+  - Expected result: All previously entered data is cleared
+  - Result: `If the form is cleared with the maximum number of answers, the
+answer input is missing`
+
+### The Poll List Page
+
+- **The poll's post reference**
+  - Expected result: The user is taken to the post where the poll is referenced
+  - Result: Works as intended
+- **The "Delete Poll" button
+  - Expected result: A modal appears, asking for confirmation to delete the poll
+  - Result: Works as intended
+- **The answer select input**
+  - Expected result: The answer that resides in the clicked container is selected
+  - Result: Works as intended
+- **The poll vote button**
+  - Expected result: The vote is sent, the current answers are shown and the user
+cannot vote again
+  - Result: Works as intended
+- **The clear vote button**
+  - Expected result: The selected vote is cleared
+  - Result: Works as intended
+- The "Edit Poll" button
+  - Expected result: The poll's due date is replaced by an inline form, with a date
+input, a "Save" button and a "Cancel" button
+  - Result: Works as intended
+- **The poll save button**
+  - Expected result: The poll's due date is updated
+  - Result: Works as intended
+- **The cancel poll edit button**
+  - Expected result: The inline form disappears, and is replaced by the original
+due date
+  - Result: Works as intended
+
+### The Account Settings Page
+
+- **The "Edit Username" button**
+  - Expected result: A modal appears, requesting the user's password before allowing
+the user to edit their settings
+  - Result: Works as intended
+- **The "Edit Email" button**
+  - Expected result: A modal appears, requesting the user's password before allowing
+the user to edit their settings
+  - Result: Works as intended
+- **The "Delete Account" button**
+  - Expected result: A modal appears, requesting the user's password before allowing
+the user to delete their account
+  - Result: Works as intended
+
+### The Edit Account Page
+
+- **The password checkbox**
+  - Expected result: A dropdown is toggled, revealing/hiding 2 password input fields
+  - Result: Works as intended
+- **The "Update Account" button**
+  - Expected result: the account details are updated
+  - Result: Works as intended
+- **The cancel account edit button**
+  - Expected result: The user is taken to the account settings page
+  - Result: Works as intended
+
+### Modals
+
+- **The modal dismiss button**
+  - Expected result: The modal is dismissed
+  - Result: Works as intended
+- **The modal cancel button**
+  - Expected result: The modal is dismissed
+  - Result: Works as intended
+- **The user logout modal**
+  - Expected result: The user is logged out and is taken to the login page
+  - Result: Works as intended
+- **The post delete modal**
+  - Expected result: The selected modal is deleted
+  - Result: Works as intended
+- **The comment delete modal**
+  - Expected result: The selected comment is deleted
+  - Result: Works as intended
+- **The poll delete modal**
+  - Expected result: The selected poll is deleted
+  - Result: Works as intended
+- **The clear image modal**
+  - Expected result: The image is removed from the post
+  - Result: Works as intended
+- **The "Edit Account" modal**
+  - Expected result: the user is taken to the edit account page
+  - Result: Works as intended
+- **The "Delete Account" modal**
+  - Expected result: The user's account is deleted, and is taken to the
+login page
+  - Result: Works as intended
 
 ### Non-Authenticated Users
 
@@ -205,7 +411,7 @@ original comment layout
   - Expected result: The user is taken to the login page
   - Result: Works as intended
 - **Links within the post body**
-  - Expected result: Should still open the links
+  - Expected result: Should still open the links in a new tab
   - Result: Works as intended
 - **The poll vote button**
   - Expected result: No radio inputs appear, the results are not shown if the
@@ -230,49 +436,4 @@ strange with the like button by itself. I will remove this for this case`
   - Result: Works as intended
 - **All other links**
   - Expected result: The user is taken to the login page
-  - Result: `The following links produced unintended results:`
-    - The post tag: Produces a server 500 error
-
-## Part 2 - Testing Form Data
-
-- **The "Log In" button, with no inputs filled in**
-  - Expected Result: A feedback message pops up asking the user to fill in the
-username field
-  - Result: Works as intended
-- **The "Log In" button, with only the username field filled in**
-  - Expected Result: A feedback message pops up asking the user to fill in the
-password field
-  - Result: Works as intended
-- **The "Log In" button, with only the password field filled in**
-  - Expected Result: A feedback message pops up asking the user to fill in the
-username field
-  - Result: Works as intended
-- **The "Log In" button, with incorrect information filled in**
-  - Expected result: The user remains on the login page, and a message notifying
-the user that their details are incorrect appears
-  - Result: Works as intended
-- **The "My Polls" button**
-  - Expected result: The user is taken to the poll list page, where they can find
-a list of all the polls they have created
-  - Result: Works as intended
-
-- **The poll vote button, without any votes selected**
-  - Expected result: A feedback message appears, telling the user they have to
-select one of the options
-  - Result: Works as intended
-- The "Send Comment" button, without any text entered
-  - Expected result: A feedback message appears, requesting the user to fill out
-the comment field
-  - Result: Works as intended
-- The "Send Comment" button, with only white space "  " entered
-  - Expected result: A feedback message appears, requesting the user to fill out
-the comment field
-  - Result: `The user is able to send comments that are blank by using the space
-bar. I will add a check for this`
-- The "Send Comment" button, only containing symbols
-  - Expected result: A feedback message appears, requesting the user to enter a
-message that contains letters or numbers
-  - Result: `The user can enter comments that don't contain any letters or numbers.
-I will add a fix for this`
-
-## Part 3 - Direct URL Inputs
+  - Result: `The post tag buttons produce a server 500 error`

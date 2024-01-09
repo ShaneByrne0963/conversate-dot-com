@@ -582,7 +582,12 @@ the select input depending on what the original image_position is
 
 ### Manual Testing
 
-Manual testing can be found [here](TESTING.md)
+Manual testing is broken into 3 categories, and can be found here:
+
+- [Buttons and anchors](TEST_BUTTONS.md)
+
+*Note*: All found issues stated in these documents have been resolved. `Look out
+for code snippet text to view found issues`
 
 ### Automated Testing
 
@@ -719,8 +724,7 @@ test it afterwards, as all test cases have already been accounted for
 
 All of my JavaScript files involve manipulating the DOM, so I decided that
 using the DOM to test my scripts instead of using Jest's mocking function was
-more efficient. See the [manual testing segment](TESTING.md) to see more about
-JavaScript testing
+more efficient.
 
 ### Browser Testing
 
