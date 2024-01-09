@@ -182,15 +182,15 @@
                 <li>Commenting as <em>{{ user.username }}</em></li>
             </ul>
             <div class="form-group mb-1">
-                <textarea class="form-control" name="content" id="post-comment" rows="3" required></textarea>
+                <textarea class="form-control validate-text" name="content" id="post-comment" rows="3" required></textarea>
             </div>
             <input type="submit" class="btn" value="Comment"></input>
             <input type="reset" class="btn" value="Clear"></input>
         </form>
+        <br>
     {% endif %}
 
     <!-- Comments section -->
-    <br>
     <div id="comments" class="accordion">
         {% if comments %}
             <h3 class="mt-4">Comments</h3>
@@ -273,7 +273,7 @@
                                         <textarea class="form-control reply-to-reply" data-reply-user="{{ comment.posted_by.username }}"
                                             name="content" rows="3" required></textarea>
                                     {% else %}
-                                        <textarea class="form-control" name="content" rows="3" required></textarea>
+                                        <textarea class="form-control validate-text" name="content" rows="3" required></textarea>
                                     {% endif %}
                                 </div>
                                 <input type="submit" class="btn" value="Reply"></input>

@@ -36,6 +36,11 @@ window.addEventListener('DOMContentLoaded', () => {
     }).on('mouseleave', function() {
         $(this).css('width', '').find('span').removeClass('d-none').addClass('d-none');
     });
+
+    // Adds validation for specified text input fields
+    $('.validate-text').on('input', function() {
+        validateText(this);
+    });
 });
 
 // Displays instructions on how to search by tag, appearing only once per session
@@ -161,4 +166,30 @@ function closeAlertMessage() {
     if ($('.alert-message').length > 1) {
         setTimeout(closeAlertMessage, messageCloseTimeGap);
     }
+}
+
+/**
+ * Checks if a text input is not blank and contains letters or numbers
+ * @param {jQuerySelector} instance A selector to get the instance (Can be "this")
+ * @param {String} prefilledText Any text the validator is to ignore
+ * @returns {String} A feedback message, or an empty string if the text is valid
+ */
+function validateText(instance, ...prefilledText) {
+    let feedbackMessage = '';
+    
+    let inputVal = $(instance).val().trim();
+    for (let text of prefilledText) {
+        inputVal = inputVal.replace(text, '');
+    }
+    if (inputVal == '') {
+        feedbackMessage = 'Please fill out this field.';
+    }
+    else {
+        let inputSpecialChars = inputVal.replace(/[a-zA-Z0-9]/, '');
+        if (inputVal == inputSpecialChars) {
+            feedbackMessage = 'Field must contain letters or numbers.';
+        }
+    }
+    $(instance).get(0).setCustomValidity(feedbackMessage);
+    return feedbackMessage;
 }

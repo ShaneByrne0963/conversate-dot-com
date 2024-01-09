@@ -33,6 +33,7 @@ DEBUG = os.environ.get('DEVELOPMENT') == 'True'
 
 ALLOWED_HOSTS = [
     '8000-shanebyrne0963-conversat-vb883usagm.us2.codeanyapp.com',
+    '8000-shanebyrne0-conversated-mo0nhin1rxh.ws-eu107.gitpod.io',
     'conversate-55f06929cde1.herokuapp.com',
 ]
 

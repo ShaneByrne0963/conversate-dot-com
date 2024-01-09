@@ -16,7 +16,7 @@ New Post - Conversate
             <div class="col-12 col-xl-6">
                 <div class="form-group">
                     <label for="title">Title</label>
-                    <input type="text" class="form-control" id="title" name="title" maxlength="100" required>
+                    <input type="text" class="form-control validate-text" id="title" name="title" maxlength="100" required>
                 </div>
                 <div class="form-group">
                     <label for="category">Category</label>
@@ -68,7 +68,7 @@ New Post - Conversate
                                 <!-- Poll Title -->
                                 <div class="form-group mt-2">
                                     <label for="poll-title">Title</label>
-                                    <input type="text" class="form-control" name="poll-title" id="poll-title" maxlength="200">
+                                    <input type="text" class="form-control validate-text" name="poll-title" id="poll-title" maxlength="200">
                                 </div>
                                 <!-- Poll Answers -->
                                 <div class="form-group">
@@ -78,7 +78,7 @@ New Post - Conversate
                                         <input type="text" class="form-control" id="answers" maxlength="100">
                                         <button type="button" class="btn ml-2 disabled" id="add-answer" disabled>Add</button>
                                     </div>
-                                    <div id="answer-feedback" class="invalid-feedback">You have already entered this answer.</div>
+                                    <div id="answer-feedback" class="invalid-feedback"></div>
                                 </div>
                                 <!-- Poll Due Date -->
                                 <div class="form-group">

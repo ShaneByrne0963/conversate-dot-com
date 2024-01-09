@@ -9,17 +9,26 @@ function checkAnswerInput() {
     $('#answers').removeClass('is-invalid');
     $('#answer-feedback').removeClass('d-block');
     let validInput = false;
-    let answerInput = $('#answers').val();
+    let errorMessage = validateText('#answers');
 
-    if (answerInput && $('.answer').length < maxAnswers) {
-        validInput = true;
-        let existingAnswers = $('.answer-text').get();
-        for (let answer of existingAnswers) {
-            if (answerInput == answer.innerText) {
-                validInput = false;
-                $('#answers').addClass('is-invalid');
-                $('#answer-feedback').addClass('d-block');
-                break;
+    let answerInput = $('#answers').val();
+    if (answerInput) {
+        if (errorMessage) {
+            $('#answers').addClass('is-invalid');
+            $('#answer-feedback').addClass('d-block');
+            $('#answer-feedback').text(errorMessage);
+        }
+        else if ($('.answer').length < maxAnswers) {
+            validInput = true;
+            let existingAnswers = $('.answer-text').get();
+            for (let answer of existingAnswers) {
+                if (answerInput == answer.innerText) {
+                    validInput = false;
+                    $('#answers').addClass('is-invalid');
+                    $('#answer-feedback').addClass('d-block');
+                    $('#answer-feedback').text('You have already entered this answer.');
+                    break;
+                }
             }
         }
     }
@@ -33,7 +42,7 @@ function checkAnswerInput() {
  * Adds the entered answer to the list of answers
  */
 function addAnswer() {
-    let answerInput = $('#answers').val();
+    let answerInput = $('#answers').val().trim();
     let currentAnswers = $('#answer-list').html();
     let numAnswers = $('.answer').length + 1;
     currentAnswers += `

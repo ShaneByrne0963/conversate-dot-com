@@ -281,8 +281,13 @@ function checkBodyValid() {
             text = text.trim();
             text = text.replace('\n', '');
             if (text !== '') {
-                feedback.setCustomValidity('');
-                break;
+                let textSpecialChars = text.replace(/[a-zA-Z0-9]/, '');
+                if (text === textSpecialChars) {
+                    feedback.setCustomValidity('Field must contain letters or numbers.');
+                }
+                else {
+                    feedback.setCustomValidity('');
+                }
             }
         }
     }
