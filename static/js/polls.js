@@ -166,10 +166,16 @@ $(document).ready(() => {
         $(parentNode).find('.poll-date-display').removeClass('d-none').addClass('d-none');
     });
 
+    // Cancels the poll date edit
     $('.poll-edit-cancel').click(function () {
         let parentNode = $(this).parent().parent().parent().parent();
         $(parentNode).find('.poll-edit-form').removeClass('d-none').addClass('d-none');
         $(parentNode).find('.poll-date-display').removeClass('d-none');
+    });
+
+    // Allows the user to click anywhere within the vote container to select their vote
+    $('.answer-container').click(function() {
+        $(this).find('input[type=radio]').prop('checked', true);
     });
 
     updateDueDate();
