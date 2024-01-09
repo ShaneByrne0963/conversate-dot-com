@@ -86,13 +86,13 @@
             {% for page in page_range %}
                 {% if forloop.last and end_gap %}
                     <li class="page-item disabled">
-                        <span class="page-link pagination-gap b-none">...</span>
+                        <span class="page-link pagination-gap d-none d-sm-block b-none">...</span>
                     </li>
                 {% endif %}
                 {% if page == item_list.number %}
                     <li class="page-item active">
                 {% else %}
-                    <li class="page-item{% if not forloop.first and not forloop.last %} d-none d-sm-block{% endif %}">
+                    <li class="page-item d-none d-sm-block">
                 {% endif %}
                     {% if selected_tab == 'Search' %}
                         <a class="page-link" href="{{ search_url }}&page={{ page }}">{{ page }}</a>
@@ -102,7 +102,7 @@
                 </li>
                 {% if forloop.first and start_gap %}
                     <li class="page-item disabled">
-                        <span class="page-link pagination-gap b-none">...</span>
+                        <span class="page-link pagination-gap d-none d-sm-block b-none">...</span>
                     </li>
                 {% endif %}
             {% endfor %}
