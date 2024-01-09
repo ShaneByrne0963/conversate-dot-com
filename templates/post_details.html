@@ -38,28 +38,7 @@
                         </button>
                     {% endif %}
                 </div>
-                {% if p_status == 0 and post.posted_by != user %}
-                    <form method="POST" class="mt-2" action="{% url 'vote_poll' post.poll.id request.path %}">
-                        {% csrf_token %}
-                        <ul class="list-group">
-                            {% for answer in post.poll.answers.all %}
-                                <li class="list-group-item">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="poll-vote" id="answer-{{ answer.position }}"
-                                            value="{{ answer.position }}" required>
-                                        <label class="form-check-label" for="answer-{{ answer.position }}">
-                                            {{ answer.body }}
-                                        </label>
-                                    </div>
-                                </li>
-                            {% endfor %}
-                        </ul>
-                        <div class="mt-3">
-                            <input type="submit" class="btn" value="Vote">
-                            <input type="reset" class="btn" value="Clear">
-                        </div>
-                    </form>
-                {% else %}
+                {% if p_status != 0 or post.posted_by == user %}
                     <h6 class="card-subtitle text-muted mb-3">
                         {% with post.poll.number_of_votes as vote_num %}
                             <span>{{ vote_num }} vote{% if vote_num != 1 %}s{% endif %}</span>
@@ -80,6 +59,36 @@
                             {% endwith %}
                         </div>
                     {% endfor %}
+                {% elif not user.is_authenticated %}
+                    <ul class="list-group">
+                        {% for answer in post.poll.answers.all %}
+                            <li class="list-group-item">{{ answer.body }}</li>
+                        {% endfor %}
+                    </ul>
+                    <div class="mt-3">
+                        Please <a href="{% url 'account_login' %}" aria-label="Go to the login page">Log in</a> to vote.
+                    </div>
+                {% else p_status == 0 and post.posted_by != user %}
+                    <form method="POST" class="mt-2" action="{% url 'vote_poll' post.poll.id request.path %}">
+                        {% csrf_token %}
+                        <ul class="list-group">
+                            {% for answer in post.poll.answers.all %}
+                                <li class="list-group-item vote">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="poll-vote" id="answer-{{ answer.position }}"
+                                            value="{{ answer.position }}" required>
+                                        <label class="form-check-label" for="answer-{{ answer.position }}">
+                                            {{ answer.body }}
+                                        </label>
+                                    </div>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                        <div class="mt-3">
+                            <input type="submit" class="btn" value="Vote">
+                            <input type="reset" class="btn" value="Clear">
+                        </div>
+                    </form>
                 {% endif %}
             </div>
             <div class="card-footer card-faded">
