@@ -68,7 +68,7 @@
                     <div class="mt-3">
                         Please <a href="{% url 'account_login' %}" aria-label="Go to the login page">Log in</a> to vote.
                     </div>
-                {% else p_status == 0 and post.posted_by != user %}
+                {% else %}
                     <form method="POST" class="mt-2" action="{% url 'vote_poll' post.poll.id request.path %}">
                         {% csrf_token %}
                         <ul class="list-group">
@@ -241,7 +241,7 @@
                                             </button>
                                         </form>
                                     {% else %}
-                                        <span class="footer-blocked py-0 line-separate" aria-disabled="true">
+                                        <span class="footer-blocked py-0" aria-disabled="true">
                                             <i class="fa-regular fa-thumbs-up"></i>
                                             {{ comment.number_of_likes }}
                                         </span>
