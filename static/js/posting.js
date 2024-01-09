@@ -251,6 +251,9 @@ function summernoteInit() {
         // Preventing the toolbar dropdowns from overflowing out of the editor
         $('iframe').attr('scrolling', 'no');
 
+        // Removing the option to open the link in the same tab
+        $(contentField).find('.sn-checkbox-open-in-new-window').addClass('d-none');
+
         // Reveals the form when all elements are in place
         finishLoading();
     }
