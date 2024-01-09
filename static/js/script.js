@@ -40,6 +40,9 @@ window.addEventListener('DOMContentLoaded', () => {
     // Adds validation for specified text input fields
     $('.validate-text').on('input', function() {
         validateText(this);
+    }).on('change', function() {
+        // Removes any white space entered by the user
+        $(this).val($(this).val().trim());
     });
 });
 
