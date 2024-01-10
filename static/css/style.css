@@ -109,34 +109,24 @@ a:hover {
 
 /* --------------------------------------------------------Accounts--------------------------------------------------------- */
 
-#account-container {
-    min-height: 100vh;
+#account-header {
+    background-color: #e65418;
+}
+
+#account-main {
+    /* The full height minus the height of the navbar */
+    min-height: calc(100vh - 56px);
     display: grid;
     grid-template-rows: 1fr auto;
 }
 
-#account-upper,
-#account-upper>div {
+#account-content>.row {
     height: 100%;
 }
 
 .login-heading {
     font-size: 4em;
     color: #e65418;
-}
-
-#mobile-header {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100vw;
-}
-
-#form-account {
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
 
 #form-shell {
@@ -149,10 +139,16 @@ a:hover {
     justify-content: center;
     row-gap: 16px;
     padding: 25px;
+    margin: 16px 0;
 }
 
 #form-shell>form {
     width: 100%;
+}
+
+#form-shell h1,
+#form-shell p {
+    text-align: center;
 }
 
 /* Removing the underline from the information icon when hovered over */
