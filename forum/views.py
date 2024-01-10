@@ -47,6 +47,9 @@ class ListPosts(View):
 class SortPosts(View):
 
     def get(self, request, by_new, current_dir):
+        # Redirects the user to the login page if not logged in
+        if not request.user.is_authenticated:
+            return redirect('/accounts/login')
         profile = get_profile(request.user)
         profile.sort_by_new = (by_new == 1)
         profile.save()
@@ -262,7 +265,7 @@ class EditPost(View):
         # Preventing users that do not own the post from being able to edit it
         if post.posted_by != request.user:
             deny_access(request)
-            return HttpResponseRedirect(reverse('view_post', args=[post.slug]))
+            return redirect('home')
 
         context = get_post_form_context(request)
         context['post'] = post
@@ -270,6 +273,12 @@ class EditPost(View):
 
     def post(self, request, post_id):
         post = get_object_or_404(Post, id=post_id)
+
+        # Prevents users who do not own the post from editing it
+        if post.posted_by != request.user:
+            deny_access(request)
+            return redirect('home')
+
         # Prevents the text from deleting if the user doesn't click the editor
         content = request.POST.get('body')
         if content == '':
@@ -311,6 +320,11 @@ class LikePost(View):
     def post(self, request, slug):
         post = get_object_or_404(Post, slug=slug)
 
+        # Prevents users from liking their own posts
+        if post.posted_by == request.user:
+            deny_access(request)
+            return redirect('home')
+
         if post.likes.filter(id=request.user.id).exists():
             post.likes.remove(request.user)
         else:
@@ -322,6 +336,12 @@ class DeletePost(View):
 
     def post(self, request, slug):
         post = get_object_or_404(Post, slug=slug)
+
+        # Prevents users who do not own the post from deleting it
+        if post.posted_by != request.user:
+            deny_access(request)
+            return redirect('home')
+
         delete_image(post)
         post.delete()
         display_success(request, 'Your post has been deleted')
@@ -332,6 +352,12 @@ class ClearImage(View):
 
     def post(self, request, post_id):
         post = get_object_or_404(Post, id=post_id)
+
+        # Prevents users who do not own the post from editing it
+        if post.posted_by != request.user:
+            deny_access(request)
+            return redirect('home')
+
         delete_image(post)
         post.save()
         display_success(request, 'The image has been deleted')
@@ -371,6 +397,11 @@ class LikeComment(View):
             return redirect('/accounts/login')
         comment = get_object_or_404(Comment, id=comment_id)
 
+        # Prevents users from liking their own comments
+        if comment.posted_by == request.user:
+            deny_access(request)
+            return redirect('home')
+
         if comment.likes.filter(id=request.user.id).exists():
             comment.likes.remove(request.user)
         else:
@@ -383,8 +414,12 @@ class EditComment(View):
 
     def post(self, request, comment_id):
         comment = get_object_or_404(Comment, id=comment_id)
-        updated_body = request.POST.get('content')
+        # Prevents users who do not own the comment from editing it
+        if comment.posted_by != request.user:
+            deny_access(request)
+            return redirect('home')
 
+        updated_body = request.POST.get('content')
         comment.content = updated_body
         comment.edited = True
         comment.save()
@@ -397,6 +432,11 @@ class DeleteComment(View):
 
     def post(self, request, comment_id):
         comment = get_object_or_404(Comment, id=comment_id)
+        # Prevents users who do not own the comment from deleting it
+        if comment.posted_by != request.user:
+            deny_access(request)
+            return redirect('home')
+
         slug = comment.post.slug
         comment.delete()
         display_success(request, 'Your comment has been deleted!')
@@ -417,6 +457,9 @@ class AddPoll(View):
         )
 
     def post(self, request):
+        # Redirects the user to the login page if not logged in
+        if not request.user.is_authenticated:
+            return redirect('/accounts/login')
         create_poll(request)
         display_success(request, 'Your poll was created successfully!')
         return HttpResponseRedirect(reverse('browse_polls', args=['owned']))
@@ -427,6 +470,12 @@ class EditPollDate(View):
     def post(self, request, poll_id, current_dir):
         new_date = get_date(request.POST.get('new-date'))
         poll = get_object_or_404(Poll, id=poll_id)
+
+        # Prevents users who do not own the poll from editing it
+        if poll.asked_by != request.user:
+            deny_access(request)
+            return redirect('home')
+    
         poll.due_date = new_date
         poll.save()
         display_success(request, 'Your poll has been updated!')
@@ -438,6 +487,11 @@ class VotePoll(View):
     def post(self, request, poll_id, current_dir):
         vote_answer = int(request.POST.get('poll-vote'))
         poll = get_object_or_404(Poll, id=poll_id)
+
+        # Prevents users from voting on their own poll
+        if poll.asked_by == request.user:
+            deny_access(request)
+            return redirect('home')
         poll_answers = list(poll.answers.all())
 
         for answer in poll_answers:
@@ -480,6 +534,10 @@ class DeletePoll(View):
 
     def post(self, request, poll_id, current_dir):
         poll = get_object_or_404(Poll, id=poll_id)
+        # Prevents users who do not own the poll from deleting it
+        if poll.asked_by != request.user:
+            deny_access(request)
+            return redirect('home')
         poll.delete()
         display_success(request, 'Your poll has been deleted')
         return redirect(current_dir)
@@ -528,7 +586,6 @@ class EditAccount(View):
         )
     
     def post(self, request):
-        print(request.user.username)
         form_valid = False
         user_form = UpdateUserForm(request.POST, instance=request.user)
         password_form = None
