@@ -25,16 +25,13 @@ Browse Categories - Conversate
 <nav aria-label="Page navigation">
     <ul class="pagination justify-content-center">
         {% if item_list.has_previous %}
-        <li class="page-item">
-            {% if selected_tab == 'Search' %}
-            <a class="page-link" href="{{ search_url }}&page={{ item_list.previous_page_number }}">&lt;</a>
-            {% else %}
-            <a class="page-link" href="?page={{ item_list.previous_page_number }}">&lt;</a>
-            {% endif %}
-            {% else %}
-        <li class="page-item disabled">
-            <div class="page-link">&lt;</div>
-            {% endif %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ item_list.previous_page_number }}"
+                    aria-label="Go to the previous page">&lt;</a>
+        {% else %}
+            <li class="page-item disabled">
+                <div class="page-link">&lt;</div>
+        {% endif %}
         </li>
 
         {% for page in page_range %}
@@ -48,11 +45,7 @@ Browse Categories - Conversate
             {% else %}
         <li class="page-item d-none d-sm-block">
             {% endif %}
-            {% if selected_tab == 'Search' %}
-            <a class="page-link" href="{{ search_url }}&page={{ page }}">{{ page }}</a>
-            {% else %}
-            <a class="page-link" href="?page={{ page }}">{{ page }}</a>
-            {% endif %}
+            <a class="page-link" href="?page={{ page }}" aria-label="Go to page {{ page }}">{{ page }}</a>
         </li>
         {% if forloop.first and start_gap %}
         <li class="page-item disabled">
@@ -62,16 +55,13 @@ Browse Categories - Conversate
         {% endfor %}
 
         {% if item_list.has_next %}
-        <li class="page-item">
-            {% if selected_tab == 'Search' %}
-            <a class="page-link" href="{{ search_url }}&page={{ item_list.next_page_number }}">&gt;</a>
-            {% else %}
-            <a class="page-link" href="?page={{ item_list.next_page_number }}">&gt;</a>
-            {% endif %}
-            {% else %}
-        <li class="page-item disabled">
-            <div class="page-link">&gt;</div>
-            {% endif %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ item_list.next_page_number }}"
+                    aria-label="Go to the next page">&gt;</a>
+        {% else %}
+            <li class="page-item disabled">
+                <div class="page-link">&gt;</div>
+        {% endif %}
         </li>
     </ul>
 </nav>

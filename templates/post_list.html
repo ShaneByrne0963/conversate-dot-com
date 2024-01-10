@@ -75,9 +75,11 @@
             {% if item_list.has_previous %}
                 <li class="page-item">
                     {% if selected_tab == 'Search' %}
-                        <a class="page-link" href="{{ search_url }}&page={{ item_list.previous_page_number }}">&lt;</a>
+                        <a class="page-link" href="{{ search_url }}&page={{ item_list.previous_page_number }}"
+                            aria-label="Go to the previous page">&lt;</a>
                     {% else %}
-                        <a class="page-link" href="?page={{ item_list.previous_page_number }}">&lt;</a>
+                        <a class="page-link" href="?page={{ item_list.previous_page_number }}"
+                            aria-label="Go to the previous page">&lt;</a>
                     {% endif %}
             {% else %}
                 <li class="page-item disabled">
@@ -97,9 +99,11 @@
                     <li class="page-item d-none d-sm-block">
                 {% endif %}
                     {% if selected_tab == 'Search' %}
-                        <a class="page-link" href="{{ search_url }}&page={{ page }}">{{ page }}</a>
+                        <a class="page-link" href="{{ search_url }}&page={{ page }}"
+                            aria-label="Go to page {{ page }}">{{ page }}</a>
                     {% else %}
-                        <a class="page-link" href="?page={{ page }}">{{ page }}</a>
+                        <a class="page-link" href="?page={{ page }}"
+                            aria-label="Go to page {{ page }}">{{ page }}</a>
                     {% endif %}
                 </li>
                 {% if forloop.first and start_gap %}
@@ -112,9 +116,11 @@
             {% if item_list.has_next %}
                 <li class="page-item">
                     {% if selected_tab == 'Search' %}
-                        <a class="page-link" href="{{ search_url }}&page={{ item_list.next_page_number }}">&gt;</a>
+                        <a class="page-link" href="{{ search_url }}&page={{ item_list.next_page_number }}"
+                            aria-label="Go to the next page">&gt;</a>
                     {% else %}
-                        <a class="page-link" href="?page={{ item_list.next_page_number }}">&gt;</a>
+                        <a class="page-link" href="?page={{ item_list.next_page_number }}"
+                            aria-label="Go to the next page">&gt;</a>
                     {% endif %}
             {% else %}
                 <li class="page-item disabled">
@@ -130,16 +136,16 @@
         {% if selected_tab == 'Home' %}
             <h2 class="mb-3">No Posts Found!</h2>
             <p class="mb-2">Looks like you're the first one here...</p>
-            <p>Start the conversation by <a href="{% url 'new_post' %}">creating your own post</a>!</p>
+            <p>Start the conversation by <a href="{% url 'new_post' %}" class="font-italic">creating your own post</a>!</p>
         {% elif selected_tab == 'My Posts' %}
             <h2 class="mb-3">No Posts Found!</h2>
             <p class="mb-2">Looks like you haven't posted anything yet...</p>
-            <p>How about we change that? <a href="{% url 'new_post' %}">Create your own post</a></p>
+            <p>How about we change that? <a href="{% url 'new_post' %}" class="font-italic">Create your own post</a></p>
         {% else %}
             <h2 class="mb-3">No Results Found!</h2>
             <p class="mb-2">Sorry, but we couldn't find any posts that matched what you were looking for!</p>
-            <p>You can <a href="{% url 'home' %}">go back to the home page</a> or
-                <a href="{% url 'new_post' %}"> create your own post</a>!</p>
+            <p>You can <a href="{% url 'home' %}" class="font-italic">go back to the home page</a> or
+                <a href="{% url 'new_post' %}" class="font-italic"> create your own post</a>!</p>
         {% endif %}
     </div>
 {% endif %}

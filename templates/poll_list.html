@@ -119,11 +119,8 @@
         <ul class="pagination justify-content-center">
             {% if item_list.has_previous %}
                 <li class="page-item">
-                    {% if selected_tab == 'Search' %}
-                        <a class="page-link" href="{{ search_url }}&page={{ item_list.previous_page_number }}">&lt;</a>
-                    {% else %}
-                        <a class="page-link" href="?page={{ item_list.previous_page_number }}">&lt;</a>
-                    {% endif %}
+                    <a class="page-link" href="?page={{ item_list.previous_page_number }}"
+                        aria-label="Go to the previous page">&lt;</a>
             {% else %}
                 <li class="page-item disabled">
                     <div class="page-link">&lt;</div>
@@ -141,11 +138,8 @@
                 {% else %}
                     <li class="page-item d-none d-sm-block">
                 {% endif %}
-                    {% if selected_tab == 'Search' %}
-                        <a class="page-link" href="{{ search_url }}&page={{ page }}">{{ page }}</a>
-                    {% else %}
-                        <a class="page-link" href="?page={{ page }}">{{ page }}</a>
-                    {% endif %}
+                    <a class="page-link" href="?page={{ page }}"
+                        aria-label="Go to page {{ page }}">{{ page }}</a>
                 </li>
                 {% if forloop.first and start_gap %}
                     <li class="page-item disabled">
@@ -156,11 +150,8 @@
 
             {% if item_list.has_next %}
                 <li class="page-item">
-                    {% if selected_tab == 'Search' %}
-                        <a class="page-link" href="{{ search_url }}&page={{ item_list.next_page_number }}">&gt;</a>
-                    {% else %}
-                        <a class="page-link" href="?page={{ item_list.next_page_number }}">&gt;</a>
-                    {% endif %}
+                    <a class="page-link" href="?page={{ item_list.next_page_number }}"
+                        aria-label="Go to the next page">&gt;</a>
             {% else %}
                 <li class="page-item disabled">
                     <div class="page-link">&gt;</div>
@@ -179,7 +170,7 @@
         {% else %}
             <p class="mb-2">There are no polls to be found here!</p>
         {% endif %}
-        <a href="{% url 'new_poll' %}">Create your own poll</a>
+        <a href="{% url 'new_poll' %}" class="font-italic">Create your own poll</a>
     </div>
 {% endif %}
 
