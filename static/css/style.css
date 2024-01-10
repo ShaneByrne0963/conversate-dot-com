@@ -50,7 +50,9 @@ a:hover {
 }
 
 .dropdown-item:active,
-.navbar .btn:hover {
+.navbar .btn:hover,
+.post-footer-item:not(.footer-blocked):hover,
+.alert-success {
     background-color: #BFE2F8;
     color: #0D4C73;
 }
@@ -59,14 +61,11 @@ a:hover {
 .btn:active,
 .tag-list-item:hover,
 .category:hover,
-.side-nav-btn:hover .badge-pill {
+.side-nav-btn:hover .badge-pill,
+.alert-error,
+.alert-danger {
     background-color: #E29CA4;
     color: #722B17;
-}
-
-.post-footer-item:not(.footer-blocked):hover {
-    background-color: #BFE2F8;
-    color: #0D4C73;
 }
 
 .btn:focus,
@@ -139,7 +138,7 @@ a:hover {
 #form-shell {
     width: 100%;
     min-height: 60%;
-    background-color: #E1E5E0;
+    background-color: #EBEBEB;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -326,27 +325,21 @@ a:hover {
     position: relative;
 }
 
-.alert-error {
-    color: #3f0d12;
-    background-color: rgb(216, 115, 125);
-    border-color: rgb(170, 92, 100);
-}
-
 .alert-message {
     width: 100%;
 }
 
 /* Pagination */
 .page-link {
-    background-color: #157CBC;
+    background-color: #11679C;
     color: white;
     transition: background-color .15s ease-in-out,
             color .15s ease-in-out;
 }
 
 .page-link:hover {
-    background-color: #bc331b;
-    color: white;
+    background-color: #BFE2F8;
+    color: #0D4C73;
     font-weight: bold;
 }
 

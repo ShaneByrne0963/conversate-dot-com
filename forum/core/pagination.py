@@ -5,7 +5,7 @@ from forum.tests import test_instance, test_index
 # The maximum amount of pages that can be displayed in the pagination bar
 # Must be an odd number to have the current page in the middle
 NUM_PAGES = 9
-POSTS_PER_PAGE = 20
+POSTS_PER_PAGE = 1
 CATEGORIES_PER_PAGE = 48
 POLLS_PER_PAGE = 10
 

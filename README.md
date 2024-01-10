@@ -60,37 +60,42 @@ in polls they discover.
 
 ## Features
 
-- **Posts**
-  - Posts are the main attraction to Conversate. They are blocks of text
+<details><summary><strong>Posts</strong></summary><ul>
+<li>Posts are the main attraction to Conversate. They are blocks of text
 created by users to send their thoughts out to the world for all to see.<br>
-![A user post](assets/images/features/post_content.JPG)
-  - All posts are made up of a title and a main body of text. The site uses
+<img src="assets/images/features/post_content.JPG" alt="A user post"></li>
+<li>All posts are made up of a title and a main body of text. The site uses
 Summernote's text editor to give users the ability to add style to their posts.
 They can add headings, paragraphs, bullet points, links and horizontal rules.
 Text can also be styled in a number of ways, including changing the font size
-and setting the font to bold, italics or underlined
-![A post using different styles of text](assets/images/features/post_styled.JPG)
-  - Categories can be added to a post in order to group it with other posts of
+and setting the font to bold, italics or underlined<br>
+<img src="assets/images/features/post_styled.JPG" alt="A post using different styles of text"></li>
+<li>Categories can be added to a post in order to group it with other posts of
 a similar nature. There are a selection of categories created by the site
-administrators that can be chosen from
-  - Images can also be added to a post. A picture is worth a thousand words,
+administrators that can be chosen from</li>
+<li>Images can also be added to a post. A picture is worth a thousand words,
 so adding one can add an invaluable layer of depth to the story the poster is
 trying to tell. Images can be placed above or below the main body of text<br>
-![A post with an image at the top](assets/images/features/post_image.JPG)
-  - Posts can be tagged with a list of keywords. These tags can be clicked on,
+<img src="assets/images/features/post_image.JPG" alt="A post with an image at the top"></li>
+<li>Posts can be tagged with a list of keywords. These tags can be clicked on,
 revealing all posts that also have this tag. Using hashtags can increase the
 likelihood of the post to be seen, as it provides an extra method for posts to
-be queried
-  - Users can choose to like posts to show appreciation to the poster. Posts
+be queried</li>
+<li>Users can choose to like posts to show appreciation to the poster. Posts
 with more likes are more likely to be found by exploring users. Posters
-cannot like their own posts
-![A list of keywords tagging the post](assets/images/features/post_tags.JPG)
-- **Comments**
-  - Users can comment on posts to share thoughts or add insight of their own
-  - If a user sees a comment they appreciate, they can like that comment
-    ![A comment left under a post](assets/images/features/comment.JPG)
-  - Comments can also be replied to so that a conversation can be started with the commenter. Replies can be replied to in a similar manner
-    ![A conversation within the comments](assets/images/features/comment_replies.JPG)
+cannot like their own posts<br>
+<img src="assets/images/features/post_tags.JPG" alt="A list of keywords tagging the post"></li>
+</ul></details>
+
+<details><summary><strong>Comments</strong></summary><ul>
+<li>Users can comment on posts to share thoughts or add insight of their own</li>
+<li>If a user sees a comment they appreciate, they can like that comment<br>
+<img src="assets/images/features/comment.JPG" alt="A comment left under a post"></li>
+<li>Comments can also be replied to so that a conversation can be started with the
+commenter. Replies can be replied to in a similar manner<br>
+<img src="assets/images/features/comment_replies.JPG" alt="A conversation within the comments">
+</li></ul></details>
+
 - **Polls**
   - Polls are an excellent way to collect answers and gather statistics from the site's community. They are made up of a question (title), a list of between 2 and 5 answers, and an end date.
     ![A user submitted poll](assets/images/features/poll.JPG)
