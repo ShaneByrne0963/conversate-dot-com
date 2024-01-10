@@ -233,10 +233,12 @@
                                         <form method="POST" class="d-inline" action="{% url 'like_comment' comment.id %}">
                                             {% csrf_token %}
                                             {% if user in comment.likes.all %}
-                                            <button type="submit" class="btn post-footer-item btn-small py-0 line-separate">
+                                            <button type="submit" class="btn post-footer-item btn-small py-0 line-separate"
+                                                aria-label="Unlike this comment">
                                                 <i class="fa-solid fa-thumbs-up"></i>
                                             {% else %}
-                                            <button type="submit" class="btn post-footer-item btn-small py-0 line-separate">
+                                            <button type="submit" class="btn post-footer-item btn-small py-0 line-separate"
+                                                aria-label="Like this comment">
                                                 <i class="fa-regular fa-thumbs-up"></i>
                                             {% endif %}
                                                 {{ comment.number_of_likes }}
@@ -250,7 +252,8 @@
                                     {% endif %}
                                     {% if user.is_authenticated %}
                                         <button class="btn post-footer-item btn-small py-0 line-separate" type="button" data-toggle="collapse"
-                                            data-target="#reply-toggle-{{ comment.id }}" aria-expanded="false" aria-controls="reply-toggle-{{ comment.id }}">
+                                            data-target="#reply-toggle-{{ comment.id }}" aria-expanded="false" aria-controls="reply-toggle-{{ comment.id }}"
+                                            aria-label="Reply to this comment">
                                             <i class="fa-regular fa-comment"></i>
                                             <span class="d-none d-md-inline">Reply</span>
                                         </button>

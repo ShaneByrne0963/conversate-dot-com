@@ -56,7 +56,9 @@ that is also interested in this topic.
   - Users are required to be logged in to navigate through the majority of the
 website, which means if they discover a post that interests them they will
 always have the opportunity to like and comment on that post, as well as vote
-in polls they discover.
+in polls they discover. The only thing that non-authenticated users can see is
+any full post, which allows users to share posts with non-users, in the hopes
+of getting them to join in on the conversation.
 
 ## Features
 
