@@ -268,7 +268,7 @@ The user interface is made up of 2 components:<ul>
     <li>Users can dismiss alerts by clicking on their close icon, or will be
     dismissed automatically after 5 seconds, so that the messages can get out
     of the way of the main content once it has served its purpose</li>
-    <li>Successful alerts are green in color, and unsuccessful ones are red<br>
+    <li>Successful alerts are blue in color, and unsuccessful ones are red<br>
     <img src="assets/images/design/user_interface/alert_success.JPG" alt="A successful login alert"></li>
     <img src="assets/images/design/user_interface/alert_fail.JPG" alt="An unsuccessful alert"></li>
 </ul></details>
