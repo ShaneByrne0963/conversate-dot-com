@@ -76,7 +76,8 @@ Edit Post - Conversate
                                 <div class="d-flex justify-content-between mb-2">
                                     <h5 class="card-title mb-0">{{ poll.title }}</h5>
                                     <button type="button" class="button-no-style px-1 trigger-delete-poll"
-                                        data-url="{% url 'delete_poll' post.poll.id request.path %}">
+                                        data-url="{% url 'delete_poll' post.poll.id request.path %}"
+                                        aria-label="Remove this poll">
                                         <h5 class="fa-solid fa-trash mb-0 text-muted"></h5>
                                     </button>
                                 </div>

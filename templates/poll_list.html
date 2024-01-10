@@ -15,11 +15,12 @@
         <div class="card mb-5">
             <div class="card-body">
                 <div class="d-flex justify-content-between mb-2">
-                    <h5 class="card-title mb-0 word-break">{{ poll.title }}</h5>
+                    <div class="card-title text-h5 mb-0 word-break">{{ poll.title }}</div>
                     {% if poll.asked_by == user %}
                         <button class="button-no-style px-1 trigger-delete-poll" type="button"
-                            data-url="{% url 'delete_poll' poll.id request.path %}">
-                            <h5 class="fa-solid fa-trash mb-0 text-muted"></h5>
+                            data-url="{% url 'delete_poll' poll.id request.path %}"
+                            aria-label="Delete this poll">
+                            <i class="fa-solid fa-trash mb-0 text-muted text-h5"></i>
                         </button>
                     {% endif %}
                 </div>
@@ -54,11 +55,11 @@
                         </div>
                     </form>
                 {% else %}
-                    <h6 class="card-subtitle text-muted mb-3">
+                    <div class="card-subtitle text-muted mb-3">
                         {% with poll.number_of_votes as vote_num %}
                             <span>{{ vote_num }} vote{% if vote_num != 1 %}s{% endif %}</span>
                         {% endwith %}
-                    </h6>
+                    </div>
                     <!-- Results -->
                     {% for answer in poll.answers.all %}
                         <div class="d-flex justify-content-between">
@@ -70,7 +71,8 @@
                         <div class="progress mb-3{% if p_status == answer.position %} answer-chosen{% endif %}">
                             {% with answer.vote_percentage as votes %}
                                 <div class="progress-bar poll-result" role="progressbar" style="width: 0%;" aria-valuenow="{{ votes }}"
-                                    aria-valuemin="0" aria-valuemax="100" data-animation="on">{{ votes }}%</div>
+                                    aria-valuemin="0" aria-valuemax="100" data-animation="on"
+                                    aria-label="Answer {{ answer.body }}: {{ votes }}%">{{ votes }}%</div>
                             {% endwith %}
                         </div>
                     {% endfor %}
@@ -84,7 +86,8 @@
                     {% endif %}
                     {% endwith %}
                     {% if poll.asked_by == user %}
-                        <button class="button-no-style ml-1 btn-edit-poll">
+                        <button class="button-no-style ml-1 btn-edit-poll"
+                            aria-label="Edit this poll's due date">
                             <i class="fa-solid fa-pen"></i>
                         </button>
                     {% endif %}

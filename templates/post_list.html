@@ -26,7 +26,8 @@
                     <div>
                         {% if post.category.slug != 'none' %}
                             <a href="{% url 'categories' post.category.slug %}"
-                                class="btn btn-sm category align-middle">{{ post.category }}</a>
+                                class="btn btn-sm category align-middle"
+                                aria-label="View posts with category {{ post.category }}">{{ post.category }}</a>
                         {% endif %}
                         <span>{{ post.posted_by }}, {{ post.time_elapsed }}</span>
                     </div>
@@ -35,7 +36,8 @@
                     <div class="post-list-body-inner">
                         <div class="post-preview">
                             <div class="post-preview-inner word-break">{{ post.content|safe }}</div>
-                            <a class="post-anchor-overlay" href="{% url 'view_post' post.slug %}"></a>
+                            <a class="post-anchor-overlay" href="{% url 'view_post' post.slug %}"
+                                aria-label="View the full post"></a>
                         </div>
                         <!-- "Read More..." text that appears when a post is too big to fit in the preview -->
                         <a class="read-more d-none mt-2" href="{% url 'view_post' post.slug %}">Read More...</a>

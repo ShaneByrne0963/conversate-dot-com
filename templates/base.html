@@ -38,7 +38,8 @@
         </div>
         <!-- Side nav collapse for small screens -->
         <div class="nav">
-            <button id="side-nav-button" class="btn btn-blue d-inline d-md-none">
+            <button id="side-nav-button" class="btn btn-blue d-inline d-md-none"
+                aria-label="Toggle the side navigation">
                 <i class="fa-solid fa-bars"></i>
             </button>
         </div>
@@ -46,13 +47,15 @@
         <ul class="nav justify-content-end">
             {% if user.is_authenticated %}
                 <li class="nav mr-3 mr-md-2">
-                    <a class="nav-icon nav-icon-expand anchor-no-style" href="{% url 'new_post' %}">
+                    <a class="nav-icon nav-icon-expand anchor-no-style" href="{% url 'new_post' %}"
+                        aria-label="Create a new post">
                         <i class="fa-solid fa-pen-to-square"></i>
                         <span class="d-none">New Post</span>
                     </a>
                 </li>
                 <li class="nav mr-3 mr-md-2">
-                    <a class="nav-icon nav-icon-expand anchor-no-style" href="{% url 'new_poll' %}">
+                    <a class="nav-icon nav-icon-expand anchor-no-style" href="{% url 'new_poll' %}"
+                        aria-label="Create a new poll">
                         <i class="fa-solid fa-square-poll-vertical"></i>
                         <span class="d-none">New Poll</span>
                     </a>
@@ -274,7 +277,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Modal title</h5>
+                    <div class="modal-title text-h5">Modal title</div>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
