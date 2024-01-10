@@ -96,48 +96,78 @@ commenter. Replies can be replied to in a similar manner<br>
 <img src="assets/images/features/comment_replies.JPG" alt="A conversation within the comments">
 </li></ul></details>
 
-- **Polls**
-  - Polls are an excellent way to collect answers and gather statistics from the site's community. They are made up of a question (title), a list of between 2 and 5 answers, and an end date.
-    ![A user submitted poll](assets/images/features/poll.JPG)
-  - Polls can be included within a post, giving the user the ability to add more context to the poll, as well as allowing people to respond in the comments
-    ![A poll that is part of a post](assets/images/features/poll_post.JPG)
-  - Users can only vote for one answer in the list, and once they vote on their decision, they are unable to change their vote
-  - Answers from other users cannot be seen until the user has voted, in order to prevent people from only selecting the most popular vote
-    ![A poll that has revealed its answers after a vote](assets/images/features/poll_voted.JPG)
-  - Once a poll has passed its due date, votes will no longer be accepted and the final results will be shown
-    ![A poll that has ended](assets/images/features/poll_ended.JPG)
-- **The Home Page**
-  - When the user first logs in to Conversate, the home page is the first step on their journey.
-  - They are welcomed with any possible kind of post made, allowing them to explore a wide variety of content until they find something that interests them.
-    ![The home page](assets/images/features/home_page.JPG)
-- **Categories**
-  - If users are looking for something a little more specific, they can search for posts by what category they belong to.
-  - A list of categories is present within the navigation that shows the categories with the most posts, making more content easily available to the user
-    ![A list of categories available from the navigation](assets/images/features/category_navigation.JPG)
-    ![Results for searching by category](assets/images/features/category_search.JPG)
-- **Search Posts**
-  - For users that are specifically looking for posts that contain certain words or phrases, they can use the search bar and find those posts
-    ![Searching for posts with the word "chocolate" in the search bar](assets/images/features/search_bar.JPG)
-    ![The results found 2 posts with the word "chocolate"](assets/images/features/search_results.JPG)
-  - Users also have the option to search for post tags by prefixing their search with a hashtag ("#")<br>
-    ![Searching for posts with the tag "Alps"](assets/images/features/search_tags.JPG)
-    ![The results found 2 posts tagged with "Alps"](assets/images/features/search_tag_results.JPG)
-- **"My Posts"**
-  - Users can easily jump to their created posts to monitor interactions by clicking on the "My Posts" button within the navigation
-    ![All the user's posts in one place](assets/images/features/my_posts.JPG)
-- **Filter Posts by Likes/Newest**
-  - All of the above methods of finding posts can have the results of those queries sorted by "Popular" or "New", first displaying the posts with the highest number of likes or posts that were most recently created, respectively
-    ![Buttons to sort the selection of posts, with "Popular" being selected](assets/images/features/post_sort.JPG)
-    ![Posts with the highest number of likes are shown as a result](assets/images/features/post_sort_results.JPG)
-- **Browse Polls**
-  - Along with posts, users can also browse through and vote on polls, made easy through the use of the "Polls" navigation tab
-  - Here, polls are divided into 3 categories:
-    - *Open polls*, where users can engage with polls and contribute their opinion to the overall score
-    - *Closed polls*, if the user feels like gathering information about votes that occured in the past
-    - *"My polls"*, which is a place for the user to find the answers to all their asked questions<br>
-  - Posts as part of polls are included, with a link to the post so the user can get the full context of the poll, as well as engage with the comments
-  ![The poll dropdown in the navigation](assets/images/features/poll_navigation.JPG)
-  ![A list of open polls](assets/images/features/poll_list.JPG)
+<details><summary><strong>Polls</strong></summary><ul>
+<li>Polls are an excellent way to collect answers and gather statistics from the site's community.
+They are made up of a question (title), a list of between 2 and 5 answers, and an end date.<br>
+<img src="assets/images/features/poll.JPG" alt="A user submitted poll"></li>
+<li>Polls can be included within a post, giving the user the ability to add more context to the
+poll, as well as allowing people to respond in the comments<br>
+<img src="assets/images/features/poll_post.JPG" alt="A poll that is part of a post"></li>
+<li>Users can only vote for one answer in the list, and once they vote on their decision, they are
+unable to change their vote</li>
+<li>Answers from other users cannot be seen until the user has voted, in order to prevent people
+from only selecting the most popular vote<br>
+<img src="assets/images/features/poll_voted.JPG" alt="A poll that has revealed its answers after a vote"></li>
+<li>Once a poll has passed its due date, votes will no longer be accepted and the final results
+will be shown<br>
+<img src="assets/images/features/poll_ended.JPG" alt="A poll that has ended">
+</li></ul></details>
+
+<details><summary><strong>The Home Page</strong></summary><ul>
+<li>When the user first logs in to Conversate, the home page is the first step on their journey.</li>
+<li>They are welcomed with any possible kind of post made on the site, allowing them to explore
+a wide variety of content until they find something that interests them.<br>
+<img src="assets/images/features/home_page.JPG" alt="The home page">
+</li></ul></details>
+
+<details><summary><strong>Categories</strong></summary><ul>
+<li>If users are looking for something a little more specific, they can search for
+posts by what category they belong to.</li>
+<li>A list of categories is present within the navigation that shows the categories
+with the most posts, making more content easily available to the user<br>
+<img src="assets/images/features/category_navigation.JPG" alt="A list of categories available from the navigation">
+<img src="assets/images/features/category_search.JPG" alt="Results for searching by category">
+</li></ul></details>
+
+<details><summary><strong>Search Posts</strong></summary><ul>
+<li>For users that are specifically looking for posts that contain certain words or
+phrases, they can use the search bar and find those posts<br>
+<img src="assets/images/features/search_bar.JPG" alt="Searching for posts with the word 'chocolate' in the search bar">
+<img src="assets/images/features/search_results.JPG" alt="The results found 2 posts with the word 'chocolate'"></li>
+<li>Users also have the option to search for post tags by prefixing their search with a hashtag ("#")<br>
+<img src="assets/images/features/search_tags.JPG" alt="Searching for posts with the tag 'Alps'">
+<img src="assets/images/features/search_tag_results.JPG" alt="The results found 2 posts tagged with 'Alps'"></li>
+</li></ul></details>
+
+<details><summary><strong>"My Posts"</strong></summary><ul>
+<li>Users can easily jump to their created posts to monitor interactions by clicking
+on the "My Posts" button within the navigation<br>
+<img src="assets/images/features/my_posts.JPG" alt="All the user's posts in one place">
+</li></ul></details>
+
+<details><summary><strong>Filter Posts by Likes/Newest</strong></summary><ul>
+<li>All of the above methods of finding posts can have the results of those queries
+sorted by "Popular" or "New", first displaying the posts with the highest number of
+likes or posts that were most recently created, respectively<br>
+<img src="assets/images/features/post_sort.JPG" alt="Buttons to sort the selection of posts, with 'Popular' being selected">
+<img src="assets/images/features/post_sort_results.JPG" alt="Posts with the highest number of likes are shown as a result">
+</li></ul></details>
+
+<details><summary><strong>Browse Polls</strong></summary><ul>
+<li>Along with posts, users can also browse through and vote on polls, made
+easy through the use of the "Polls" navigation tab</li>
+<li>Here, polls are divided into 3 categories:<ul>
+  <li>Open polls, where users can engage with polls and contribute their opinion
+  to the overall score</li>
+  <li>Closed polls, if the user feels like gathering information about votes that
+  occured in the past</li>
+  <li>"My polls", which is a place for the user to find the answers to all their
+  asked questions</li></ul></li>
+<li>Posts as part of polls are included, with a link to the post so the user can
+get the full context of the poll, as well as engage with the comments<br>
+<img src="assets/images/features/poll_navigation.JPG" alt="The poll dropdown in the navigation">
+<img src="assets/images/features/poll_list.JPG" alt="A list of open polls">
+</li></ul></details>
 
 ## Design
 
