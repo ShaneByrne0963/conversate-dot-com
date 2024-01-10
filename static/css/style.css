@@ -22,6 +22,12 @@ h3 {
     text-decoration: none;
 }
 
+.btn {
+    color: white;
+    background-color: #126DA5;
+    border: none;
+}
+
 .button-no-style {
     background: none;
     border: none;
@@ -31,32 +37,29 @@ h1,
 h2,
 h3,
 .spinner-border {
-    color: #841722;
+    color: #072A40;
 }
 
 a {
-    color: #5abb00;
+    color: #076DBB;
 }
 
 a:hover {
-    color: #9fab35;
-}
-
-.btn {
-    background-color: #9fab35;
-    border: none;
-    color: white;
+    color: #0D4C73;
 }
 
 .dropdown-item:active,
 .btn:not(.disabled):hover,
 .btn:not(.disabled):active,
 .tag-list-item:hover,
-.nav-icon:hover,
-.navbar .btn:hover,
+.navbar .btn:hover {
+    background-color: #BFE2F8;
+    color: #0D4C73;
+}
+
 .post-footer-item:not(.footer-blocked):hover {
-    background-color: #bcd2a1;
-    color: #212529;
+    background-color: #BFE2F8;
+    color: #0D4C73;
 }
 
 .btn:focus,
@@ -104,13 +107,14 @@ a:hover {
 
 .progress-bar,
 .badge-pill {
-    background-color: #9fab35;
+    background-color: #C9F7BB;
+    color: #256B00;
 }
 
 /* --------------------------------------------------------Accounts--------------------------------------------------------- */
 
 #account-header {
-    background-color: #e65418;
+    background-color: #157CBC;
 }
 
 #account-main {
@@ -126,13 +130,13 @@ a:hover {
 
 .login-heading {
     font-size: 4em;
-    color: #e65418;
+    color: #157CBC;
 }
 
 #form-shell {
     width: 100%;
     min-height: 60%;
-    background-color: #e3e3cd;
+    background-color: #E1E5E0;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -159,7 +163,7 @@ a:hover {
 /* ------------------------------------------------------Navigation------------------------------------------------------ */
 
 .navbar {
-    background-color: #e65418;
+    background-color: #157CBC;
     display: grid;
     grid-template-columns: auto auto 1fr;
     grid-template-rows: 1fr;
@@ -167,7 +171,7 @@ a:hover {
 
 .nav-icon {
     color: white;
-    background-color: #9fab35;
+    background-color: #126DA5;
     transition: background-color .15s ease-in-out,
                 color .15s ease-in-out;
     border: none;
@@ -179,6 +183,11 @@ a:hover {
     overflow: hidden;
 }
 
+.nav-icon:hover {
+    background-color: #BFE2F8;
+    color: #0D4C73;
+}
+
 .nav-icon-expand.applied {
     transition: width .15s ease-in-out;
 }
@@ -186,13 +195,13 @@ a:hover {
 /* ------------------------------------------------------Side Navigation------------------------------------------------------ */
 
 #side-nav-large {
-    background-color: #e7a977;
+    background-color: #E0F0FA;
 }
 
 .side-nav-btn,
 .side-nav-btn:focus {
     color: white;
-    background-color: #e65418;
+    background-color: #126DA5;
     transition: color .15s ease-in-out,
         background-color .15s ease-in-out,
         border-color .15s ease-in-out,
@@ -207,13 +216,14 @@ a:hover {
 }
 
 .side-nav-btn:not(.disabled):hover {
-    background-color: #d27638;
-    color: white;
+    color: #0D4C73;
+    background-color: #BFE2F8;
     font-weight: bold;
 }
 
 .side-nav-btn.active {
-    background-color: #e57156;
+    background-color: #157CBC;
+    color: white;
     border: 1px solid rgba(0, 0, 0, 0.25);
 }
 
@@ -252,7 +262,7 @@ a:hover {
 .search-bar {
     border-radius: 32px;
     width: 100%;
-    background-color: #e65418;
+    background-color: #157CBC;
     color: white;
     display: grid;
     grid-template-columns: auto 1fr auto;
@@ -272,7 +282,7 @@ a:hover {
     outline: none;
     display: inline-block;
     min-width: 0;
-    background-color: #e65418;
+    background-color: #157CBC;
     color: white;
 }
 
@@ -285,7 +295,7 @@ a:hover {
 }
 
 .search-bar input[type=submit]:hover {
-    background-color: #d27638;
+    background-color: #bc331b;
 }
 
 #search-filter {
@@ -332,20 +342,20 @@ a:hover {
 
 /* Pagination */
 .page-link {
-    background-color: #e65418;
+    background-color: #157CBC;
     color: white;
     transition: background-color .15s ease-in-out,
             color .15s ease-in-out;
 }
 
 .page-link:hover {
-    background-color: #d27638;
+    background-color: #bc331b;
     color: white;
     font-weight: bold;
 }
 
 .page-item.active>.page-link {
-    background-color: #e57156;
+    background-color: #157CBC;
     border-color: rgba(0, 0, 0, 0.25);
 }
 
@@ -356,12 +366,6 @@ a:hover {
 }
 
 /* ------------------------------------------------------Posts------------------------------------------------------ */
-
-.card-header,
-.card-footer,
-.post-list-body {
-    background-color: #e3e3cd;
-}
 
 .post-list-body {
     padding: 0 0.25rem;
@@ -374,11 +378,6 @@ a:hover {
 
 .card-faded {
     color: #4d521f;
-}
-
-.category {
-    background-color: #9fab35;
-    color: white;
 }
 
 .post-preview {
@@ -454,9 +453,9 @@ code {
 }
 
 .post-footer {
-    background-color: #9fab35;
-    padding: 8px;
     color: white;
+    background-color: #126DA5;
+    padding: 8px;
 }
 
 .post-footer-buttons {
@@ -469,12 +468,13 @@ code {
 }
 
 .post-footer-item {
+    color: white;
     background: none;
     border-radius: 0;
 }
 
 .footer-blocked {
-    color: #314e16;
+    color: #afd7f0;
     padding: .375rem .75rem;
     text-align: center;
 }
@@ -522,7 +522,7 @@ code {
 
 .tag-list-item {
     display: inline-block;
-    background-color: #9fab35;
+    background-color: #126DA5;
     color: white;
     padding: 2px 4px;
     transition: background-color .15s ease-in-out,
