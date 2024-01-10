@@ -938,6 +938,18 @@ best practices and search engine optimization
 <img src="assets/images/validation/lighthouse/edit_post.jpg" alt="The edit post page lighthouse results">
 </details>
 
+<details><summary><strong>The Browse Categories Page</strong></summary>
+<img src="assets/images/validation/lighthouse/browse_categories.jpg" alt="The browse categories page lighthouse results">
+</details>
+
+<details><summary><strong>The Account Settings Page</strong></summary>
+<img src="assets/images/validation/lighthouse/account_settings.jpg" alt="The account settings page lighthouse results">
+</details>
+
+<details><summary><strong>The Edit Account Page</strong></summary>
+<img src="assets/images/validation/lighthouse/edit_account.jpg" alt="The edit account page lighthouse results">
+</details>
+
 ## Deployment and Local Development
 
 ### Deployment to Heroku
