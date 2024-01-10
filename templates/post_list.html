@@ -40,7 +40,7 @@
                                 aria-label="View the full post"></a>
                         </div>
                         <!-- "Read More..." text that appears when a post is too big to fit in the preview -->
-                        <a class="read-more d-none mt-2" href="{% url 'view_post' post.slug %}">Read More...</a>
+                        <a class="read-more d-none mt-2 font-italic" href="{% url 'view_post' post.slug %}">Read More...</a>
                         {% if post.tags %}
                             <div>
                                 <hr>

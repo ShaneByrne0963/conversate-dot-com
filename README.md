@@ -371,6 +371,19 @@ The user interface is made up of 2 components:<ul>
 
 ### Color Scheme
 
+- Originally, I had intended on using a orange/green color scheme to design Conversate
+
+![The original color scheme of Conversate](assets/images/design/colors/original_design.JPG)
+
+- However, upon reaching the testing phase, I discovered that orange is a tricky color
+in terms of accessability. White-on-orange does not give enough contrast for visually
+impaired users to differentiate foreground from background
+- At first, I had considered implementing a separate mode for visually impaired users,
+but I did not want to remind the users of their impairment making them choose the
+option, so I concluded the design of the site must change
+
+![The new design of the site]()
+
 I decided to use a 2-hue color scheme to design Conversate
 
 - **Primary Color**: I chose to use a *red-orange* hue as the primary color. This hue is used mostly to decorate the user interface and headings, so it covers a significant portion of the page. I decided on this because orange is often associated with warmth, positivity, sociability and creativity, all of which are important emotions we want the users to feel in order to be encouraged to interact with the community and create content.<br>
