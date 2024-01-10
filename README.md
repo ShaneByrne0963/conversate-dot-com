@@ -769,11 +769,91 @@ it
 
 ### W3C HTML
 
+I could not produce valid W3C HTML results, due to Django's template tags, and
+if statements using opening tags with no closing tags and vice versa, causing
+errors
+
+![List of HTML errors caused by Django](assets/images/validation/html.png)
+
 ### W3C CSS
+
+![style.css validation](assets/images/validation/css.png)
 
 ### JSHint
 
+<details><summary>script.js</summary>
+<img src="assets/images/validation/js/script.png" alt="Validation for script.js">
+</details>
+
+<details><summary>posting.js</summary>
+<img src="assets/images/validation/js/posting.png" alt="Validation for posting.js">
+</details>
+
+<details><summary>comments.js</summary>
+<img src="assets/images/validation/js/comments.png" alt="Validation for comments.js">
+</details>
+
+<details><summary>polls.js</summary>
+<img src="assets/images/validation/js/polls.png" alt="Validation for polls.js">
+</details>
+
+<details><summary>forms.js</summary>
+<img src="assets/images/validation/js/forms.png" alt="Validation for forms.js">
+</details>
+
+<details><summary>modals.js</summary>
+<img src="assets/images/validation/js/modals.png" alt="Validation for modals.js">
+</details>
+
+<details><summary>accountSettings.js</summary>
+<img src="assets/images/validation/js/account_settings.png" alt="Validation for accountSettings.js">
+</details>
+
 ### PEP8
+
+<details><summary>views.py</summary>
+<img src="assets/images/validation/python/views.png" alt="Validation for views.py">
+</details>
+
+<details><summary>models.py</summary>
+<img src="assets/images/validation/python/models.png" alt="Validation for models.py">
+</details>
+
+<details><summary>urls.py</summary>
+<img src="assets/images/validation/python/urls.png" alt="Validation for urls.py">
+</details>
+
+<details><summary>content.py</summary>
+<img src="assets/images/validation/python/content.png" alt="Validation for content.py">
+</details>
+
+<details><summary>slug.py</summary>
+<img src="assets/images/validation/python/slug.png" alt="Validation for slug.py">
+</details>
+
+<details><summary>categories.py</summary>
+<img src="assets/images/validation/python/categories.png" alt="Validation for categories.py">
+</details>
+
+<details><summary>forms.py</summary>
+<img src="assets/images/validation/python/forms.png" alt="Validation for forms.py">
+</details>
+
+<details><summary>messages.py</summary>
+<img src="assets/images/validation/python/messages.png" alt="Validation for messages.py">
+</details>
+
+<details><summary>pagination.py</summary>
+<img src="assets/images/validation/python/pagination.png" alt="Validation for pagination.py">
+</details>
+
+<details><summary>dates.py</summary>
+<img src="assets/images/validation/python/dates.png" alt="Validation for dates.py">
+</details>
+
+<details><summary>tests.py</summary>
+<img src="assets/images/validation/python/tests.png" alt="Validation for tests.py">
+</details>
 
 ## Deployment and Local Development
 
@@ -846,10 +926,6 @@ appear underneath, and select "create a new repository"
 new project from that template.
 
 ## Credits
-
-### Libraries/Tutorials
-
-### Media
 
 - Conversate was made using the [Django Framework](https://www.djangoproject.com/)
 - The site was styled with the help of [Bootstrap](https://getbootstrap.com/)
