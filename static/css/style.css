@@ -1,0 +1,578 @@
+/* --------------------------------------------------------GLOBAL--------------------------------------------------------- */
+
+* {
+    font-family: 'Roboto', sans-serif;
+}
+
+h1,
+h2,
+h3 {
+    font-family: 'Montserrat', sans-serif;
+    overflow-wrap: anywhere;
+}
+
+/* Gives the mouse cursor a pointer effect when hovering over the element */
+.clickable {
+    cursor: pointer;
+}
+
+/* Removes the blue colour and underline from default anchors */
+.anchor-no-style,
+.anchor-no-style:hover {
+    text-decoration: none;
+}
+
+.button-no-style {
+    background: none;
+    border: none;
+}
+
+h1,
+h2,
+h3,
+.spinner-border {
+    color: #841722;
+}
+
+a {
+    color: #5abb00;
+}
+
+a:hover {
+    color: #9fab35;
+}
+
+.btn {
+    background-color: #9fab35;
+    border: none;
+    color: white;
+}
+
+.dropdown-item:active,
+.btn:not(.disabled):hover,
+.btn:not(.disabled):active,
+.tag-list-item:hover,
+.nav-icon:hover,
+.navbar .btn:hover,
+.post-footer-item:not(.footer-blocked):hover {
+    background-color: #bcd2a1;
+    color: #212529;
+}
+
+.btn:focus,
+.btn:active {
+    outline: none;
+}
+
+.btn.disabled:hover {
+    color: white;
+}
+
+.center-to-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Adds a white line to separate an element to the right of it */
+.line-separate {
+    border-radius: 0;
+    border-right: 1px solid white;
+}
+
+/* Loading icon present while awaiting JavaScript to finish */
+.pre-load {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 3;
+    background-color: white;
+    text-align: center;
+    padding-top: 32px;
+}
+
+/* What the loading icon covers. Must contain .pre-load as a child element */
+.after-load {
+    position: relative;
+}
+
+.word-break {
+    overflow-wrap: anywhere;
+}
+
+.progress-bar,
+.badge-pill {
+    background-color: #9fab35;
+}
+
+/* --------------------------------------------------------Accounts--------------------------------------------------------- */
+
+#account-header {
+    background-color: #e65418;
+}
+
+#account-main {
+    /* The full height minus the height of the navbar */
+    min-height: calc(100vh - 56px);
+    display: grid;
+    grid-template-rows: 1fr auto;
+}
+
+#account-content>.row {
+    height: 100%;
+}
+
+.login-heading {
+    font-size: 4em;
+    color: #e65418;
+}
+
+#form-shell {
+    width: 100%;
+    min-height: 60%;
+    background-color: #e3e3cd;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    row-gap: 16px;
+    padding: 25px;
+    margin: 16px 0;
+}
+
+#form-shell>form {
+    width: 100%;
+}
+
+#form-shell h1,
+#form-shell p {
+    text-align: center;
+}
+
+/* Removing the underline from the information icon when hovered over */
+.info-hover:hover {
+    text-decoration: none;
+}
+
+/* ------------------------------------------------------Navigation------------------------------------------------------ */
+
+.navbar {
+    background-color: #e65418;
+    display: grid;
+    grid-template-columns: auto auto 1fr;
+    grid-template-rows: 1fr;
+}
+
+.nav-icon {
+    color: white;
+    background-color: #9fab35;
+    transition: background-color .15s ease-in-out,
+                color .15s ease-in-out;
+    border: none;
+    border-radius: 32px;
+    width: 30px;
+    height: 30px;
+    padding: 4px;
+    text-align: center;
+    overflow: hidden;
+}
+
+.nav-icon-expand.applied {
+    transition: width .15s ease-in-out;
+}
+
+/* ------------------------------------------------------Side Navigation------------------------------------------------------ */
+
+#side-nav-large {
+    background-color: #e7a977;
+}
+
+.side-nav-btn,
+.side-nav-btn:focus {
+    color: white;
+    background-color: #e65418;
+    transition: color .15s ease-in-out,
+        background-color .15s ease-in-out,
+        border-color .15s ease-in-out,
+        box-shadow .15s ease-in-out;
+}
+
+/* Adds space for icons in the side nav */
+.list-group-item-action {
+    display: grid;
+    grid-template-columns: 32px 1fr auto;
+    grid-template-rows: 1fr;
+}
+
+.side-nav-btn:not(.disabled):hover {
+    background-color: #d27638;
+    color: white;
+    font-weight: bold;
+}
+
+.side-nav-btn.active {
+    background-color: #e57156;
+    border: 1px solid rgba(0, 0, 0, 0.25);
+}
+
+/* Removing the extra thick border between collapsible navigation buttons */
+#category-collapse,
+#poll-collapse {
+    border-bottom: none;
+}
+
+#side-nav-categories,
+#side-nav-polls {
+    border-radius: 0;
+}
+
+#side-nav-collapse {
+    width: 90vw;
+    height: 100%;
+    position: fixed;
+    left: -90vw;
+    background-color: #e7a977;
+    padding-left: 15px;
+    padding-right: 15px;
+    z-index: 10;
+}
+
+#side-nav-collapse.expanding {
+    transition: left 0.5s ease-in-out;
+}
+
+#side-nav-collapse.expanded {
+    left: 0;
+}
+
+/* ------------------------------------------------------Search Bar------------------------------------------------------ */
+
+.search-bar {
+    border-radius: 32px;
+    width: 100%;
+    background-color: #e65418;
+    color: white;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    grid-template-rows: 1fr;
+    overflow: hidden;
+}
+
+.search-bar i {
+    padding-left: 10px;
+}
+
+#search-input,
+#search-input::placeholder {
+    margin-left: 8px;
+    padding: 6px 0;
+    border: none;
+    outline: none;
+    display: inline-block;
+    min-width: 0;
+    background-color: #e65418;
+    color: white;
+}
+
+.search-bar input[type=submit] {
+    background: none;
+    border: none;
+    border-left: 1px solid white;
+    padding: 4px 16px 4px 10px;
+    color: white;
+}
+
+.search-bar input[type=submit]:hover {
+    background-color: #d27638;
+}
+
+#search-filter {
+    background: none;
+    border: none;
+    outline: none;
+}
+
+#search-hint {
+    font-size: .875em;
+}
+
+/* ------------------------------------------------------Default Template------------------------------------------------------ */
+
+#main-content {
+    background-color: white;
+    padding-top: 32px;
+    /* The full height of the screen minus the height of the navbar */
+    height: calc(100vh - 56px);
+    overflow-y: auto;
+    /* Forces the footer to the bottom of the page */
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr auto;
+    position: relative;
+}
+
+.alert-success {
+    color: #214104;
+    background-color: #87c734;
+    border-color: #81b63d;
+}
+
+.alert-error,
+.alert-danger {
+    color: #3f0d12;
+    background-color: rgb(216, 115, 125);
+    border-color: rgb(170, 92, 100);
+}
+
+.alert-message {
+    width: 100%;
+}
+
+/* Pagination */
+.page-link {
+    background-color: #e65418;
+    color: white;
+    transition: background-color .15s ease-in-out,
+            color .15s ease-in-out;
+}
+
+.page-link:hover {
+    background-color: #d27638;
+    color: white;
+    font-weight: bold;
+}
+
+.page-item.active>.page-link {
+    background-color: #e57156;
+    border-color: rgba(0, 0, 0, 0.25);
+}
+
+.pagination-gap {
+    border: none;
+    font-weight: bold;
+    padding: 0.5rem;
+}
+
+/* ------------------------------------------------------Posts------------------------------------------------------ */
+
+.card-header,
+.card-footer,
+.post-list-body {
+    background-color: #e3e3cd;
+}
+
+.post-list-body {
+    padding: 0 0.25rem;
+}
+
+.post-list-body-inner {
+    padding: 1.25rem 1rem;
+    background-color: white;
+}
+
+.card-faded {
+    color: #4d521f;
+}
+
+.category {
+    background-color: #9fab35;
+    color: white;
+}
+
+.post-preview {
+    position: relative;
+    max-height: 150px;
+    overflow: hidden;
+}
+
+/* Code snippets */
+pre {
+    background-color: rgba(0, 0, 0, .1);
+    padding: 4px;
+}
+
+/* Allowing code snippets to adjust to screen sizes */
+code {
+    white-space: normal;
+}
+
+/* Links cannot be clicked on in the preview, so they will have the appearance of regular text */
+.post-preview a {
+    color: #212529;
+    text-decoration: none;
+}
+
+/* Different sizes for user-created headings */
+.post-preview h1,
+#post-content h1 {
+    font-size: 1.8rem;
+}
+
+.post-preview h2,
+#post-content h2 {
+    font-size: 1.6rem;
+}
+
+.post-preview h3,
+#post-content h3 {
+    font-size: 1.4rem;
+}
+
+.post-preview h4,
+#post-content h4 {
+    font-size: 1.2rem;
+}
+
+.post-preview h5,
+#post-content h5 {
+    font-size: 1rem;
+}
+
+/* Gives the appearance of the preview text fading out at the bottom */
+.hidden-text {
+    background: rgb(0, 0, 0);
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 1) 100%);
+}
+
+.read-more {
+    display: inline-block;
+}
+
+#no-content {
+    height: 80%;
+}
+
+/* Invisible anchor overlay that takes the user to the post detail page */
+.post-anchor-overlay {
+    position: absolute;
+    top: -1.25rem;
+    left: -1.25rem;
+    width: calc(100% + 2.5rem);
+    height: calc(100% + 2.5rem);
+}
+
+.post-footer {
+    background-color: #9fab35;
+    padding: 8px;
+    color: white;
+}
+
+.post-footer-buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+.post-footer.post-not-owned>.post-footer-buttons {
+    grid-template-columns: 1fr 1fr;
+}
+
+.post-footer-item {
+    background: none;
+    border-radius: 0;
+}
+
+.footer-blocked {
+    color: #314e16;
+    padding: .375rem .75rem;
+    text-align: center;
+}
+
+.comment-footer {
+    padding: 4px;
+}
+
+.post-image {
+    max-width: 100%;
+    max-height: 640px;
+    margin-bottom: 1rem;
+}
+
+/* ------------------------------------------------------Post Form------------------------------------------------------ */
+
+.form-button {
+    width: 128px;
+}
+
+/* Fixing the summernote text editor size */
+#id_body_iframe {
+    width: 100%;
+    overflow: visible;
+}
+
+#summernote-content {
+    position: relative;
+}
+
+#summernote-feedback {
+    border: none;
+    outline: none;
+    z-index: -1;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+#tag-input,
+#answer-input {
+    display: grid;
+    grid-template-columns: 1fr auto;
+}
+
+.tag-list-item {
+    display: inline-block;
+    background-color: #9fab35;
+    color: white;
+    padding: 2px 4px;
+    transition: background-color .15s ease-in-out,
+            color .15s ease-in-out;
+}
+
+#preview {
+    height: auto;
+    min-height: 245px;
+    position: relative;
+}
+
+#preview-image {
+    max-width: 100%;
+    max-height: 500px;
+}
+
+#delete-image {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+}
+
+/* ------------------------------------------------------Polls------------------------------------------------------ */
+
+.progress {
+    height: 24px;
+}
+
+.progress-bar {
+    transition: width .8s ease-in-out;
+}
+
+.progress.answer-chosen {
+    border: 2px solid #cbcdcf;
+    height: 28px;
+}
+
+.answer-chosen>.progress-bar {
+    font-weight: bold;
+}
+
+/* ------------------------------------------------------Account Settings------------------------------------------------------ */
+
+.account-setting {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr auto;
+}
+
+.account-setting>em {
+    line-height: 32px;
+}
