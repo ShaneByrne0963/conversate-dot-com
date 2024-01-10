@@ -373,7 +373,7 @@ The user interface is made up of 2 components:<ul>
 ![The original color scheme of Conversate](assets/images/design/colors/original_design.JPG)
 
 - However, upon reaching the testing phase, I discovered that orange is a tricky color
-in terms of accessability. White-on-orange does not give enough contrast for visually
+in terms of accessibility. White-on-orange does not give enough contrast for visually
 impaired users to differentiate foreground from background
 - At first, I had considered implementing a separate mode for visually impaired users,
 but I did not want to remind the users of their impairment making them choose the
@@ -391,7 +391,7 @@ color is used sparingly in order to prevent the user from feeling overwhelmed
 - I also reduced the amount of color used compared to the original design, in order to
 keep the navigation through the site clear and simple
 - Overall, while I am fond of the original design, I understand the importance of
-accessability, and going forward, will determine the readability of font colors
+accessibility, and going forward, will determine the readability of font colors
 during implementation rather than in the testing phase to prevent this from
 happening again
 
@@ -904,6 +904,36 @@ errors
 
 <details><summary>tests.py</summary>
 <img src="assets/images/validation/python/tests.png" alt="Validation for tests.py">
+</details>
+
+### Lighthouse
+
+Lighthouse tests for the site's accessibility, such as aria labels and color contrast.
+All pages tested received a high percentage in terms of performance, accessibility,
+best practices and search engine optimization
+
+<details><summary><strong>The Login Page</strong></summary>
+<img src="assets/images/validation/lighthouse/login.jpg" alt="The login page lighthouse results">
+</details>
+
+<details><summary><strong>The Signup Page</strong></summary>
+<img src="assets/images/validation/lighthouse/login.jpg" alt="The signup page lighthouse results">
+</details>
+
+<details><summary><strong>The Post List Page</strong></summary>
+<img src="assets/images/validation/lighthouse/post_list.jpg" alt="The post list page lighthouse results">
+</details>
+
+<details><summary><strong>The Post Details Page</strong></summary>
+<img src="assets/images/validation/lighthouse/post_details.jpg" alt="The post details page lighthouse results">
+</details>
+
+<details><summary><strong>The New Post Page</strong></summary>
+<img src="assets/images/validation/lighthouse/new_post.jpg" alt="The new post page lighthouse results">
+</details>
+
+<details><summary><strong>The Edit Post Page</strong></summary>
+<img src="assets/images/validation/lighthouse/edit_post.jpg" alt="The edit post page lighthouse results">
 </details>
 
 ## Deployment and Local Development
