@@ -9,6 +9,8 @@ wide range of ways to express their thoughts and opinions, as well as making
 those expressions as accessible to other users as possible. Conversate was made
 using the Django framework and designed using Bootstrap
 
+![The Conversate home page](assets/images/design/user_interface/main.JPG)
+
 ## Design Thinking Process
 
 > *"Why would a user want to visit our website?"*
