@@ -8,7 +8,7 @@ h1,
 h2,
 h3 {
     font-family: 'Montserrat', sans-serif;
-    word-break: break-word;
+    overflow-wrap: anywhere;
 }
 
 /* Gives the mouse cursor a pointer effect when hovering over the element */
@@ -99,7 +99,7 @@ a:hover {
 }
 
 .word-break {
-    word-break: break-word;
+    overflow-wrap: anywhere;
 }
 
 .progress-bar,
@@ -174,7 +174,6 @@ a:hover {
     border-radius: 32px;
     width: 30px;
     height: 30px;
-    max-width: auto;
     padding: 4px;
     text-align: center;
     overflow: hidden;
