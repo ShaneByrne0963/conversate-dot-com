@@ -144,7 +144,7 @@ Edit Post - Conversate
                     <div class="form-group">
                         <label for="preview">Preview</label>
                         <div id="preview" class="form-control center-to-container">
-                            <img id="preview-image"{% if not post.image %} class="d-none"{% endif %} src="{{ post.image.url }}" alt="Your selected image">
+                            <img id="preview-image"{% if not post.image %} class="d-none"{% else %} src="{{ post.image.url }}"{% endif %} alt="Your selected image">
                             <span id="preview-empty"{% if post.image %} class="d-none"{% endif %}>No file chosen.</span>
                             {% if post.image %}
                                 <button type="button" id="delete-image" class="btn trigger-delete-image"

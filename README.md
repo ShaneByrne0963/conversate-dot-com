@@ -772,7 +772,11 @@ test it afterwards, as all test cases have already been accounted for
 
 All of my JavaScript files involve manipulating the DOM, so I decided that
 using the DOM to test my scripts instead of using Jest's mocking function was
-more efficient.
+more efficient. JavaScript functions that involved clicking on buttons and
+anchors were all tested and can be found within the
+[button testing section](TEST_BUTTONS.md), and the JavaScript that involved
+form validation was tested and can be found in the
+[form validation section](TEST_FORMS.md)
 
 ### Browser Testing
 
