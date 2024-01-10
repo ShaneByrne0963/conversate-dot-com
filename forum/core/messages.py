@@ -28,7 +28,7 @@ def deny_access(request):
     Adds an error message that notifies the user they are not allowed to
     perform a specific action
     """
-    display_error(request,'You do not have permission to perform that action')
+    display_error(request, 'You do not have permission to perform that action')
 
 
 def display_form_errors(request, form):

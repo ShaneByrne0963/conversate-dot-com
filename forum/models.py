@@ -57,10 +57,11 @@ class Post(models.Model):
 
     def __str__(self):
         return f'({self.category}) {self.title}'
-    
+
     def title_preview(self):
         """
-        Returns the first 50 characters of a post's title for the post list page
+        Returns the first 50 characters of a post's title for the post list
+        page
         """
         if len(self.title) > 50:
             return f'{self.title[:50]}...'
@@ -80,7 +81,7 @@ class Post(models.Model):
         # Removes the blank tag at the start of the list
         tags_separate.pop(0)
         return tags_separate
-    
+
     def time_elapsed(self):
         return get_time_elapsed(self.posted_on)
 
@@ -109,7 +110,7 @@ class Comment(models.Model):
 
     def number_of_replies(self):
         return self.replies.count()
-    
+
     def time_elapsed(self):
         return get_time_elapsed(self.posted_on)
 
@@ -123,13 +124,13 @@ class Poll(models.Model):
 
     class Meta:
         ordering = ['-due_date']
-    
+
     def __str__(self):
         return self.title
-    
+
     def number_of_answers(self):
         return self.answers.count()
-    
+
     def number_of_votes(self):
         total_votes = 0
         for answer in self.answers.all():
@@ -154,10 +155,10 @@ class PollAnswer(models.Model):
 
     def __str__(self):
         return f'{self.poll} => {self.body}'
-    
+
     def number_of_votes(self):
         return self.votes.count()
-    
+
     def vote_percentage(self):
         total_votes = 0
         poll_answers = self.poll.answers.all()

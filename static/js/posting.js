@@ -180,8 +180,8 @@ function tagIsUnique(tagName) {
  */
 function tagHasAllowedChars(tagName) {
     // Allows all letters, numbers, "_" and "-"
-    allowedChars = /[a-zA-Z0-9_-]/g;
-    remainingChars = tagName.replace(allowedChars, '');
+    let allowedChars = /[a-zA-Z0-9_-]/g;
+    let remainingChars = tagName.replace(allowedChars, '');
     return (remainingChars === '');
 }
 

@@ -127,7 +127,7 @@ function editComment(event) {
 
         commentBody.classList.add('d-none');
         // Prepopulating the text area with the original comment text
-        editTextArea = commentEditField.querySelector('textarea');
+        let editTextArea = commentEditField.querySelector('textarea');
         editTextArea.value = comment.querySelector('.comment-text').innerText;
         commentEditField.classList.remove('d-none');
     }

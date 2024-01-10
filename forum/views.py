@@ -364,7 +364,6 @@ class ClearImage(View):
         return HttpResponseRedirect(reverse('edit_post', args=[post_id]))
 
 
-
 class SendComment(View):
 
     def post(self, request, slug):
@@ -466,7 +465,7 @@ class AddPoll(View):
 
 
 class EditPollDate(View):
-    
+
     def post(self, request, poll_id, current_dir):
         new_date = get_date(request.POST.get('new-date'))
         poll = get_object_or_404(Poll, id=poll_id)
@@ -475,7 +474,7 @@ class EditPollDate(View):
         if poll.asked_by != request.user:
             deny_access(request)
             return redirect('home')
-    
+
         poll.due_date = new_date
         poll.save()
         display_success(request, 'Your poll has been updated!')
@@ -556,7 +555,7 @@ class AccountSettings(View):
             'account_settings.html',
             context
         )
-    
+
     def post(self, request):
 
         password = request.POST.get('password')
@@ -584,7 +583,7 @@ class EditAccount(View):
             'edit_account.html',
             context
         )
-    
+
     def post(self, request):
         form_valid = False
         user_form = UpdateUserForm(request.POST, instance=request.user)

@@ -22,11 +22,11 @@ class UpdateUserForm(forms.ModelForm):
     username = forms.CharField(
         max_length=100,
         required=True,
-        widget=forms.TextInput(attrs={ 'class': 'form-control validate-text' })
+        widget=forms.TextInput(attrs={'class': 'form-control validate-text'})
     )
     email = forms.EmailField(
         required=False,
-        widget=forms.EmailInput(attrs={ 'class': 'form-control validate-text' })
+        widget=forms.EmailInput(attrs={'class': 'form-control validate-text'})
     )
 
     class Meta:
