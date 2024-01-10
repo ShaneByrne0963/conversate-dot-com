@@ -174,15 +174,10 @@ get the full context of the poll, as well as engage with the comments<br>
 ### User Interface
 
 <details><summary><strong>The Login/Signup Page</strong></summary><ul>
-<li>This is where the site users begin their journey. Compared to the rest of the site, the layout for these pages is simple, with the Conversate brand logo on the left, the form to log in/sign up on the right, and a simple post footer at the bottom to mark the end of the page</li>
-<li>For mobile devices, an orange navbar showing a minimized brand logo appears instead of the large logo, in order to confirm to the user that they are on the Conversate website</li>
+<li>This is where the site users begin their journey. Compared to the rest of the site, the layout for these pages is simple, with the Conversate brand logo on the left, the form to log in/sign up on the right, a navbar with the logo on top and a simple post footer at the bottom to mark the end of the page</li>
 <li>I wanted these pages to be minimalistic prevent any distractions from the main action of these pages, which is to log in/sign up to the website</li></ul>
-<p><strong>Desktop</strong></p>
-<img src="assets/images/design/user_interface/login_desktop.JPG" alt="The login page on a desktop screen">
-<img src="assets/images/design/user_interface/signup_desktop.JPG" alt="The signup page on a desktop screen">
-<p><strong>Mobile</strong></p>
-<img src="assets/images/design/user_interface/login_mobile.JPG" alt="The login page on a mobile screen">
-<img src="assets/images/design/user_interface/signup_mobile.JPG" alt="The signup page on a mobile screen">
+<img src="assets/images/design/user_interface/login.jpg" alt="The login page">
+<img src="assets/images/design/user_interface/signup.JPG" alt="The signup page">
 </details>
 
 <details><summary><strong>The Main User Interface</strong></summary>
